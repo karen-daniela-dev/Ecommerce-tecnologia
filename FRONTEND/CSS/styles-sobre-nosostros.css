@@ -1,0 +1,196 @@
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   VARIABLES (TU SISTEMA DE DISEÑO)
+   ============================================================ */
+:root {
+
+  --bg-base: #050d1f;
+  --bg-surface: #0d1225;
+  --bg-elevated: #141d35;
+
+  --neon-cyan: #00f0c8;
+  --neon-purple: #bc4fe8;
+  --neon-pink: #ff3cac;
+  --neon-blue: #0abde3;
+
+  --neon-cyan-10: rgba(0, 240, 200, 0.10);
+  --neon-cyan-20: rgba(0, 240, 200, 0.20);
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.35);
+
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-cyan: rgba(0, 240, 200, 0.25);
+  --border-cyan-hover: rgba(0, 240, 200, 0.6);
+
+  --glow-cyan: 0 0 12px rgba(0, 240, 200, 0.35);
+  --glow-cyan-lg: 0 0 25px rgba(0, 240, 200, 0.6);
+  --glow-purple: 0 0 12px rgba(188, 79, 232, 0.4);
+
+  --radius-lg: 12px;
+
+  --transition: all 0.25s ease;
+}
+
+/* ============================================================
+   BODY
+   ============================================================ */
+body {
+  background: radial-gradient(circle at top, #0a1430, #050d1f 70%);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ============================================================
+   TITULOS
+   ============================================================ */
+h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+}
+
+h2 {
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+h3 {
+  color: var(--neon-purple);
+  text-shadow: var(--glow-purple);
+}
+
+/* ============================================================
+   TEXTOS
+   ============================================================ */
+.card-text {
+  color: var(--text-secondary);
+}
+
+small {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   CARDS (CORE DEL DISEÑO)
+   ============================================================ */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow base */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--neon-cyan-10);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+/* Hover */
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--border-cyan-hover);
+  box-shadow: var(--glow-cyan-lg);
+}
+
+/* Activa glow */
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Efecto luz pasando */
+.card::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(0, 240, 200, 0.15),
+    transparent
+  );
+  transform: rotate(25deg);
+  top: -100%;
+  left: -100%;
+  opacity: 0;
+}
+
+.card:hover::after {
+  animation: shine 1s ease;
+  opacity: 1;
+}
+
+@keyframes shine {
+  to {
+    top: 100%;
+    left: 100%;
+  }
+}
+
+/* ============================================================
+   TITULOS DE CARD
+   ============================================================ */
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--neon-cyan);
+}
+
+/* ============================================================
+   IMAGENES EQUIPO (AVATAR NEON)
+   ============================================================ */
+.card-img-top {
+  border: 2px solid var(--border-cyan);
+  transition: var(--transition);
+}
+
+.card:hover .card-img-top {
+  border-color: var(--border-cyan-hover);
+  box-shadow: var(--glow-cyan);
+}
+
+/* ============================================================
+   LEAD TEXT (SUBTITULO)
+   ============================================================ */
+.lead {
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   ESPACIADO EXTRA SUAVE
+   ============================================================ */
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   SCROLLBAR (PRO DETAIL)
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 10px;
+}
