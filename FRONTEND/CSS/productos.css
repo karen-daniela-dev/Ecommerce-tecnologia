@@ -320,7 +320,7 @@ input[type="range"]::-moz-range-track {
   height: 100%;
   overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
   scrollbar-width: none; /* esconde escrol */
-  margin-bottom: 50PX;
+  margin-bottom: 50%;
   display: flex;
   padding-left: 2vh;
 }
