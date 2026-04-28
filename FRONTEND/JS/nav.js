@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
  let totalPrecio = 0;
 
 
-
-
-
-
  document.addEventListener("click", function(e){
   if(e.target.classList.contains("btn-agregar")){
     
@@ -28,10 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let nombre = boton.dataset.nombre;
     let precio = Number(boton.dataset.precio);
 
+    
     let card = boton.closest(".card");
-    let cantidad = Number(card.querySelector(".numeros").textContent);
+    let numero = card.querySelector(".numeros");
+    let cantidad = Number(numero.textContent);
 
     agregarAlcarrito(imagen, nombre, precio, cantidad);
+
+    numero.textContent = 1;
   }
 });
 
