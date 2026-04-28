@@ -512,6 +512,7 @@ nav{
     background: #000d1f !important;
     border: 1px solid rgba(0, 240, 200, 0.15);
     border-radius: 12px;
+    
     margin-top: 8px;
     padding: 1rem;
     box-shadow:
@@ -876,6 +877,14 @@ nav{
 
 
    /*carrito contenido*/
+.offcanvas-header{
+  padding: 16px 16px 10px 16px;
+}
+.contenedor-carrito{
+  position: relative;
+  height: 100%;
+}
+
 .producto img{
     width: 75px;
     height: 60px;
@@ -887,17 +896,58 @@ nav{
   margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  
   gap: 5px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  height: 100%;
+ 
 }
 
 #listaCarrito li{
-   font-size: 18px;
+   font-size: 13px;
+   
 }
 
 .botonEliminar{
    margin: 0px 0px 0px 20px;
+   font-size: 15px;
    border: none;
    background-color: transparent;
    color: #fafbfc;
+}
+
+.totalCarrito{
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 370px;
+  left: 0;
+  background: #0d1225;
+  padding: 20px;
+  z-index: 10; /* clave para que quede encima */
+}
+
+.totalCarrito .btn{
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  align-items: center;
+  background-color: transparent;
+   border: 1px solid rgba(0, 240, 200, 0.2);
+}
+
+.totalCarrito .btn:hover{
+   cursor: pointer;
+}
+
+.totalC{
+  color: #f2f3f5;
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
 }

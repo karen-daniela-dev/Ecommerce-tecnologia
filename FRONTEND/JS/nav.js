@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     eliminarP.textContent = "x";
     eliminarP.classList.add("botonEliminar");
 
-  lista.innerHTML = `<img src="${imagen}" class="imagenCarrito"> ${nombre} ${cantidad} ${(precio*cantidad).toLocaleString()}`;
+  lista.innerHTML = `<img src="${imagen}" class="imagenCarrito"> ${nombre} ${(precio*cantidad).toLocaleString()} ${cantidad}`;
   lista.appendChild(eliminarP);
 
   let listaCarrito = document.getElementById("listaCarrito");
