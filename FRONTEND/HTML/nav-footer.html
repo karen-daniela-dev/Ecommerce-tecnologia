@@ -101,9 +101,7 @@
 </section>
 
 <section class="contenido">
-<!-- ============================================================
-     AQUÍ VA EL CONTENIDO
-     ============================================================ -->
+ 
 </section>
 
 
@@ -157,7 +155,10 @@
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
   </div>
   <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
-    <p class="text-center mt-4">Tu carrito está vacío.</p>
+    <p id="msgVacio" class="text-center mt-4">Tu carrito está vacío.</p>
+     <ul id="listaCarrito" class="list-group"></ul>
+     <p class="totalC">Total: <span id="total">0</span></p>
+     <button id="btnVaciar" class="btn btn-danger">Vaciar carrito</button>
   </div>
 </div>
 

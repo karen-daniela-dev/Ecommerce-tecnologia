@@ -59,7 +59,7 @@ function crearCards(producto){
                 <div class="linea"></div>
                 <div class="precios">
                     <div class="numero">
-                       <span>$ ${producto.precio.toLocaleString()}</span> 
+                       <span>$ ${producto.precio}</span> 
                     </div>
                     <div class="masmenos">
                        <button>−</button>
@@ -68,7 +68,7 @@ function crearCards(producto){
                     </div>
                 </div>
                 <div class="anadir">
-                    <button>🛒 Agregar al carrito</button>
+                    <button class="btn-agregar" data-imagen="${producto.imagen}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">🛒 Agregar al carrito</button>
                 </div>
             </div>
         </div>

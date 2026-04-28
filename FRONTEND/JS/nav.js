@@ -11,13 +11,92 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
-  // Actualiza el número del carrito en ambos lugares:
-  // el badge de la barra inferior móvil y el del navbar desktop
-  function actualizarBadge(cantidad) {
-    document.getElementById('badge-mobile').textContent  = cantidad;
-    document.getElementById('badge-desktop').textContent = cantidad;
+ let cantitaProducto = 0;
+ let totalPrecio = 0;
+
+ document.addEventListener("click", function(e){
+  if(e.target.classList.contains("btn-agregar")){
+    
+    let boton = e.target;
+
+    let imagen = boton.dataset.imagen;
+    let nombre = boton.dataset.nombre;
+    let precio = Number(boton.dataset.precio);
+
+    agregarAlcarrito(imagen, nombre, precio);
+  }
+});
+
+
+
+ function agregarAlcarrito(imagen, nombre, precio){
+  let lista = document.createElement("li");
+  lista.classList.add("producto");
+
+  let eliminarP = document.createElement("button");
+    eliminarP.textContent = "x";
+    eliminarP.classList.add("botonEliminar");
+
+  lista.innerHTML = `<img src="${imagen}" class="imagenCarrito"> ${nombre} ${precio.toLocaleString()}`;
+  lista.appendChild(eliminarP);
+
+  let listaCarrito = document.getElementById("listaCarrito");
+  listaCarrito.appendChild(lista);
+
+
+  eliminarP.addEventListener("click", function(){
+       eliminarProducto(lista, precio);
+  })
+
+  cantitaProducto++;
+  totalPrecio += precio;
+  actualizarBadge();
+  actualizarPrecio();
+
+  document.getElementById("msgVacio").style.display = "none";
+ }
+
+
+ function eliminarProducto(li, precio){
+    li.remove();
+    
+    cantitaProducto --;
+    totalPrecio -= precio;
+
+    actualizarBadge();
+    actualizarPrecio();
+
+ }
+
+
+ function actualizarBadge() {
+    document.getElementById('badge-mobile').textContent  = cantitaProducto;
+    document.getElementById('badge-desktop').textContent = cantitaProducto;
   }
 
+  function actualizarPrecio(){
+     let total = document.getElementById("total");
+
+     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
+  }
+
+  let vaciarCarrito= document.getElementById("btnVaciar");
+  vaciarCarrito.addEventListener("click", function(){
+    let lista = document.getElementById("listaCarrito");
+    lista.querySelectorAll('li').forEach(li => li.remove());
+    document.getElementById("msgVacio").style.display = "block";
+
+    cantitaProducto = 0;
+    totalPrecio = 0;
+
+    actualizarBadge();
+    actualizarPrecio();
+
+
+  })
+
+
+  
   // ── ÍCONO DEL BOTÓN MENÚ ─────────────────────────────────────────
   // Selecciona el menú desplegable y el botón de menú de la barra inferior
   const navbarCollapse = document.getElementById('navbarKlydy');
