@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
  let cantitaProducto = 0;
  let totalPrecio = 0;
- 
+
+
+
+
+
 
  document.addEventListener("click", function(e){
   if(e.target.classList.contains("btn-agregar")){
@@ -24,13 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let nombre = boton.dataset.nombre;
     let precio = Number(boton.dataset.precio);
 
-    agregarAlcarrito(imagen, nombre, precio);
+    let card = boton.closest(".card");
+    let cantidad = Number(card.querySelector(".numeros").textContent);
+
+    agregarAlcarrito(imagen, nombre, precio, cantidad);
   }
 });
 
 
 
- function agregarAlcarrito(imagen, nombre, precio){
+ function agregarAlcarrito(imagen, nombre, precio, cantidad){
   let lista = document.createElement("li");
   lista.classList.add("producto");
 
@@ -38,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     eliminarP.textContent = "x";
     eliminarP.classList.add("botonEliminar");
 
-  lista.innerHTML = `<img src="${imagen}" class="imagenCarrito"> ${nombre} ${precio.toLocaleString()}`;
+  lista.innerHTML = `<img src="${imagen}" class="imagenCarrito"> ${nombre} ${cantidad} ${(precio*cantidad).toLocaleString()}`;
   lista.appendChild(eliminarP);
 
   let listaCarrito = document.getElementById("listaCarrito");
@@ -46,11 +53,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   eliminarP.addEventListener("click", function(){
-       eliminarProducto(lista, precio);
+       eliminarProducto(lista, precio, cantidad);
   })
 
-  cantitaProducto++;
-  totalPrecio += precio;
+  cantitaProducto += cantidad;
+  totalPrecio += precio * cantidad;
   actualizarBadge();
   actualizarPrecio();
 
@@ -58,11 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
  }
 
 
- function eliminarProducto(li, precio){
+ function eliminarProducto(li, precio, cantidad){
     li.remove();
     
-    cantitaProducto --;
-    totalPrecio -= precio;
+    cantitaProducto -= cantidad;
+    totalPrecio -= precio * cantidad;
 
     actualizarBadge();
     actualizarPrecio();

@@ -32,7 +32,7 @@ function ActualizarProductos(){
 
     mostrarProductos();
 }
-setInterval(ActualizarProductos, 2000);
+//setInterval(ActualizarProductos, 2000);
 
  IniciarDatos();
 
@@ -41,7 +41,7 @@ let filtrarCategoria = "inicio";
 let filtrarUso = "";
 
 // card
-function crearCards(producto){
+function crearCards(producto){   
     const columnas = document.createElement("div");
     columnas.className = "col-12 col-sm-12 col-md-12 col-lg-2";
 
@@ -62,9 +62,9 @@ function crearCards(producto){
                        <span>$ ${producto.precio}</span> 
                     </div>
                     <div class="masmenos">
-                       <button id="incremento">−</button>
-                       <span id="numero">1</span>
-                       <button  id="incremento" class="icon">+</button>
+                       <button class="decremento">−</button>
+                       <span class="numeros">1</span>
+                       <button  class="incremento" class="icon">+</button>
                     </div>
                 </div>
                 <div class="anadir">
@@ -73,8 +73,32 @@ function crearCards(producto){
             </div>
         </div>
     ` ;
+
+
+     let incremento = columnas.querySelector(".incremento");
+  let decremento = columnas.querySelector(".decremento");
+  let numero = columnas.querySelector(".numeros");
+
+
+  let cantidad = 1;
+
+  incremento.addEventListener("click", () => {
+    cantidad++;
+    numero.textContent = cantidad;
+  });
+
+  decremento.addEventListener("click", () => {
+    if (cantidad > 1) {
+      cantidad--;
+      numero.textContent = cantidad;
+    }
+  });
+
+
+
     return columnas;
 }
+
 // fin de cards
 
 
