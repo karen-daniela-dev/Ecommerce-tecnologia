@@ -876,7 +876,7 @@ nav{
 
 
 
-   /*carrito contenido*/
+   /*carrito contenido
 .offcanvas-header{
   padding: 16px 16px 10px 16px;
 }
@@ -928,7 +928,7 @@ nav{
   left: 0;
   background: #0d1225;
   padding: 20px;
-  z-index: 10; /* clave para que quede encima */
+  z-index: 10; /* clave para que quede encima 
 }
 
 .totalCarrito .btn{
@@ -950,4 +950,134 @@ nav{
   margin: 0;
   padding: 0;
   font-size: 11px;
+}
+
+*/
+
+/* ─────────────────────────────────────────────
+   OFFCANVAS CARRITO
+   ───────────────────────────────────────────── */
+ 
+#offcanvasCarrito {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-left: 1px solid var(--border-cyan);
+  box-shadow: var(--glow-cyan-lg);
+}
+ 
+/* Header */
+#offcanvasCarrito .offcanvas-header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-cyan);
+}
+ 
+#offcanvasCarrito .offcanvas-title {
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+}
+ 
+/* ─────────────────────────────────────────────
+   LISTA DEL CARRITO
+   ───────────────────────────────────────────── */
+ 
+#listaCarrito {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+#listaCarrito .producto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+ 
+  background: var(--bg-elevated);
+  padding: 10px;
+  border-radius: var(--radius-md);
+ 
+  border: 1px solid var(--border-default);
+  transition: var(--transition-normal);
+}
+ 
+/* Hover neon */
+#listaCarrito .producto:hover {
+  border: 1px solid var(--border-cyan-hover);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
+}
+ 
+/* Imagen */
+.imagenCarrito {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-cyan);
+}
+ 
+/* ─────────────────────────────────────────────
+   BOTÓN ELIMINAR
+   ───────────────────────────────────────────── */
+ 
+.botonEliminar {
+  background: transparent;
+  border: 1px solid var(--border-pink);
+  color: var(--text-pink);
+  border-radius: var(--radius-pill);
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+ 
+.botonEliminar:hover {
+  background: var(--neon-pink-20);
+  box-shadow: var(--glow-pink);
+  transform: scale(1.1);
+}
+ 
+/* ─────────────────────────────────────────────
+   TOTAL
+   ───────────────────────────────────────────── */
+ 
+.totalC {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+ 
+#total {
+  color: var(--text-cyan);
+  font-weight: bold;
+  text-shadow: var(--glow-cyan);
+}
+ 
+/* ─────────────────────────────────────────────
+   BOTÓN VACIAR
+   ───────────────────────────────────────────── */
+ 
+#btnVaciar {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-pink);
+  background: transparent;
+  color: var(--text-pink);
+  transition: var(--transition-normal);
+}
+ 
+#btnVaciar:hover {
+  background: var(--neon-pink-20);
+  box-shadow: var(--glow-pink);
+}
+ 
+/* ─────────────────────────────────────────────
+   MENSAJE VACÍO
+   ───────────────────────────────────────────── */
+ 
+#msgVacio {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
