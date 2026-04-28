@@ -872,3 +872,32 @@ nav{
 /* ============================================================
    CONTENIDO......
    ============================================================ */
+
+
+
+   /*carrito contenido*/
+.producto img{
+    width: 75px;
+    height: 60px;
+}
+
+#listaCarrito {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+#listaCarrito li{
+   font-size: 18px;
+}
+
+.botonEliminar{
+   margin: 0px 0px 0px 20px;
+   border: none;
+   background-color: transparent;
+   color: #fafbfc;
+}

@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
  let cantitaProducto = 0;
  let totalPrecio = 0;
+ 
 
  document.addEventListener("click", function(e){
   if(e.target.classList.contains("btn-agregar")){

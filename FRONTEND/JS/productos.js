@@ -62,9 +62,9 @@ function crearCards(producto){
                        <span>$ ${producto.precio}</span> 
                     </div>
                     <div class="masmenos">
-                       <button>−</button>
-                       <span>1</span>
-                       <button class="icon">+</button>
+                       <button id="incremento">−</button>
+                       <span id="numero">1</span>
+                       <button  id="incremento" class="icon">+</button>
                     </div>
                 </div>
                 <div class="anadir">
