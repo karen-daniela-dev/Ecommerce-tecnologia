@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', function () {
  let totalPrecio = 0;
 
 
- document.addEventListener("click", function(e){
-  if(e.target.classList.contains("btn-agregar")){
-    
-    let boton = e.target;
+document.addEventListener("click", function(e){
 
+  let boton = e.target.closest(".btn-agregar");
+
+  if(boton){
+    
     let imagen = boton.dataset.imagen;
     let nombre = boton.dataset.nombre;
     let precio = Number(boton.dataset.precio);
 
-    
     let card = boton.closest(".card");
     let numero = card.querySelector(".numeros");
     let cantidad = Number(numero.textContent);

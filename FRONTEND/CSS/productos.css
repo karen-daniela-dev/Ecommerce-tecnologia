@@ -486,12 +486,22 @@ input[type="range"]::-moz-range-track {
 
 /*boto añadir cariito*/
 .anadir{
-  margin-top: 5px;
+  margin-top: 100px;
   width: 100%;
   background-color: #0e0e0e;
-  height: 100%;
-  text-align: center;
+  height: 50px;
+  font-size: 13px;
+  margin: 0 auto;
   transition: all 0.3s ease;
+}
+
+.anadir span{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  height: 100%;
+  color: #fefcfc;
 }
 
 /*boto añadir cariito movimiento*/
@@ -500,14 +510,18 @@ input[type="range"]::-moz-range-track {
   transform: scale(1.03);
 }
 
-/*boto añadir cariito*/
-.anadir button{
+/*boto añadir cariito
+.anadir span{
   border: none;
-  background-color: transparent;
+  background-color: #00f0d0;
   font-size: 13px;
-  margin: 5px;
+  padding-top: 5px;
   color: #a1a4a9;
+  width: 500px;
+  height: 50px;
+  
 }
+*/
 
 /*boto añadir cariito movimiento*/
 .anadir button:hover{

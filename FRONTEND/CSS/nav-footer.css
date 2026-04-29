@@ -364,6 +364,7 @@ nav{
     z-index: 9998;
     max-height: calc(100vh - 56px - 64px); /* pantalla - navbar - barra inferior */
     overflow-y: auto;       /* scroll si el contenido es muy largo */
+    scrollbar-width: none;
     background: #000d1f !important;
     border: 1px solid rgba(0,240,200,0.15);
     border-radius: 0 0 12px 12px;
@@ -373,6 +374,8 @@ nav{
     
     
   }
+
+
 
   .navbar-collapse .navbar-nav {
     flex-direction: column;
@@ -876,88 +879,31 @@ nav{
 
 
 
-   /*carrito contenido
-.offcanvas-header{
-  padding: 16px 16px 10px 16px;
-}
-.contenedor-carrito{
-  position: relative;
-  height: 100%;
-}
 
-.producto img{
-    width: 75px;
-    height: 60px;
-}
 
-#listaCarrito {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  
-  gap: 5px;
-  overflow-y: auto;
-  scrollbar-width: none;
-  height: 100%;
+
+/* ─────────────────────────────────────────────
+   OFFCANVAS CARRITO
+   ───────────────────────────────────────────── */
  
+.offcanvas-body{
+  scrollbar-width: none;
 }
-
-#listaCarrito li{
-   font-size: 13px;
-   
-}
-
-.botonEliminar{
-   margin: 0px 0px 0px 20px;
-   font-size: 15px;
-   border: none;
-   background-color: transparent;
-   color: #fafbfc;
-}
-
 .totalCarrito{
   position: absolute;
   bottom: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 58px;
   gap: 30px;
-  width: 370px;
+  width: 100%;
   left: 0;
   background: #0d1225;
   padding: 20px;
-  z-index: 10; /* clave para que quede encima 
+  z-index: 10;
 }
 
-.totalCarrito .btn{
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  font-size: 12px;
-  align-items: center;
-  background-color: transparent;
-   border: 1px solid rgba(0, 240, 200, 0.2);
-}
-
-.totalCarrito .btn:hover{
-   cursor: pointer;
-}
-
-.totalC{
-  color: #f2f3f5;
-  margin: 0;
-  padding: 0;
-  font-size: 11px;
-}
-
-*/
-
-/* ─────────────────────────────────────────────
-   OFFCANVAS CARRITO
-   ───────────────────────────────────────────── */
- 
 #offcanvasCarrito {
   background: var(--bg-surface);
   color: var(--text-primary);
@@ -981,15 +927,24 @@ nav{
    ───────────────────────────────────────────── */
  
 #listaCarrito {
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  
+  margin-bottom: 50px;
+  
+}
+
+/* Chrome, Edge, Safari */
+#listaCarrito::-webkit-scrollbar {
+  display: none;
 }
  
 #listaCarrito .producto {
   display: flex;
   align-items: center;
+  
   justify-content: space-between;
   gap: 10px;
  
@@ -1044,8 +999,10 @@ nav{
  
 .totalC {
   margin-top: 20px;
-  font-size: 1.1rem;
+  font-size: 0.90rem;
   color: var(--text-secondary);
+  display: flex;
+  gap: 10px;
 }
  
 #total {
@@ -1060,12 +1017,13 @@ nav{
  
 #btnVaciar {
   margin-top: 10px;
-  width: 100%;
+  width: 70%;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-pink);
   background: transparent;
   color: var(--text-pink);
   transition: var(--transition-normal);
+  margin: 0 auto;
 }
  
 #btnVaciar:hover {

@@ -67,8 +67,8 @@ function crearCards(producto){
                        <button  class="incremento" class="icon">+</button>
                     </div>
                 </div>
-                <div class="anadir">
-                    <button class="btn-agregar" data-imagen="${producto.imagen}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">🛒 Agregar al carrito</button>
+                <div class="anadir btn-agregar" data-imagen="${producto.imagen}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">
+                  <span>  🛒 Agregar al carrito</span>
                 </div>
             </div>
         </div>

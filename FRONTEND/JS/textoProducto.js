@@ -25,7 +25,7 @@ export const productos = [
     },
      {
         id: 3,
-        nombre: "Portátil HP ProBook",  
+        nombre: "Portátil ProBook",  
         imagen: "https://i.postimg.cc/xTM4PYD9/Copilot-20260423-025245.png", 
         descripcion: "Maximice su potencial con una laptop resiliente.", 
         precio: 5139000,
@@ -36,7 +36,7 @@ export const productos = [
     },
     {
         id: 4,
-        nombre: "Portátil HP 240R G9",  
+        nombre: "Portátil 240R G9",  
         imagen: "https://i.postimg.cc/QdBkqJWj/Copilot-20260423-030436.png", 
         descripcion: "El Portátil HP 240R G9 cuenta con una pantalla FHD.", 
         precio: 2488000,
@@ -212,7 +212,7 @@ export const productos = [
 
     { 
         id: 17,
-        nombre: "FORGE GK600 TOPO", 
+        nombre: "FORGE TOPO", 
         imagen: "https://i.postimg.cc/XYKtxFnD/Copilot-20260418-204720.png",
         descripcion: "Inspirado en mapas topográficos, el juego de teclas.", 
         precio: 324840,
@@ -288,7 +288,7 @@ export const productos = [
     },
     { 
         id: 23,
-        nombre: "Base de acoplamiento", 
+        nombre: "Base acoplamiento", 
         imagen: "https://i.postimg.cc/YSFHYrLq/Copilot-20260423-045952.png",
         descripcion: "Conecta tu portátil mediante USB-C™ a tus pantallas.", 
         precio: 875773,
