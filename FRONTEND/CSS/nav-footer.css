@@ -952,6 +952,7 @@ nav{
  
   background: var(--bg-elevated);
   padding: 10px;
+  margin-top: 4px;
   border-radius: var(--radius-md);
  
   border: 1px solid var(--border-default);
