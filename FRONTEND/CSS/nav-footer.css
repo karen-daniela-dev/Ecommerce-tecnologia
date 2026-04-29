@@ -909,12 +909,14 @@ nav{
   color: var(--text-primary);
   border-left: 1px solid var(--border-cyan);
   box-shadow: var(--glow-cyan-lg);
+  width: 530px;
 }
  
 /* Header */
 #offcanvasCarrito .offcanvas-header {
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-cyan);
+  
 }
  
 #offcanvasCarrito .offcanvas-title {
@@ -981,8 +983,12 @@ nav{
   border: 1px solid var(--border-pink);
   color: var(--text-pink);
   border-radius: var(--radius-pill);
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
   cursor: pointer;
   transition: var(--transition-fast);
 }
@@ -1042,6 +1048,27 @@ nav{
 
 
 /* cantidad numero lista*/
+.cajonNumero{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-pink);
+  background: transparent;
+  padding: 10px;
+  height: 40px;
+  width: 100px;
+}
+
+.cajonNumero button{
+   background-color: transparent;
+   border: none;
+   color: #f7f8fa;
+   font-size: 17px;
+}
+
 .cantidades{
   margin: 1px;
+  font-size: 17px;
 }

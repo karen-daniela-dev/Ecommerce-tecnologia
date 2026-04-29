@@ -88,9 +88,11 @@ document.addEventListener("click", function(e){
   <span class="nombre-item">${nombre}</span>
   <span class="precio-item">${(precio * cantidad).toLocaleString()}</span>
 
-  <button class="decremento">−</button> 
-  <span class="cantidades">${cantidad}</span> 
-  <button class="incremento">+</button>
+  <div class="cajonNumero">
+    <button class="decremento">−</button> 
+    <span class="cantidades">${cantidad}</span> 
+    <button class="incremento">+</button>
+  </div>
 `;
   lista.appendChild(eliminarP);
 
@@ -122,9 +124,11 @@ document.addEventListener("click", function(e){
 
 document.addEventListener("click", function(e){
 
-  // ➖ RESTAR
+  // ➖
   if(e.target.classList.contains("decremento")){
     let contenedor = e.target.closest("li");
+    if(!contenedor) return; // 🔥 evita el error
+
     let numero = contenedor.querySelector(".cantidades");
     let precioSpan = contenedor.querySelector(".precio-item");
 
@@ -134,7 +138,6 @@ document.addEventListener("click", function(e){
     if(cantidad > 1){
       cantidad--;
       numero.textContent = cantidad;
-
       precioSpan.textContent = (precio * cantidad).toLocaleString();
 
       cantitaProducto--;
@@ -145,9 +148,11 @@ document.addEventListener("click", function(e){
     }
   }
 
-  // ➕ SUMAR
+  // ➕
   if(e.target.classList.contains("incremento")){
     let contenedor = e.target.closest("li");
+    if(!contenedor) return; // 🔥 importante
+
     let numero = contenedor.querySelector(".cantidades");
     let precioSpan = contenedor.querySelector(".precio-item");
 
@@ -156,7 +161,6 @@ document.addEventListener("click", function(e){
 
     cantidad++;
     numero.textContent = cantidad;
-
     precioSpan.textContent = (precio * cantidad).toLocaleString();
 
     cantitaProducto++;
@@ -167,7 +171,6 @@ document.addEventListener("click", function(e){
   }
 
 });
-
 
 
    
