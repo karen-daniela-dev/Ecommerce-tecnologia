@@ -38,22 +38,68 @@ document.addEventListener("click", function(e){
 
 
  function agregarAlcarrito(imagen, nombre, precio, cantidad){
+   
+
+    let listaCarrito = document.getElementById("listaCarrito");
+
+  // 🔍 buscar si ya existe
+  let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
+
+  if(productoExistente){
+    // 👉 YA EXISTE → SOLO SUMAR
+
+    let numero = productoExistente.querySelector(".cantidades");
+    let precioSpan = productoExistente.querySelector(".precio-item");
+
+    let cantidadActual = Number(numero.textContent);
+    let nuevaCantidad = cantidadActual + cantidad;
+
+    numero.textContent = nuevaCantidad;
+
+    let precioUnitario = Number(productoExistente.dataset.precio);
+
+    let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
+
+    precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
+
+    // 🔥 actualizar totales
+    cantitaProducto += cantidad;
+    totalPrecio += precioUnitario * cantidad;
+
+    actualizarBadge();
+    actualizarPrecio();
+
+    return; // 🚀 importante: detener aquí
+  }
+
   let lista = document.createElement("li");
   lista.classList.add("producto");
+  
+  lista.dataset.precio = precio;
+  lista.dataset.nombre = nombre;
+  
 
   let eliminarP = document.createElement("button");
     eliminarP.textContent = "x";
     eliminarP.classList.add("botonEliminar");
 
-  lista.innerHTML = `<img src="${imagen}" class="imagenCarrito"> ${nombre} ${(precio*cantidad).toLocaleString()} ${cantidad}`;
+  lista.innerHTML = `
+  <img src="${imagen}" class="imagenCarrito"> 
+  <span class="nombre-item">${nombre}</span>
+  <span class="precio-item">${(precio * cantidad).toLocaleString()}</span>
+
+  <button class="decremento">−</button> 
+  <span class="cantidades">${cantidad}</span> 
+  <button class="incremento">+</button>
+`;
   lista.appendChild(eliminarP);
 
-  let listaCarrito = document.getElementById("listaCarrito");
+
   listaCarrito.appendChild(lista);
 
 
   eliminarP.addEventListener("click", function(){
-       eliminarProducto(lista, precio, cantidad);
+   eliminarProducto(lista);
   })
 
   cantitaProducto += cantidad;
@@ -65,16 +111,81 @@ document.addEventListener("click", function(e){
  }
 
 
- function eliminarProducto(li, precio, cantidad){
-    li.remove();
-    
-    cantitaProducto -= cantidad;
-    totalPrecio -= precio * cantidad;
+
+
+
+
+
+
+
+
+
+document.addEventListener("click", function(e){
+
+  // ➖ RESTAR
+  if(e.target.classList.contains("decremento")){
+    let contenedor = e.target.closest("li");
+    let numero = contenedor.querySelector(".cantidades");
+    let precioSpan = contenedor.querySelector(".precio-item");
+
+    let precio = Number(contenedor.dataset.precio);
+    let cantidad = Number(numero.textContent);
+
+    if(cantidad > 1){
+      cantidad--;
+      numero.textContent = cantidad;
+
+      precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+      cantitaProducto--;
+      totalPrecio -= precio;
+
+      actualizarBadge();
+      actualizarPrecio();
+    }
+  }
+
+  // ➕ SUMAR
+  if(e.target.classList.contains("incremento")){
+    let contenedor = e.target.closest("li");
+    let numero = contenedor.querySelector(".cantidades");
+    let precioSpan = contenedor.querySelector(".precio-item");
+
+    let precio = Number(contenedor.dataset.precio);
+    let cantidad = Number(numero.textContent);
+
+    cantidad++;
+    numero.textContent = cantidad;
+
+    precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+    cantitaProducto++;
+    totalPrecio += precio;
 
     actualizarBadge();
     actualizarPrecio();
+  }
 
- }
+});
+
+
+
+   
+ function eliminarProducto(li){
+
+  let numero = li.querySelector(".cantidades");
+  let cantidad = Number(numero.textContent);
+
+  let precio = Number(li.dataset.precio);
+
+  li.remove();
+  
+  cantitaProducto -= cantidad;
+  totalPrecio -= precio * cantidad;
+
+  actualizarBadge();
+  actualizarPrecio();
+}
 
 
  function actualizarBadge() {
@@ -84,6 +195,7 @@ document.addEventListener("click", function(e){
 
   function actualizarPrecio(){
      let total = document.getElementById("total");
+
 
      total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
   }
@@ -99,7 +211,6 @@ document.addEventListener("click", function(e){
 
     actualizarBadge();
     actualizarPrecio();
-
 
   })
 
