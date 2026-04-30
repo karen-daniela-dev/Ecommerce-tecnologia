@@ -12,9 +12,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
   
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
-  // contadores
+  //cotadores 
   let cantitaProducto = 0;
   let totalPrecio = 0;
+
+  // guardar en localStorage
+  function guardarCarrito() {
+    let listaCarrito = document.querySelectorAll("#listaCarrito li");
+
+    let carrito = [];
+
+    listaCarrito.forEach(item => {
+      carrito.push({
+        imagen: item.querySelector("img").src,
+        nombre: item.dataset.nombre,
+        precio: Number(item.dataset.precio),
+        cantidad: Number(item.querySelector(".cantidades").textContent)
+      });
+    });
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+
+
+  // contadores (cargar carrito guardado)
+  let datos = localStorage.getItem("carrito");
+
+  if(datos){
+    let carrito = JSON.parse(datos);
+
+    carrito.forEach(prodc => {
+      agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
+    });
+  }
+
 
 
   // escha el click de la targeta para agrecar a lista
@@ -67,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
       actualizarBadge();
       actualizarPrecio();
+      guardarCarrito();
+
+      // al agregar mas cantidad se pone al inicio
+      listaCarrito.prepend(productoExistente);
 
       return; 
     }
@@ -112,12 +147,15 @@ document.addEventListener('DOMContentLoaded', function () {
     totalPrecio += precio * cantidad;
     actualizarBadge();
     actualizarPrecio();
-
+    guardarCarrito();
+    
+    // la agrega la creada al inicio
+    listaCarrito.prepend(lista);
     document.getElementById("msgVacio").style.display = "none";
   }
 
 
-  // evento del incremento y decremento de la li
+  // evento del decremento y decremento de la li
   document.addEventListener("click", function(clic){
 
     // si solo hace click en el boton decremento li
@@ -145,10 +183,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         actualizarBadge();
         actualizarPrecio();
+        guardarCarrito();
       }
     }
 
+
   
+    // evento del incremento y decremento de la li
+    // si dedecta en click en incremento
     if(clic.target.classList.contains("incremento")){
       let contenedor = clic.target.closest("li");
       if(!contenedor) return; 
@@ -168,12 +210,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
       actualizarBadge();
       actualizarPrecio();
+      guardarCarrito();
     }
 
   });
 
 
-   
+  // elimina el producto unitario
   function eliminarProducto(li){
 
     let numero = li.querySelector(".cantidades");
@@ -181,28 +224,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let precio = Number(li.dataset.precio);
 
-    li.remove();
-    
     cantitaProducto -= cantidad;
     totalPrecio -= precio * cantidad;
 
+    li.remove();
+
     actualizarBadge();
     actualizarPrecio();
+    guardarCarrito();
+
+    if(cantitaProducto === 0){
+      document.getElementById("msgVacio").style.display = "block";
+    }
   }
 
-
-  function actualizarBadge() {
-    document.getElementById('badge-mobile').textContent  = cantitaProducto;
-    document.getElementById('badge-desktop').textContent = cantitaProducto;
-  }
-
-  function actualizarPrecio(){
-     let total = document.getElementById("total");
-     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
-  }
-
+  // vaciar carrito completo
   let vaciarCarrito= document.getElementById("btnVaciar");
   vaciarCarrito.addEventListener("click", function(){
+
     let lista = document.getElementById("listaCarrito");
     lista.querySelectorAll('li').forEach(li => li.remove());
     document.getElementById("msgVacio").style.display = "block";
@@ -212,8 +251,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     actualizarBadge();
     actualizarPrecio();
+    guardarCarrito();
 
   })
+
+  //actualizar total de produtos carrito
+  function actualizarBadge() {
+    document.getElementById('badge-mobile').textContent  = cantitaProducto;
+    document.getElementById('badge-desktop').textContent = cantitaProducto;
+  }
+
+  // actualizar precio total del carrito
+  function actualizarPrecio(){
+     let total = document.getElementById("total");
+     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
+  }
+
+
+  
 
 
   
