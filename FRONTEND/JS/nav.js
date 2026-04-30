@@ -10,195 +10,194 @@ document.addEventListener('DOMContentLoaded', function () {
     el.classList.add('active');
   }
 
+  
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
- // contadores
- let cantitaProducto = 0;
- let totalPrecio = 0;
+  // contadores
+  let cantitaProducto = 0;
+  let totalPrecio = 0;
 
 
-// escha el click de la targeta para agrecar a lista
-document.addEventListener("click", function(boton){
+  // escha el click de la targeta para agrecar a lista
+  document.addEventListener("click", function(boton){
 
-  let evento = boton.target.closest(".btn-agregar");
+    let evento = boton.target.closest(".btn-agregar");
 
-  if(evento){
+    if(evento){
+      
+      let imagen = evento.dataset.imagen;
+      let nombre = evento.dataset.nombre;
+      let precio = Number(evento.dataset.precio);
+
+      let card = evento.closest(".card");
+      let numero = card.querySelector(".numeros");
+      let cantidad = Number(numero.textContent);
+
+      agregarAlcarrito(imagen, nombre, precio, cantidad);
+
+      numero.textContent = 1;
+    }
+  });
+
+
+  // lista para carrito
+  function agregarAlcarrito(imagen, nombre, precio, cantidad){
     
-    let imagen = evento.dataset.imagen;
-    let nombre = evento.dataset.nombre;
-    let precio = Number(evento.dataset.precio);
+    let listaCarrito = document.getElementById("listaCarrito");
 
-    let card = evento.closest(".card");
-    let numero = card.querySelector(".numeros");
-    let cantidad = Number(numero.textContent);
+    let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
 
-    agregarAlcarrito(imagen, nombre, precio, cantidad);
+    // si el producto ya esiste actializa para que se agrege la cantidad y no se repita la li
+    if(productoExistente){
 
-    numero.textContent = 1;
-  }
-});
+      let numero = productoExistente.querySelector(".cantidades");
+      let precioSpan = productoExistente.querySelector(".precio-item");
+
+      let cantidadActual = Number(numero.textContent);
+      let nuevaCantidad = cantidadActual + cantidad;
+
+      numero.textContent = nuevaCantidad;
+
+      let precioUnitario = Number(productoExistente.dataset.precio);
+      let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
+      precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
+
+      
+      cantitaProducto += cantidad;
+      totalPrecio += precioUnitario * cantidad;
+
+      actualizarBadge();
+      actualizarPrecio();
+
+      return; 
+    }
 
 
-// lista para carrito
- function agregarAlcarrito(imagen, nombre, precio, cantidad){
-   
-  let listaCarrito = document.getElementById("listaCarrito");
-
-  let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
-
-  // si el producto ya esiste actializa para que se agrege la cantidad y no se repita la li
-  if(productoExistente){
-
-    let numero = productoExistente.querySelector(".cantidades");
-    let precioSpan = productoExistente.querySelector(".precio-item");
-
-    let cantidadActual = Number(numero.textContent);
-    let nuevaCantidad = cantidadActual + cantidad;
-
-    numero.textContent = nuevaCantidad;
-
-    let precioUnitario = Number(productoExistente.dataset.precio);
-    let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
-    precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
-
+    // si no esiste esa li con ese nombre la añade a la lista
+    let lista = document.createElement("li");
+    lista.classList.add("producto");
     
+    lista.dataset.precio = precio;
+    lista.dataset.nombre = nombre;
+    
+    //boton eliminar
+    let eliminarP = document.createElement("button");
+    eliminarP.textContent = "x";
+    eliminarP.classList.add("botonEliminar");
+
+    // crea la lista
+    lista.innerHTML = `
+    <img src="${imagen}" class="imagenCarrito"> 
+    <span class="nombre-item">${nombre}</span>
+    <span class="precio-item">${(precio * cantidad).toLocaleString()}</span>
+
+    <div class="cajonNumero">
+      <button class="decremento">−</button> 
+      <span class="cantidades">${cantidad}</span> 
+      <button class="incremento">+</button>
+    </div>
+    `;
+
+    // agregar boton eliminar a la lista
+    lista.appendChild(eliminarP);
+
+    // agregar toda la li creada al contenedor de html 
+    listaCarrito.appendChild(lista);
+
+    // evento de boton eliminar el producto
+    eliminarP.addEventListener("click", function(){
+      eliminarProducto(lista);
+    })
+
     cantitaProducto += cantidad;
-    totalPrecio += precioUnitario * cantidad;
-
+    totalPrecio += precio * cantidad;
     actualizarBadge();
     actualizarPrecio();
 
-    return; 
+    document.getElementById("msgVacio").style.display = "none";
   }
 
 
-  // si no esiste esa li con ese nombre la añade a la lista
-  let lista = document.createElement("li");
-  lista.classList.add("producto");
+  // evento del incremento y decremento de la li
+  document.addEventListener("click", function(clic){
+
+    // si solo hace click en el boton decremento li
+    if(clic.target.classList.contains("decremento")){
+
+      //busca li
+      let contenedor = clic.target.closest("li"); 
+      // si no la encuetra se detiene
+      if(!contenedor) return; 
+
+      let numero = contenedor.querySelector(".cantidades");
+      let precioSpan = contenedor.querySelector(".precio-item");
+
+      let precio = Number(contenedor.dataset.precio);
+      let cantidad = Number(numero.textContent);
+
+      // si es mayor a 1 puede decrementar
+      if(cantidad > 1){
+        cantidad--;
+        numero.textContent = cantidad;
+        precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+        cantitaProducto--;
+        totalPrecio -= precio;
+
+        actualizarBadge();
+        actualizarPrecio();
+      }
+    }
+
   
-  lista.dataset.precio = precio;
-  lista.dataset.nombre = nombre;
-  
-  //boton eliminar
-  let eliminarP = document.createElement("button");
-  eliminarP.textContent = "x";
-  eliminarP.classList.add("botonEliminar");
+    if(clic.target.classList.contains("incremento")){
+      let contenedor = clic.target.closest("li");
+      if(!contenedor) return; 
 
-  // crea la lista
-  lista.innerHTML = `
-  <img src="${imagen}" class="imagenCarrito"> 
-  <span class="nombre-item">${nombre}</span>
-  <span class="precio-item">${(precio * cantidad).toLocaleString()}</span>
+      let numero = contenedor.querySelector(".cantidades");
+      let precioSpan = contenedor.querySelector(".precio-item");
 
-  <div class="cajonNumero">
-    <button class="decremento">−</button> 
-    <span class="cantidades">${cantidad}</span> 
-    <button class="incremento">+</button>
-  </div>
- `;
+      let precio = Number(contenedor.dataset.precio);
+      let cantidad = Number(numero.textContent);
 
-  // agregar boton eliminar a la lista
-  lista.appendChild(eliminarP);
-
-  // agregar toda la li creada al contenedor de html 
-  listaCarrito.appendChild(lista);
-
-  // evento de boton eliminar el producto
-  eliminarP.addEventListener("click", function(){
-   eliminarProducto(lista);
-  })
-
-  cantitaProducto += cantidad;
-  totalPrecio += precio * cantidad;
-  actualizarBadge();
-  actualizarPrecio();
-
-  document.getElementById("msgVacio").style.display = "none";
- }
-
-
-// evento del incremento y decremento de la li
-document.addEventListener("click", function(clic){
-
-  // si solo hace click en el boton decremento li
-  if(clic.target.classList.contains("decremento")){
-
-    //busca li
-    let contenedor = clic.target.closest("li"); 
-    // si no la encuetra se detiene
-    if(!contenedor) return; 
-
-    let numero = contenedor.querySelector(".cantidades");
-    let precioSpan = contenedor.querySelector(".precio-item");
-
-    let precio = Number(contenedor.dataset.precio);
-    let cantidad = Number(numero.textContent);
-
-    // si es mayor a 1 puede decrementar
-    if(cantidad > 1){
-      cantidad--;
+      cantidad++;
       numero.textContent = cantidad;
       precioSpan.textContent = (precio * cantidad).toLocaleString();
 
-      cantitaProducto--;
-      totalPrecio -= precio;
+      cantitaProducto++;
+      totalPrecio += precio;
 
       actualizarBadge();
       actualizarPrecio();
     }
-  }
 
-  
-  if(clic.target.classList.contains("incremento")){
-    let contenedor = clic.target.closest("li");
-    if(!contenedor) return; 
+  });
 
-    let numero = contenedor.querySelector(".cantidades");
-    let precioSpan = contenedor.querySelector(".precio-item");
 
-    let precio = Number(contenedor.dataset.precio);
+   
+  function eliminarProducto(li){
+
+    let numero = li.querySelector(".cantidades");
     let cantidad = Number(numero.textContent);
 
-    cantidad++;
-    numero.textContent = cantidad;
-    precioSpan.textContent = (precio * cantidad).toLocaleString();
+    let precio = Number(li.dataset.precio);
 
-    cantitaProducto++;
-    totalPrecio += precio;
+    li.remove();
+    
+    cantitaProducto -= cantidad;
+    totalPrecio -= precio * cantidad;
 
     actualizarBadge();
     actualizarPrecio();
   }
 
-});
 
-
-   
- function eliminarProducto(li){
-
-  let numero = li.querySelector(".cantidades");
-  let cantidad = Number(numero.textContent);
-
-  let precio = Number(li.dataset.precio);
-
-  li.remove();
-  
-  cantitaProducto -= cantidad;
-  totalPrecio -= precio * cantidad;
-
-  actualizarBadge();
-  actualizarPrecio();
-}
-
-
- function actualizarBadge() {
+  function actualizarBadge() {
     document.getElementById('badge-mobile').textContent  = cantitaProducto;
     document.getElementById('badge-desktop').textContent = cantitaProducto;
   }
 
   function actualizarPrecio(){
      let total = document.getElementById("total");
-
-
      total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
   }
 
