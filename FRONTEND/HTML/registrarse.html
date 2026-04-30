@@ -45,6 +45,112 @@
   </svg>
 </div>
 
+<section class="nav">
+ <nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <div class="container-logo">
+      <div class="footer-logo-wrap d-flex">
+        <a class="footer-logo" href="#">
+          <span>K</span>lydy<span class="footer-logo-dot"></span>
+        </a>
+        <p class="footer-sub">Technology</p>
+      </div>
+    </div>
+
+    <!-- Toggler hamburguesa -->
+    <button class="navbar-toggler d-lg-none" 
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarKlydy"
+      aria-controls="navbarKlydy"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapse con links -->
+    <div class="collapse navbar-collapse" id="navbarKlydy">
+      <div>
+        <ul class="navbar-nav flex-grow-1 justify-content-evenly mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link klydy-link" href="index.html">HOME</a></li>
+          <li class="nav-item"><a class="nav-link klydy-link" href="productos.html">PRODUCTOS</a></li>
+          <li class="nav-item"><a class="nav-link klydy-link" href="sobre-nosotros.html">SOBRE NOSOTROS</a></li>
+          <li class="nav-item"><a class="nav-link klydy-link" href="contacto.html">CONTÁCTANOS</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Solo desktop -->
+    <div class="d-none d-lg-flex align-items-center gap-2">
+      <form class="d-flex align-items-center gap-2">
+        <button class="btn klydy-btn-login" type="button"
+          data-bs-toggle="modal" data-bs-target="#modalLogin">
+          <i class="bi bi-person"></i> Mi Cuenta
+        </button>
+        <button class="btn klydy-btn-cart d-flex align-items-center" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
+          <i class="bi bi-cart3"></i>
+          <span class="klydy-badge ms-1" id="badge-desktop"></span>
+        </button>
+      </form>
+    </div>
+
+  </div>
+ </nav>
+</section>
+
+<div class="modal fade" id="modalLogin" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-klydy">
+
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-logo-wrap">
+        <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
+        <p class="modal-logo-sub">Technology</p>
+      </div>
+
+      <div class="modal-body px-4 pb-4">
+        <div class="mb-3">
+          <label class="modal-label">Correo</label>
+          <input type="email" class="form-control klydy-input" placeholder="tu@email.com">
+        </div>
+        <div class="mb-4">
+          <label class="modal-label">Contraseña</label>
+          <input type="password" class="form-control klydy-input" placeholder="••••••••">
+        </div>
+        <button class="btn w-100 fw-bold modal-btn-enter">ENTRAR</button>
+        <p class="modal-register-text">
+        <a href="registrarse.html" class="modal-register-link">Regístrate</a>
+        <a href="recuperar.html" class="modal-register-link">¿Olvidaste tu contraseña?</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     OFFCANVAS CARRITO
+     ============================================================ -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+  <div class="offcanvas-header" style="background:#0d1225; border-bottom: 1px solid rgba(0,240,200,0.2);">
+    <h5 class="offcanvas-title text-white" id="offcanvasCarritoLabel">
+      <i class="bi bi-cart3 me-2" style="color:#00f0c8;"></i>Mi Carrito
+    </h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
+    <p class="text-center mt-4">Tu carrito está vacío.</p>
+  </div>
+</div>
+
+
+
 <div class="register-container">
 
     <div class="register-card">
@@ -60,7 +166,7 @@
 
             <div class="form-group">
                 <label>Numero de Identificacion</label>
-                <input type="number" id="identificacion" placeholder="Identificacion">
+                <input type="text" id="identificacion" inputmode="numeric" pattern="[0-9]*">
             </div>
 
             <div class="form-group">
@@ -70,7 +176,7 @@
 
             <div class="form-group">
                 <label>Telefono</label>
-                <input type="tel" id="telefono" placeholder="3000000000">
+                <input type="text" id="telefono" inputmode="numeric" pattern="[0-9]*" placeholder="3000000000">
             </div>
 
             <div class="form-group">
@@ -99,6 +205,100 @@
             </p>
         </form>
     </div>
+</div>
+
+<footer class="klydy-footer">
+  <div class="container">
+
+    <div class="row gy-4 pb-4 align-items-start">
+
+      <!-- COL: REDES SOCIALES -->
+      <div class="col-12 col-md-5 col-lg-5 footer-divider">
+        <p class="footer-title">Síguenos</p>
+        <div class="social-grid">
+          <a href="#" class="social-btn whatsapp"  title="WhatsApp"> <i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-btn instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-btn facebook"  title="Facebook"> <i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn tiktok"    title="TikTok">   <i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-btn youtube"   title="YouTube">  <i class="bi bi-youtube"></i></a>
+          <a href="#" class="social-btn linkedin"  title="LinkedIn"> <i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- COL: LOGO -->
+      <div class="col-12 col-md-2 col-lg-2 footer-divider d-flex align-items-center justify-content-center">
+        <div class="footer-logo-wrap">
+          <a class="footer-logo" href="#">
+            <span>K</span>lydy<span class="footer-logo-dot"></span>
+          </a>
+          <p class="footer-sub">Technology</p>
+        </div>
+      </div>
+
+      <!-- COL: MEDIOS DE PAGO -->
+      <div class="col-12 col-md-5 col-lg-5">
+        <p class="footer-title">Medios de pago</p>
+        <div class="payment-grid">
+          <div class="payment-badge"><span class="pay-daviplata">Daviplata</span></div>
+          <div class="payment-badge"><span class="pay-nequi">Nequi</span></div>
+          <div class="payment-badge"><span class="pay-pse">PSE</span></div>
+          <div class="payment-badge"><span class="pay-efecty">Efecty</span></div>
+          <div class="payment-badge">
+            <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="10" r="9" fill="#eb001b"/>
+              <circle cx="20" cy="10" r="9" fill="#f79e1b" opacity="0.9"/>
+              <path d="M16 3.5a9 9 0 0 1 0 13A9 9 0 0 1 16 3.5z" fill="#ff5f00"/>
+            </svg>
+          </div>
+          <div class="payment-badge">
+            <span class="pay-paypal" style="font-weight:800; font-style:italic;">Pay<span style="color:#009cde;">Pal</span></span>
+          </div>
+          <div class="payment-badge"><span class="pay-bancol">Bancolombia</span></div>
+          <div class="payment-badge">
+            <svg width="38" height="14" viewBox="0 0 38 14" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="12" font-family="Arial" font-size="14" font-weight="900" fill="#1a1f71" letter-spacing="-1">VISA</text>
+            </svg>
+          </div>
+          <div class="payment-badge"><span class="pay-wompi">Wompi</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRA COPYRIGHT -->
+    
+          <div class="col-12">
+          <p class="footer-copy">
+            © <span>Klydy Technology</span> — Developers and Design <span>2026</span>
+          </p>
+        </div>
+      
+  </div>
+</footer>
+</section>
+
+<div class="bottom-nav d-lg-none">
+
+  <button class="bottom-nav-item btn-cuenta"
+    data-bs-toggle="modal" data-bs-target="#modalLogin"
+    onclick="setActive(this)">
+    <i class="bi bi-person-circle"></i>
+    <span class="label">Mi Cuenta</span>
+  </button>
+
+  <button class="bottom-nav-item btn-carrito"
+    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito"
+    onclick="setActive(this)">
+    <i class="bi bi-cart3"></i>
+    <span class="bottom-badge" id="badge-mobile">0</span>
+    <span class="label">Carrito</span>
+  </button>
+
+  <button class="bottom-nav-item btn-menu active"
+    data-bs-toggle="collapse" data-bs-target="#navbarKlydy"
+    onclick="setActive(this)">
+    <i class="bi bi-grid-3x3-gap"></i>
+    <span class="label">Menú</span>
+  </button>
 </div>
 
 <script src="../JS/registrarse.js"></script>
