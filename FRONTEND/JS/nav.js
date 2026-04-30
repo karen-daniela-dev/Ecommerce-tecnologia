@@ -11,21 +11,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
+ // contadores
  let cantitaProducto = 0;
  let totalPrecio = 0;
 
 
-document.addEventListener("click", function(e){
+// escha el click de la targeta para agrecar a lista
+document.addEventListener("click", function(boton){
 
-  let boton = e.target.closest(".btn-agregar");
+  let evento = boton.target.closest(".btn-agregar");
 
-  if(boton){
+  if(evento){
     
-    let imagen = boton.dataset.imagen;
-    let nombre = boton.dataset.nombre;
-    let precio = Number(boton.dataset.precio);
+    let imagen = evento.dataset.imagen;
+    let nombre = evento.dataset.nombre;
+    let precio = Number(evento.dataset.precio);
 
-    let card = boton.closest(".card");
+    let card = evento.closest(".card");
     let numero = card.querySelector(".numeros");
     let cantidad = Number(numero.textContent);
 
@@ -36,17 +38,15 @@ document.addEventListener("click", function(e){
 });
 
 
-
+// lista para carrito
  function agregarAlcarrito(imagen, nombre, precio, cantidad){
    
+  let listaCarrito = document.getElementById("listaCarrito");
 
-    let listaCarrito = document.getElementById("listaCarrito");
-
-  // 🔍 buscar si ya existe
   let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
 
+  // si el producto ya esiste actializa para que se agrege la cantidad y no se repita la li
   if(productoExistente){
-    // 👉 YA EXISTE → SOLO SUMAR
 
     let numero = productoExistente.querySelector(".cantidades");
     let precioSpan = productoExistente.querySelector(".precio-item");
@@ -57,32 +57,33 @@ document.addEventListener("click", function(e){
     numero.textContent = nuevaCantidad;
 
     let precioUnitario = Number(productoExistente.dataset.precio);
-
     let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
-
     precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
 
-    // 🔥 actualizar totales
+    
     cantitaProducto += cantidad;
     totalPrecio += precioUnitario * cantidad;
 
     actualizarBadge();
     actualizarPrecio();
 
-    return; // 🚀 importante: detener aquí
+    return; 
   }
 
+
+  // si no esiste esa li con ese nombre la añade a la lista
   let lista = document.createElement("li");
   lista.classList.add("producto");
   
   lista.dataset.precio = precio;
   lista.dataset.nombre = nombre;
   
-
+  //boton eliminar
   let eliminarP = document.createElement("button");
-    eliminarP.textContent = "x";
-    eliminarP.classList.add("botonEliminar");
+  eliminarP.textContent = "x";
+  eliminarP.classList.add("botonEliminar");
 
+  // crea la lista
   lista.innerHTML = `
   <img src="${imagen}" class="imagenCarrito"> 
   <span class="nombre-item">${nombre}</span>
@@ -93,13 +94,15 @@ document.addEventListener("click", function(e){
     <span class="cantidades">${cantidad}</span> 
     <button class="incremento">+</button>
   </div>
-`;
+ `;
+
+  // agregar boton eliminar a la lista
   lista.appendChild(eliminarP);
 
-
+  // agregar toda la li creada al contenedor de html 
   listaCarrito.appendChild(lista);
 
-
+  // evento de boton eliminar el producto
   eliminarP.addEventListener("click", function(){
    eliminarProducto(lista);
   })
@@ -113,21 +116,16 @@ document.addEventListener("click", function(e){
  }
 
 
+// evento del incremento y decremento de la li
+document.addEventListener("click", function(clic){
 
+  // si solo hace click en el boton decremento li
+  if(clic.target.classList.contains("decremento")){
 
-
-
-
-
-
-
-
-document.addEventListener("click", function(e){
-
-  // ➖
-  if(e.target.classList.contains("decremento")){
-    let contenedor = e.target.closest("li");
-    if(!contenedor) return; // 🔥 evita el error
+    //busca li
+    let contenedor = clic.target.closest("li"); 
+    // si no la encuetra se detiene
+    if(!contenedor) return; 
 
     let numero = contenedor.querySelector(".cantidades");
     let precioSpan = contenedor.querySelector(".precio-item");
@@ -135,6 +133,7 @@ document.addEventListener("click", function(e){
     let precio = Number(contenedor.dataset.precio);
     let cantidad = Number(numero.textContent);
 
+    // si es mayor a 1 puede decrementar
     if(cantidad > 1){
       cantidad--;
       numero.textContent = cantidad;
@@ -148,10 +147,10 @@ document.addEventListener("click", function(e){
     }
   }
 
-  // ➕
-  if(e.target.classList.contains("incremento")){
-    let contenedor = e.target.closest("li");
-    if(!contenedor) return; // 🔥 importante
+  
+  if(clic.target.classList.contains("incremento")){
+    let contenedor = clic.target.closest("li");
+    if(!contenedor) return; 
 
     let numero = contenedor.querySelector(".cantidades");
     let precioSpan = contenedor.querySelector(".precio-item");
