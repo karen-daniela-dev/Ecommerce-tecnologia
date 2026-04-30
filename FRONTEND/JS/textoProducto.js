@@ -172,7 +172,7 @@ export const productos = [
         descripcion: "El procesador de élite de alto rendimiento y mejorado.", 
         precio: 4099900,
         categoria: "videojuegos",
-        uso: "estudio",
+        uso: "gamer",
         marca: "asus",
         catidad: 25
         

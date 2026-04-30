@@ -40,6 +40,14 @@ let productosFiltros = JSON.parse(JSON.stringify(listaProductos));
 let filtrarCategoria = "inicio"; 
 let filtrarUso = "";
 
+//nombres para usos
+const nombresUsos = {
+    gamer: "Gamer",
+    general: "General",
+    estudio: "Estudio",
+    trabajo: "Trabajo"
+};
+
 // card
 function crearCards(producto){   
     const columnas = document.createElement("div");
@@ -150,13 +158,34 @@ listaUsos.forEach(function(boton){
 
 //muetra producto
 function mostrarProductos(){
+
     productosFiltros = listaProductos.filter(function(item){
         return(filtrarCategoria === "inicio" || item.categoria === filtrarCategoria) && (filtrarUso === "" || item.uso === filtrarUso);
     });
 
     let contenedorP = document.getElementById("contenedor");
-
     contenedorP.innerHTML = "";
+
+    let carrusel = document.getElementById("carouselExampleIndicators");
+
+    if(filtrarCategoria === "inicio"){
+        carrusel.style.display = "block";
+    } else {
+        carrusel.style.display = "none";
+    }
+
+    //controlar título para usos
+    let titulo = document.getElementById("titulo-seccion");
+
+    if(filtrarUso === ""){
+        titulo.style.display = "none";
+        
+    } else {
+        carrusel.style.display = "none"; // carrusel
+        titulo.style.display = "block"; // titula uso
+        titulo.textContent = nombresUsos[filtrarUso] || filtrarUso; // mostar el titulo de pediendo de filtro
+        escribirTexto(titulo, nombresUsos[filtrarUso] || filtrarUso);// ingresamos el contenedor y el texto
+    }
 
     productosFiltros.forEach(function(producto){
         const cards = crearCards(producto);
@@ -164,6 +193,33 @@ function mostrarProductos(){
     })
 
 }; 
+
+// escritura de los titulos
+let intervaloActual;
+function escribirTexto(elemento, texto){
+    elemento.textContent = "";
+
+    if(intervaloActual){
+        clearInterval(intervaloActual);
+    }
+
+    let i = 0;
+
+    intervaloActual = setInterval(() => {
+        elemento.textContent = texto.substring(0, i + 1) + "|"; // cursor
+        i++;
+
+        if(i === texto.length){
+            clearInterval(intervaloActual);
+
+            
+            setTimeout(() => {
+                elemento.textContent = texto;
+            }, 200); // tienpo del | en vista
+        }
+
+    }, 150);//velosidad de escritura
+}
 
 mostrarProductos()
 
