@@ -113,7 +113,9 @@ const nombresUsos = {
 // card
 function crearCards(producto){   
     const columnas = document.createElement("div");
-    columnas.className = "col-12 col-sm-12 col-md-12 col-lg-2";
+    columnas.className = "col";
+    columnas.style.flex = "0 0 12.5%";
+    columnas.style.maxWidth = "12.5%";
 
       columnas.innerHTML = ` 
         <div class="card">
