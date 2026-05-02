@@ -21,11 +21,18 @@ body {
   font-family: 'Inter', sans-serif; 
   min-height: 100vh;
   position: relative;
+  scrollbar-width: none; /* Firefox */
+  overflow-y: scroll;
   padding-bottom: 70px;
   padding-top: 70px;
   margin-top: 70px;
   margin: 0;
 
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .neon-sparks {
@@ -83,7 +90,6 @@ body {
 /*CONTENDOR DE TODA LA PAGINA*/
 .contenedor{
   display: flex;
-  height: 89vh;
   margin-left: 10px;
 }
 /*FIN DE CONTENEDOR */
@@ -93,10 +99,11 @@ body {
 .Cajoncategorias{
   width: 16%;
   top: 0;
-  height: 84vh;
+  height: fit-content;
+  top: 90px;
   position: sticky; 
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   
 }
 
@@ -319,13 +326,21 @@ input[type="range"]::-moz-range-track {
 }
 
 /*SECION INICIO.....................................................................................................................*/
-.productos{
+/*.productos{
   width: 100%;
   background-color:  transparent; 
   height: 100%;
-  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
-  scrollbar-width: none; /* esconde escrol */
+  overflow-y: auto; 
+  scrollbar-width: none;
   margin-bottom: 10px;
+  padding-left: 2vh;
+}
+*/
+
+.productos{
+  width: 100%;
+  background-color: transparent;
+  margin-bottom: 0px;
   padding-left: 2vh;
 }
 
@@ -535,18 +550,16 @@ input[type="range"]::-moz-range-track {
   font-weight: bold;
 }
 
-/*ocultar scrol*/
-.productos::-webkit-scrollbar {
-  display: none;
-}
+
 
 /*sesion productos*/
-.productos{
+/*.productos{
   width: 100%;
   height: 89.5vh;
-  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
-  scrollbar-width: none; /* esconde escrol */
+  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte
+  scrollbar-width: none;  esconde escrol 
 }
+*/
 
 /*computadores card*/
 .productos .card{
