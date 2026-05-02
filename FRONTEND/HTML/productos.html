@@ -87,7 +87,6 @@
       <!--firtos usos-->
       <h2 class="filtro">Filtros</h2>
       <div class="usos">
-       <!--<h4>Usos</h4>-->
         <div class="lista">
           <ul>
             <li class="itenUso" data-target="gamer">Gamer</li>
@@ -102,50 +101,52 @@
 
       <div class="filtrosPrecio">
         <div class="filtro-precio">
-          <label>Precio mínimo: <span id="minValor">0</span></label>
-          <input type="range" id="precioMin" >
-
-          <label>Precio máximo: <span id="maxValor">0</span></label>
-          <input type="range" id="precioMax" >
+          <input class="pre" type="text" placeholder="Min">
+          <input class="pre" type="text" placeholder="Max">
         </div>
+        <div class="notonfl">
+          <button class="botonff botonFiltrar bottom-nav-item">Filtrar precios</button>
+          <button class="botonff limpiarFiltro bottom-nav-item">Limpiar filtro</button>
+        </div>
+       
       </div>
 
       <!--checkbox marca-->
       <div class="marcas">
         <div>
           <label>
-          <input type="checkbox" name="acer" value="acer">
+          <input type="checkbox" value="acer">
            Acer
         </label>
         <label>
-          <input type="checkbox" name="apple" value="apple">
+          <input type="checkbox" value="apple">
            Apple
         </label>
          <label>
-          <input type="checkbox" name="asus" value="asus">
+          <input type="checkbox" value="asus">
            Asus
         </label>
         <label>
-          <input type="checkbox" name="dell" value="dell">
+          <input type="checkbox" value="dell">
            Dell
         </label>
         </div>
         
         <div>
           <label>
-           <input type="checkbox" name="hp" value="hp">
+           <input type="checkbox" value="hp">
             HP
           </label>
           <label>
-            <input type="checkbox" name="Lenovo" value="Lenovo">
+            <input type="checkbox" value="lenovo">
             Lenovo
           </label>
           <label>
-            <input type="checkbox" name="microsoft" value="microsoft">
+            <input type="checkbox" value="msi">
             Msi
           </label>
           <label>
-            <input type="checkbox" name="msi" value="msi">
+            <input type="checkbox" value="otros">
             Otros
           </label> 
         </div>
@@ -160,28 +161,28 @@
        <!--Carrusel-->
     <div class="inicio boton">
 
-      <div id="carouselExampleIndicators" class="carousel slide" style="display: none;"> 
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" style="display: none;"> 
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="https://i.postimg.cc/SsVtz3dM/acer.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/SsVtz3dM/acer.png" class="d-block w-100" alt="imagen acer">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/hjM376sQ/apple.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/hjM376sQ/apple.png" class="d-block w-100" alt="imagen apple">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/Y98ymZRY/asus.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/Y98ymZRY/asus.png" class="d-block w-100" alt="imagen asus">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/nzTwQg27/dell.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/nzTwQg27/dell.png" class="d-block w-100" alt="imagen dell">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/tTDmVwkd/hp.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/tTDmVwkd/hp.png" class="d-block w-100" alt="imagen hp">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/D0ZpQ6pJ/lenovo.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/D0ZpQ6pJ/lenovo.png" class="d-block w-100" alt="imagen lenovo">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/ZnRsPHsv/msi.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/ZnRsPHsv/msi.png" class="d-block w-100" alt="imagen msi">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

@@ -192,8 +192,9 @@ export const productos = [
         precio: 330000,
         categoria: "teclados",
         uso: "gamer",
-        catidad: 25,
-        marca: "msi"
+        marca: "msi",
+        catidad: 25
+        
         
     },
 
@@ -223,6 +224,8 @@ export const productos = [
     },
 
 
+
+    
     { 
         id: 18,
         nombre: "Premium - MS900", 

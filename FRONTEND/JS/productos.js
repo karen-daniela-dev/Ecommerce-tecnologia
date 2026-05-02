@@ -4,7 +4,6 @@ import {productos} from "./textoProducto.js";
 
 //convertimos en JSON
 let listaProductos = JSON.parse(JSON.stringify(productos));
-
 function IniciarDatos(){
 
     let datos = localStorage.getItem("ListaProductos");
@@ -12,7 +11,7 @@ function IniciarDatos(){
     if(datos){
 
         let creadosProductos = JSON.parse(datos);
-            listaProductos = [...listaProductos,...creadosProductos];
+        listaProductos = [...listaProductos,...creadosProductos];
     }
 
 
@@ -32,13 +31,76 @@ function ActualizarProductos(){
 
     mostrarProductos();
 }
+
+
+
 //setInterval(ActualizarProductos, 2000);
 
- IniciarDatos();
+IniciarDatos();
 
 let productosFiltros = JSON.parse(JSON.stringify(listaProductos));
 let filtrarCategoria = "inicio"; 
 let filtrarUso = "";
+
+//  precio
+let precioMin = null;
+let precioMax = null;
+
+// inputs y botón precio
+let inputMax = document.querySelector('.filtrosPrecio input[placeholder="Max"]');
+let inputMin = document.querySelector('.filtrosPrecio input[placeholder="Min"]');
+let botonFiltrar = document.querySelector('.botonFiltrar');
+let botonLimpiar = document.querySelector('.limpiarFiltro');
+
+function formatearCOP(valor){
+    return new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0
+    }).format(valor);
+}
+
+function limpiarNumero(texto){
+    return Number(texto.replace(/\D/g, ""));
+}
+
+[inputMin, inputMax].forEach(input => {
+
+    input.addEventListener("input", function(){
+
+        let numero = limpiarNumero(this.value);
+
+        if(numero === 0){
+            this.value = "";
+            return;
+        }
+
+        this.value = formatearCOP(numero);
+    });
+
+});
+
+//evento filtro precio
+botonFiltrar.addEventListener("click", function(){
+    precioMin = inputMin.value ? limpiarNumero(inputMin.value) : null;
+    precioMax = inputMax.value ? limpiarNumero(inputMax.value) : null
+    mostrarProductos();
+});
+
+// EVENTO LIMPIAR
+botonLimpiar.addEventListener("click", function(){
+
+    // limpiar inputs
+    inputMin.value = "";
+    inputMax.value = "";
+
+    // resetear valores
+    precioMin = null;
+    precioMax = null;
+
+    // actualizar vista
+    mostrarProductos();
+});
 
 //nombres para usos
 const nombresUsos = {
@@ -67,7 +129,7 @@ function crearCards(producto){
                 <div class="linea"></div>
                 <div class="precios">
                     <div class="numero">
-                       <span>$ ${producto.precio}</span> 
+                       <span>${formatearCOP(producto.precio)}</span> 
                     </div>
                     <div class="masmenos">
                        <button class="decremento">−</button>
@@ -83,26 +145,24 @@ function crearCards(producto){
     ` ;
 
 
-     let incremento = columnas.querySelector(".incremento");
-  let decremento = columnas.querySelector(".decremento");
-  let numero = columnas.querySelector(".numeros");
+    let incremento = columnas.querySelector(".incremento");
+    let decremento = columnas.querySelector(".decremento");
+    let numero = columnas.querySelector(".numeros");
 
 
-  let cantidad = 1;
+    let cantidad = 1;
 
-  incremento.addEventListener("click", () => {
-    cantidad++;
-    numero.textContent = cantidad;
-  });
+    incremento.addEventListener("click", () => {
+        cantidad++;
+        numero.textContent = cantidad;
+    });
 
-  decremento.addEventListener("click", () => {
-    if (cantidad > 1) {
-      cantidad--;
-      numero.textContent = cantidad;
-    }
-  });
-
-
+    decremento.addEventListener("click", () => {
+        if (cantidad > 1) {
+        cantidad--;
+        numero.textContent = cantidad;
+        }
+    });
 
     return columnas;
 }
@@ -160,7 +220,18 @@ listaUsos.forEach(function(boton){
 function mostrarProductos(){
 
     productosFiltros = listaProductos.filter(function(item){
-        return(filtrarCategoria === "inicio" || item.categoria === filtrarCategoria) && (filtrarUso === "" || item.uso === filtrarUso);
+
+        let cumpleCategoria = (filtrarCategoria === "inicio" || item.categoria === filtrarCategoria);
+
+        let cumpleUso = (filtrarUso === "" || item.uso === filtrarUso);
+
+        let cumplePrecioMin = (precioMin === null || item.precio >= precioMin);
+
+        let cumplePrecioMax = (precioMax === null || item.precio <= precioMax);
+
+         let cumpleMarca = (marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(item.marca.toLowerCase()));
+
+        return cumpleCategoria && cumpleUso && cumplePrecioMin && cumplePrecioMax && cumpleMarca;
     });
 
     let contenedorP = document.getElementById("contenedor");
@@ -220,6 +291,24 @@ function escribirTexto(elemento, texto){
 
     }, 150);//velosidad de escritura
 }
+
+let marcasSeleccionadas = [];
+const checkboxesMarca = document.querySelectorAll('.marcas input[type="checkbox"]');
+
+checkboxesMarca.forEach(cb => {
+  cb.addEventListener("change", () => {
+
+    marcasSeleccionadas = [];
+
+    checkboxesMarca.forEach(c => {
+      if (c.checked) {
+        marcasSeleccionadas.push(c.value.toLowerCase());
+      }
+    });
+
+    mostrarProductos(); // 👈 vuelve a renderizar
+  });
+});
 
 mostrarProductos()
 
