@@ -138,6 +138,13 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+.item:hover{
+  width: 92%;
+  border-radius: 6px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 4px#00f0d0;
+}
+
 /*MOVIMIENTO DE BOTONES MENU*/
 .item.active {
   width: 92%;
@@ -177,21 +184,26 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   color: #fff;
-  margin: 5px 0px 0px 0px;
+  margin: 8px 0px 0px 0px;
   padding: 8px;
   width: 100%;
   height: 35px;
   border-radius: 5px;
   background-color: #0005106c;
   border: solid 0.5px  rgba(26, 158, 96, 0.388);
-  font-size: 10px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.4s ease;
 }
 
+.itenUso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
 /*MEVIMIENTO DE LI*/
 .itenUso.active{
-  font-size: 10px;
+  font-size: 14px;
   color: #00f0d0;
   box-shadow: 0px 0px 2px#00f0d0;
   transform: scale(1.03);
@@ -222,9 +234,9 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center; 
   align-items: center;   
-  gap: 10px;
+  gap: 010px;
   margin-bottom: 10px;
-  padding: 0px 5px 5px 5px;
+  padding: 0px 8px 8px 8px;
 }
 
 
@@ -265,8 +277,8 @@ body::-webkit-scrollbar {
   width: 100%;
   margin-bottom: 10px;
   border-radius: 5px;
-  font-size: 10px;
-  background-color:  transparent;
+  font-size: 14px;
+  background-color: #0005106c;
   border: solid 0.5px  rgba(26, 158, 96, 0.388);
   padding: 5px;
   cursor: pointer;
@@ -277,6 +289,13 @@ body::-webkit-scrollbar {
   color: #00f0d07a;
 }
 
+.pre:hover{
+  outline: none;
+  box-shadow: none;
+  box-shadow: 0px 0px 3px #00f0d0;
+  color: #00f0d0;
+  
+}
 .pre:focus{
   outline: none;
   box-shadow: none;
@@ -297,10 +316,10 @@ body::-webkit-scrollbar {
   margin: 0 auto;
   height: 29px;
   width: 100%;
-  font-size: 10px;
+  font-size: 13px;
   padding: 8px;
-  border-radius: 6px;
-  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  border-radius: 9px;
+  border: solid 1.30px  rgba(26, 158, 96, 0.388);
   background-color:  transparent;
   color: #e5e5ea;
   cursor: pointer;
@@ -320,7 +339,7 @@ body::-webkit-scrollbar {
    display: flex;
    justify-content: center;
    align-items: center;
-   height: 163px;
+   height: 156px;
    border-radius: 8px;
    margin-top: 8px;
    padding: 10px;   
@@ -334,13 +353,27 @@ body::-webkit-scrollbar {
 
 /*LABEL MARCA*/
 .marcas label{
-  display: flex;          /* 👈 clave */
-  align-items: center;    /* centra vertical */
-  gap: 6px;               /* espacio entre checkbox y texto */
+  display: flex;          
+  align-items: center;    
+  gap: 6px;              
   color: #fff;
-  font-size: 10px;
+  font-size: 14px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
 
+.marcas label:hover {
+  text-shadow: 0 0 5px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+  color: #00f0d0;
+}
+
+.marcas input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+}
 
 .marcas input[type="checkbox"] {
   appearance: none;
@@ -352,11 +385,13 @@ body::-webkit-scrollbar {
   position: relative;
   transition: all 0.3s ease;
   margin-right: 6px;
-  background: transparent;
+  background-color: #0005106c;
+  transition: transform 0.3s ease;
 }
 
 .marcas input[type="checkbox"]:hover {
   box-shadow: 0 0 5px rgba(0,240,200,0.7);
+  transform: scale(1.09);
 }
 
 .marcas input[type="checkbox"]:checked {
@@ -368,7 +403,7 @@ body::-webkit-scrollbar {
 
 .marcas input[type="checkbox"]::after {
   content: "✔";
-  font-size: 12px;
+  font-size: 13px;
   color: #f7f5f5;
   display: flex;
   position: absolute;
@@ -381,6 +416,7 @@ body::-webkit-scrollbar {
 
 .marcas input[type="checkbox"]:checked::after {
   opacity: 1;
+  
 }
 /*SECION INICIO.....................................................................................................................*/
 /*.productos{
