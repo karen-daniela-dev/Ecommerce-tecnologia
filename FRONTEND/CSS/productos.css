@@ -518,7 +518,8 @@ body::-webkit-scrollbar {
 
 /*nobre de produdo*/
 .texto h5 {
-  color: #4fa983 !important;
+  color: #00f0d0;
+  opacity: 0.6;
   font-family: 'Orbitron', sans-serif;
   font-size: 13px;
   font-weight: bold;
@@ -563,7 +564,7 @@ body::-webkit-scrollbar {
 .masmenos{
   display: flex;
   background-color: transparent;
-  border: solid 1px #67927e;
+  border: solid 1px #00f0d0;;
   width: 71px;
   height: 20px;
   border-radius: 12px;
@@ -583,7 +584,7 @@ body::-webkit-scrollbar {
 
 /*cuando el mouse pasa - +*/
 .masmenos button:hover{
-  color: #06cf96;
+  color: #00f0d0;
   text-shadow: 0px 0px 5px #11cd0d;
 }
 
@@ -628,6 +629,12 @@ body::-webkit-scrollbar {
   background-color: transparent;
   height: 100%;
   color: #fefcfc;
+   transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.anadir span:hover{
+  color: #040404;
+  transform: scale(1.1);
 }
 
 /*boto añadir cariito movimiento*/
@@ -636,6 +643,8 @@ body::-webkit-scrollbar {
   transform: scale(1.03);
   cursor: pointer;
 }
+
+
 
 /*boto añadir cariito
 .anadir span{

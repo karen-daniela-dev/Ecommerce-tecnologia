@@ -224,8 +224,6 @@ export const productos = [
     },
 
 
-
-    
     { 
         id: 18,
         nombre: "Premium - MS900", 
