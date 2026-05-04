@@ -4,18 +4,19 @@ import {productos} from "./textoProducto.js";
 
 //convertimos en JSON
 let listaProductos = JSON.parse(JSON.stringify(productos));
-function IniciarDatos(){
+
+// unir productos con productos creados
+function unirDatos(){
 
     let datos = localStorage.getItem("ListaProductos");
 
     if(datos){
 
-        let creadosProductos = JSON.parse(datos);
-        listaProductos = [...listaProductos,...creadosProductos];
+        let productosCreados = JSON.parse(datos);
+        listaProductos = [...listaProductos,...productosCreados];
     }
 
-
-}
+};
 
 function ActualizarProductos(){
 
@@ -36,7 +37,7 @@ function ActualizarProductos(){
 
 //setInterval(ActualizarProductos, 2000);
 
-IniciarDatos();
+unirDatos();
 
 let productosFiltros = JSON.parse(JSON.stringify(listaProductos));
 let filtrarCategoria = "inicio"; 

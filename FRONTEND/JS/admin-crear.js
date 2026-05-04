@@ -323,7 +323,7 @@
     };
  
     console.log(JSON.stringify(nuevoProducto));
-    // Agregar a la lista en memoria
+    // Agregar a el objeto a la lista 
     listaProductos.push(nuevoProducto);
  
     localStorage.setItem("ListaProductos",JSON.stringify(listaProductos));

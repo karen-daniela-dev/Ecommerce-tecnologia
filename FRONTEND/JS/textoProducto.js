@@ -106,7 +106,7 @@ export const productos = [
 
     { 
         id: 9,
-        nombre: "gaming Acer Nitro", 
+        nombre: "Acer Nitro", 
         imagen: "https://i.postimg.cc/HxQgKNjR/Copilot-20260423-040232.png",
         descripcion: "Auriculares de diadema alámbricos diseñados para gaming.", 
         precio: 130000,
@@ -298,7 +298,6 @@ export const productos = [
         marca: "hp",
         catidad: 25
     },
-
 
 
  
