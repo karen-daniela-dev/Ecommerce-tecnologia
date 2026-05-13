@@ -152,31 +152,6 @@ export const productos = [
 
 
 
-
-    { 
-        id: 13,
-        nombre: "ROG Xbox Ally", 
-        imagen: "https://i.postimg.cc/3wWpgPt7/Copilot-20260423-042030.png", 
-        descripcion: "Accede rápidamente a la Game Bar.", 
-        precio: 2599900,
-        categoria: "videojuegos",
-        uso: "gamer",
-        marca: "asus",
-        catidad: 25
-        
-    },
-    { 
-        id: 14,
-        nombre: "ROG Ally RC72LA", 
-        imagen: "https://i.postimg.cc/FRcWNdtB/Copilot-20260423-041257.png", 
-        descripcion: "El procesador de élite de alto rendimiento y mejorado.", 
-        precio: 4099900,
-        categoria: "videojuegos",
-        uso: "gamer",
-        marca: "asus",
-        catidad: 25
-        
-    },
    
 
 

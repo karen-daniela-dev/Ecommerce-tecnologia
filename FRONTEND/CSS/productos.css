@@ -87,13 +87,12 @@ body::-webkit-scrollbar {
 
 
 
-/*CONTENDOR DE TODA LA PAGINA*/
+/*CONTENDOR DE TODA LA PAGINA.............................................*/
 .contenedor{
   display: flex;
   margin-left: 10px;
 }
 /*FIN DE CONTENEDOR */
-
 
 /*CAJON DE MENU......................................................................................*/
 .Cajoncategorias{
@@ -108,9 +107,6 @@ body::-webkit-scrollbar {
   
 }
 
-
-
-
 /*MENU ........................................................................................*/
 .menuCategorias{
   background-color: transparent; 
@@ -118,11 +114,23 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   padding: 0px 0px 5px 0px;
-  height: 320px;
+  height: 290px;
   margin-bottom: 8px;
   border-radius: 12px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+}
+
+/*TITULO DE MENU PRINCIPAL*/
+.menuCategorias h2{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #00f0d0;   
+  text-transform: uppercase; 
+  letter-spacing: 20%; 
+  text-align: center;
+  padding: 17px 0px 0px 0px;
 }
 
 /* BOTONES MENU*/
@@ -153,27 +161,28 @@ body::-webkit-scrollbar {
   box-shadow: 0px 0px 4px#00f0d0;
 }
 
-/*TITULO DE MENU PRINCIPAL*/
-.menuCategorias h2{
-  font-family: 'Orbitron', sans-serif;
-  font-size: 19px;
-  font-weight: 800;
-  color: #00f0d0;   
-  text-transform: uppercase; 
-  letter-spacing: 20%; 
-  text-align: center;
-  padding: 17px 0px 0px 0px;
-}
 
-/*FILTROS USOS...............................................................*/
+/*FILTROS MENU.............................................................................................*/
 .filtros{
   background-color: transparent;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
   border: solid 0.5px  rgba(26, 158, 96, 0.388);
-  height: 400px; 
+  height: 430px; 
   padding: 7px;
   border-radius: 12px;
   
+}
+
+/*TITULO DE MENU SEGUNDARIO*/
+.filtros h2{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #00f0d0;
+  text-transform: uppercase; 
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 10px 0px 0px 0px;
 }
 
 /*LISTA DE UL LI*/
@@ -187,7 +196,7 @@ body::-webkit-scrollbar {
   margin: 8px 0px 0px 0px;
   padding: 8px;
   width: 100%;
-  height: 35px;
+  height: 25px;
   border-radius: 5px;
   background-color: #0005106c;
   border: solid 0.5px  rgba(26, 158, 96, 0.388);
@@ -207,18 +216,6 @@ body::-webkit-scrollbar {
   color: #00f0d0;
   box-shadow: 0px 0px 2px#00f0d0;
   transform: scale(1.03);
-}
-
-/*TITULO DE MENU SEGUNDARIO*/
-.filtros h2{
-  font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  color: #00f0d0;
-  text-transform: uppercase; 
-  letter-spacing: 2px;
-  text-align: center;
-  padding: 10px 0px 0px 0px;
 }
 
 /*CAJON USOS*/
@@ -269,7 +266,7 @@ body::-webkit-scrollbar {
   gap: 7px;
 }
 
-
+/*INPUT TEXT*/
 .pre[type="text"] {
   height: 27px;
   width: 100%;
@@ -283,10 +280,12 @@ body::-webkit-scrollbar {
   color: #00f0d0c8;
 }
 
+/*TEXTO DE INPUT*/
 .pre::placeholder{
   color: #00f0d07a;
 }
 
+/*MOVIMIENTO*/
 .pre:hover{
   outline: none;
   box-shadow: none;
@@ -294,6 +293,8 @@ body::-webkit-scrollbar {
   color: #00f0d0;
   
 }
+
+/*FOCUS*/
 .pre:focus{
   outline: none;
   box-shadow: none;
@@ -302,11 +303,13 @@ body::-webkit-scrollbar {
   
 }
 
+/*..*/
  .notonfl{
   display: flex;
   gap: 10px;
  }
 
+ /*BOTONES*/
 .botonff{
   display: flex;
   justify-content: center;
@@ -343,6 +346,7 @@ body::-webkit-scrollbar {
    padding: 10px;   
    gap: 40px;       
 }
+
 .marcas div {
   display: flex;
   flex-direction: column;
@@ -416,25 +420,305 @@ body::-webkit-scrollbar {
   opacity: 1;
   
 }
-/*SECION INICIO.....................................................................................................................*/
-/*.productos{
-  width: 100%;
-  background-color:  transparent; 
-  height: 100%;
-  overflow-y: auto; 
-  scrollbar-width: none;
-  margin-bottom: 10px;
-  padding-left: 2vh;  inicio
-}
-*/
 
+/*BUTON LIAMPIAR FILTROS......................................*/
+.limpiarF{
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  color: #d7d7d9;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.limpiarF:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.02);
+}
+
+
+/*RESPOSIVE MENU CATEGORIAS.................................................................................*/
+
+@media(min-width: 1254px ) and ( max-width: 1752px){
+
+  /*CAJON DE MENU......................................................................................*/
+  .Cajoncategorias{
+    background-color: transparent;
+    top: 90px;
+    position: sticky; 
+    display: block;
+    margin-bottom: 14px;
+    width: 16%;
+    top: 0;
+    height: 730px;
+  }
+
+   /*TITULO DE MENU PRINCIPAL..............................................*/
+  .menuCategorias h2{
+    font-size: 17px;
+  }
+
+  /* BOTONES MENU*/
+  .item {
+    font-size: 17px;
+    margin-top: 3.50px;
+  }
+
+  /*TITULO DE MENU SEGUNDARIO......................................................*/
+  .filtros h2{
+    font-size: 15px;
+  }
+
+  /*LISTA DE UL LI USOS............................................................*/
+  .itenUso{
+    font-size: 12px;
+  }
+
+   /*BOTONES  FILTRO PRECIO....................................................*/
+  .botonff{
+    font-size: 11.50px;
+    padding: 0;
+    text-shadow: 0px 0px 5px #000000;
+  }
+
+  /*INPUT TEXT*/
+  .pre[type="text"] {
+    font-size: 12px;
+  }
+
+  /*LABEL MARCA  FILTRO MARCA..........................................................*/
+  .marcas label{
+    font-size: 12px;
+  }
+
+}
+
+@media(min-width: 990px ) and ( max-width: 1254px){
+
+  /*CAJON DE MENU......................................................................................*/
+  .Cajoncategorias{
+    width: 26%;
+    background-color: transparent;
+    
+  }
+
+  /*MENU CATEGORIA........................................................................................*/
+   /*TITULO*/
+  .menuCategorias h2{
+    font-size: 16px;
+  }
+
+  /* BOTONES MENU*/
+  .item {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  /*FILTROS MENU.............................................................................................*/
+  /*TITULO*/
+  .filtros h2{
+    font-size: 15px;
+  }
+
+  /*LISTA DE UL LI USOS............................................................*/
+  .itenUso{
+    font-size: 11px;
+  }
+
+   /*BOTONES  FILTRO PRECIO....................................................*/
+  .botonff{
+    font-size: 11px;
+    padding: 0;
+    text-shadow: 0px 0px 5px #000000;
+  }
+
+  /*INPUT TEXT*/
+  .pre[type="text"] {
+    font-size: 11px;
+  }
+
+  /*LABEL MARCA  FILTRO MARCA..........................................................*/
+  .marcas label{
+    font-size: 12px;
+  }
+
+}
+
+@media(min-width: 9px ) and ( max-width: 990px){
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  /*CAJON DE MENU......................................................................................*/
+  .Cajoncategorias{
+    display: none;
+      
+  }
+
+  /*BARRA MENU..............*/
+  .Cajoncategorias2{
+    display: flex;
+    background-color: #111827;
+    border-radius: 12px;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+   
+
+
+  .Cajoncategorias2 .menus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 50px;
+    width: 100%;
+    gap: 20px;
+  }
+
+
+  /*TEXTO BARRA*/
+  .Cajoncategorias2 .menus h2{
+    margin-top: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #26897b;  
+    padding: 10px;
+    width: 120px;
+    font-size: 16px;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /*EVENTO TEXTO*/
+   .Cajoncategorias2 .menus h2:hover{
+    padding: 10px;
+    border-radius: 9px;
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+  .Cajoncategorias2 .menus h2.active{
+    padding: 10px;
+    border-radius: 9px;
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+  /*quitar claces*/
+
+  .item{
+   all: unset;
+  }
+
+  .item:hover{
+   all: unset;
+  }
+
+  .item.active{
+    all: unset;
+  }
+
+
+  /*MENU CATEGORIA........*/
+  .menu2{
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    padding: 10px 10px 10px 10px !important;
+    height: 50px !important;
+    gap: 10px !important;
+    width: 90% !important;
+    background-color: #000000a9;
+    margin-bottom: 10px !important;
+  }
+
+  .but{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+    font-size: 16px !important; 
+    color: #dfe2e1;
+    padding: 8px; 
+    margin-top: 5px; 
+  }
+
+  .but:hover{
+    padding: 7px; 
+    border-radius: 8px !important;
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    background-color: #00000051;
+    color: #ffffff;
+  }
+
+  .item.active{
+    padding: 7px !important; 
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388) !important;
+    background-color: #00f0d051 !important;
+    color: #ffffff !important;
+    box-shadow: 0px 0px 8px #79adad !important;
+  }
+
+  /*CARRUSEL ........................................................................*/
+  #carouselExampleIndicators {
+     display: none;
+  }
+
+  /*BORDE CARRUSEL*/
+  .carousel-inner{
+    display: none;
+  }
+
+  /*IMAGEN CARRUSEL*/
+  .carousel-item img{
+    border-radius: 12px; 
+    opacity: 0.6;
+    border-radius: 0;
+    border: none;
+  }
+
+  /*ICOCO CARRISEL*/
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    display: none;
+  }
+
+}
+
+
+
+
+/*SECION INICIO.....................................................................................................................*/
 .container{
   margin: 0;   
   
 }
 
 #contenedor{
-    display: grid;
+  display: grid;
   grid-template-columns: repeat(8, 1fr);
   gap: 5px; 
 }

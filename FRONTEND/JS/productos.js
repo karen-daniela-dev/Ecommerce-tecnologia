@@ -313,5 +313,62 @@ checkboxesMarca.forEach(cb => {
   });
 });
 
+// BOTÓN LIMPIAR TODOS LOS FILTROS
+let botonLimpiarTodo = document.querySelector(".limpiarF");
+
+botonLimpiarTodo.addEventListener("click", function(){
+
+    // reset categorías
+    filtrarCategoria = "inicio";
+
+    // reset uso
+    filtrarUso = "";
+
+    // reset precios
+    precioMin = null;
+    precioMax = null;
+
+    // limpiar inputs
+    inputMin.value = "";
+    inputMax.value = "";
+
+    // reset marcas
+    marcasSeleccionadas = [];
+
+    // desmarcar checkboxes
+    checkboxesMarca.forEach(cb => {
+        cb.checked = false;
+    });
+
+    // quitar active categorías
+    categorias.forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    // quitar active usos
+    listaUsos.forEach(li => {
+        li.classList.remove("active");
+    });
+
+    // volver a mostrar productos
+    mostrarProductos();
+});
+
+let catego = document.getElementById("catego");
+let categoriaMenu = document.getElementById("menu2");
+
+catego.addEventListener("click", function(){
+     if(categoriaMenu.style.display === "flex"){
+
+        categoriaMenu.style.display = "none";
+        catego.classList.remove("active");
+        
+    } else {
+
+        categoriaMenu .style.display = "flex";
+        catego.classList.add("active");
+    }
+})
+
 mostrarProductos()
 

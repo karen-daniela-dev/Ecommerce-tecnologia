@@ -67,94 +67,188 @@
     </nav>
   </section>
 
+
+
+ <!--menu PAGINA--------------------------------------------------------------------------------->
   <div  class="contenedor" style="margin-top: 20px; margin-bottom: 10px;">
-     <!--menu-->
+    
     <div class="Cajoncategorias">
-    <div class="menuCategorias"> 
-      <h2>Categorias</h2>
-      <button class="item" data-target="inicio">inicio</button>
-      <button class="item" data-target="laptops">Laptops</button>
-      <button class="item" data-target="mouses">Mouses</button>
-      <button class="item" data-target="smartwatches">Smartwatches</button>
-      <button class="item" data-target="audio">Audio</button>
-      <button class="item" data-target="teclados">Teclados</button>
-      <button class="item" data-target="tarjetas Graficar">Tarjetas Graficar</button>
-      <button class="item" data-target="videojuegos">Videos juegos</button>
-      <button class="item" data-target="accesorios">Accesorios</button>
       
-    </div>
-    <div class="filtros">
-      <!--firtos usos-->
-      <h2 class="filtro">Filtros</h2>
-      <div class="usos">
-        <div class="lista">
-          <ul>
-            <li class="itenUso" data-target="gamer">Gamer</li>
-            <li class="itenUso" data-target="general">General</li>
-          </ul>
-          <ul>
-            <li class="itenUso" data-target="estudio" >Estudio</li>
-            <li class="itenUso" data-target="trabajo">Trabajo</li>
-          </ul>
-        </div>
+      <div class="menuCategorias"> 
+        <h2>Categorias</h2>
+        <button class="item" data-target="inicio">inicio</button>
+        <button class="item" data-target="laptops">Laptops</button>
+        <button class="item" data-target="mouses">Mouses</button>
+        <button class="item" data-target="smartwatches">Smartwatches</button>
+        <button class="item" data-target="audio">Audio</button>
+        <button class="item" data-target="teclados">Teclados</button>
+        <button class="item" data-target="tarjetas Graficar">Tarjetas Graficar</button>
+        <button class="item" data-target="accesorios">Accesorios</button>
       </div>
 
-      <div class="filtrosPrecio">
-        <div class="filtro-precio">
-          <input class="pre" type="text" placeholder="Min">
-          <input class="pre" type="text" placeholder="Max">
+      <div class="filtros">
+        <!--firtos usos-->
+        <h2 class="filtro">Filtros</h2>
+        <div class="usos">
+          <div class="lista">
+            <ul>
+              <li class="itenUso" data-target="gamer">Gamer</li>
+              <li class="itenUso" data-target="general">General</li>
+            </ul>
+            <ul>
+              <li class="itenUso" data-target="estudio" >Estudio</li>
+              <li class="itenUso" data-target="trabajo">Trabajo</li>
+            </ul>
+          </div>
         </div>
-        <div class="notonfl">
-          <button class="botonff botonFiltrar bottom-nav-item">Filtrar precios</button>
-          <button class="botonff limpiarFiltro bottom-nav-item">Limpiar filtro</button>
-        </div>
-       
-      </div>
 
-      <!--checkbox marca-->
-      <div class="marcas">
-        <div>
-          <label>
-            <input type="checkbox" value="acer">
-           <span>Acer</span> 
-          </label>
-        <label>
-          <input type="checkbox" value="apple">
-           <span>Apple</span>
-        </label>
-         <label>
-          <input type="checkbox" value="asus">
-           <span>Asus</span>
-         </label>
-        <label>
-          <input type="checkbox" value="dell">
-           <span>Dell</span>
-        </label>
-        </div>
+        <div class="filtrosPrecio">
+          <div class="filtro-precio">
+            <input class="pre" type="text" placeholder="Min">
+            <input class="pre" type="text" placeholder="Max">
+          </div>
+          <div class="notonfl">
+            <button class="botonff botonFiltrar bottom-nav-item">Filtrar precios</button>
+            <button class="botonff limpiarFiltro bottom-nav-item">Limpiar filtro</button>
+          </div>
         
-        <div>
-          <label>
-           <input type="checkbox" value="hp">
-           <span>HP</span> 
-          </label>
-          <label>
-            <input type="checkbox" value="lenovo">
-            <span>Lenovo</span>
-          </label>
-          <label>
-            <input type="checkbox" value="msi">
-            <span>Msi</span>
-          </label>
-          <label>
-            <input type="checkbox" value="otros">
-            <span>Otros</span>
-          </label> 
         </div>
+
+        <!--checkbox marca-->
+        <div class="marcas">
+          <div>
+            <label>
+              <input type="checkbox" value="acer">
+            <span>Acer</span> 
+            </label>
+          <label>
+            <input type="checkbox" value="apple">
+            <span>Apple</span>
+          </label>
+          <label>
+            <input type="checkbox" value="asus">
+            <span>Asus</span>
+          </label>
+          <label>
+            <input type="checkbox" value="dell">
+            <span>Dell</span>
+          </label>
+          </div>
+          
+          <div>
+            <label>
+            <input type="checkbox" value="hp">
+            <span>HP</span> 
+            </label>
+            <label>
+              <input type="checkbox" value="lenovo">
+              <span>Lenovo</span>
+            </label>
+            <label>
+              <input type="checkbox" value="msi">
+              <span>Msi</span>
+            </label>
+            <label>
+              <input type="checkbox" value="otros">
+              <span>Otros</span>
+            </label> 
+          </div>
+        </div>
+        <button class="limpiarF">Limpiar filtros</button>
       </div>
-    </div>
   </div>
 
-  <!--finde menu-->
+  <!--finde menu PAGINA--------------------------------------------------------------------------------------->
+
+  <div class="Cajoncategorias2">
+      <div class="menus"> 
+        <h2 id="catego">Categorias</h2>
+        <h2>Usos</h2>
+        <h2 class="filtro">Filtros</h2>
+      </div>
+  </div>
+        <div id="menu2" class="menuCategorias menu2" style="display: none;">
+          <button class="item but" data-target="inicio">inicio</button>
+          <button class="item but" data-target="laptops">Laptops</button>
+          <button class="item but" data-target="mouses">Mouses</button>
+          <button class="item but" data-target="smartwatches">Smartwatches</button>
+          <button class="item but" data-target="audio">Audio</button>
+          <button class="item but" data-target="teclados">Teclados</button>
+          <button class="item but" data-target="tarjetas Graficar">Tarjetas Graficar</button>
+          <button class="item but" data-target="accesorios">Accesorios</button>
+        </div>
+
+      <div class="filtros">
+        <!--firtos usos-->
+       
+        <div class="usos">
+          <div class="lista">
+            <ul>
+              <li class="itenUso" data-target="gamer">Gamer</li>
+              <li class="itenUso" data-target="general">General</li>
+            </ul>
+            <ul>
+              <li class="itenUso" data-target="estudio" >Estudio</li>
+              <li class="itenUso" data-target="trabajo">Trabajo</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="filtrosPrecio">
+          <div class="filtro-precio">
+            <input class="pre" type="text" placeholder="Min">
+            <input class="pre" type="text" placeholder="Max">
+          </div>
+          <div class="notonfl">
+            <button class="botonff botonFiltrar bottom-nav-item">Filtrar precios</button>
+            <button class="botonff limpiarFiltro bottom-nav-item">Limpiar filtro</button>
+          </div>
+        
+        </div>
+
+        <!--checkbox marca-->
+        <div class="marcas">
+          <div>
+            <label>
+              <input type="checkbox" value="acer">
+            <span>Acer</span> 
+            </label>
+          <label>
+            <input type="checkbox" value="apple">
+            <span>Apple</span>
+          </label>
+          <label>
+            <input type="checkbox" value="asus">
+            <span>Asus</span>
+          </label>
+          <label>
+            <input type="checkbox" value="dell">
+            <span>Dell</span>
+          </label>
+          </div>
+          
+          <div>
+            <label>
+            <input type="checkbox" value="hp">
+            <span>HP</span> 
+            </label>
+            <label>
+              <input type="checkbox" value="lenovo">
+              <span>Lenovo</span>
+            </label>
+            <label>
+              <input type="checkbox" value="msi">
+              <span>Msi</span>
+            </label>
+            <label>
+              <input type="checkbox" value="otros">
+              <span>Otros</span>
+            </label> 
+          </div>
+        </div>
+        <button class="limpiarF">Limpiar filtros</button>
+      </div>
+  
 
 
   <div class="productos" style="padding-bottom: 10px;">
