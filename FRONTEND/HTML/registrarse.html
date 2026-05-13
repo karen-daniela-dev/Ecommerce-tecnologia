@@ -4,48 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KLYDY Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" sizes="16x16" href="../images/klydy-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/klydy-favicon-32.png">
+<link rel="stylesheet" href="../CSS/registrarse.css">
 <link rel="stylesheet" href="../CSS/nav-footer.css">
-
-<style>
-  /* Modales y offcanvas siempre por encima de la barra inferior */
-  .modal-backdrop { z-index: 1050 !important; }
-  .modal          { z-index: 1055 !important; }
-  .offcanvas-backdrop { z-index: 1055 !important; }
-  .offcanvas      { z-index: 1060 !important; }
-</style>
 </head>
 <body>
+
 
 <div class="neon-lines">
   <svg viewBox="0 0 1440 900" preserveAspectRatio="none"
        xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Cyan — esquina derecha inferior -->
     <polyline points="1380,900 1380,580 1440,580"
       fill="none" stroke="#00f0c8" stroke-width="2"  opacity="0.6"/>
     <polyline points="1380,900 1380,580 1440,580"
       fill="none" stroke="#00f0c8" stroke-width="18" opacity="0.07"/>
+
+    <!-- Purple — esquina izquierda inferior -->
     <polyline points="60,900 60,620 0,620"
       fill="none" stroke="#bc4fe8" stroke-width="2"  opacity="0.55"/>
     <polyline points="60,900 60,620 0,620"
       fill="none" stroke="#bc4fe8" stroke-width="18" opacity="0.07"/>
+
+    <!-- Pink — esquina derecha superior (bajada 70px por el navbar) -->
     <polyline points="1440,190 1360,190 1360,70"
       fill="none" stroke="#ff3cac" stroke-width="1.5" opacity="0.50"/>
     <polyline points="1440,190 1360,190 1360,70"
       fill="none" stroke="#ff3cac" stroke-width="14"  opacity="0.06"/>
+
+    <!-- Blue — esquina izquierda superior (bajada 70px por el navbar) -->
     <polyline points="0,180 80,180 80,70"
       fill="none" stroke="#0abde3" stroke-width="1.5" opacity="0.50"/>
     <polyline points="0,180 80,180 80,70"
       fill="none" stroke="#0abde3" stroke-width="14"  opacity="0.06"/>
+
   </svg>
 </div>
 
-
-<!-- ============================================================
-     NAVBAR
-     ============================================================ -->
 <section class="nav">
  <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
@@ -100,17 +99,6 @@
  </nav>
 </section>
 
-<section class="contenido">
-<!-- ============================================================
-     AQUÍ VA EL CONTENIDO
-     ============================================================ -->
-</section>
-
-
-<!-- ============================================================
-     MODAL LOGIN
-    
-     ============================================================ -->
 <div class="modal fade" id="modalLogin" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-klydy">
@@ -162,10 +150,63 @@
 </div>
 
 
-<section class="footer">
-<!-- ══════════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════════ -->
+
+<div class="register-container">
+
+    <div class="register-card">
+
+        <h2 class="register-title">Crear Cuenta</h2>
+        <p class="register-sub">Unete a Klydy Technology</p>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Nombre completo">
+            </div>
+
+            <div class="form-group">
+                <label>Numero de Identificacion</label>
+                <input type="text" id="identificacion" inputmode="numeric" pattern="[0-9]*">
+            </div>
+
+            <div class="form-group">
+                <label>Correo electronico</label>
+                <input type="email" id="correo" placeholder="tu@email.com">
+            </div>
+
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type="text" id="telefono" inputmode="numeric" pattern="[0-9]*" placeholder="3000000000">
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+
+                    <div class="input-icon">
+                    <input type="password" id="password" placeholder="**********">
+                    <i class="bi bi-eye toggle-password" onclick="togglePassword('password', this)"></i>
+                </div>
+            </div>
+
+            <div class="form-group password-group">
+                <label>Confirmar contraseña</label>
+                
+                    <div class="input-icon">
+                    <input type="password" id="confirmPassword" placeholder="**********">
+                    <i class="bi bi-eye toggle-password" onclick="togglePassword('confirmPassword', this)"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-register">Registrarse</button>
+
+            <p class="login-link">
+                <a href="#">Iniciar sesion</a>
+                <span class="login-text">¿Ya tienes cuenta?</span>
+            </p>
+        </form>
+    </div>
+</div>
+
 <footer class="klydy-footer">
   <div class="container">
 
@@ -235,10 +276,6 @@
 </footer>
 </section>
 
-
-<!-- ============================================================
-     BARRA INFERIOR MÓVIL
-     ============================================================ -->
 <div class="bottom-nav d-lg-none">
 
   <button class="bottom-nav-item btn-cuenta"
@@ -264,7 +301,7 @@
   </button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../JS/nav.js"></script>
+<script src="../JS/registrarse.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLYDY Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="16x16" href="images/klydy-favicon-32.png">
+<link rel="stylesheet" href="../CSS/recuperar.css">
+</head>
+<body>
+
+
+<div class="neon-lines">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="none"
+       xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Cyan — esquina derecha inferior -->
+    <polyline points="1380,900 1380,580 1440,580"
+      fill="none" stroke="#00f0c8" stroke-width="2"  opacity="0.6"/>
+    <polyline points="1380,900 1380,580 1440,580"
+      fill="none" stroke="#00f0c8" stroke-width="18" opacity="0.07"/>
+
+    <!-- Purple — esquina izquierda inferior -->
+    <polyline points="60,900 60,620 0,620"
+      fill="none" stroke="#bc4fe8" stroke-width="2"  opacity="0.55"/>
+    <polyline points="60,900 60,620 0,620"
+      fill="none" stroke="#bc4fe8" stroke-width="18" opacity="0.07"/>
+
+    <!-- Pink — esquina derecha superior (bajada 70px por el navbar) -->
+    <polyline points="1440,190 1360,190 1360,70"
+      fill="none" stroke="#ff3cac" stroke-width="1.5" opacity="0.50"/>
+    <polyline points="1440,190 1360,190 1360,70"
+      fill="none" stroke="#ff3cac" stroke-width="14"  opacity="0.06"/>
+
+    <!-- Blue — esquina izquierda superior (bajada 70px por el navbar) -->
+    <polyline points="0,180 80,180 80,70"
+      fill="none" stroke="#0abde3" stroke-width="1.5" opacity="0.50"/>
+    <polyline points="0,180 80,180 80,70"
+      fill="none" stroke="#0abde3" stroke-width="14"  opacity="0.06"/>
+
+  </svg>
+</div>
+
+
+<section class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1>Recuperar contraseña</h1>
+            <p class="lead">Selecciona el tipo de documento e ingresa datos</p>
+        </div>
+    </div>
+
+    <div id="klydy-card">
+
+        <div class="klydy-form-header">
+            <h2 class="logo-form">Klydy<span class="logo-form-dot"></span></h2>
+            <p class="logo-form-sub">TECHNOLOGY</p>
+        </div>
+
+        <form id="formRecuperar">
+
+        <div class="form-row">
+
+        <div class="form-group">
+          <label>TIPO DE DOCUMENTO</label>
+          <select class="klydy-input">
+            <option value="">Selecciona</option>
+            <option>Cédula de ciudadanía</option>
+            <option>Tarjeta de Identidad</option>
+            <option>Pasaporte</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>NÚMERO DE DOCUMENTO</label>
+          <input class="klydy-input" placeholder="Tu número">
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label>CORREO ELECTRÓNICO</label>
+        <input type="email" class="klydy-input" placeholder="tu@email.com">
+      </div>
+
+      <!-- CAPTCHA -->
+      <div class="form-group">
+        <label>CÓDIGO DE VERIFICACIÓN</label>
+
+        <div class="klydy-captcha-box">
+          <span id="captchaTexto">68ZF2</span>
+        </div>
+
+        <input type="text" class="klydy-input" placeholder="Ingresa el código">
+      </div>
+
+      <button class="klydy-btn-main">VERIFICAR</button>
+
+    </form>
+
+  </div>
+
+</section>
+
+<script src="../JS/validacion.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

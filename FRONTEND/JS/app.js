@@ -1,3 +1,7 @@
+
+
+//  ESTILOS DE  SOBRE-NOSOTROS
+
 document.querySelectorAll('.card').forEach(card => {
   const canvas = card.querySelector('canvas.particles');
 

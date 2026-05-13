@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KLYDY Technology</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/klydy-favicon-32.png" />
+
+  <!-- CSS de estilos generales del proyecto (variables, body, neon-lines) -->
+  <link rel="stylesheet" href="../CSS/nav-footer.css" />
+
+  <!-- CSS de esta página -->
+  <link rel="stylesheet" href="../CSS/admin-crear.css" />
+</head>
+
+<body>
+
+  <!-- ─────────────────────────────────────────────────────────
+       DECORACIÓN GLOBAL — L-shapes neón en esquinas
+       Heredado de nav-footer.css · position: fixed · z-index: 0
+  ──────────────────────────────────────────────────────────── -->
+  <div class="neon-lines" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Cyan — esquina derecha inferior -->
+      <polyline points="1380,900 1380,580 1440,580" fill="none" stroke="#00f0c8" stroke-width="2" opacity="0.6" />
+      <polyline points="1380,900 1380,580 1440,580" fill="none" stroke="#00f0c8" stroke-width="18" opacity="0.07" />
+
+      <!-- Purple — esquina izquierda inferior -->
+      <polyline points="60,900 60,620 0,620" fill="none" stroke="#bc4fe8" stroke-width="2" opacity="0.55" />
+      <polyline points="60,900 60,620 0,620" fill="none" stroke="#bc4fe8" stroke-width="18" opacity="0.07" />
+
+      <!-- Pink — esquina derecha superior -->
+      <polyline points="1440,190 1360,190 1360,70" fill="none" stroke="#ff3cac" stroke-width="1.5" opacity="0.50" />
+      <polyline points="1440,190 1360,190 1360,70" fill="none" stroke="#ff3cac" stroke-width="14" opacity="0.06" />
+
+      <!-- Blue — esquina izquierda superior -->
+      <polyline points="0,180 80,180 80,70" fill="none" stroke="#0abde3" stroke-width="1.5" opacity="0.50" />
+      <polyline points="0,180 80,180 80,70" fill="none" stroke="#0abde3" stroke-width="14" opacity="0.06" />
+
+    </svg>
+  </div>
+
+  <!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+  <section class="nav">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="container-logo">
+          <div class="footer-logo-wrap d-flex">
+            <a class="footer-logo" href="#">
+              <span>K</span>lydy<span class="footer-logo-dot"></span>
+            </a>
+            <p class="footer-sub">Technology</p>
+          </div>
+        </div>
+
+        <!-- Toggler hamburguesa -->
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarKlydy"
+          aria-controls="navbarKlydy" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapse con links -->
+        <div class="collapse navbar-collapse" id="navbarKlydy">
+          <div>
+            <ul class="navbar-nav flex-grow-1 justify-content-evenly mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link klydy-link" href="index.html">HOME</a></li>
+              <li class="nav-item"><a class="nav-link klydy-link" href="productos.html">PRODUCTOS</a></li>
+              <li class="nav-item"><a class="nav-link klydy-link" href="sobre-nosotros.html">SOBRE NOSOTROS</a></li>
+              <li class="nav-item"><a class="nav-link klydy-link" href="contacto.html">CONTÁCTANOS</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Solo desktop -->
+        <div class="d-none d-lg-flex align-items-center gap-2">
+          <form class="d-flex align-items-center gap-2">
+            <button class="btn klydy-btn-login" type="button" data-bs-toggle="modal" data-bs-target="#modalLogin">
+              <i class="bi bi-person"></i> Mi Cuenta
+            </button>
+            <button class="btn klydy-btn-cart d-flex align-items-center" type="button" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasCarrito">
+              <i class="bi bi-cart3"></i>
+              <span class="klydy-badge ms-1" id="badge-desktop"></span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </nav>
+  </section>
+
+
+
+
+  <main>
+    <section class="py-4 py-md-5">
+      <div class="container">
+
+        <!-- TÍTULO Y BOTON VER -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-2">
+
+          <h1 class="mb-0">Crear producto</h1>
+
+          <a href="../HTML/admin-ver.html" class="btn btn-outline-info btn__info">
+            <i class="bi bi-laptop me-1"></i> Ver productos
+          </a>
+        </div>
+
+        <form id="formCrearProducto" novalidate>
+
+          <!-- ═══════════════════════════════
+             SECCIÓN 1: INFORMACIÓN BÁSICA
+        ═══════════════════════════════ -->
+          <h5 class="mb-3">Información básica</h5>
+
+          <!-- Nombre | Marca -->
+          <div class="row g-3 mb-3">
+
+            <div class="col-12 col-md-6">
+              <label for="nombre" class="form-label fw-semibold">
+                Nombre <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" id="nombre" name="nombre"
+                placeholder="Ingresa nombre del producto" maxlength="100" required />
+              <div class="invalid-feedback">
+                El nombre es obligatorio (máx. 100 caracteres).
+              </div>
+            </div>
+
+
+
+
+            <div class="col-12 col-md-6">
+              <label for="marca" class="form-label fw-semibold">
+                Marca <span class="text-danger">*</span>
+              </label>
+              <select class="form-select" id="marca" name="marca" required>
+                <option value="">Selecciona una marca</option>
+                <option value="Acer">Acer</option>
+                <option value="Apple">Apple</option>
+                <option value="Asus">Asus</option>
+                <option value="Dell">Dell</option>
+                <option value="HP">HP</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="MSI">MSI</option>
+                <option value="Otros">Otros</option>
+              </select>
+
+              <div class="invalid-feedback">
+                Debes seleccionar una marca.
+              </div>
+
+
+
+            </div>
+
+
+
+
+
+
+          </div>
+
+          <!-- ═══════════════════════════════
+             SECCIÓN 2: DETALLES DEL PRODUCTO
+        ═══════════════════════════════ -->
+          <h5 class="mb-3">Detalles del producto</h5>
+
+          <!-- Cantidad | Precio | Categoría -->
+          <div class="row g-3 mb-3">
+
+            <div class="col-12 col-md-4">
+              <label for="cantidad" class="form-label fw-semibold">
+                Cantidad <span class="text-danger">*</span>
+              </label>
+              <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresa la cantidad"
+                min="0" max="99999" step="1" required />
+              <div class="invalid-feedback">
+                Ingresa una cantidad válida (≥ 0).
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="precio" class="form-label fw-semibold">
+                Precio (COP) <span class="text-danger">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" id="precio" name="precio" placeholder="Ingresa el precio"
+                  inputmode="numeric" maxlength="15" required />
+              </div>
+              <div class="invalid-feedback d-block" id="precioError" style="display:none !important;"></div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="categoria" class="form-label fw-semibold">
+                Categoría <span class="text-danger">*</span>
+              </label>
+              <select class="form-select" id="categoria" name="categoria" required>
+                <option value="" selected disabled>Selecciona categoría</option>
+                <option value="laptops">Laptops</option>
+                <option value="mouses">Mouses</option>
+                <option value="smartwatches">Smartwatches</option>
+                <option value="audio">Audio</option>
+                <option value="teclados">Teclados</option>
+                <option value="tarjetas">Tarjetas Gráficas</option>
+                <option value="accesorios">Accesorios</option>
+              </select>
+              <div class="invalid-feedback">
+                Selecciona una categoría.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Uso -->
+          <div class="row g-3 mb-3 mt-3">
+            <div class="col-12">
+              <fieldset>
+                <legend class="form-label  mb-2">
+                  Según el uso <span class="text-danger">*</span>
+                </legend>
+
+                <div class="d-flex flex-wrap gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="uso" id="usoTrabajo" value="trabajo" required />
+                    <label class="form-check-label" for="usoTrabajo">Trabajo</label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="uso" id="usoEstudio" value="estudio" />
+                    <label class="form-check-label" for="usoEstudio">Estudio</label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="uso" id="usoGamer" value="gamer" />
+                    <label class="form-check-label" for="usoGamer">Gamer</label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="uso" id="usoGeneral" value="general" />
+                    <label class="form-check-label" for="usoGeneral">General</label>
+                  </div>
+                </div>
+
+                <div class="text-danger small mt-1" id="usoError" style="display:none;">
+                  Selecciona un tipo de uso.
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════
+             SECCIÓN 3: IMAGEN
+        ═══════════════════════════════ -->
+
+
+          <h5 class="mb-3 mt-5">Imagen del producto</h5>
+
+          <div class="row g-3 mb-3">
+            <div class="col-12 col-md-8">
+
+              <!-- MENSAJE -->
+              <p class="text-muted small">
+                Puedes cargar una imagen o pegar un enlace (URL)
+              </p>
+
+              <!-- DROPZONE -->
+              <div id="dropZone"
+                class="border border-2 rounded-3 d-flex flex-column align-items-center justify-content-center p-4 text-center"
+                style="cursor:pointer; min-height: 140px; border-style: dashed !important;">
+
+                <i class="bi bi-cloud-arrow-up fs-2 mb-2 text-secondary"></i>
+                <p class="mb-1 text-secondary">
+                  Arrastra una imagen o <span class="text-primary fw-semibold">haz clic</span>
+                </p>
+                <p class="small text-muted mb-0">JPG o PNG · Máx. 5 MB</p>
+
+                <input type="file" class="d-none" id="imagenProducto" accept=".jpg,.jpeg,.png" />
+              </div>
+
+              <!-- INPUT URL -->
+              <div class="mt-3">
+                <input type="url" id="imagenUrl" class="form-control" placeholder="https://ejemplo.com/imagen.jpg" />
+              </div>
+
+              <!-- PREVIEW (sirve para ambos) -->
+              <div id="previewContainer" class="mt-3 d-none">
+                <div class="d-flex align-items-center gap-3">
+                  <img id="previewImg" class="rounded border" style="max-width: 120px;" />
+                  <div>
+                    <p class="small mb-1" id="previewNombre"></p>
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="btnQuitarImagen">
+                      Quitar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-danger small mt-1" id="imagenError" style="display:none;"></div>
+
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════
+             SECCIÓN 4: DESCRIPCIÓN
+        ═══════════════════════════════ -->
+          <h5 class="mb-3 mt-5">Descripción</h5>
+
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-md-8">
+              <textarea class="form-control" id="descripcion" rows="5" placeholder="Descripción del producto..."
+                maxlength="500" required></textarea>
+              <div class="invalid-feedback">La descripción es obligatoria (máx. 500 caracteres).</div>
+              <div class="form-text text-end" id="descContador">0 / 500</div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="d-flex justify-content-end gap-2 flex-wrap">
+            <button type="button" id="btnCancelar" class="btn btn-outline-secondary px-4">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-dark px-4">
+              Crear
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+ 
+  </main>
+  <!-- FIN CONTENIDO  -->
+
+
+
+
+
+
+
+
+  <!-- ============================================================
+     MODAL LOGIN
+    
+     ============================================================ -->
+  <div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-klydy">
+
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-logo-wrap">
+          <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
+          <p class="modal-logo-sub">Technology</p>
+        </div>
+
+        <div class="modal-body px-4 pb-4">
+          <div class="mb-3">
+            <label class="modal-label">Correo</label>
+            <input type="email" class="form-control klydy-input" placeholder="tu@email.com">
+          </div>
+          <div class="mb-4">
+            <label class="modal-label">Contraseña</label>
+            <input type="password" class="form-control klydy-input" placeholder="••••••••">
+          </div>
+          <button class="btn w-100 fw-bold modal-btn-enter">ENTRAR</button>
+          <p class="modal-register-text">
+            <a href="registrarse.html" class="modal-register-link">Regístrate</a>
+            <a href="recuperar.html" class="modal-register-link">¿Olvidaste tu contraseña?</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+     OFFCANVAS CARRITO
+     ============================================================ -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+    <div class="offcanvas-header" style="background:#0d1225; border-bottom: 1px solid rgba(0,240,200,0.2);">
+      <h5 class="offcanvas-title text-white" id="offcanvasCarritoLabel">
+        <i class="bi bi-cart3 me-2" style="color:#00f0c8;"></i>Mi Carrito
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
+      <p class="text-center mt-4">Tu carrito está vacío.</p>
+    </div>
+  </div>
+
+
+  <section class="footer">
+    <!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+    <footer class="klydy-footer">
+      <div class="container">
+
+        <div class="row gy-4 pb-4 align-items-start">
+
+          <!-- COL: REDES SOCIALES -->
+          <div class="col-12 col-md-5 col-lg-5 footer-divider">
+            <p class="footer-title">Síguenos</p>
+            <div class="social-grid">
+              <a href="#" class="social-btn whatsapp" title="WhatsApp"> <i class="bi bi-whatsapp"></i></a>
+              <a href="#" class="social-btn instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="social-btn facebook" title="Facebook"> <i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-btn tiktok" title="TikTok"> <i class="bi bi-tiktok"></i></a>
+              <a href="#" class="social-btn youtube" title="YouTube"> <i class="bi bi-youtube"></i></a>
+              <a href="#" class="social-btn linkedin" title="LinkedIn"> <i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <!-- COL: LOGO -->
+          <div class="col-12 col-md-2 col-lg-2 footer-divider d-flex align-items-center justify-content-center">
+            <div class="footer-logo-wrap">
+              <a class="footer-logo" href="#">
+                <span>K</span>lydy<span class="footer-logo-dot"></span>
+              </a>
+              <p class="footer-sub">Technology</p>
+            </div>
+          </div>
+
+          <!-- COL: MEDIOS DE PAGO -->
+          <div class="col-12 col-md-5 col-lg-5">
+            <p class="footer-title">Medios de pago</p>
+            <div class="payment-grid">
+              <div class="payment-badge"><span class="pay-daviplata">Daviplata</span></div>
+              <div class="payment-badge"><span class="pay-nequi">Nequi</span></div>
+              <div class="payment-badge"><span class="pay-pse">PSE</span></div>
+              <div class="payment-badge"><span class="pay-efecty">Efecty</span></div>
+              <div class="payment-badge">
+                <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="10" r="9" fill="#eb001b" />
+                  <circle cx="20" cy="10" r="9" fill="#f79e1b" opacity="0.9" />
+                  <path d="M16 3.5a9 9 0 0 1 0 13A9 9 0 0 1 16 3.5z" fill="#ff5f00" />
+                </svg>
+              </div>
+              <div class="payment-badge">
+                <span class="pay-paypal" style="font-weight:800; font-style:italic;">Pay<span
+                    style="color:#009cde;">Pal</span></span>
+              </div>
+              <div class="payment-badge"><span class="pay-bancol">Bancolombia</span></div>
+              <div class="payment-badge">
+                <svg width="38" height="14" viewBox="0 0 38 14" xmlns="http://www.w3.org/2000/svg">
+                  <text x="0" y="12" font-family="Arial" font-size="14" font-weight="900" fill="#1a1f71"
+                    letter-spacing="-1">VISA</text>
+                </svg>
+              </div>
+              <div class="payment-badge"><span class="pay-wompi">Wompi</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BARRA COPYRIGHT -->
+
+        <div class="col-12">
+          <p class="footer-copy">
+            © <span>Klydy Technology</span> — Developers and Design <span>2026</span>
+          </p>
+        </div>
+
+      </div>
+    </footer>
+  </section>
+
+
+  <!-- ============================================================
+     BARRA INFERIOR MÓVIL
+     ============================================================ -->
+  <div class="bottom-nav d-lg-none">
+
+    <button class="bottom-nav-item btn-cuenta" data-bs-toggle="modal" data-bs-target="#modalLogin"
+      onclick="setActive(this)">
+      <i class="bi bi-person-circle"></i>
+      <span class="label">Mi Cuenta</span>
+    </button>
+
+    <button class="bottom-nav-item btn-carrito" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito"
+      onclick="setActive(this)">
+      <i class="bi bi-cart3"></i>
+      <span class="bottom-badge" id="badge-mobile">0</span>
+      <span class="label">Carrito</span>
+    </button>
+
+    <button class="bottom-nav-item btn-menu active" data-bs-toggle="collapse" data-bs-target="#navbarKlydy"
+      onclick="setActive(this)">
+      <i class="bi bi-grid-3x3-gap"></i>
+      <span class="label">Menú</span>
+    </button>
+  </div>
+
+
+
+
+  <!-- Bootstrap  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+
+
+
+  <script src="../JS/admin-crear.js"></script>
+   <div id="toastProducto" class="toast-custom">Producto agregado correctamente</div>
+</body>
+
+</html>

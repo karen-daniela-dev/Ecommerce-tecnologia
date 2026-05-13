@@ -1,0 +1,40 @@
+[33madc9017[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mrama-yeison[m[33m, [m[1;31morigin/rama-yeison[m[33m)[m Actualizaciones
+[33m8672b87[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m se agrega footer y Nav a admin-crar
+[33m2bfa10f[m cargar productos a catalogo desde admin
+[33m13ae842[m[33m ([m[1;31morigin/ramaluselly[m[33m)[m actualizar local
+[33mc180dc6[m cargar cambios
+[33mc2ef83d[m comentarios  de guia
+[33m13350c0[m Agregando modificaciones de registrarse
+[33m8e53db1[m[33m ([m[1;31morigin/admin-crear[m[33m)[m agregar btn ver productos
+[33mf9cc314[m limpiar formulario despues de enviar
+[33mb9ffa66[m se agrega id btn cancelar, se modifica orden del formulario, más XU
+[33m3f20b46[m se agregan estilos
+[33m7086832[m se agregan comentarios
+[33m33debb3[m validaciones admin crear producto
+[33mbdeeb07[m index o inicio full responsive y carrusel funcionando - imagenes y animaciones, pendientes.
+[33m277cc3b[m cambio de ruta de estilos generales porque cambio en el main su  nombre
+[33mb2a6f3b[m se mejora la vista de categorias retirando carrusel
+[33m0d6ec3b[m configurando la estructura index html -boost - css
+[33ma21f410[m crea archivo para estilos index
+[33m55b8c04[m se da mas visibilidad al color del texto var --text-secondary
+[33mae3abbd[m Registrarse
+[33m096c606[m merge recuperación de contraseña y validaciones
+[33mb385780[m Actualizando contacto para que se dirija a recuoerar contraseña
+[33m1eb1f64[m Merge pull request #2 from yulybeltran/rama-yeison
+[33me72ae2d[m Merge pull request #1 from yulybeltran/yuly
+[33m9365bc0[m Merge pull request #1 from yulybeltran/yuly
+[33m4084b41[m[33m ([m[1;31morigin/yuly[m[33m)[m Entrega sprint 6 estructura de navegación  y footer
+[33m143ac8f[m Entrega sprint 6 estructura de navegación  y footer
+[33m78b8741[m implementacion logica formulario contacto
+[33m2043091[m Se corrije nav y estilos de contactanos
+[33m8bcd922[m Se ajustan estilos de sobre nosotros
+[33m2a7c000[m[33m ([m[1;32mmain[m[33m)[m Se carga base contacto
+[33m339f922[m Se carga nav y footer
+[33m3a270da[m actulizar todo
+[33m9befe47[m mis cambios
+[33m07145ea[m resolver conflicto merge sobre-nosotros
+[33mb9c038a[m agregar sobre-nosotros y estilos
+[33mc7a2298[m textos agregados
+[33m7a611ac[m correcion -text
+[33m510b4bc[m estructura - sobre nosotros
+[33m9470b77[m[33m ([m[1;31morigin/ramaDaniel[m[33m)[m Se carga la estructura inicial

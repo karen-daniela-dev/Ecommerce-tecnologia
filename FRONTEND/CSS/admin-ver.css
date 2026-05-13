@@ -1,0 +1,173 @@
+/* ─────────────────────────────
+   CONTENEDOR GENERAL
+──────────────────────────── */
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+/* TÍTULO */
+h1 {
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────
+   BUSCADOR
+──────────────────────────── */
+#buscador {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+#buscador::placeholder {
+  color: var(--text-muted);
+}
+
+#buscador:focus {
+  border-color: var(--border-cyan-hover);
+  box-shadow: var(--glow-cyan);
+  background: var(--bg-elevated);
+  outline: none;
+}
+
+/* ─────────────────────────────
+   TABLA 
+──────────────────────────── */
+.table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.table thead th {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: none;
+}
+
+/* FILAS */
+.table tbody tr {
+  background: var(--bg-surface);
+  transition: var(--transition-normal);
+  border: 1px solid transparent;
+}
+
+.table tbody tr:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+/* CELDAS */
+.table td {
+  vertical-align: middle;
+  border: none;
+}
+
+/* IMAGEN */
+.table img {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+}
+
+/* PRECIO */
+.table td:nth-child(6) {
+  color: var(--text-cyan);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────
+   BOTONES
+──────────────────────────── */
+.btn {
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+  font-weight: 500;
+}
+
+/* BOTÓN INFO (VER) */
+.btn-outline-info {
+  border-color: var(--border-cyan);
+  color: var(--text-cyan);
+}
+
+.btn-outline-info:hover {
+  background: var(--neon-cyan-15);
+  border-color: var(--border-cyan-hover);
+  box-shadow: var(--glow-cyan);
+  color: var(--text-primary);
+}
+
+/* BOTÓN ELIMINAR */
+.btn-outline-danger {
+  border-color: var(--border-pink);
+  color: var(--text-pink);
+}
+
+.btn-outline-danger:hover {
+  background: var(--neon-pink-10);
+  box-shadow: var(--glow-pink);
+  color: var(--text-primary);
+}
+
+/* BOTÓN CREAR */
+.btn-outline-info i {
+  transition: var(--transition-fast);
+}
+
+.btn-outline-info:hover i {
+  transform: scale(1.1);
+}
+
+/* ─────────────────────────────
+   PAGINACIÓN
+──────────────────────────── */
+.pagination .page-link {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.pagination .page-link:hover {
+  border-color: var(--border-cyan-hover);
+  color: var(--text-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.pagination .active .page-link {
+  background: var(--gradient-cyan-blue);
+  border: none;
+  color: #000;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────
+   CARDS (MOBILE)
+──────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-normal);
+}
+
+.card:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.card h6 {
+  font-family: var(--font-heading);
+}
+
+.card strong {
+  color: var(--text-cyan);
+}

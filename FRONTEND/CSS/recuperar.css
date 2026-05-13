@@ -1,0 +1,290 @@
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+:root {
+
+  /* ── FONDOS ─────────────────────────────────────────────── */
+  --bg-base:          #050d1f;   /* Fondo principal */
+  --bg-surface:       #0d1225;   /* Tarjetas, modales */
+  --bg-elevated:      #141d35;   /* Hover, elementos */
+  --bg-overlay:       rgba(5, 13, 31, 0.97);  /* Navbar, overlays */
+
+  /* ── NEONES PRINCIPALES ─────────────────────────────────── */
+  --neon-cyan:        #00f0c8;   /* Primario — links activos, bordes, precios */
+  --neon-purple:      #bc4fe8;   /* Secundario — categorías, login */
+  --neon-pink:        #ff3cac;   /* Acento — carrito, badges, CTAs */
+  --neon-blue:        #0abde3;   /* Info — botón enviar, links */
+
+  /* ── NEONES CON OPACIDAD (fondos) ───────────────── */
+  --neon-cyan-10:     rgba(0, 240, 200, 0.10);
+  --neon-cyan-15:     rgba(0, 240, 200, 0.15);
+  --neon-cyan-20:     rgba(0, 240, 200, 0.20);
+  --neon-purple-10:   rgba(188, 79, 232, 0.10);
+  --neon-purple-20:   rgba(188, 79, 232, 0.20);
+  --neon-pink-10:     rgba(255, 60, 172, 0.10);
+  --neon-pink-20:     rgba(255, 60, 172, 0.20);
+  --neon-blue-10:     rgba(10, 189, 227, 0.10);
+  --neon-blue-20:     rgba(10, 189, 227, 0.20);
+
+  /* ── TEXTO ──────────────────────────────────────────────── */
+  --text-primary:     #ffffff;
+  --text-secondary:   rgba(255, 255, 255, 0.55);
+  --text-muted:       rgba(255, 255, 255, 0.30);
+  --text-cyan:        #00f0c8;
+  --text-purple:      #bc4fe8;
+  --text-pink:        #ff3cac;
+  --text-blue:        #0abde3;
+
+  /* ── BORDES ─────────────────────────────────────────────── */
+  --border-default:   rgba(255, 255, 255, 0.08);
+  --border-cyan:      rgba(0, 240, 200, 0.25);
+  --border-cyan-hover:rgba(0, 240, 200, 0.55);
+  --border-purple:    rgba(188, 79, 232, 0.25);
+  --border-pink:      rgba(255, 60, 172, 0.25);
+  --border-blue:      rgba(10, 189, 227, 0.25);
+
+  /* / SOMBRAS ────────────────────────────────────── */
+  --glow-cyan:        0 0 14px rgba(0, 240, 200, 0.35);
+  --glow-cyan-lg:     0 0 30px rgba(0, 240, 200, 0.50);
+  --glow-purple:      0 0 14px rgba(188, 79, 232, 0.35);
+  --glow-pink:        0 0 14px rgba(255, 60, 172, 0.35);
+  --glow-blue:        0 0 14px rgba(10, 189, 227, 0.35);
+
+  /* ── GRADIENTES ─────────────────────────────────────────── */
+  --gradient-cyan-purple: linear-gradient(90deg, #00f0c8, #bc4fe8);
+  --gradient-purple-pink: linear-gradient(90deg, #bc4fe8, #ff3cac);
+  --gradient-cyan-blue:   linear-gradient(90deg, #00f0c8, #0abde3);
+  --gradient-btn:         linear-gradient(90deg, #00f0c8, #0abde3);
+
+  /* ── BORDER RADIUS ──────────────────────────────────────── */
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-pill: 999px;
+
+  /* ── TIPOGRAFÍA ─────────────────────────────────────────── */
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* ── TRANSICIONES ───────────────────────────────────────── */
+  --transition-fast:   all 0.15s ease;
+  --transition-normal: all 0.20s ease;
+  --transition-slow:   all 0.30s ease;
+
+}
+
+body {
+  background-color: #000510;
+  background-image:
+    /* Niebla cyan intensa arriba izquierda */
+    radial-gradient(ellipse 70% 50% at -10% 0%,   rgba(0,240,200,0.28)  0%, transparent 60%),
+    /* Niebla purple izquierda centro */
+    radial-gradient(ellipse 55% 70% at -5%  60%,  rgba(188,79,232,0.22) 0%, transparent 55%),
+    /* Niebla pink arriba derecha */
+    radial-gradient(ellipse 60% 45% at 110% 0%,   rgba(255,60,172,0.20) 0%, transparent 55%),
+    /* Niebla blue derecha centro */
+    radial-gradient(ellipse 50% 60% at 110% 55%,  rgba(10,189,227,0.18) 0%, transparent 55%),
+    /* Resplandor purple abajo centro */
+    radial-gradient(ellipse 80% 60% at 50%  110%,  rgba(188,79,232,0.18) 0%, transparent 60%),
+    /* Cyan abajo izquierda */
+    radial-gradient(ellipse 60% 40% at 30%  110%,  rgba(0,240,200,0.12)  0%, transparent 55%),
+    /* Pink abajo derecha */
+    radial-gradient(ellipse 50% 35% at 80%  110%,  rgba(255,60,172,0.14) 0%, transparent 55%),
+    /* Base oscura profunda */
+    linear-gradient(180deg, #000812 0%, #010a1a 35%, #000d1f 65%, #000510 100%);
+     min-height: 100vh;
+ 
+ 
+}
+
+/* ============================================================
+   RECUPERAR CONTRASEÑA
+   ============================================================ */
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    border: 1px solid #8d8d8d;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #050d1f;
+}
+
+.container .heading {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+
+.form {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form .btn-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+.neon-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.neon-lines svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+h1{
+    color: #00f0c8;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 500; 
+    font-size: 2rem;
+    text-shadow: 1px 1px 10px #151622;
+}
+
+.lead{
+    color: aliceblue;
+    font-size: 20px;
+    opacity: 0.7;
+    font-family:  'Inter', sans-serif;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--neon-cyan) !important;
+  box-shadow: var(--glow-cyan);
+}
+
+select {
+  cursor: pointer;
+}
+
+   /* CONTENEDOR */
+.klydy-recovery {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* CARD */
+.klydy-form-box {
+  width: 100%;
+  max-width: 600px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-purple);
+  border-radius: var(--radius-xl);
+  padding: 30px;
+  box-shadow: var(--glow-purple);
+}
+
+
+/* HEADER */
+.klydy-form-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* GRID */
+.form-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* LABEL */
+.form-group label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+/* INPUT */
+input,
+select,
+textarea {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-cyan) !important;
+  border-radius: var(--radius-md);
+  padding: 10px;
+  color: var(--text-primary) !important;
+  transition: var(--transition-normal);
+  font-family: var(--font-body);
+}
+
+/* FOCUS */
+.klydy-form-box .klydy-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  outline: none;
+}
+
+/* CAPTCHA */
+.klydy-captcha-box {
+  background: var(--bg-base);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#captchaTexto {
+  font-family: var(--font-heading);
+  color: var(--neon-pink);
+  letter-spacing: 4px;
+  font-size: 18px;
+}
+
+/* BOTÓN */
+.klydy-btn-main {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-btn);
+  color: #050d1f;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.klydy-btn-main:hover {
+  box-shadow: var(--glow-cyan-lg);
+}

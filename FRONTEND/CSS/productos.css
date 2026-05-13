@@ -1,0 +1,550 @@
+body {
+  background-color: #000510;
+  background-image:
+    /* Niebla cyan intensa arriba izquierda */
+    radial-gradient(ellipse 70% 50% at -10% 0%,   rgba(0,240,200,0.28)  0%, transparent 60%),
+    /* Niebla purple izquierda centro */
+    radial-gradient(ellipse 55% 70% at -5%  60%,  rgba(188,79,232,0.22) 0%, transparent 55%),
+    /* Niebla pink arriba derecha */
+    radial-gradient(ellipse 60% 45% at 110% 0%,   rgba(255,60,172,0.20) 0%, transparent 55%),
+    /* Niebla blue derecha centro */
+    radial-gradient(ellipse 50% 60% at 110% 55%,  rgba(10,189,227,0.18) 0%, transparent 55%),
+    /* Resplandor purple abajo centro */
+    radial-gradient(ellipse 80% 60% at 50%  110%,  rgba(188,79,232,0.18) 0%, transparent 60%),
+    /* Cyan abajo izquierda */
+    radial-gradient(ellipse 60% 40% at 30%  110%,  rgba(0,240,200,0.12)  0%, transparent 55%),
+    /* Pink abajo derecha */
+    radial-gradient(ellipse 50% 35% at 80%  110%,  rgba(255,60,172,0.14) 0%, transparent 55%),
+    /* Base oscura profunda */
+    linear-gradient(180deg, #000812 0%, #010a1a 35%, #000d1f 65%, #000510 100%);
+
+  font-family: 'Inter', sans-serif; 
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 70px;
+  padding-top: 70px;
+  margin-top: 70px;
+  margin: 0;
+
+}
+
+.neon-sparks {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  animation: flicker 4s ease-in-out infinite;
+  background-image:
+    radial-gradient(circle 2px   at  8% 12%, rgba(0,240,200,1)    0%, transparent 100%),
+    radial-gradient(circle 1.5px at 22% 38%, rgba(0,240,200,0.8)  0%, transparent 100%),
+    radial-gradient(circle 1px   at 35%  8%, rgba(0,240,200,0.7)  0%, transparent 100%),
+    radial-gradient(circle 2px   at 75% 90%, rgba(0,240,200,0.6)  0%, transparent 100%),
+    radial-gradient(circle 2px   at 18% 65%, rgba(188,79,232,0.9) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 42% 55%, rgba(188,79,232,0.7) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 65% 20%, rgba(188,79,232,0.8) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 85% 48%, rgba(188,79,232,0.6) 0%, transparent 100%),
+    radial-gradient(circle 2px   at 28% 82%, rgba(255,60,172,0.9) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 58% 42%, rgba(255,60,172,0.7) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 78% 72%, rgba(255,60,172,0.8) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 92% 15%, rgba(255,60,172,0.6) 0%, transparent 100%),
+    radial-gradient(circle 2px   at 12% 50%, rgba(10,189,227,0.9) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 48% 22%, rgba(10,189,227,0.8) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 70%  5%, rgba(10,189,227,0.7) 0%, transparent 100%),
+    radial-gradient(circle 2px   at 95% 85%, rgba(10,189,227,0.9) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 32% 18%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 62% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(circle 1px   at 88% 35%, rgba(255,255,255,0.4) 0%, transparent 100%);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.neon-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.neon-lines svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/*TERMINO DE FONDO*/
+
+
+
+
+/*CONTENDOR DE TODA LA PAGINA*/
+.contenedor{
+  display: flex;
+  height: 89vh;
+  margin-left: 10px;
+}
+/*FIN DE CONTENEDOR */
+
+
+/*CAJON DE MENU......................................................................................*/
+.Cajoncategorias{
+  width: 16%;
+  top: 0;
+  height: 89.5vh;
+  position: sticky; 
+  display: block;
+  
+}
+
+
+
+
+/*MENU ........................................................................................*/
+.menuCategorias{
+  background-color: transparent;
+  height: 49; 
+  padding: 0px 0px 5px 0px;
+  margin-bottom: 4%;
+  border-radius: 12px;
+  box-shadow: 0px 0px 7px rgba(10,189,227,0.7);
+  border: solid 0.5px  rgba(89, 236, 10, 0.388);
+}
+
+/* BOTONES MENU*/
+.item {
+  text-decoration: none;
+  color:rgba(255, 255, 255, 0.823);
+  font-family:'Courier New', Courier, monospace;
+  font-size: 15px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/*MOVIMIENTO DE BOTONES MENU*/
+.item.active {
+  font-size: 15.20px;
+  box-shadow: 0px 0px 5px  rgba(100, 253, 227, 0.653);
+  width: 92%;
+  border-radius: 6px;
+  text-shadow: 0px 0px 2px#07e516;
+}
+
+/*TITULO DE MENU PRINCIPAL*/
+.menuCategorias h2{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 95%;
+  font-weight: 800;
+  color: #00f0d0;   
+  text-transform: uppercase; 
+  letter-spacing: 20%; 
+  text-align: center;
+  padding: 17px 0px 0px 0px;
+}
+
+/*FILTROS USOS...............................................................*/
+.filtros{
+  background-color: transparent;
+  box-shadow: 0px 0px 2px#07e516;
+  height: 50%; /*lago de filtro*/
+  padding: 7px;
+  border-radius: 12px;
+  
+}
+
+/*LISTA DE UL LI*/
+.itenUso{
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/*MEVIMIENTO DE LI*/
+.itenUso.active{
+  font-size: 12.20px;
+  color: #1ea762;
+  text-shadow: 0px 0px 5px#0b9006;
+}
+
+/*TITULO DE MENU SEGUNDARIO*/
+.filtros h2{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #00f0d0;
+  text-transform: uppercase; 
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 10px 0px 0px 0px;
+}
+
+/*CAJON USOS*/
+.uso{
+  background-color: transparent;
+  display: block;
+}
+
+/*TITULO DE USOS*/
+.usos h4{
+  font-size: 17px;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0px 0px 2px#07e516;
+  text-align: center;
+  margin: 5px;
+  padding: 2px;
+  color:#06cf96 ;
+  border-radius: 5px;
+}
+
+/*LISTA DE USOS*/
+.lista{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  background-color: transparent;
+  margin: 2px;
+}
+
+
+/*LISTA DE UL*/
+.lista ul{
+  list-style: none;   
+  padding: 0; 
+  margin-bottom: 5px;
+  margin-top: 5px;                 
+}
+
+
+
+/*CAJON FILTRO PRECIO....................................................................*/
+.filtrosPrecio{
+  box-shadow: 0px 0px 2px#07e516;
+  height: 59px; 
+  padding: 7px;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+/*FILTRO*/
+.filtro-precio{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+/* LABEL DE FILTRO*/
+.filtro-precio label{
+  font-size: 11px;
+  display: block;
+  margin: 0;
+  height: 1px;
+  color: #fff;
+}
+
+/* Estilo general de la barra */
+input[type="range"] {
+  width: 100%;
+  height: 2px;
+  background: #ccc; /* color de la barra */
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Barra rellena (opcional en algunos navegadores) */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #04a177; /* color de la barra */
+  border-radius: 5px;
+}
+
+/* Bolita (thumb) - Chrome, Edge, Safari */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1px; /* tamaño */
+  width: 1px;  /* tamaño */
+  border-radius: 50%;
+  background: #060606; /* color de la bolita */
+  cursor: pointer;
+  margin-top: -6px; /* centra la bolita */
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #0ad17b;
+  cursor: pointer;
+}
+
+/* Barra en Firefox */
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 5px;
+}
+
+/*FILTRO DE MARCAS.............................................................................................................................*/
+.marcas{
+   box-shadow: 0px 0px 2px#07e516;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 37%;
+   width: 100%;
+   border-radius: 12px;
+   margin-top: 3%;
+   padding: 10px;
+}
+
+/*LABEL MARCA*/
+.marcas label{
+  color: #fff;
+  font-size: 12px;
+  margin-left: 15%;
+}
+
+/*SECION INICIO.....................................................................................................................*/
+.productos{
+  width: 84%;
+  background-color:  transparent; 
+  height: 100%;
+  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
+  scrollbar-width: none; /* esconde escrol */
+  margin-bottom: 50%;
+  display: flex;
+  padding-left: 2vh;
+}
+
+/*CARRUSEL BOOTSTRAP .......................................................*/
+#carouselExampleIndicators {
+  height: 200px; 
+  width: 98%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  border-radius: 12px;
+  filter: drop-shadow(0px 0px 3px #066665);
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  border-radius: 12px; 
+  opacity: 0.6;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* flechas de carrucel negras */
+}
+
+/* CARDS..................................................................................................................................*/
+.inicio .card{
+  background-color: #111827;
+  box-shadow: 0px 0px 5px  #00ffcc55;
+  width: 160px;
+  height: 280px;
+  margin: 0px 0px 12px 0px;
+  border-radius: 25px;
+  display: block;
+  overflow: hidden;
+  gap: 10px;
+}
+
+
+/*COLUMNAS CARDS*/
+.row div .col{
+  padding: 0;
+  width: 160px;
+  margin: 0px 0px 0px 0px;
+  margin-left: 0px;
+}
+
+/*IMAGEN CARDS*/
+.imagenes{
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+/*imagen de cards*/
+.imagenes img{
+  width: 100%;
+  height: 100%;
+}
+
+/*texto de crads*/
+.texto{
+  width: 100%;
+  height: 50%;
+  display: block;
+}
+
+/*nobre de produdo*/
+.texto h5 {
+  color: #4fa983 !important;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 0px 0px 0px;
+  text-align: center;
+  margin: 2px;
+}
+
+/*text de car descricion*/
+.descripcion{
+  color: #cbcdd1;
+  font-size: 11px;
+  width: 92%;
+  height: 30px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/*lina card*/
+.linea{
+  height: 0.1px;
+  width: 90%;
+  background-color: #374151;
+  margin: 0 auto;
+  margin-top: 6px;
+ }
+
+ /* precio y mas y menos*/
+.precios{
+  width: 92%;
+  height: 20%;
+  margin: 0 auto;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 2px 0px 5px;
+}
+
+/* - + */
+.masmenos{
+  display: flex;
+  background-color: transparent;
+  border: solid 1px #67927e;
+  width: 71px;
+  height: 20px;
+  border-radius: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 5px 0px 5px;
+  font-weight: bold;
+}
+
+/*botones - +*/
+.masmenos button{
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+/*cuando el mouse pasa - +*/
+.masmenos button:hover{
+  color: #06cf96;
+  text-shadow: 0px 0px 5px #11cd0d;
+}
+
+/*numero de increneto producto*/
+.masmenos span{
+  color: #bbbfc4;
+}
+
+/*precio de producto*/
+.precios span {
+  margin: 0 auto;
+  font-size: 11px;
+  font-weight: bold;
+  color: #cfd1d4;
+}
+
+/*precio de producto*/
+.numero{
+  display: flex;
+  width: 70px;
+  height: 20px;
+}
+
+/*boto añadir cariito*/
+.anadir{
+  margin-top: 5px;
+  width: 100%;
+  background-color: #0e0e0e;
+  height: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/*boto añadir cariito movimiento*/
+.anadir:hover{
+  background-color: #96eaa774;
+  transform: scale(1.03);
+}
+
+/*boto añadir cariito*/
+.anadir button{
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  margin: 5px;
+  color: #a1a4a9;
+}
+
+/*boto añadir cariito movimiento*/
+.anadir button:hover{
+  transform: scale(1.01);
+  color: #f4f4f6;
+  font-weight: bold;
+}
+
+/*ocultar scrol*/
+.productos::-webkit-scrollbar {
+  display: none;
+}
+
+/*sesion productos*/
+.productos{
+  width: 100%;
+  height: 89.5vh;
+  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
+  scrollbar-width: none; /* esconde escrol */
+}
+
+/*computadores card*/
+.productos .card{
+  background-color: #111827;
+  box-shadow: 0px 0px 5px  #00ffcc55;
+  width: 160px;
+  height: 280px;
+  border-radius: 25px;
+  display: block;
+  overflow: hidden;
+  margin: 3px 0px 5px 0px;
+}
+
+
+
+
+
+
+
+

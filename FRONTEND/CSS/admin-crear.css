@@ -1,0 +1,232 @@
+:root {
+  --bs-form-valid-color: var(--neon-cyan);
+}
+.was-validated .form-check-input:invalid ~ .form-check-label {
+  color: var(--neon-pink);
+  text-shadow: var(--glow-pink);
+}
+
+
+main {
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+
+   h1 {
+  font-family: var(--font-heading);
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: var(--glow-cyan);
+}
+
+
+
+   .form-label,
+legend {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+
+.form-label:hover {
+  color: var(--neon-cyan);
+}
+
+/* Radios y checks */
+.form-check-label {
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   INPUTS / SELECT / TEXTAREA
+   ============================================================ */
+.form-control,
+.form-select {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+/* Placeholder */
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Focus neón */
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-cyan);
+  box-shadow: var(--glow-cyan);
+  color: var(--text-primary);
+}
+
+/* Input group ($ precio) */
+.input-group-text {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   RADIO BUTTONS (detalle visual)
+   ============================================================ */
+.form-check-input {
+  background-color: transparent;
+  border: 1px solid var(--border-cyan);
+}
+
+.form-check-input:checked {
+  background-color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+/* ============================================================
+   DROPZONE (imagen)
+   ============================================================ */
+#dropZone {
+  background-color: var(--bg-surface);
+  border-color: var(--border-default);
+  transition: var(--transition-fast);
+}
+
+#dropZone:hover {
+  border-color: var(--border-cyan-hover);
+  box-shadow: var(--glow-cyan);
+}
+
+#dropZone p {
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   TEXTOS SECUNDARIOS
+   ============================================================ */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+
+
+
+
+/* Botón principal */
+.btn-dark  {
+  background: var(--gradient-btn);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+.btn__info  {
+  background: var(--gradient-btn);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+
+.btn-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--glow-cyan);
+}
+.btn__info:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Botón cancelar */
+.btn-outline-secondary {
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+}
+
+.btn-outline-secondary:hover {
+  border-color: var(--border-pink);
+  color: var(--neon-pink);
+  box-shadow: var(--glow-pink);
+}
+
+/* Botón eliminar imagen */
+.btn-outline-danger {
+  border-color: var(--border-pink);
+  color: var(--neon-pink);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--neon-pink-10);
+  box-shadow: var(--glow-pink);
+}
+
+/* ============================================================
+   CONTADOR DESCRIPCIÓN
+   ============================================================ */
+#descContador {
+  color: var(--text-muted);
+}
+
+#descripcion {
+  resize: vertical;
+  min-height: 120px;
+  max-height: 220px;
+}
+
+
+
+/* ── TOAST NOTIFICACIÓN ───────────────────────────── */
+.toast-custom {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+
+  padding: 14px 22px;
+  border-radius: var(--radius-md);
+
+  border: 1px solid var(--border-cyan);
+  box-shadow: var(--glow-cyan);
+
+  font-family: var(--font-body);
+  font-size: 14px;
+
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: var(--transition-normal);
+
+  z-index: 9999;
+}
+
+/* estado visible */
+.toast-custom.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* efecto neon al aparecer */
+.toast-custom.show {
+  box-shadow: var(--glow-cyan-lg);
+}
+/* ============================================================
+   ERRORES
+   ============================================================ */
+.invalid-feedback,
+.text-danger {
+  color: var(--neon-pink) !important;
+}
+
+
+
+
+
+@media (max-width: 1040px) {
+  .neon-lines {
+    display: none;
+  }
+}
