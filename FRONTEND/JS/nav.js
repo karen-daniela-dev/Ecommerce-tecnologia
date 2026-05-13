@@ -509,7 +509,7 @@ function iniciarSesion() {
 
     setTimeout(() => {
 
-      window.location.href = "FRONTEND/HTML/productos.html";
+      window.location.href = "productos.html";
 
     }, 1000);
 

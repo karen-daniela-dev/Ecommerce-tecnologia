@@ -339,13 +339,40 @@
 
   </div>
 
-<!-- ============================================================
-     MODAL LOGIN
-    
-     ============================================================ -->
-<div class="modal fade" id="modalLogin" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content modal-klydy">
+  <!-- ============================================================
+      MODAL LOGIN
+      
+      ============================================================ -->
+  <div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-klydy">
+
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-logo-wrap">
+          <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
+          <p class="modal-logo-sub">Technology</p>
+        </div>
+
+        <div class="modal-body px-4 pb-4">
+          <div id="mensajeLogin"></div>
+          <div class="mb-3">
+            <label class="modal-label">Correo</label>
+            <input type="email" id="correoLogin" class="form-control klydy-input" placeholder="tu@email.com">
+          </div>
+          <div class="mb-4">
+            <label class="modal-label">Contraseña</label>
+            <input type="password" id="passwordLogin" class="form-control klydy-input" placeholder="••••••••">
+          </div>
+          <button id="btnLogin" class="btn w-100 fw-bold modal-btn-enter">ENTRAR</button>
+          <p class="modal-register-text">
+            ¿No tienes cuenta?
+            <a href="registrarse.html" class="modal-register-link">Regístrate</a>
+          </p>
+        </div>
 
       <div class="modal-header border-0">
         <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
