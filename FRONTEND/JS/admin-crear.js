@@ -96,7 +96,7 @@
     const valor = inputPrecio.value.trim();
     const raw = valor.replace(/\./g, '');
 
-    // 🟡 Vacío
+    // Vacío
     if (valor === '') {
       if (forzar) {
         inputPrecio.classList.add('is-invalid');
@@ -112,7 +112,7 @@
       return false;
     }
 
-    // ❌ No numérico
+    // No numérico
     if (!/^\d+$/.test(raw)) {
       inputPrecio.classList.add('is-invalid');
       inputPrecio.classList.remove('is-valid');
@@ -122,7 +122,7 @@
       return false;
     }
 
-    // ❌ <= 0
+    // x <= 0
     if (parseInt(raw) <= 0) {
       inputPrecio.classList.add('is-invalid');
       inputPrecio.classList.remove('is-valid');
@@ -132,7 +132,7 @@
       return false;
     }
 
-    // ✅ OK
+    //  OK
     inputPrecio.classList.remove('is-invalid');
     inputPrecio.classList.add('is-valid');
     precioError.style.display = 'none';
