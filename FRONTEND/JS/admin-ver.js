@@ -36,7 +36,7 @@ function render() {
         <td>${p.cantidad}</td>
         <td>${formatearPrecio(p.precio)}</td>
         <td>
-          <button class="btn btn-sm btn-outline-info" onclick="#">
+          <button class="btn btn-sm btn-outline-info" onclick="irAEditar(${p.id})">
             <i class="bi bi-eye"></i>
           </button>
           <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${p.id})">
@@ -114,6 +114,11 @@ function eliminar(id) {
   const nuevaLista = lista.filter(p => p.id !== id);
   localStorage.setItem("ListaProductos", JSON.stringify(nuevaLista));
   location.reload();
+}
+
+//edicion
+function irAEditar(id) {
+  window.location.href = `admin-crear.html?id=${id}`;
 }
 
 /* INIT */

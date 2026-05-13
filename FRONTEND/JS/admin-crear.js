@@ -1,5 +1,10 @@
 (() => {
   'use strict';
+  let modoEdicion = false;
+  let productoEditando = null;
+  let productoOriginal = null;
+
+
 
   /* ── Referencias al DOM ───────────────────────────── */
   const form = document.getElementById('formCrearProducto');
@@ -486,10 +491,36 @@
     };
 
     console.log(JSON.stringify(nuevoProducto));
-    // Agregar a la lista en memoria
-    listaProductos.push(nuevoProducto);
 
-    localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
+
+    if (modoEdicion) {
+
+      const index = listaProductos.findIndex(p => p.id === productoEditando.id);
+
+      if (index !== -1) {
+        listaProductos[index] = {
+          ...productoEditando,
+          ...nuevoProducto,
+          id: productoEditando.id
+        };
+
+        localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
+
+        mostrarToast(`Producto "${nuevoProducto.nombre}" actualizado`);
+      }
+
+      modoEdicion = false;
+      productoEditando = null;
+      productoOriginal = null;
+
+    } else {
+
+      listaProductos.push(nuevoProducto);
+
+      localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
+
+      mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
+    }
 
 
 
@@ -517,10 +548,12 @@
         .catch(err => console.error('Error al guardar:', err));
     */
 
-    mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
+    if (!modoEdicion) {
+      mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
+    }
     limpiarFormulario();
 
-   
+
 
 
   });
@@ -532,5 +565,90 @@
 
     }
   });
+
+  // edicion 
+  /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (id) {
+    const producto = listaProductos.find(p => p.id == id);
+
+    if (producto) {
+      modoEdicion = true;
+      productoEditando = producto;
+      productoOriginal = JSON.stringify(producto);
+
+      cargarFormulario(producto);
+
+      document.querySelector("h1").textContent = "Editar producto";
+
+      const btnSubmit = form.querySelector('button[type="submit"]');
+      btnSubmit.textContent = "Actualizar";
+      btnSubmit.disabled = true;
+    }
+  }
+
+
+  function cargarFormulario(p) {
+    inputNombre.value = p.nombre;
+    inputCantidad.value = p.cantidad;
+    inputPrecio.value = p.precio.toLocaleString("es-CO");
+    inputMarca.value = p.marca;
+    selectCat.value = p.categoria;
+    descTextarea.value = p.descripcion;
+
+    // radio uso
+    radiosUso.forEach(r => {
+      if (r.value === p.uso) r.checked = true;
+    });
+
+    // imagen
+    if (p.tipoImagen === "url") {
+      inputUrl.value = p.imagen;
+    }
+    if (p.imagen) {
+      previewImg.src = p.imagen;
+      previewNombre.textContent = p.imagenNombre || "Imagen guardada";
+      previewContainer.classList.remove('d-none');
+
+      dropZone.classList.add('border-success');
+    }
+
+    descContador.textContent = `${p.descripcion.length} / 500`;
+  }
+
+  function obtenerProductoFormulario() {
+    return {
+      nombre: inputNombre.value.trim(),
+      cantidad: parseInt(inputCantidad.value),
+      precio: parseInt(inputPrecio.value.replace(/\./g, '')),
+      marca: inputMarca.value,
+      categoria: selectCat.value,
+      uso: [...radiosUso].find(r => r.checked)?.value,
+      descripcion: descTextarea.value.trim(),
+      imagen: previewImg.src || null
+    };
+  }
+
+  function detectarCambios() {
+    if (!modoEdicion) return;
+
+    const actual = JSON.stringify({
+      ...productoEditando,
+      ...obtenerProductoFormulario()
+    });
+
+    const btnSubmit = form.querySelector('button[type="submit"]');
+
+    if (actual !== productoOriginal) {
+      btnSubmit.disabled = false;
+    } else {
+      btnSubmit.disabled = true;
+    }
+  }
+  form.addEventListener('input', detectarCambios);
+  form.addEventListener('change', detectarCambios);
 
 })();
