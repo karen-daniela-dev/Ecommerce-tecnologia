@@ -137,7 +137,7 @@ function iniciarSesion() {
 
     setTimeout(() => {
 
-      window.location.href = "productos.html";
+      window.location.href = "FRONTEND/HTML/productos.html";
 
     }, 1000);
 
@@ -252,7 +252,7 @@ function cerrarSesion() {
   // REDIRECCIONAR
   setTimeout(() => {
 
-    window.location.href = "index.html";
+    window.location.href = "../../index.html";
 
   }, 1500);
 }
@@ -277,17 +277,12 @@ function abrirModalCerrarSesion() {
 // CONFIRMAR CERRAR SESIÓN
 // ─────────────────────────────────────────────
 
-document
-  .getElementById("confirmarCerrarSesion")
-  .addEventListener("click", cerrarSesion);
+document.addEventListener("DOMContentLoaded", () => {
 
-// ─────────────────────────────────────────────
-// CERRAR SESIÓN
-// ─────────────────────────────────────────────
+  const btnConfirmar = document.getElementById("confirmarCerrarSesion");
 
-function cerrarSesion() {
+  if (btnConfirmar) {
+    btnConfirmar.addEventListener("click", cerrarSesion);
+  }
 
-  localStorage.removeItem("usuarioActivo");
-
-  window.location.href = "index.html";
-}
+});
