@@ -368,7 +368,72 @@
     </button>
   </div>
 
+<!-- ============================================================
+     MODAL CERRAR SESIÓN
+============================================================ -->
+<div class="modal fade" id="modalCerrarSesion" tabindex="-1">
 
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content modal-klydy">
+
+      <div class="modal-header border-0">
+
+        <h5 class="modal-title text-white fw-bold">
+          Confirmar cierre de sesión
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal">
+        </button>
+
+      </div>
+
+      <div class="modal-body text-center text-white">
+
+        <i
+          class="bi bi-box-arrow-right"
+          style="
+            font-size: 3rem;
+            color: #00f0c8;
+          ">
+        </i>
+
+        <p class="mt-3 fs-5">
+          ¿Estás seguro de cerrar sesión?
+        </p>
+
+      </div>
+
+      <div class="modal-footer border-0 justify-content-center">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal">
+
+          Cancelar
+
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="confirmarCerrarSesion">
+
+          Cerrar Sesión
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
   <script type="module" src="../JS/productos.js"></script>     
   <script src="../JS/nav.js"></script>     
