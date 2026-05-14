@@ -211,7 +211,7 @@ function actualizarNavbarUsuario() {
     // EVENTO CERRAR SESIÓN
     document
       .getElementById("btnCerrarSesion")
-      .addEventListener("click", cerrarSesion);
+      .addEventListener("click", abrirModalCerrarSesion);
   }
 }
 
@@ -252,10 +252,42 @@ function cerrarSesion() {
   // REDIRECCIONAR
   setTimeout(() => {
 
-    window.location.href = "nav-footer.html";
+    window.location.href = "index.html";
 
   }, 1500);
 }
 
 // EJECUTAR AL CARGAR
 actualizarNavbarUsuario();
+
+// ─────────────────────────────────────────────
+// ABRIR MODAL CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+function abrirModalCerrarSesion() {
+
+  const modal = new bootstrap.Modal(
+    document.getElementById("modalCerrarSesion")
+  );
+
+  modal.show();
+}
+
+// ─────────────────────────────────────────────
+// CONFIRMAR CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+document
+  .getElementById("confirmarCerrarSesion")
+  .addEventListener("click", cerrarSesion);
+
+// ─────────────────────────────────────────────
+// CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+function cerrarSesion() {
+
+  localStorage.removeItem("usuarioActivo");
+
+  window.location.href = "index.html";
+}
