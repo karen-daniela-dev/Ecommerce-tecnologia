@@ -10,34 +10,29 @@ CREATE TABLE usuarios (
     created_at  TIMESTAMP           NOT NULL DEFAULT NOW()
 );
 
--- ============================================================
+
 -- TABLA: categorias
--- ============================================================
+
 CREATE TABLE categorias (
     id_categoria    SERIAL PRIMARY KEY,
     nombre          VARCHAR(100)    NOT NULL UNIQUE
 );
 
--- ============================================================
+
 -- TABLA: usos
--- ============================================================
 CREATE TABLE usos (
     id_uso  SERIAL PRIMARY KEY,
     nombre  VARCHAR(100)    NOT NULL UNIQUE
 );
 
--- ============================================================
 -- TABLA: marcas
--- ============================================================
 CREATE TABLE marcas (
     id_marca    SERIAL PRIMARY KEY,
     nombre      VARCHAR(100)    NOT NULL UNIQUE
 );
 
--- ============================================================
 -- TABLA: productos
--- Corrección: user_id representa el cliente/admin
--- ============================================================
+--  user_id representa el cliente/admin
 CREATE TABLE productos (
     id_producto     SERIAL PRIMARY KEY,
     nombre          VARCHAR(255)        NOT NULL,
@@ -51,7 +46,7 @@ CREATE TABLE productos (
     user_id         INTEGER             NOT NULL, 
     created_at      TIMESTAMP           NOT NULL DEFAULT NOW(),
 
-    -- Relaciones
+    -- Relaciones con productos
     CONSTRAINT fk_productos_categoria
         FOREIGN KEY (categoria_id) REFERENCES categorias (id_categoria)
         ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -69,9 +64,7 @@ CREATE TABLE productos (
         ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
--- ============================================================
 -- TABLA: compras
--- ============================================================
 CREATE TABLE compras (
     id_compra   SERIAL PRIMARY KEY,
     fecha       TIMESTAMP       NOT NULL DEFAULT NOW(),
@@ -82,9 +75,7 @@ CREATE TABLE compras (
         ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
--- ============================================================
 -- TABLA: detalle_compra
--- ============================================================
 CREATE TABLE detalle_compra (
     id_detalle      SERIAL PRIMARY KEY,
     cantidad        INTEGER             NOT NULL CHECK (cantidad > 0),
@@ -101,9 +92,7 @@ CREATE TABLE detalle_compra (
         ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
--- ============================================================
--- ÍNDICES (mejoran el rendimiento de búsquedas por FK)
--- ============================================================
+-- iNDICES (mejoran el rendimiento de búsquedas por FK)
 CREATE INDEX idx_productos_categoria    ON productos (categoria_id);
 CREATE INDEX idx_productos_uso          ON productos (uso_id);
 CREATE INDEX idx_productos_marca        ON productos (marca_id);
@@ -113,9 +102,7 @@ CREATE INDEX idx_detalle_compra         ON detalle_compra (compra_id);
 CREATE INDEX idx_detalle_producto       ON detalle_compra (producto_id);
 
 
--- ============================================================
 -- INGRESO DE DATOS A CADA TABLA
--- ============================================================
 
 
 INSERT INTO categorias (nombre) VALUES
@@ -129,9 +116,7 @@ INSERT INTO categorias (nombre) VALUES
    
    
 
--- ============================================================
 -- 2. USOS
--- ============================================================
 INSERT INTO usos (nombre) VALUES
     ('Trabajo'),
     ('Estudio'),
@@ -139,13 +124,9 @@ INSERT INTO usos (nombre) VALUES
     ('General'),
     
  
-
  
- 
--- ============================================================
 -- 3. MARCAS
--- Marcas definidas por el cliente
--- ============================================================
+
 INSERT INTO marcas (nombre) VALUES
     ('Acer'),
     ('Apple'),
@@ -156,9 +137,6 @@ INSERT INTO marcas (nombre) VALUES
     ('Samsung'),
     ('MSI'),
     ('Asus');
- 
-
- 
  
 
 -- 4. USUARIOS
@@ -182,8 +160,7 @@ INSERT INTO usuarios (nombre, cedula, correo, telefono, contrasena, es_admin, cr
 
 -- 5. PRODUCTOS
 --  productos variados, referenciando las FK correctas
--- user_id = cliente que registró el producto (usuarios 3-10)
--- ============================================================
+
 INSERT INTO productos (nombre, stock, precio, url_imagen, descripcion, categoria_id, uso_id, marca_id, user_id, created_at) VALUES
  
     -- 1. Laptop Acer Aspire 5 — Laptops / Estudio / Acer
@@ -282,10 +259,8 @@ INSERT INTO productos (nombre, stock, precio, url_imagen, descripcion, categoria
 
  
  
--- ============================================================
 -- 6. COMPRAS
 -- 10 compras distribuidas entre los clientes (user_id 3-10)
--- ============================================================
 INSERT INTO compras (fecha, user_id) VALUES
     ('2024-03-05 10:25:00', 3),   -- compra 1: Carlos
     ('2024-03-12 14:10:00', 4),   -- compra 2: María
@@ -301,11 +276,9 @@ INSERT INTO compras (fecha, user_id) VALUES
 
  
  
--- ============================================================
 -- 7. DETALLE_COMPRA
 --  líneas de detalle — distribuidas entre las compras
 -- precio_unitario = precio histórico al momento de la compra
--- ============================================================
 INSERT INTO detalle_compra (cantidad, precio_unitario, compra_id, producto_id) VALUES
  
     -- Compra 1 (Carlos): compró Acer Aspire 5 + Samsung SSD
