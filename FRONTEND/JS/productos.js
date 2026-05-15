@@ -44,15 +44,12 @@ let filtrarCategoria = "inicio";
 let filtrarUso = "";
 
 //  precio
+// PRECIOS
 let precioMin = null;
 let precioMax = null;
 
-// inputs y botón precio
-let inputMax = document.querySelector('.filtrosPrecio input[placeholder="Max"]');
-let inputMin = document.querySelector('.filtrosPrecio input[placeholder="Min"]');
-let botonFiltrar = document.querySelector('.botonFiltrar');
-let botonLimpiar = document.querySelector('.limpiarFiltro');
 
+// FORMATO COP
 function formatearCOP(valor){
     return new Intl.NumberFormat("es-CO", {
         style: "currency",
@@ -61,48 +58,82 @@ function formatearCOP(valor){
     }).format(valor);
 }
 
+
+// LIMPIAR NÚMERO
 function limpiarNumero(texto){
     return Number(texto.replace(/\D/g, ""));
 }
 
-[inputMin, inputMax].forEach(input => {
 
-    input.addEventListener("input", function(){
+// CONTENEDORES FILTROS
+let filtrosPrecio = document.querySelectorAll(".filtrosPrecio");
 
-        let numero = limpiarNumero(this.value);
 
-        if(numero === 0){
-            this.value = "";
-            return;
-        }
+// RECORRER CADA BLOQUE
+filtrosPrecio.forEach(filtro => {
 
-        this.value = formatearCOP(numero);
+    let inputMin = filtro.querySelector('input[placeholder="Min"]');
+    let inputMax = filtro.querySelector('input[placeholder="Max"]');
+
+    let botonFiltrar = filtro.querySelector(".botonFiltrar");
+    let botonLimpiar = filtro.querySelector(".limpiarFiltro");
+
+
+    // VALIDAR EXISTENCIA
+    if(!inputMin || !inputMax || !botonFiltrar || !botonLimpiar){
+        return;
+    }
+
+
+    // FORMATO INPUTS
+    [inputMin, inputMax].forEach(input => {
+
+        input.addEventListener("input", function(){
+
+            let numero = limpiarNumero(this.value);
+
+            if(numero <= 0){
+                this.value = "";
+                return;
+            }
+
+            this.value = formatearCOP(numero);
+
+        });
+
+    });
+
+
+    // FILTRAR
+    botonFiltrar.addEventListener("click", function(){
+
+        precioMin = inputMin.value
+            ? limpiarNumero(inputMin.value)
+            : null;
+
+        precioMax = inputMax.value
+            ? limpiarNumero(inputMax.value)
+            : null;
+
+        mostrarProductos();
+
+    });
+
+
+    // LIMPIAR
+    botonLimpiar.addEventListener("click", function(){
+
+        inputMin.value = "";
+        inputMax.value = "";
+
+        precioMin = null;
+        precioMax = null;
+
+        mostrarProductos();
+
     });
 
 });
-
-//evento filtro precio
-botonFiltrar.addEventListener("click", function(){
-    precioMin = inputMin.value ? limpiarNumero(inputMin.value) : null;
-    precioMax = inputMax.value ? limpiarNumero(inputMax.value) : null
-    mostrarProductos();
-});
-
-// EVENTO LIMPIAR
-botonLimpiar.addEventListener("click", function(){
-
-    // limpiar inputs
-    inputMin.value = "";
-    inputMax.value = "";
-
-    // resetear valores
-    precioMin = null;
-    precioMax = null;
-
-    // actualizar vista
-    mostrarProductos();
-});
-
 //nombres para usos
 const nombresUsos = {
     gamer: "Gamer",
@@ -176,21 +207,27 @@ function crearCards(producto){
 //recore botopnes categorias
 let categorias = document.querySelectorAll(".menuCategorias button");
 categorias.forEach(function(boton){
+
     boton.addEventListener("click", function(){
-        filtrarCategoria = this.getAttribute("data-target");
-        mostrarProductos();
+
+        
+       
         const items = document.querySelectorAll('.item');
 
                 // si ya tiene la clase active → quitarla
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
+                     filtrarCategoria = "inicio";
                 } else {
                     // quitar activo a todos
                     items.forEach(i => i.classList.remove('active'));
 
                     // agregar activo al seleccionado
                     this.classList.add('active');
+                    filtrarCategoria = this.getAttribute("data-target");
                 }; 
+
+                mostrarProductos();
         });
          
     })
@@ -309,66 +346,124 @@ checkboxesMarca.forEach(cb => {
       }
     });
 
-    mostrarProductos(); // 👈 vuelve a renderizar
+    mostrarProductos(); 
   });
 });
 
 // BOTÓN LIMPIAR TODOS LOS FILTROS
-let botonLimpiarTodo = document.querySelector(".limpiarF");
+let botonesLimpiarTodo = document.querySelectorAll(".limpiarF");
 
-botonLimpiarTodo.addEventListener("click", function(){
+botonesLimpiarTodo.forEach(boton => {
 
-    // reset categorías
-    filtrarCategoria = "inicio";
+    boton.addEventListener("click", function(){
 
-    // reset uso
-    filtrarUso = "";
+        // reset categorías
+        filtrarCategoria = "inicio";
 
-    // reset precios
-    precioMin = null;
-    precioMax = null;
+        // reset uso
+        filtrarUso = "";
 
-    // limpiar inputs
-    inputMin.value = "";
-    inputMax.value = "";
+        // reset precios
+        precioMin = null;
+        precioMax = null;
 
-    // reset marcas
-    marcasSeleccionadas = [];
+        // limpiar inputs
+        document.querySelectorAll(".pre").forEach(input => {
+            input.value = "";
+        });
 
-    // desmarcar checkboxes
-    checkboxesMarca.forEach(cb => {
-        cb.checked = false;
+        // reset marcas
+        marcasSeleccionadas = [];
+
+        // desmarcar checkboxes
+        checkboxesMarca.forEach(cb => {
+            cb.checked = false;
+        });
+
+        // quitar active categorías
+        categorias.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        // quitar active usos
+        listaUsos.forEach(li => {
+            li.classList.remove("active");
+        });
+
+        // CERRAR MENÚ MÓVIL
+        if(categoriaMenu.style.display === "flex"){
+
+            catego.classList.remove("active");
+            categoriaMenu.style.display = "none";
+
+        } else {
+
+            catego.classList.remove("active");
+            categoriaMenu.style.display = "none";
+        }
+
+        // mostrar productos
+        mostrarProductos();
+
     });
 
-    // quitar active categorías
-    categorias.forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    // quitar active usos
-    listaUsos.forEach(li => {
-        li.classList.remove("active");
-    });
-
-    // volver a mostrar productos
-    mostrarProductos();
 });
 
 let catego = document.getElementById("catego");
 let categoriaMenu = document.getElementById("menu2");
 
 catego.addEventListener("click", function(){
-     if(categoriaMenu.style.display === "flex"){
+
+    let estado = window.getComputedStyle(categoriaMenu).display;
+
+    if(estado === "none"){
+
+        categoriaMenu.style.display = "flex";
+        catego.classList.add("active");
+
+    } else {
 
         categoriaMenu.style.display = "none";
         catego.classList.remove("active");
-        
+
+    }
+
+});
+
+
+let filtro = document.getElementById("filtro");
+
+let filtrosMenu = document.getElementById("filtros");
+
+filtro.addEventListener("click", function(){
+
+    let estado = getComputedStyle(filtrosMenu).display;
+
+    if(estado === "none"){
+
+        filtrosMenu.style.display = "block";
+
     } else {
 
-        categoriaMenu .style.display = "flex";
-        catego.classList.add("active");
+        filtrosMenu.style.display = "none";
+
     }
-})
 
-mostrarProductos()
+});
 
+ mostrarProductos();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*inicio menu filtros..........................................................*/
