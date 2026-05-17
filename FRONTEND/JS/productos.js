@@ -12,13 +12,13 @@ function unirDatos(){
 
     if(datos){
 
-        let productosCreados = JSON.parse(datos);
+        let productosCreados = JSON.parse(datos);       
         listaProductos = [...listaProductos,...productosCreados];
     }
 
-};
+};                                           
 
-function ActualizarProductos(){
+function ActualizarProductos(){               
 
     listaProductos = JSON.parse(JSON.stringify(productos));
 
@@ -145,9 +145,7 @@ const nombresUsos = {
 // card
 function crearCards(producto){   
     const columnas = document.createElement("div");
-    columnas.className = "col";
-    columnas.style.flex = "0 0 12.5%";
-    columnas.style.maxWidth = "12.5%";
+    columnas.className = "colunas";
 
       columnas.innerHTML = ` 
         <div class="card">
@@ -172,7 +170,8 @@ function crearCards(producto){
                     </div>
                 </div>
                 <div class="anadir btn-agregar" data-imagen="${producto.imagen}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">
-                  <span>  🛒 Agregar al carrito</span>
+                  <span class="acregar">  🛒 Agregar al carrito</span>
+                  <span class="acregar2">  🛒 Agregar</span style="display: none;">
                 </div>
             </div>
         </div>
@@ -334,9 +333,10 @@ function escribirTexto(elemento, texto){
 
 let marcasSeleccionadas = [];
 const checkboxesMarca = document.querySelectorAll('.marcas input[type="checkbox"]');
+const categoriaMenu = document.querySelectorAll('.menuCategorias');
 
-checkboxesMarca.forEach(cb => {
-  cb.addEventListener("change", () => {
+checkboxesMarca.forEach(chec => {
+  chec.addEventListener("change", () => {
 
     marcasSeleccionadas = [];
 
@@ -367,6 +367,7 @@ botonesLimpiarTodo.forEach(boton => {
         precioMin = null;
         precioMax = null;
 
+        
         // limpiar inputs
         document.querySelectorAll(".pre").forEach(input => {
             input.value = "";
@@ -376,13 +377,14 @@ botonesLimpiarTodo.forEach(boton => {
         marcasSeleccionadas = [];
 
         // desmarcar checkboxes
-        checkboxesMarca.forEach(cb => {
-            cb.checked = false;
+        checkboxesMarca.forEach(chec => {
+            chec.checked = false;
         });
 
         // quitar active categorías
         categorias.forEach(btn => {
             btn.classList.remove("active");
+           
         });
 
         // quitar active usos
@@ -391,16 +393,22 @@ botonesLimpiarTodo.forEach(boton => {
         });
 
         // CERRAR MENÚ MÓVIL
-        if(categoriaMenu.style.display === "flex"){
+        categoriaMenu.forEach(menu => {
 
-            catego.classList.remove("active");
-            categoriaMenu.style.display = "none";
+    if(menu.style.display === "flex"){
 
-        } else {
+        catego.classList.remove("active");
+        menu.style.display = "none";
+        categoriasMenu2.style.display ="none"
 
-            catego.classList.remove("active");
-            categoriaMenu.style.display = "none";
-        }
+    } else {
+
+        catego.classList.add("active");
+        menu.style.display = "block";
+        categoriasMenu2.style.display ="flex"
+    }
+
+});
 
         // mostrar productos
         mostrarProductos();
@@ -409,61 +417,54 @@ botonesLimpiarTodo.forEach(boton => {
 
 });
 
-let catego = document.getElementById("catego");
-let categoriaMenu = document.getElementById("menu2");
-
-catego.addEventListener("click", function(){
-
-    let estado = window.getComputedStyle(categoriaMenu).display;
-
-    if(estado === "none"){
-
-        categoriaMenu.style.display = "flex";
-        catego.classList.add("active");
-
-    } else {
-
-        categoriaMenu.style.display = "none";
-        catego.classList.remove("active");
-
-    }
-
-});
 
 
-let filtro = document.getElementById("filtro");
 
-let filtrosMenu = document.getElementById("filtros");
 
-filtro.addEventListener("click", function(){
+let buscarCatrgoria = document.getElementById("buscarCatrgoria");
+let categoriasMenu2 = document.getElementById("categoriasMenu2");
+let filtrosMenu = document.querySelector(".filtroMovil");
+
+
+buscarCatrgoria.addEventListener("click", function(){
 
     let estado = getComputedStyle(filtrosMenu).display;
 
     if(estado === "none"){
 
         filtrosMenu.style.display = "block";
+        
 
     } else {
-
+       
         filtrosMenu.style.display = "none";
+        categoriasMenu2.style.display ="none"
 
     }
 
 });
 
+
+let botonCategorias = document.getElementById("botonCategorias");
+
+
+botonCategorias.addEventListener("click", function(){
+
+    let estado = window.getComputedStyle(categoriasMenu2).display;
+
+    if(estado === "none"){
+
+        categoriasMenu2.style.display = "flex";
+        botonCategorias.classList.add("active");
+
+    } else {
+
+        categoriasMenu2.style.display = "none";
+        botonCategorias.classList.remove("active");
+
+    }
+
+});
  mostrarProductos();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*inicio menu filtros..........................................................*/

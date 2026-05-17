@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
       guardarCarrito();
 
       // al agregar mas cantidad se pone al inicio
-      listaCarrito.prepend(productoExistente);
+      /*listaCarrito.prepend(productoExistente);*/
 
       return; 
     }
@@ -154,6 +154,60 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("msgVacio").style.display = "none";
   }
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   // evento del decremento y decremento de la li
   document.addEventListener("click", function(clic){
@@ -181,9 +235,13 @@ document.addEventListener('DOMContentLoaded', function () {
         cantitaProducto--;
         totalPrecio -= precio;
 
-        actualizarBadge();
+        
+
+         listaCarrito.prepend(contenedor);
+         actualizarBadge();
         actualizarPrecio();
         guardarCarrito();
+         
       }
     }
 
@@ -208,9 +266,13 @@ document.addEventListener('DOMContentLoaded', function () {
       cantitaProducto++;
       totalPrecio += precio;
 
-      actualizarBadge();
+     
+
+       listaCarrito.prepend(contenedor);
+        actualizarBadge();
       actualizarPrecio();
       guardarCarrito();
+       
     }
 
   });

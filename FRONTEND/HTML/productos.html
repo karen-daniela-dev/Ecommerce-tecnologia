@@ -71,10 +71,10 @@
 
 
 
- <!--menu PAGINA--------------------------------------------------------------------------------->
-  <div  class="contenedor" style="margin-top: 20px; margin-bottom: 10px;">
+ <!--MENU PAGINA PRINCIPAL--------------------------------------------------------------------------------->
+  <div  class="contenedor" style="margin-top: 10px; margin-bottom: 10px;">
     
-    <div class="Cajoncategorias">
+    <div class="Cajoncategorias" id="Cajoncategorias">
       
       <div class="menuCategorias"> 
         <h3>Categorias</h3>
@@ -163,90 +163,74 @@
 
 
 
-  
+<!--MENU MOVIIL---------------------------------------------------------------------------------->
 
+ <div class="menuMovil">
+    <div id="categoriasMenu2" class="categoriasMenu2 menuCategorias" style="display: none;">
 
-
-
-<!--
-  <div class="Cajoncategorias2" style="display: none;" >
-      <div class="menus"> 
-        <h2 id="catego">Categorias</h2>
-        <h2 id="filtro" class="filtro">Filtros</h2>
-      </div>
-  </div>
- -->
-  <div id="menu2" class="menuCategorias menu2" style="display: none;">
-
-      <button class="item but" data-target="inicio">
-        <img src="https://i.postimg.cc/Gmc9Q1fg/Copilot-20260514-113556.png" alt="imagen">
+      <button class="item botonCategoria" data-target="inicio">
+        <img src="https://i.postimg.cc/Gmc9Q1fg/Copilot-20260514-113556.png" alt="imagen"  style="display: none;">
       </button>
 
-      <button class="item but" data-target="laptops">
+      <button class="item botonCategoria" data-target="laptops">
         <img src="https://i.postimg.cc/G2jkXjQg/Chat-GPT-Image-14-may-2026-11-32-21-a-m.png" alt="imagen">
       </button>
    
-    
-   
-      <button class="item but " data-target="mouses">
+      <button class="item botonCategoria" data-target="mouses">
         <img src="https://i.postimg.cc/Pr1d9FD3/Chat-GPT-Image-14-may-2026-11-28-48-a-m.png" alt="imagen">
       </button>
 
-      <button class="item but" data-target="audio">
+      <button class="item botonCategoria" data-target="audio">
         <img src="https://i.postimg.cc/T3ypKc5n/Chat-GPT-Image-14-may-2026-11-24-28-a-m.png" alt="imagen">
       </button>
     
-   
-  
-      <button class="item but" data-target="accesorios">
+      <button class="item botonCategoria" data-target="accesorios">
         <img src="https://i.postimg.cc/B62FXBkG/Chat-GPT-Image-14-may-2026-11-21-27-a-m.png" alt="imagen">
       </button>
 
-      <button class="item but" data-target="teclados">
+      <button class="item botonCategoria" data-target="teclados">
         <img src="https://i.postimg.cc/9Fn6QPh0/Chat-GPT-Image-14-may-2026-11-16-05-a-m.png" alt="imagen">
       </button>
    
-
-    
-       <button class="item but" data-target="tarjetas Graficar">
-        <img src="https://i.postimg.cc/d379HySz/Chat-GPT-Image-14-may-2026-11-18-34-a-m.png" alt="imagen">
+      <button class="item botonCategoria" data-target="tarjetas Graficar">
+        <img src="https://i.postimg.cc/d379HySz/Chat-GPT-Image-14-may-2026-11-18-34-a-m.png" alt="imagen" >
       </button>
 
-      <button class="item but" data-target="smartwatches">
+      <button class="item botonCategoria" data-target="smartwatches">
         <img src="https://i.postimg.cc/66S2VSVV/Chat-GPT-Image-14-may-2026-11-07-40-a-m.png" alt="imagen">
       </button>
      
-  </div>
+    </div>
 
-      <div id="filtros" class="filtros" style="display: none;">
+      <div id="filtros" class="filtroMovil filtros">
         <!--firtos usos-->
        
-        <div class="usos">
-          <div class="lista">
+        <div class="tipoUsos"> 
+          <div class="listaUsos">
             <ul>
-              <li class="itenUso" data-target="gamer">Gamer</li>
-              <li class="itenUso" data-target="general">General</li>
+              <li class="uso" data-target="gamer">Gamer</li>
+              <li class="uso" data-target="general">General</li>
             </ul>
             <ul>
-              <li class="itenUso" data-target="estudio" >Estudio</li>
-              <li class="itenUso" data-target="trabajo">Trabajo</li>
+              <li class="uso" data-target="estudio" >Estudio</li>
+              <li class="uso" data-target="trabajo">Trabajo</li>
             </ul>
           </div>
         </div>
 
-        <div class="filtrosPrecio">
-          <div class="filtro-precio">
-            <input class="pre" type="text" placeholder="Min">
-            <input class="pre" type="text" placeholder="Max">
+        <div class="filtrosPrecio filtroPrecio2">
+          <div class="precio">
+            <input class="minMax" type="text" placeholder="Min">
+            <input class="minMax" type="text" placeholder="Max">
           </div>
-          <div class="notonfl">
-            <button class="botonff botonFiltrar bottom-nav-item">Filtrar</button>
-            <button class="botonff limpiarFiltro bottom-nav-item">Limpiar</button>
+          <div class="botonesFiltraL">
+            <button class="bontonesFL botonFiltrar bottom-nav-item">Filtrar</button>
+            <button class="bontonesFL limpiarFiltro bottom-nav-item">Limpiar</button>
           </div>
         </div>
 
         <!--checkbox marca-->
-        <div class="marcas">
+        <div class="marcas marca">
           <div>
             <label>
               <input type="checkbox" value="acer">
@@ -265,41 +249,41 @@
               <input type="checkbox" value="dell">
               <span>Dell</span>
             </label>
-            
-          </div>
-        
-
-          
-          <div>
-            <label>
-              <input type="checkbox" value="hp">
-              <span>HP</span> 
-            </label>
-            <label>
-              <input type="checkbox" value="lenovo">
-              <span>Lenovo</span>
-            </label>
-            <label>
-              <input type="checkbox" value="msi">
-              <span>Msi</span>
-            </label>
-            <label>
-              <input type="checkbox" value="otros">
-              <span>Otros</span>
-            </label> 
-          </div>
+              
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" value="hp">
+                <span>HP</span> 
+              </label>
+              <label>
+                <input type="checkbox" value="lenovo">
+                <span>Lenovo</span>
+              </label>
+              <label>
+                <input type="checkbox" value="msi">
+                <span>Msi</span>
+              </label>
+              <label>
+                <input type="checkbox" value="otros">
+                <span>Otros</span>
+              </label> 
+            </div>
         </div>
-        <button class="limpiarF">Limpiar filtros</button>
-      <div class="Cajoncategorias2" style="display: none;" >
-          <h2 class="cates" id="catego">Categorias</h2>
+
+      <button class="limpiarF limpiarFlitros">Limpiar filtros</button>
+      <div id="botonCategorias" class="botonCategorias">
+          <h2 class="catego" id="catego">Categorias</h2>
       </div>
     </div>
+ </div>
+  
   
 
 
   <div class="productos" style="padding-bottom: 10px;">
        <!--Carrusel-->
-    <div class="inicio boton">
+    <div class="inicio boton" >
 
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" style="display: none;"> 
         <div class="carousel-inner">
@@ -339,10 +323,8 @@
       
       
       <!--cards-->
-      <div class="container text-center">
-        <div class="titulos" id="titulo-seccion">
-        </div> 
-       
+      <div class="container text-center p-0">
+        <div class="titulos" id="titulo-seccion"></div> 
         <div class="contenedor" id="contenedor">   
           <!--cards-->
         </div>
@@ -512,9 +494,9 @@
     <span class="label">Carrito</span>
   </button>
 
-  <button id="filtro" class="bottom-nav-item filtro">
+  <button id="buscarCatrgoria" class="bottom-nav-item filtro">
     <i class="bi bi-funnel-fill"></i>
-     <span class="label">Buscasr por</span>
+     <span>Buscasr por</span>
   </button>
 </div>
 

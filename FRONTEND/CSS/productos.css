@@ -83,20 +83,27 @@ body::-webkit-scrollbar {
 }
 
 /*TERMINO DE FONDO*/
+.menuMovil{
+  display: none;
+}
 
-
-
+ 
 
 /*CONTENDOR DE TODA LA PAGINA.............................................*/
 .contenedor{
   display: flex;
-  margin-left: 10px;
+  width: 100%;
+  gap: 10px;
+  margin: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 /*FIN DE CONTENEDOR */
 
 /*CAJON DE MENU......................................................................................*/
 .Cajoncategorias{
-  width: 16%;
+  width: 260px;
+  min-width: 260px;
   top: 0;
   height: 730px;
   background-color: transparent;
@@ -107,35 +114,12 @@ body::-webkit-scrollbar {
   
 }
 
-.Cajoncategorias2{
-  display: none;
-}
+/*DISPLAYS NONES DE MOVIL............................................................*/
 
-
-#filtros{
+.menuMovil{
     display: none;
 }
 
-.Cajoncategorias2{
-    all: unset;
-  }
-
-.menus{
-    all: unset;
-
-  }
-
- .menus{
-  all: unset;
- }
-.menu2 .but img{
-     all: unset;
-  }
-
-.menus h2{
-    display: none;
-
-}
 /*MENU ........................................................................................*/
 .menuCategorias{
   background-color: transparent; 
@@ -474,12 +458,12 @@ body::-webkit-scrollbar {
 @media(min-width: 1254px ) and ( max-width: 1752px){
   
   #carouselExampleIndicators {
-    height: 130px !important; 
-    margin-bottom: 120px !important;
+    height: 130px; 
+    margin-bottom: 120px;
   }
 
-  .Cajoncategorias2{
-    display: none !important;
+  .menuMovil{
+    display: none;
   }
 
   /*CAJON DE MENU......................................................................................*/
@@ -489,7 +473,7 @@ body::-webkit-scrollbar {
     position: sticky!important; 
     display: block;
     margin-bottom: 14px;
-    width: 16%;
+    width: 14%;
     top: 0;
     height: 730px;
   }
@@ -536,78 +520,66 @@ body::-webkit-scrollbar {
 /*RESPONSE PRODUCTOS.......................................................*/
 @media(min-width: 1565px ) and ( max-width: 1659px){
     #carouselExampleIndicators {
-    height: 130px !important; 
-    margin-bottom: 110px !important;
+    height: 130px; 
+    margin-bottom: 110px;
   }
-  
 
 }
 
 @media(min-width: 1404px ) and ( max-width: 1565px){
     #carouselExampleIndicators {
-    height: 115px !important; 
-    margin-bottom: 120px !important;
+    height: 115px; 
+    margin-bottom: 120px;
   }
-
 }
 
 @media(min-width: 1331px ) and ( max-width: 1404px){
     #carouselExampleIndicators {
-    height: 115px !important; 
-    margin-bottom: 90px !important;
+    height: 115px; 
+    margin-bottom: 90px;
   }
 
+   
 }
 
 @media(min-width: 1249px ) and ( max-width: 1331px){
     #carouselExampleIndicators {
-    height: 115px !important; 
-    margin-bottom: 80px !important;
+    height: 115px; 
+    margin-bottom: 80px;
 
   }
 
 }
 
-@media(min-width: 990px ) and ( max-width: 1250px){
-    #carouselExampleIndicators {
-    height: 118px !important; 
-    margin-bottom: 10px !important;
-    background-color: #000000 !important;
-  }
-
-  #contenedor{
-    margin-top: 20px!important; 
-  }
-
-  .carousel-item img{
-    height: 129px !important;
-  }
-}
 /*FIN REPOSIVE PRODUCTO*/
 
 
 @media(min-width: 990px ) and ( max-width: 1254px){
+  
 
- #carouselExampleIndicators {
-  height: 130px !important; 
-  margin-bottom: 18px !important;
-}
-
-  .Cajoncategorias2{
-    display: none !important;
+  #carouselExampleIndicators {
+    height: 130px !important; 
+    margin-bottom: 18px !important;
   }
+
+  .menuMovil{
+    display: none;
+  }
+
+
 
   /*CAJON DE MENU......................................................................................*/
   .Cajoncategorias{
-    width: 26%;
-    background-color: transparent;
+    display: block !important;
+    width: 20% !important;
+    background-color: transparent !important;
     
   }
 
   /*MENU CATEGORIA........................................................................................*/
    /*TITULO*/
   .menuCategorias h2{
-    font-size: 16px;
+    font-size: 12px;
   }
 
   /* BOTONES MENU*/
@@ -646,29 +618,440 @@ body::-webkit-scrollbar {
 
 }
 
-/* menu resposive.........................................................................*/
-@media(min-width: 1px ) and ( max-width: 990px){
+/*MENU CELULAR.........................................................................*/
+@media(min-width: 857px ) and ( max-width: 990px){
+
+  /*DISPLAYS NONES*/
+
+ 
 
   /*CONTENDOR DE TODA LA PAGINA.............................................*/
   .contenedor{
+
     display: block;
+    width: 100%;
+    gap: 10px;
+    margin: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+  /*  
+    display: flex;
     margin-left: 10px;
     margin-right: 10px;
+  */
+  }
+  .menuMovil{
+    display: block !important;
   }
 
-
-  /*CAJON DE MENU......................................................................................*/
   .Cajoncategorias{
-    display: none !important;
+    display: none;
+  }
+
+  
+
+   /*MENU CATEGORIA..................................................................*/    
+
+  .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 19px !important;
+    margin-top: 0px !important;
+    height: 80px !important;
+    width: 100%;
+    padding: 0% 25% 0% 0%;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+
+  }
+
+   .botonCategoria{
+      width:50px !important;
+      height:50px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:14px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 12px 5px 5px 5px !important;
+      position:relative !important;
+
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:0px !important;
+
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .categoriasMenu2 .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .categoriasMenu2 .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .categoriasMenu2 .botonCategoria img{            
+      width: 40px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
   }
 
 
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 100px 20px 20px 20px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px;
+    top: 0  !important;
+    right: 0  !important;
+    width: 25%;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
 
-  /*BARRA MENU categiria filtros..............*/
-  .Cajoncategorias2{
+  /*CAJON USOS*/
+  .uso{
+    height: 35px !important;
+    font-size: 15px !important;
+    background-color: transparent;
+  }
+
+
+  /*LISTA DE USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 100px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
     display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 100px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 16px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+  
+
+    /*FILTRO*/
+  .precio{
+    display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 7px;
+  }
+  
+
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 27px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: flex;
+  gap: 10px;
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 35px !important;
+    width: 100%;
+    font-size: 14px !important;
+    padding: 12px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   display: flex !important;
+   justify-content: center;
+   align-items: center;
+   height: 150px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 13px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 6px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 40px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 17px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     width: 100% !important;
     height: 40px !important;
     margin-top: 10px !important;
@@ -679,30 +1062,26 @@ body::-webkit-scrollbar {
     transition: all 0.4s ease !important;
     cursor: pointer !important;
   }
+ 
 
-  
-
-
-
-  
   /*TEXTO BARRA*/
-  .Cajoncategorias2 h2{
+  .botonCategorias h2{
     font-size: 16px !important;
     color: #d7d7d9 !important;
+      margin: 0 auto !important;
    
   }
 
   /*EVENTO TEXTO*/
-    .Cajoncategorias2:hover{
+  .botonCategorias:hover{
     background-color:  #62f0ab27 !important;
     color: #00f0d0;
     box-shadow: 0px 0px 6px#cee0dd;
     transform: scale(1.02);
   }
 
-  .catego.active{
-    padding: 10px;
-    border-radius: 9px;
+  
+  .botonCategorias.active{
     cursor: pointer;
     border: solid 1.30px  rgba(26, 158, 96, 0.388);
     box-shadow: 0px 0px 8px #79adad;
@@ -710,45 +1089,68 @@ body::-webkit-scrollbar {
     color: #ffffff;
   }
 
-  /*quitar claces*/
-  #catego{
-    all: unset;
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  display: none !important;
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  display: none !important;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+
+}
+
+@media(min-width: 757px ) and ( max-width: 857px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block; 
+  }
+  .menuMovil{
+    display: block !important;
   }
 
-  .item{
-   all: unset;
-  }
-
-  .item:hover{
-   all: unset;
-  }
-
-  .item.active{
-    all: unset;
-  }
-
-  #menu2{
+  .Cajoncategorias{
     display: none;
   }
+ 
+   /*MENU CATEGORIA..................................................................*/
+  .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 2.50% !important;
+    margin-top: 0px !important;
+    height: 80px !important;
+    margin-right: 5000px !important;
+    width: 74.93%;
+    margin-left: 12px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
 
-  /*MENU CATEGORIA........*/
-   .menu2{
-      background-color: #00000000;
-      gap: 3.50% !important;
-      margin-top: 0px !important;
-      height: 80px !important;
-      margin-right: 5000px !important;
-      width: 73%;
-      margin-left: 12px !important;
-      border: none !important;
-      box-shadow: none;
-      margin-bottom: 10px !important;
-      
-    }
+  }
 
-    .menu2 .but{
-      width:50px !important;
-      height:50px !important;
+   .botonCategoria{
+      width:45px !important;
+      height:45px !important;
       border:none !important;
       outline:none !important;
       cursor:pointer !important;
@@ -774,8 +1176,8 @@ body::-webkit-scrollbar {
         inset 0 0 12px rgba(0,255,255,.15) !important;
     }
 
-    /* EFECTO HOVER */
-    .menu2 .but:hover{
+   /* EFECTO HOVER */
+    .categoriasMenu2 .botonCategoria:hover{
       transform:translateY(-8px) scale(1.03) !important;
 
       box-shadow:
@@ -785,31 +1187,29 @@ body::-webkit-scrollbar {
         inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
     }
 
-        /* IMAGENES */
 
-    .menu2 .but img{
-      width: 40px  !important;
+    .categoriasMenu2 .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .categoriasMenu2 .botonCategoria img{            
+      width: 35px  !important;
       color:#00d9ff;
-
+      display: block !important;
       text-shadow:
         0 0 5px #00d9ff,
         0 0 12px #00d9ff,
         0 0 25px #00d9ff;
     }
 
-   
 
-    .menu2 .but::after{
-      content:"";
-      position:absolute;
-      border-radius:10px;
-      background:#00d9ff;
-
-     
-    }
-
-
-  .item.active{
+   .item.active{
    
     border-radius: 8px !important;
     margin-bottom: 0px !important;
@@ -827,155 +1227,180 @@ body::-webkit-scrollbar {
     height:50px !important;
   }
 
-  /*USOS..........................................................................*/
-  /*CAJON FILTROS*/
-  .filtros{
-    display: block;
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
     position: fixed;
     background: #000d1f !important;
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
     border: solid 0.5px  rgba(26, 158, 96, 0.388);
     margin: 10px 0px 0px 0px ;
     margin-bottom: 0px !important;
-    padding: 20px;
+    padding: 100px 20px 20px 20px;
     
-    margin-top: 57px !important;
+    margin-top: 0px !important;
     border-radius: 0px !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 10px;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 708.5px;
-    z-index: 9999;
+    top: 0  !important;
+    right: 0  !important;
+    width: 25%;
+    height: 100vh  !important;
+    z-index: 1  !important;
   }
 
-  .usos .lista{
-      width: 100%  !important;
-      height: 100px !important;
-      background-color: #00000000;
-  }
-
-  .itenUso{
-    height: 35px !important;
-    font-size: 15px !important;
-  }
-
-  /*
-  .filtro.active{
-    cursor: pointer !important;
-    border: solid 1.30px rgba(26, 158, 96, 0.388) !important;
-    background-color: #00f0d051 !important;
-    color: #ffffff !important;
-    box-shadow: 0px 0px 8px #79adad !important;
-  }
-/*
-  
-  /*BUTON LIAMPIAR FILTROS......................................*/
-  .limpiarF{
-    width: 100% !important;
-    height: 40px  !important;
-    margin-top: 15px;
-    padding: 5px;
-    border-radius: 10px;
-    background-color: #0005106c;
-    border: solid 0.5px  rgba(26, 158, 96, 0.388);
-    font-size: 17px;
-    color: #d7d7d9;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
-
-  .limpiarF:hover{
-    background-color:  #62f0ab27 !important;
-    color: #00f0d0;
-    box-shadow: 0px 0px 2px#00f0d0;
-    transform: scale(1.02);
-  }
-
-  /*MACARS...........................................................................*/
-  .marcas{
-   border: solid 0.5px  rgba(26, 158, 96, 0.388);
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 150px !important;
-   border-radius: 8px;
-   margin-top: 10px !important;
-   padding: 0px !important;   
-   gap: 5px;       
-  }
-
-  /*LABEL MARCA*/
-  .marcas label{
-    display: flex;          
-    align-items: center;                 
-    color: #fff;
-    padding: 6px !important;
-
-    font-size: 14px !important;
-    transition: transform 0.3s ease, color 0.3s ease;
-    cursor: pointer;
-  }
-
-  .marcas label:hover {
-    text-shadow: 0 0 5px rgba(0,240,200,0.7);
-    transform: scale(1.05);
-    color: #00f0d0;
-  }
-
-  .marcas input[type="checkbox"] {
-    appearance: none;
-    width: 22px;
-    height: 22px;  
-  }
-
-  .marcas div {
-    display: block;
-    flex-direction: column;
-    gap: 6px !important;
+   /*LISTA DE USOS*/
+  .uso{
+    height: 29px !important;
+    font-size: 13px !important;
+    background-color: transparent;
   }
 
 
-  /*CAJON FILTRO PRECIO....................................................................*/
-  .filtrosPrecio{
+   /*CAJON USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 88px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
     justify-content: center;
     border: solid 0.5px  rgba(26, 158, 96, 0.388);
-    height: 100px; 
+    height: 90px; 
     width: 100% !important;
     border-radius: 8px;
-    padding: 16px 10px 10px 10px;
+    padding: 15px 10px 10px 10px;
     margin-top: 20px !important;
   }
 
+    /*FILTRO*/
+  .precio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 5px;
+  }
+    
   /*INPUT TEXT*/
-  .pre[type="text"] {
+  .minMax[type="text"] {
+    height: 25px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
     font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
   }
 
-  
- /*BOTONES*/
-  .botonff{
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: flex;
+  gap: 5px;
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
     display: block;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    height: 35px !important;
+    height: 30px !important;
     width: 100%;
-    font-size: 14px !important;
-    padding: 12px !important;
+    font-size: 13px !important;
+    padding: 10px !important;
     border-radius: 9px;
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     background-color:  #021b0f27 !important;
-    color: #e5e5ead1 !important;
+    color: #e5e5eaef !important;
     text-shadow: 0 0 50px #000000 !important;
     cursor: pointer;
     transition: transform 0.3s ease;
   }
 
 
-  .botonff:hover{
+  .bontonesFL:hover{
     color: #00f0d0  !important;
     transform: scale(1.03);
     color: var(--neon-cyan);
@@ -984,198 +1409,1239 @@ body::-webkit-scrollbar {
     background-color:  #62f0ab27 !important;
   }
 
-   /*LISTA DE USOS*/
-  .lista{
-    margin-bottom: 0px !important;
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   display: flex !important;
+   justify-content: center;
+   align-items: center;
+   height: 140px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 10.50px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 0px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 36px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 15px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
   }
 
 
-    /*fin de filtros.....................................................*/
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 36px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
 
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 15px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
 
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
 
 
   /*CARRUSEL ........................................................................*/
-  #carouselExampleIndicators {
-     display: none;
-     padding: 0;
-     all: unset !important;
-  }
-
-  /*BORDE CARRUSEL*/
-  .carousel-inner{
-    display: none;
-  }
-
-  /*IMAGEN CARRUSEL*/
-  .carousel-item img{
-    all: unset !important;
-    display: none;
-  }
-
-  /*ICOCO CARRISEL*/
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    display: none;
-    all: unset;
-  }
-
-}
-/*
-@media(min-width: 737px ) and ( max-width: 860px){
-
-  .menu2{
-    gap: 5px !important;
-     height: 40px !important;
-    padding: 10px 5px 5px 5px !important;
-  }
-
-  .but{
-
-    font-size: 14px !important; 
-
-  }
-
-   .but:hover{
-    padding: 8px !important; 
-    border-radius: 8px !important;
-    margin-bottom: 10px !important;
-    cursor: pointer;
-    border: solid 1.30px  rgba(26, 158, 96, 0.388);
-    background-color: #00000051;
-    color: #ffffff;
-  }
-}
-
-@media(min-width: 564px ) and ( max-width: 737px){
-
-  .menu2{
-    gap: 0px !important;
-    height: 29px !important;
-    padding: 10px 5px 5px 5px !important;
-    background-color: #000000 !important;
-  }
-  
-  .but{
-    gap: 0px !important;
-    font-size: 9px !important; 
-    padding: 0px !important;
-  }
-
-   .but:hover{
-    padding: 8px !important; 
-    border-radius: 8px !important;
-    margin-bottom: 9px !important;
-    cursor: pointer;
-    border: solid 1.30px  rgba(26, 158, 96, 0.388);
-    background-color: #00000051;
-    color: #ffffff;
-  }
-}
-
-
-@media(min-width: 1px ) and ( max-width: 738px){
-
-  .menu2{
-    gap: 0px !important;
-    height: 40px !important;
-    
-  }
-  
-  .but{
-
-    padding: 5px !important;
-    font-size: 10px !important; 
-
-  }
-
-   .but:hover{
-    padding: 4px !important; 
-    border-radius: 8px !important;
-    margin-bottom: 9px !important;
-    cursor: pointer;
-    border: solid 1.30px  rgba(26, 158, 96, 0.388);
-    background-color: #00000051;
-    color: #ffffff;
-  }
-}
-*/
-
-
-/*SECION INICIO.....................................................................................................................*/
-.container{
-  margin: 0 !important;   
-  
-}
-
-#contenedor{
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 0 auto !important;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))!important;
-  gap: 17px !important; 
-
-}
-
-.productos{
-  width: 100%;
-  background-color: transparent;
-  margin-bottom: 0px;
- 
-}
-
-/*CARRUSEL BOOTSTRAP .......................................................*/
-#carouselExampleIndicators {
-  height: 200px; 
-  width: 98%;
-  margin: 0 auto;
-  margin-bottom: 60px;
+ #carouselExampleIndicators {
+  display: none !important;
 }
 
 /*BORDE CARRUSEL*/
 .carousel-inner{
-  border-radius: 12px;
-  filter: drop-shadow(0px 0px 3px #066665);
+  display: none !important;
 }
 
 /*IMAGEN CARRUSEL*/
 .carousel-item img{
-  border-radius: 12px; 
-  opacity: 0.6;
-  border-radius: 0;
-  border: none;
+  display: none !important;
 }
 
 /*ICOCO CARRISEL*/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(1); /* flechas de carrucel negras */
+  display: none !important;
+}
+
+}
+
+@media(min-width: 601px ) and ( max-width: 757px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block; 
+  }
+  .menuMovil{
+    display: block !important;
+  }
+
+  .Cajoncategorias{
+    display: none !important;
+  }
+
+
+   /*MENU CATEGORIA..................................................................*/
+  .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 0% !important;
+    margin-top: 0px !important;
+    height: 80px !important;
+    margin-right: 5000px !important;
+    width: 74.93%;
+    margin-left: 12px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+
+  }
+
+   .botonCategoria{
+      width:40px !important;
+      height:40px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:14px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 12px 2px 5px 2px !important;
+      position:relative !important;
+
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:2px !important;
+
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .categoriasMenu2 .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .categoriasMenu2 .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .categoriasMenu2 .botonCategoria img{            
+      width: 32px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
+  }
+
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 70px 20px 20px 20px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    top: 0  !important;
+    right: 0  !important;
+    width: 29%;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
+
+   /*LISTA DE USOS*/
+  .uso{
+    height: 25px !important;
+    font-size: 12px !important;
+    background-color: transparent;
+  }
+
+
+   /*CAJON USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 140px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: block !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
 }
 
 
-/*COLUMNAS CARDS*/
-.row div .col{
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 160px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 15px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+    /*FILTRO*/
+  .precio{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 5px;
+  }
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 25px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: block;
+  
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    height: 30px !important;
+    width: 100%;
+    font-size: 13px !important;
+    padding: 10px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: block;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   justify-content: center;
+   align-items: center;
+   height: 260px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 10.50px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 0px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 34px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 14px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 34px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
+
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 14px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
+
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
+
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  display: none !important;
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  display: none !important;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+
+}
+/*500px*/
+
+@media(min-width: 50px ) and ( max-width: 601px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block; 
+  }
+  .menuMovil{
+    display: block !important;
+  }
+
+  .Cajoncategorias{
+    display: none;
+  }
+
+
+   /*MENU CATEGORIA..................................................................*/
+
+   .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 1px !important;
+    margin-top: 0px !important;
+    height:420px !important;
+    width: 40% !important;
+    padding: 0% 20% 0% 0%;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+    margin-left: 48%;
+    flex-direction:column !important;
+    position: fixed; /* o absolute */
+    z-index: 1;
+  }
+
+   .botonCategoria{
+      width:36px !important;
+      height:36px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:10px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 10px 3px 3px 3px !important;
+      position:relative !important;
+      margin-left: 0px !important;
+      display:block !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:2px !important;
+      
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .botonCategoria img{            
+      width: 30px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+        margin: 0 auto;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
+  }
+
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 70px 16px 20px 16px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    top: 0  !important;
+    right: 0  !important;
+    width: 30% !important;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
+
+   /*LISTA DE USOS*/
+  .uso{
+    height: 25px !important;
+    font-size: 12px !important;
+    background-color: transparent;
+  }
+
+
+   /*CAJON USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 140px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: block !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 160px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 15px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+    /*FILTRO*/
+  .precio{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 5px;
+  }
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 25px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: block;
+  
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    height: 30px !important;
+    width: 100%;
+    font-size: 12px !important;
+    padding: 10px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: block;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   justify-content: center;
+   align-items: center;
+   height: 260px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 10.50px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 0px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 34px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 11px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 34px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
+
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 11px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
+
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
+
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  display: none !important;
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  display: none !important;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+
+}
+
+
+/*SECION INICIO.....................................................................................................................*/
+
+
+.container{
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 13px !important;
+  padding-right: 0 !important;
+  margin-top: 20px;
+  
+}
+
+.colunas{
+  margin: 0;
   padding: 0;
-  width: 160px;
-  margin: 0px 0px 0px 0px;
-  margin-left: 0px;
 }
+
+
+/*
+#contenedor{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(169px, 1fr));
+  justify-content: flex-start;
+  gap: 10px;
+  
+}
+
+*/
+
+#contenedor{
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, 169px);
+
+  justify-content: start;
+
+  gap: 15px;
+  padding: 0;
+}
+
+.productos{
+  flex: 1;
+  min-width: 0;
+  background-color: transparent;
+  margin-bottom: 0px;
+}
+
+
+
+/*computadores card*/
+.productos .card{
+  background-color: #111827;
+  box-shadow: 0px 0px 5px rgb(0, 0, 0);
+  border: solid 0.5px  rgba(241, 245, 243, 0.388);
+  width: 169px;
+  margin: 5px;
+  height: 280px;
+  border-radius: 25px;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+}
+
+
+/*CARRUSEL BOOTSTRAP .......................................................*/
+#carouselExampleIndicators {
+  height: 240px;
+  width: 98%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  
+}
+
+.carousel-inner{
+  height: 100%;
+  border-radius: 12px;
+  filter: drop-shadow(0px 0px 3px #066665);
+}
+
+.carousel-item{
+  height: 100%;
+}
+
+.carousel-item img{
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0.6;
+  border: none;
+}
+
 
 /*IMAGEN CARDS*/
 .imagenes{
@@ -1302,7 +2768,7 @@ body::-webkit-scrollbar {
   transition: all 0.3s ease;
 }
 
-.anadir span{
+.anadir .acregar{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1312,6 +2778,7 @@ body::-webkit-scrollbar {
    transition: transform 0.3s ease, color 0.3s ease;
 }
 
+
 /*boto añadir cariito movimiento*/
 .anadir:hover{
   background-color: #96eaa774;
@@ -1319,25 +2786,14 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
-/*boto añadir cariito movimiento*/
-.anadir button:hover{
+/*boto añadir cariito movimiento*/    
+.anadir button:hover{    
   transform: scale(1.01);
   color: #f4f4f6;
   font-weight: bold;
 }
 
-/*computadores card*/
-.productos .card{
-  background-color: #111827;
-  box-shadow: 0px 0px 5px rgb(0, 0, 0);
-  border: solid 0.5px  rgba(241, 245, 243, 0.388);
-  width: 172px;
-  height: 280px;
-  border-radius: 25px;
-  display: block;
-  overflow: hidden;
-  margin: 3px 0px 5px 0px;
-}
+
 
 
 
@@ -1347,17 +2803,31 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-color: transparent;
   border-radius: 12px;
-  width: 100%;
-  margin: 0px 0px 15px 0px;
-  border: 1px solid var(--border-cyan);
-  font-family: var(--font-heading);
-  font-size: 50px;
-  color: #00f0d0;
-  overflow: hidden;
-}
 
+  width: 100%;
+  max-width: 1200px;
+
+  min-height: 80px;
+
+  margin: 0 auto 20px auto;
+  padding: 15px;
+
+  border: 1px solid var(--border-cyan);
+
+  font-family: var(--font-heading);
+
+  font-size: clamp(28px, 5vw, 50px);
+
+  color: #00f0d0;
+
+  overflow: hidden;
+  text-align: center;
+
+  box-sizing: border-box;
+}
 
 
 

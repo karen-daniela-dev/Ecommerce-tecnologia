@@ -175,7 +175,7 @@ export const productos = [
 
     { 
         id: 16,
-        nombre: "FORGE GK600 TKL",  
+        nombre: "FORGE GK600",  
         imagen: "https://i.postimg.cc/nVsYnJ9Y/Copilot-20260418-085301.png", 
         descripcion: "teclado compacto diseñado para la eficiencia y la portabilidad.", 
         precio: 3250389,
