@@ -2083,6 +2083,19 @@ body::-webkit-scrollbar {
     display: none;
   }
 
+  #contenedor{
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, 169px);
+
+  justify-content: center  !important;
+
+  gap: 15px;
+  padding: 0;
+}
+
 
    /*MENU CATEGORIA..................................................................*/
 
