@@ -2555,7 +2555,7 @@ body::-webkit-scrollbar {
 .carousel-control-next-icon {
   display: none !important;
 }
-
+ 
 }
 
 
@@ -2844,4 +2844,129 @@ body::-webkit-scrollbar {
 
 
 
+/* =========================================
+TOAST
+========================================= */
 
+#toast{
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 12px;
+
+    transform: translateX(-50%) translateY(20px);
+
+    background: #1a382c;
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+
+    z-index: 999999;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s;
+}
+
+#toast.active{
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-50%) translateY(0);
+
+}
+
+
+/* =========================================
+MODAL CONFIRMACIÓN
+========================================= */
+
+.modalConfirmacion{
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.6);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999999;
+}
+
+.contenidoModal{
+    width: 90%;
+    max-width: 350px;
+
+    background: #151c2f;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.contenidoModal p{
+    color: white;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+}
+
+.botonesModal{
+    display: flex;
+
+    gap: 10px;
+}
+
+.botonesModal button{
+    flex: 1;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+#cancelarModal{
+    background: #2a3247;
+    color: white;
+}
+
+#aceptarModal{
+    background: #0648059e;
+    color: white;
+}
+
+#aceptarModal:hover{
+    transform: scale(1.03);
+    box-shadow: 0px 0px 5px #9fcc9e;
+}
+
+#cancelarModal:hover{
+    transform: scale(1.03);
+    box-shadow: 0px 0px 9px #010701;
+}

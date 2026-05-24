@@ -39,6 +39,62 @@ function ActualizarProductos(){
 
 unirDatos();
 
+// =========================================
+// TOAST
+// =========================================
+
+function mostrarToast(mensaje){
+
+    let toast = document.getElementById("toast");
+
+    toast.textContent = mensaje;
+
+    toast.classList.add("active");
+
+    setTimeout(() => {
+        toast.classList.remove("active");
+    }, 3000);
+
+}
+
+
+
+// =========================================
+// MODAL CONFIRMACIÓN
+// =========================================
+
+function mostrarConfirmacion(mensaje, callback){
+
+    let modal = document.getElementById("modalConfirmacion");
+
+    let mensajeModal = document.getElementById("mensajeModal");
+
+    let aceptar = document.getElementById("aceptarModal");
+
+    let cancelar = document.getElementById("cancelarModal");
+
+    mensajeModal.textContent = mensaje;
+
+    modal.style.display = "flex";
+
+    aceptar.onclick = () => {
+
+        modal.style.display = "none";
+
+        callback(true);
+
+    };
+
+    cancelar.onclick = () => {
+
+        modal.style.display = "none";
+
+        callback(false);
+
+    };
+
+}
+
 let productosFiltros = JSON.parse(JSON.stringify(listaProductos));
 let filtrarCategoria = "inicio"; 
 let filtrarUso = "";
@@ -184,6 +240,7 @@ function crearCards(producto){
 
 
     let cantidad = 1;
+    let botonAgregar = columnas.querySelector(".btn-agregar");
 
     incremento.addEventListener("click", () => {
         cantidad++;
@@ -195,6 +252,16 @@ function crearCards(producto){
         cantidad--;
         numero.textContent = cantidad;
         }
+    });
+
+    // =========================================
+    // AGREGAR CARRITO
+    // =========================================
+
+    botonAgregar.addEventListener("click", () => {
+
+        mostrarToast(`${producto.nombre} agregado al carrito`);
+
     });
 
     return columnas;
@@ -440,7 +507,7 @@ buscarCatrgoria.addEventListener("click", function(){
         filtrosMenu.style.display = "none";
         categoriasMenu2.style.display ="none"
 
-    }
+    }              
 
 });
 
@@ -466,5 +533,7 @@ botonCategorias.addEventListener("click", function(){
 
 });
  mostrarProductos();
+
+ 
 
 

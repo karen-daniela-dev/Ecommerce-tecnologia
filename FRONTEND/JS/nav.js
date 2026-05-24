@@ -12,9 +12,67 @@ document.addEventListener('DOMContentLoaded', function () {
 
   
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
+  // =========================================
+// TOAST
+// =========================================
+
+function mostrarToast(mensaje){
+
+  let toast = document.getElementById("toast");
+
+  toast.textContent = mensaje;
+
+  toast.classList.add("active");
+
+  setTimeout(() => {
+    toast.classList.remove("active");
+  }, 3000);
+
+}
+
+
+// =========================================
+// MODAL CONFIRMACION
+// =========================================
+
+function mostrarConfirmacion(mensaje, callback){
+
+  let modal = document.getElementById("modalConfirmacion");
+
+  let mensajeModal = document.getElementById("mensajeModal");
+
+  let aceptar = document.getElementById("aceptarModal");
+
+  let cancelar = document.getElementById("cancelarModal");
+
+  mensajeModal.textContent = mensaje;
+
+  modal.style.display = "flex";
+
+  aceptar.onclick = () => {
+
+    modal.style.display = "none";
+
+    callback(true);
+
+  };
+
+  cancelar.onclick = () => {
+
+    modal.style.display = "none";
+
+    callback(false);
+
+  };
+
+}
+  
+  
   //cotadores 
   let cantitaProducto = 0;
   let totalPrecio = 0;
+
+
 
   // guardar en localStorage
   function guardarCarrito() {
@@ -138,11 +196,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // agregar toda la li creada al contenedor de html 
     listaCarrito.appendChild(lista);
 
-    // evento de boton eliminar el producto
+     // evento de boton eliminar el producto
     eliminarP.addEventListener("click", function(){
-      eliminarProducto(lista);
-    })
 
+      mostrarConfirmacion(
+        `¿Deseas eliminar ${nombre} del carrito?`,
+        
+        function(confirmado){
+
+          if(confirmado){
+
+            eliminarProducto(lista);
+
+            mostrarToast(`${nombre} eliminado del carrito`);
+
+          }
+
+        }
+
+      );
+
+    });
     cantitaProducto += cantidad;
     totalPrecio += precio * cantidad;
     actualizarBadge();
@@ -156,124 +230,87 @@ document.addEventListener('DOMContentLoaded', function () {
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 
   // evento del decremento y decremento de la li
   document.addEventListener("click", function(clic){
 
     // si solo hace click en el boton decremento li
-    if(clic.target.classList.contains("decremento")){
+ if(clic.target.classList.contains("decremento")){
 
-      //busca li
-      let contenedor = clic.target.closest("li"); 
-      // si no la encuetra se detiene
-      if(!contenedor) return; 
+  // busca li
+  let contenedor = clic.target.closest("li"); 
 
-      let numero = contenedor.querySelector(".cantidades");
-      let precioSpan = contenedor.querySelector(".precio-item");
+  // si no la encuentra se detiene
+  if(!contenedor) return; 
 
-      let precio = Number(contenedor.dataset.precio);
-      let cantidad = Number(numero.textContent);
+  let numero = contenedor.querySelector(".cantidades");
 
-      // si es mayor a 1 puede decrementar
-      if(cantidad > 1){
-        cantidad--;
-        numero.textContent = cantidad;
-        precioSpan.textContent = (precio * cantidad).toLocaleString();
+  let precioSpan = contenedor.querySelector(".precio-item");
 
-        cantitaProducto--;
-        totalPrecio -= precio;
+  let precio = Number(contenedor.dataset.precio);
 
-        
+  let cantidad = Number(numero.textContent);
 
-         listaCarrito.prepend(contenedor);
-         actualizarBadge();
-        actualizarPrecio();
-        guardarCarrito();
-         
-      }
-    }
+  // si es mayor a 1 puede decrementar
+  if(cantidad > 1){
+
+    cantidad--;
+
+    numero.textContent = cantidad;
+
+    precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+    cantitaProducto--;
+
+    totalPrecio -= precio;
+
+    actualizarBadge();
+
+    actualizarPrecio();
+
+    guardarCarrito();
+
+  }
+
+}
 
 
   
     // evento del incremento y decremento de la li
     // si dedecta en click en incremento
-    if(clic.target.classList.contains("incremento")){
-      let contenedor = clic.target.closest("li");
-      if(!contenedor) return; 
+   // evento del incremento
+if(clic.target.classList.contains("incremento")){
 
-      let numero = contenedor.querySelector(".cantidades");
-      let precioSpan = contenedor.querySelector(".precio-item");
+  let contenedor = clic.target.closest("li");
 
-      let precio = Number(contenedor.dataset.precio);
-      let cantidad = Number(numero.textContent);
+  if(!contenedor) return; 
 
-      cantidad++;
-      numero.textContent = cantidad;
-      precioSpan.textContent = (precio * cantidad).toLocaleString();
+  let numero = contenedor.querySelector(".cantidades");
 
-      cantitaProducto++;
-      totalPrecio += precio;
+  let precioSpan = contenedor.querySelector(".precio-item");
 
-     
+  let precio = Number(contenedor.dataset.precio);
 
-       listaCarrito.prepend(contenedor);
-        actualizarBadge();
-      actualizarPrecio();
-      guardarCarrito();
-       
-    }
+  let cantidad = Number(numero.textContent);
+
+  cantidad++;
+
+  numero.textContent = cantidad;
+
+  precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+  cantitaProducto++;
+
+  totalPrecio += precio;
+
+  actualizarBadge();
+
+  actualizarPrecio();
+
+  guardarCarrito();
+
+}
 
   });
 
@@ -300,22 +337,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // vaciar carrito completo
-  let vaciarCarrito= document.getElementById("btnVaciar");
-  vaciarCarrito.addEventListener("click", function(){
+    // vaciar carrito completo
+    let vaciarCarrito = document.getElementById("btnVaciar");
 
-    let lista = document.getElementById("listaCarrito");
-    lista.querySelectorAll('li').forEach(li => li.remove());
-    document.getElementById("msgVacio").style.display = "block";
+    vaciarCarrito.addEventListener("click", function(){
 
-    cantitaProducto = 0;
-    totalPrecio = 0;
+      mostrarConfirmacion(
 
-    actualizarBadge();
-    actualizarPrecio();
-    guardarCarrito();
+        "¿Deseas vaciar todo el carrito?",
 
-  })
+        function(confirmado){
+
+          if(confirmado){
+
+            let lista = document.getElementById("listaCarrito");
+
+            lista.querySelectorAll('li').forEach(li => li.remove());
+
+            document.getElementById("msgVacio").style.display = "block";
+
+            cantitaProducto = 0;
+            totalPrecio = 0;
+
+            actualizarBadge();
+            actualizarPrecio();
+            guardarCarrito();
+
+            mostrarToast("Carrito vaciado");
+
+          }
+
+        }
+
+      );
+
+    });
 
   //actualizar total de produtos carrito
   function actualizarBadge() {
