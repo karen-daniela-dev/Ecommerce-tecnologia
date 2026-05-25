@@ -81,3 +81,208 @@ document.addEventListener('DOMContentLoaded', function () {
   window.actualizarBadge = actualizarBadge;
 
 });
+
+// ─────────────────────────────────────────────
+// LOGIN
+// ─────────────────────────────────────────────
+
+const btnLogin = document.getElementById("btnLogin");
+
+btnLogin.addEventListener("click", iniciarSesion);
+
+function iniciarSesion() {
+
+  const correo = document.getElementById("correoLogin").value.trim();
+
+  const password = document.getElementById("passwordLogin").value.trim();
+
+  const mensaje = document.getElementById("mensajeLogin");
+
+  // VALIDAR CAMPOS VACÍOS
+  if (correo === "" || password === "") {
+
+    mensaje.innerHTML = `
+      <div class="alert alert-danger">
+        Todos los campos son obligatorios
+      </div>
+    `;
+
+    return;
+  }
+
+  // OBTENER USUARIOS
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  // BUSCAR USUARIO
+  const usuarioEncontrado = usuarios.find(usuario =>
+    usuario.correo === correo &&
+    usuario.password === password
+  );
+
+  // LOGIN EXITOSO
+  if (usuarioEncontrado) {
+
+    localStorage.setItem(
+      "usuarioActivo",
+      JSON.stringify(usuarioEncontrado)
+    );
+
+    mensaje.innerHTML = `
+      <div class="alert alert-success">
+        Inicio de sesión exitoso
+      </div>
+    `;
+
+    //REDIRECCION
+
+    setTimeout(() => {
+
+      window.location.href = "FRONTEND/HTML/productos.html";
+
+    }, 1000);
+
+    // LOGIN INCORRECTO
+
+  } else {
+
+    mensaje.innerHTML = `
+      <div class="alert alert-danger">
+        Usuario o contraseña inválidos
+      </div>
+    `;
+  }
+}
+
+
+// ─────────────────────────────────────────────
+// CAMBIAR NAVBAR
+// ─────────────────────────────────────────────
+
+function actualizarNavbarUsuario() {
+
+  const usuarioActivo = JSON.parse(
+    localStorage.getItem("usuarioActivo")
+  );
+
+  const contenedorDesktop = document.querySelector(
+    ".d-none.d-lg-flex.align-items-center.gap-2"
+  );
+
+  if (usuarioActivo && contenedorDesktop) {
+
+    contenedorDesktop.innerHTML = `
+
+      <div class="d-flex align-items-center gap-2">
+
+        <!-- NOMBRE USUARIO -->
+        <span class="text-white fw-bold">
+          <i class="bi bi-person-check-fill"></i>
+          ${usuarioActivo.nombre}
+        </span>
+
+        <!-- BOTÓN CERRAR SESIÓN -->
+        <button
+          class="btn btn-outline-danger btn-sm"
+          id="btnCerrarSesion">
+
+          Cerrar Sesión
+        </button>
+
+        <!-- CARRITO -->
+        <button
+          class="btn klydy-btn-cart d-flex align-items-center"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasCarrito">
+
+          <i class="bi bi-cart3"></i>
+
+          <span
+            class="klydy-badge ms-1"
+            id="badge-desktop">
+
+          </span>
+
+        </button>
+
+      </div>
+    `;
+
+    // EVENTO CERRAR SESIÓN
+    document
+      .getElementById("btnCerrarSesion")
+      .addEventListener("click", abrirModalCerrarSesion);
+  }
+}
+
+// ─────────────────────────────────────────────
+// CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+function cerrarSesion() {
+
+  localStorage.removeItem("usuarioActivo");
+
+  // CREAR ALERTA VISUAL
+  const alerta = document.createElement("div");
+
+  alerta.innerHTML = `
+  
+    <div 
+      class="alert alert-info alert-dismissible fade show shadow-lg"
+      role="alert"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 320px;
+        border-radius: 14px;
+        font-weight: 600;
+      ">
+
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Sesión cerrada correctamente
+
+    </div>
+  `;
+
+  document.body.appendChild(alerta);
+
+  // REDIRECCIONAR
+  setTimeout(() => {
+
+    window.location.href = "../../index.html";
+
+  }, 1500);
+}
+
+// EJECUTAR AL CARGAR
+actualizarNavbarUsuario();
+
+// ─────────────────────────────────────────────
+// ABRIR MODAL CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+function abrirModalCerrarSesion() {
+
+  const modal = new bootstrap.Modal(
+    document.getElementById("modalCerrarSesion")
+  );
+
+  modal.show();
+}
+
+// ─────────────────────────────────────────────
+// CONFIRMAR CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btnConfirmar = document.getElementById("confirmarCerrarSesion");
+
+  if (btnConfirmar) {
+    btnConfirmar.addEventListener("click", cerrarSesion);
+  }
+
+});
