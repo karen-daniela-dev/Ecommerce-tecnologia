@@ -30,12 +30,7 @@ body {
  
 }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .neon-lines {
   position: fixed;
@@ -55,7 +50,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: calc(100vh - 160px);
+    padding: 40px 20px;
+}
+
+@media (max-width: 768) {
+    #registerForm {
+        grid-template-columns: 1fr;
+    }
+
+    .register-card {
+        margin: auto;
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .register-title {
+        font-size: 22px;
+    }
 }
 
 .register-card {
@@ -86,7 +98,7 @@ body {
     margin-bottom: 15px;
 }
 
-.form.group label {
+.form-group label {
     font-size: 13px;
     color: var(--neon-cyan);
     font-weight: 600;
