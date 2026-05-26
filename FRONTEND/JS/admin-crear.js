@@ -491,16 +491,6 @@
     };
 
     console.log(JSON.stringify(nuevoProducto));
-<<<<<<< HEAD
-    // Agregar a el objeto a la lista 
-    listaProductos.push(nuevoProducto);
- 
-    localStorage.setItem("ListaProductos",JSON.stringify(listaProductos));
- 
-   
-   
- 
-=======
 
 
     if (modoEdicion) {
@@ -535,7 +525,6 @@
 
 
 
->>>>>>> 04907a752b5f4bf84cf7b2ac297bf6e0ff9e7639
     // Mostrar en consola
     console.log(
       ' Producto agregado:',
