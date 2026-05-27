@@ -2,14 +2,14 @@
 (function () {
     const cats = [
         {
-            num: '01', name: 'Laptops', tag: 'Alto Rendimiento', color: '#00f0c8', href: '/categoria/laptops',
+            num: '01', name: 'Laptops', tag: 'Alto Rendimiento', color: '#00f0c8', href: '/FRONTEND/HTML/productos.html?categoria=laptops',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <rect x="2" y="4" width="20" height="13" rx="2"/>
         <path d="M0 21h24"/>
       </svg>` },
 
         {
-            num: '02', name: 'Mouse', tag: 'Alta Precisión', color: '#bc4fe8', href: '/categoria/mouse',
+            num: '02', name: 'Mouse', tag: 'Alta Precisión', color: '#bc4fe8', href: '/FRONTEND/HTML/productos.html?categoria=mouses',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <path d="M12 2a5 5 0 0 1 5 5v6a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"/>
         <line x1="12" y1="2" x2="12" y2="8"/>
@@ -26,7 +26,7 @@
       </svg>` },
 
         {
-            num: '04', name: 'Teclados', tag: 'Mecánicos & RGB', color: '#0abde3', href: '/categoria/teclados',
+            num: '04', name: 'Teclados', tag: 'Mecánicos & RGB', color: '#0abde3', href: '/FRONTEND/HTML/productos.html?categoria=teclados',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <rect x="1" y="7" width="22" height="11" rx="2"/>
         <circle cx="5" cy="11" r=".6" fill="currentColor"/>
@@ -42,7 +42,7 @@
       </svg>` },
 
         {
-            num: '05', name: 'Audio', tag: 'Audio Inmersivo', color: '#00f0c8', href: '/categoria/audio',
+            num: '05', name: 'Audio', tag: 'Audio Inmersivo', color: '#00f0c8', href: '/FRONTEND/HTML/productos.html?categoria=audio',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <path d="M3 17v-5a9 9 0 0 1 18 0v5"/>
         <path d="M21 18a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
@@ -59,7 +59,7 @@
       </svg>` },
 
         {
-            num: '07', name: 'Accesorios', tag: 'Complementos', color: '#ff3cac', href: '/categoria/accesorios',
+            num: '07', name: 'Accesorios', tag: 'Complementos', color: '#ff3cac', href: '/FRONTEND/HTML/productos.html?categoria=accesorio',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
         <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/>
