@@ -17,7 +17,7 @@
       </svg>` },
 
         {
-            num: '03', name: 'Tarjetas Gráficas', tag: 'Visual Power', color: '#ff3cac', href: '/categoria/tarjetas-graficas',
+            num: '03', name: 'Tarjetas Gráficas', tag: 'Visual Power', color: '#ff3cac', href: '/FRONTEND/HTML/productos.html?categoria=tarjetasGraficar',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <rect x="1" y="6" width="22" height="12" rx="2"/>
         <path d="M6 6V4M9 6V4M12 6V4M15 6V4M18 6V4"/>
@@ -50,7 +50,7 @@
       </svg>` },
 
         {
-            num: '06', name: 'Relojes Inteligentes', tag: 'Smartwatch', color: '#bc4fe8', href: '/categoria/relojes-inteligentes',
+            num: '06', name: 'Relojes Inteligentes', tag: 'Smartwatch', color: '#bc4fe8', href: '/FRONTEND/HTML/productos.html?categoria=smartwatches',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <rect x="6" y="2" width="12" height="20" rx="3"/>
         <path d="M6 7h12M6 17h12"/>
@@ -59,7 +59,7 @@
       </svg>` },
 
         {
-            num: '07', name: 'Accesorios', tag: 'Complementos', color: '#ff3cac', href: '/FRONTEND/HTML/productos.html?categoria=accesorio',
+            num: '07', name: 'Accesorios', tag: 'Complementos', color: '#ff3cac', href: '/FRONTEND/HTML/productos.html?categoria=accesorios',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
         <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/>
