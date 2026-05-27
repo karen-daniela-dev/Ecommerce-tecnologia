@@ -21,11 +21,18 @@ body {
   font-family: 'Inter', sans-serif; 
   min-height: 100vh;
   position: relative;
+  scrollbar-width: none; /* Firefox */
+  overflow-y: scroll;
   padding-bottom: 70px;
   padding-top: 70px;
   margin-top: 70px;
   margin: 0;
 
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .neon-sparks {
@@ -76,69 +83,61 @@ body {
 }
 
 /*TERMINO DE FONDO*/
+.menuMovil{
+  display: none;
+}
 
+ 
 
-
-
-/*CONTENDOR DE TODA LA PAGINA*/
+/*CONTENDOR DE TODA LA PAGINA.............................................*/
 .contenedor{
   display: flex;
-  height: 89vh;
-  margin-left: 10px;
+  width: 100%;
+  gap: 10px;
+  margin: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 /*FIN DE CONTENEDOR */
 
-
 /*CAJON DE MENU......................................................................................*/
 .Cajoncategorias{
-  width: 16%;
+  width: 260px;
+  min-width: 260px;
   top: 0;
-  height: 89.5vh;
+  height: 730px;
+  background-color: transparent;
+  top: 90px;
   position: sticky; 
   display: block;
+  margin-bottom: 14px;
   
 }
 
+/*DISPLAYS NONES DE MOVIL............................................................*/
 
-
+.menuMovil{
+    display: none;
+}
 
 /*MENU ........................................................................................*/
 .menuCategorias{
-  background-color: transparent;
-  height: 49; 
-  padding: 0px 0px 5px 0px;
-  margin-bottom: 4%;
-  border-radius: 12px;
-  box-shadow: 0px 0px 7px rgba(10,189,227,0.7);
-  border: solid 0.5px  rgba(89, 236, 10, 0.388);
-}
-
-/* BOTONES MENU*/
-.item {
-  text-decoration: none;
-  color:rgba(255, 255, 255, 0.823);
-  font-family:'Courier New', Courier, monospace;
-  font-size: 15px;
+  background-color: transparent; 
   display: block;
-  margin: 0 auto;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-/*MOVIMIENTO DE BOTONES MENU*/
-.item.active {
-  font-size: 15.20px;
-  box-shadow: 0px 0px 5px  rgba(100, 253, 227, 0.653);
-  width: 92%;
-  border-radius: 6px;
-  text-shadow: 0px 0px 2px#07e516;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 0px 5px 0px;
+  height: 290px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
 }
 
 /*TITULO DE MENU PRINCIPAL*/
-.menuCategorias h2{
+.menuCategorias h3{
   font-family: 'Orbitron', sans-serif;
-  font-size: 95%;
+  font-size: 19px;
   font-weight: 800;
   color: #00f0d0;   
   text-transform: uppercase; 
@@ -147,34 +146,47 @@ body {
   padding: 17px 0px 0px 0px;
 }
 
-/*FILTROS USOS...............................................................*/
-.filtros{
-  background-color: transparent;
-  box-shadow: 0px 0px 2px#07e516;
-  height: 50%; /*lago de filtro*/
-  padding: 7px;
-  border-radius: 12px;
-  
-}
-
-/*LISTA DE UL LI*/
-.itenUso{
+/* BOTONES MENU*/
+.item {
+  text-decoration: none;
+  color:rgba(255, 255, 255, 0.823);
+  font-family:'Courier New', Courier, monospace;
+  font-size: 19px;
+  display: block;
+  margin: 0 auto;
   border: none;
   background-color: transparent;
-  color: #fff;
-  font-size: 12px;
   cursor: pointer;
 }
 
-/*MEVIMIENTO DE LI*/
-.itenUso.active{
-  font-size: 12.20px;
-  color: #1ea762;
-  text-shadow: 0px 0px 5px#0b9006;
+.item:hover{
+  width: 92%;
+  border-radius: 6px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 4px#00f0d0;
+}
+
+/*MOVIMIENTO DE BOTONES MENU*/
+.item.active {
+  width: 92%;
+  border-radius: 6px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 4px#00f0d0;
+}
+
+
+/*FILTROS MENU.............................................................................................*/
+.filtros{
+  background-color: transparent;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  height: 430px; 
+  padding: 7px;
+  border-radius: 12px;
 }
 
 /*TITULO DE MENU SEGUNDARIO*/
-.filtros h2{
+.filtros h3{
   font-family: 'Orbitron', sans-serif;
   font-size: 16px;
   font-weight: 800;
@@ -185,193 +197,2464 @@ body {
   padding: 10px 0px 0px 0px;
 }
 
+/*USOS..............................................................................*/
+/*LISTA DE UL LI*/
+.itenUso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.itenUso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.itenUso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
 /*CAJON USOS*/
 .uso{
   background-color: transparent;
-  display: block;
-}
-
-/*TITULO DE USOS*/
-.usos h4{
-  font-size: 17px;
-  font-family: 'Orbitron', sans-serif;
-  box-shadow: 0px 0px 2px#07e516;
-  text-align: center;
-  margin: 5px;
-  padding: 2px;
-  color:#06cf96 ;
-  border-radius: 5px;
 }
 
 /*LISTA DE USOS*/
 .lista{
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  border-radius: 8px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  background-color: transparent;
-  margin: 2px;
+  justify-content: center; 
+  align-items: center;   
+  gap: 010px;
+  margin-bottom: 10px;
+  padding: 0px 8px 8px 8px;
 }
 
 
 /*LISTA DE UL*/
 .lista ul{
-  list-style: none;   
+  list-style: none; 
   padding: 0; 
-  margin-bottom: 5px;
-  margin-top: 5px;                 
+  margin: auto;
+  width: 100%; 
 }
 
 
 
 /*CAJON FILTRO PRECIO....................................................................*/
 .filtrosPrecio{
-  box-shadow: 0px 0px 2px#07e516;
-  height: 59px; 
-  padding: 7px;
-  border-radius: 12px;
-  padding: 5px;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  height: 80px; 
+  border-radius: 8px;
+  padding: 10px 10px 10px 10px;
 }
 
 /*FILTRO*/
 .filtro-precio{
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   box-sizing: border-box;
-
+  gap: 7px;
 }
 
-/* LABEL DE FILTRO*/
-.filtro-precio label{
-  font-size: 11px;
-  display: block;
-  margin: 0;
-  height: 1px;
-  color: #fff;
-}
-
-/* Estilo general de la barra */
-input[type="range"] {
+/*INPUT TEXT*/
+.pre[type="text"] {
+  height: 27px;
   width: 100%;
-  height: 2px;
-  background: #ccc; /* color de la barra */
+  margin-bottom: 6px;
   border-radius: 5px;
+  font-size: 14px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  padding: 5px;
+  cursor: pointer;
+  color: #00f0d0c8;
+}
+
+/*TEXTO DE INPUT*/
+.pre::placeholder{
+  color: #00f0d07a;
+}
+
+/*MOVIMIENTO*/
+.pre:hover{
   outline: none;
+  box-shadow: none;
+  box-shadow: 0px 0px 3px #00f0d0;
+  color: #00f0d0;
+  
 }
 
-/* Barra rellena (opcional en algunos navegadores) */
-input[type="range"]::-webkit-slider-runnable-track {
-  height: 2px;
-  background: #04a177; /* color de la barra */
-  border-radius: 5px;
+/*FOCUS*/
+.pre:focus{
+  outline: none;
+  box-shadow: none;
+  box-shadow: 0px 0px 3px #00f0d0;
+  color: #00f0d0;
+  
 }
 
-/* Bolita (thumb) - Chrome, Edge, Safari */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 1px; /* tamaño */
-  width: 1px;  /* tamaño */
-  border-radius: 50%;
-  background: #060606; /* color de la bolita */
+/*..*/
+ .notonfl{
+  display: flex;
+  gap: 10px;
+ }
+
+ /*BOTONES*/
+.botonff{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 26px;
+  width: 100%;
+  font-size: 13px;
+  padding: 8px;
+  border-radius: 9px;
+  border: solid 1.30px  rgba(26, 158, 96, 0.388);
+  background-color:  transparent;
+  color: #e5e5eacb;
   cursor: pointer;
-  margin-top: -6px; /* centra la bolita */
+  transition: transform 0.3s ease;
 }
 
-/* Firefox */
-input[type="range"]::-moz-range-thumb {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: #0ad17b;
-  cursor: pointer;
-}
 
-/* Barra en Firefox */
-input[type="range"]::-moz-range-track {
-  height: 8px;
-  background: #4CAF50;
-  border-radius: 5px;
+.botonff:hover{
+  transform: scale(1.03);
+  color: var(--neon-cyan);
+  background: var(--neon-cyan-10);
+  box-shadow: 0px 0px 3px #00f0d0;
 }
-
 /*FILTRO DE MARCAS.............................................................................................................................*/
 .marcas{
-   box-shadow: 0px 0px 2px#07e516;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
    display: flex;
    justify-content: center;
    align-items: center;
-   height: 37%;
-   width: 100%;
-   border-radius: 12px;
-   margin-top: 3%;
-   padding: 10px;
+   height: 156px;
+   border-radius: 8px;
+   margin-top: 8px;
+   padding: 10px;   
+   gap: 40px;       
+}
+
+.marcas div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /*LABEL MARCA*/
 .marcas label{
+  display: flex;          
+  align-items: center;    
+  gap: 6px;              
   color: #fff;
-  font-size: 12px;
-  margin-left: 15%;
+  font-size: 14px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
 }
 
-/*SECION INICIO.....................................................................................................................*/
-.productos{
-  width: 84%;
-  background-color:  transparent; 
-  height: 100%;
-  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
-  scrollbar-width: none; /* esconde escrol */
-  margin-bottom: 50%;
+.marcas label:hover {
+  text-shadow: 0 0 5px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+  color: #00f0d0;
+}
+
+.marcas input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+}
+
+.marcas input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(0,240,200,0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-right: 6px;
+  background-color: #0005106c;
+  transition: transform 0.3s ease;
+}
+
+.marcas input[type="checkbox"]:hover {
+  box-shadow: 0 0 5px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+}
+
+.marcas input[type="checkbox"]:checked {
+  background: #00f0c861;
+  border-color: #00f0c8;
+  box-shadow: 0 0 3px #00f0c8;
+  transform: scale(1.1);
+}
+
+.marcas input[type="checkbox"]::after {
+  content: "✔";
+  font-size: 13px;
+  color: #f7f5f5;
   display: flex;
-  padding-left: 2vh;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 3px;
+  opacity: 0;
 }
 
-/*CARRUSEL BOOTSTRAP .......................................................*/
-#carouselExampleIndicators {
-  height: 200px; 
-  width: 98%;
-  margin: 0 auto;
-  margin-bottom: 20px;
+.marcas input[type="checkbox"]:checked::after {
+  opacity: 1;
+  
+}
+
+/*BUTON LIAMPIAR FILTROS......................................*/
+.limpiarF{
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  color: #d7d7d9;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.limpiarF:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.02);
+}
+
+
+/*RESPOSIVE MENU CATEGORIAS.................................................................................*/
+
+@media(min-width: 1254px ) and ( max-width: 1752px){
+  
+  #carouselExampleIndicators {
+    height: 130px; 
+    margin-bottom: 120px;
+  }
+
+  .menuMovil{
+    display: none;
+  }
+
+  /*CAJON DE MENU......................................................................................*/
+  .Cajoncategorias{
+    background-color: transparent;
+    top: 90px;
+    position: sticky!important; 
+    display: block;
+    margin-bottom: 14px;
+    width: 14%;
+    top: 0;
+    height: 730px;
+  }
+
+   /*TITULO DE MENU PRINCIPAL..............................................*/
+  .menuCategorias h3{
+    font-size: 17px;
+  }
+
+  /* BOTONES MENU*/
+  .item {
+    font-size: 17px;
+    margin-top: 3.50px;
+  }
+
+  /*TITULO DE MENU SEGUNDARIO......................................................*/
+  .filtros h3{
+    font-size: 15px;
+  }
+
+  /*LISTA DE UL LI USOS............................................................*/
+  .itenUso{
+    font-size: 12px;
+  }
+
+   /*BOTONES  FILTRO PRECIO....................................................*/
+  .botonff{
+    font-size: 11.50px;
+    padding: 0;
+    text-shadow: 0px 0px 5px #000000;
+  }
+
+  /*INPUT TEXT*/
+  .pre[type="text"] {
+    font-size: 12px;
+  }
+
+  /*LABEL MARCA  FILTRO MARCA..........................................................*/
+  .marcas label{
+    font-size: 12px;
+  }
+
+}
+/*RESPONSE PRODUCTOS.......................................................*/
+@media(min-width: 1565px ) and ( max-width: 1659px){
+    #carouselExampleIndicators {
+    height: 130px; 
+    margin-bottom: 110px;
+  }
+
+}
+
+@media(min-width: 1404px ) and ( max-width: 1565px){
+    #carouselExampleIndicators {
+    height: 115px; 
+    margin-bottom: 120px;
+  }
+}
+
+@media(min-width: 1331px ) and ( max-width: 1404px){
+    #carouselExampleIndicators {
+    height: 115px; 
+    margin-bottom: 90px;
+  }
+
+   
+}
+
+@media(min-width: 1249px ) and ( max-width: 1331px){
+    #carouselExampleIndicators {
+    height: 115px; 
+    margin-bottom: 80px;
+
+  }
+
+}
+
+/*FIN REPOSIVE PRODUCTO*/
+
+
+@media(min-width: 990px ) and ( max-width: 1254px){
+  
+
+  #carouselExampleIndicators {
+    height: 130px !important; 
+    margin-bottom: 18px !important;
+  }
+
+  .menuMovil{
+    display: none;
+  }
+
+
+
+  /*CAJON DE MENU......................................................................................*/
+  .Cajoncategorias{
+    display: block !important;
+    width: 20% !important;
+    background-color: transparent !important;
+    
+  }
+
+  /*MENU CATEGORIA........................................................................................*/
+   /*TITULO*/
+  .menuCategorias h2{
+    font-size: 12px;
+  }
+
+  /* BOTONES MENU*/
+  .item {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  /*FILTROS MENU.............................................................................................*/
+  /*TITULO*/
+  .filtros h2{
+    font-size: 15px;
+  }
+
+  /*LISTA DE UL LI USOS............................................................*/
+  .itenUso{
+    font-size: 11px;
+  }
+
+   /*BOTONES  FILTRO PRECIO....................................................*/
+  .botonff{
+    font-size: 11px;
+    padding: 0;
+    text-shadow: 0px 0px 5px #000000;
+  }
+
+  /*INPUT TEXT*/
+  .pre[type="text"] {
+    font-size: 11px;
+  }
+
+  /*LABEL MARCA  FILTRO MARCA..........................................................*/
+  .marcas label{
+    font-size: 12px;
+  }
+
+}
+
+/*MENU CELULAR.........................................................................*/
+@media(min-width: 857px ) and ( max-width: 990px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+
+    display: block;
+    width: 100%;
+    gap: 10px;
+    margin: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+  /*  
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+  */
+  }
+  .menuMovil{
+    display: block !important;
+  }
+
+  .Cajoncategorias{
+    display: none;
+  }
+
+  
+
+   /*MENU CATEGORIA..................................................................*/    
+
+  .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 19px !important;
+    margin-top: 0px !important;
+    height: 80px !important;
+    width: 100%;
+    padding: 0% 25% 0% 0%;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+
+  }
+
+   .botonCategoria{
+      width:50px !important;
+      height:50px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:14px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 12px 5px 5px 5px !important;
+      position:relative !important;
+
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:0px !important;
+
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .categoriasMenu2 .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .categoriasMenu2 .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .categoriasMenu2 .botonCategoria img{            
+      width: 40px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
+  }
+
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 100px 20px 20px 20px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px;
+    top: 0  !important;
+    right: 0  !important;
+    width: 25%;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
+
+  /*CAJON USOS*/
+  .uso{
+    height: 35px !important;
+    font-size: 15px !important;
+    background-color: transparent;
+  }
+
+
+  /*LISTA DE USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 100px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 100px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 16px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+  
+
+    /*FILTRO*/
+  .precio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 7px;
+  }
+  
+
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 27px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: flex;
+  gap: 10px;
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 35px !important;
+    width: 100%;
+    font-size: 14px !important;
+    padding: 12px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   display: flex !important;
+   justify-content: center;
+   align-items: center;
+   height: 150px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 13px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 6px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 40px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 17px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 40px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
+
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 16px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
+
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
+
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
 }
 
 /*BORDE CARRUSEL*/
 .carousel-inner{
-  border-radius: 12px;
-  filter: drop-shadow(0px 0px 3px #066665);
+  display: none !important;
 }
 
 /*IMAGEN CARRUSEL*/
 .carousel-item img{
-  border-radius: 12px; 
-  opacity: 0.6;
+  display: none !important;
 }
 
 /*ICOCO CARRISEL*/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(1); /* flechas de carrucel negras */
+  display: none !important;
 }
 
-/* CARDS..................................................................................................................................*/
-.inicio .card{
+}
+
+@media(min-width: 757px ) and ( max-width: 857px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block; 
+  }
+  .menuMovil{
+    display: block !important;
+  }
+
+  .Cajoncategorias{
+    display: none;
+  }
+ 
+   /*MENU CATEGORIA..................................................................*/
+  .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 2.50% !important;
+    margin-top: 0px !important;
+    height: 80px !important;
+    margin-right: 5000px !important;
+    width: 74.93%;
+    margin-left: 12px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+
+  }
+
+   .botonCategoria{
+      width:45px !important;
+      height:45px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:14px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 12px 5px 5px 5px !important;
+      position:relative !important;
+
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:2px !important;
+
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .categoriasMenu2 .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .categoriasMenu2 .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .categoriasMenu2 .botonCategoria img{            
+      width: 35px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
+  }
+
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 100px 20px 20px 20px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    top: 0  !important;
+    right: 0  !important;
+    width: 25%;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
+
+   /*LISTA DE USOS*/
+  .uso{
+    height: 29px !important;
+    font-size: 13px !important;
+    background-color: transparent;
+  }
+
+
+   /*CAJON USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 88px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 90px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 15px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+    /*FILTRO*/
+  .precio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 5px;
+  }
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 25px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: flex;
+  gap: 5px;
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 30px !important;
+    width: 100%;
+    font-size: 13px !important;
+    padding: 10px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   display: flex !important;
+   justify-content: center;
+   align-items: center;
+   height: 140px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 10.50px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 0px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 36px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 15px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 36px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
+
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 15px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
+
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
+
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  display: none !important;
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  display: none !important;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+
+}
+
+@media(min-width: 601px ) and ( max-width: 757px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block; 
+  }
+  .menuMovil{
+    display: block !important;
+  }
+
+  .Cajoncategorias{
+    display: none !important;
+  }
+
+
+   /*MENU CATEGORIA..................................................................*/
+  .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 0% !important;
+    margin-top: 0px !important;
+    height: 80px !important;
+    margin-right: 5000px !important;
+    width: 74.93%;
+    margin-left: 12px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+
+  }
+
+   .botonCategoria{
+      width:40px !important;
+      height:40px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:14px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 12px 2px 5px 2px !important;
+      position:relative !important;
+
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:2px !important;
+
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .categoriasMenu2 .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .categoriasMenu2 .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .categoriasMenu2 .botonCategoria img{            
+      width: 32px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
+  }
+
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 70px 20px 20px 20px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    top: 0  !important;
+    right: 0  !important;
+    width: 29%;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
+
+   /*LISTA DE USOS*/
+  .uso{
+    height: 25px !important;
+    font-size: 12px !important;
+    background-color: transparent;
+  }
+
+
+   /*CAJON USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 140px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: block !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 160px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 15px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+    /*FILTRO*/
+  .precio{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 5px;
+  }
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 25px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: block;
+  
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    height: 30px !important;
+    width: 100%;
+    font-size: 13px !important;
+    padding: 10px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: block;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   justify-content: center;
+   align-items: center;
+   height: 260px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 10.50px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 0px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 34px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 14px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 34px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
+
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 14px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
+
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
+
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  display: none !important;
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  display: none !important;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+
+}
+/*500px*/
+
+@media(min-width: 50px ) and ( max-width: 601px){
+
+  /*DISPLAYS NONES*/
+
+ 
+
+  /*CONTENDOR DE TODA LA PAGINA.............................................*/
+  .contenedor{
+    display: block; 
+  }
+  .menuMovil{
+    display: block !important;
+  }
+
+  .Cajoncategorias{
+    display: none;
+  }
+
+  #contenedor{
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, 169px);
+
+  justify-content: center  !important;
+
+  gap: 15px;
+  padding: 0;
+}
+
+
+   /*MENU CATEGORIA..................................................................*/
+
+   .categoriasMenu2{
+    display: none;
+    background-color: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    gap: 1px !important;
+    margin-top: 0px !important;
+    height:420px !important;
+    width: 40% !important;
+    padding: 0% 20% 0% 0%;
+    margin-bottom: 20px !important;
+    border-radius: 0 !important;
+    margin-left: 48%;
+    flex-direction:column !important;
+    position: fixed; /* o absolute */
+    z-index: 1;
+  }
+
+   .botonCategoria{
+      width:36px !important;
+      height:36px !important;
+      border:none !important;
+      outline:none !important;
+      cursor:pointer !important;
+      border-radius:10px !important;
+      background:rgba(10,15,35,.9) !important;
+      margin: 10px 3px 3px 3px !important;
+      position:relative !important;
+      margin-left: 0px !important;
+      display:block !important;
+      flex-direction:column !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap:2px !important;
+      
+      color:white !important;
+      transition:.35s ease !important;
+
+      border:0.1px solid rgba(18, 202, 165, 0.81) !important;
+
+      box-shadow:
+        0 0 1px rgba(0,255,255,.5),
+        0 0 1px rgba(0,255,255,.35),
+        inset 0 0 12px rgba(0,255,255,.15) !important;
+    }
+
+   /* EFECTO HOVER */
+    .botonCategoria:hover{
+      transform:translateY(-8px) scale(1.03) !important;
+
+      box-shadow:
+        0 0 2px rgba(227, 234, 234, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    }
+
+
+    .botonCategoria::after{
+      content:""  !important;
+      position:absolute  !important;
+      border-radius:10px  !important;
+      background:#00d9ff  !important;
+
+     
+    }
+
+     /* IMAGENES */
+    .botonCategoria img{            
+      width: 30px  !important;
+      color:#00d9ff;
+      display: block !important;
+      text-shadow:
+        0 0 5px #00d9ff,
+        0 0 12px #00d9ff,
+        0 0 25px #00d9ff;
+        margin: 0 auto;
+    }
+
+
+   .item.active{
+   
+    border-radius: 8px !important;
+    margin-bottom: 0px !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    border: solid 1.30px  rgba(255, 255, 255, 0.71) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 0 2px rgba(24, 189, 184, 0.8),
+        0 0 8px rgba(148, 221, 183, 0.998),
+        0 0 5px rgba(20, 191, 83, 0.4),
+        inset 0 0 15px rgba(14, 160, 43, 0.25) !important;
+    transform:translateY(-8px) scale(1.03) !important;
+    width:50px !important;
+    height:50px !important;
+  }
+
+
+   /*CAJON FILTROS*/
+  .filtroMovil{
+    display: none;
+    position: fixed;
+    background: #000d1f !important;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7);
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    margin: 10px 0px 0px 0px ;
+    margin-bottom: 0px !important;
+    padding: 70px 16px 20px 16px;
+    
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    top: 0  !important;
+    right: 0  !important;
+    width: 30% !important;
+    height: 100vh  !important;
+    z-index: 1  !important;
+  }
+
+   /*LISTA DE USOS*/
+  .uso{
+    height: 25px !important;
+    font-size: 12px !important;
+    background-color: transparent;
+  }
+
+
+   /*CAJON USOS*/
+  .listaUsos{
+    width: 100%  !important;
+    height: 140px !important;
+    background-color: #00000000;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    border-radius: 8px !important;
+    display: block !important;
+    justify-content: center !important; 
+    align-items: center !important;   
+    gap: 010px !important;
+    margin-bottom: 10px !important;
+    padding: 0px 8px 8px 8px !important;
+  }
+
+  /*LISTA DE UL*/
+  .listaUsos ul{
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: auto !important;
+    width: 100% !important; 
+  }
+
+  .uso{
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin: 8px 0px 0px 0px;
+  padding: 8px;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #0005106c;
+  border: solid 0.5px  rgba(26, 158, 96, 0.388);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.uso:hover{
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.04);
+}
+/*MEVIMIENTO DE LI*/
+.uso.active{
+  font-size: 14px;
+  color: #00f0d0;
+  box-shadow: 0px 0px 2px#00f0d0;
+  transform: scale(1.03);
+}
+
+
+   /*CAJON FILTRO PRECIO....................................................................*/
+  .filtroPrecio2{
+    justify-content: center;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    height: 160px; 
+    width: 100% !important;
+    border-radius: 8px;
+    padding: 15px 10px 10px 10px;
+    margin-top: 20px !important;
+  }
+
+    /*FILTRO*/
+  .precio{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    gap: 5px;
+  }
+    
+  /*INPUT TEXT*/
+  .minMax[type="text"] {
+    height: 25px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    padding: 5px;
+    cursor: pointer;
+    color: #00f0d0c8;
+  }
+
+  /*TEXTO DE INPUT*/
+  .minMax::placeholder{
+    color: #00f0d07a;
+  }
+
+  /*MOVIMIENTO*/
+  .minMax:hover{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+  /*FOCUS*/
+  .minMax:focus{
+    outline: none;
+    box-shadow: none;
+    box-shadow: 0px 0px 3px #00f0d0;
+    color: #00f0d0;
+    
+  }
+
+
+  /*CAJON FILTRA Y LIMPIAR PRECIO*/
+ .botonesFiltraL{
+  display: block;
+  
+ }
+
+
+  /*BOTONES*/
+  .bontonesFL{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    height: 30px !important;
+    width: 100%;
+    font-size: 12px !important;
+    padding: 10px !important;
+    border-radius: 9px;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    background-color:  #021b0f27 !important;
+    color: #e5e5eaef !important;
+    text-shadow: 0 0 50px #000000 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .bontonesFL:hover{
+    color: #00f0d0  !important;
+    transform: scale(1.03);
+    color: var(--neon-cyan);
+    background: var(--neon-cyan-10);
+    box-shadow: 0px 0px 3px #00f0d0;
+    background-color:  #62f0ab27 !important;
+  }
+
+
+  /*MACARS...........................................................................*/
+  .marca{
+   display: block;
+   justify-content: center;
+   align-items: center;
+   border: solid 0.5px  rgba(26, 158, 96, 0.388);
+   justify-content: center;
+   align-items: center;
+   height: 260px !important;
+   border-radius: 8px;
+   margin-top: 10px !important;
+   padding: 10px 10px 10px 10px !important;   
+   gap: 5px;       
+  }
+
+  /*LABEL MARCA*/
+  .marca label{
+    display: flex;          
+    align-items: center;                 
+    color: #fff;
+    padding: 6px !important;
+
+    font-size: 10.50px !important;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marca label:hover {
+    text-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.05);
+    color: #00f0d0;
+  }
+
+  .marca input[type="checkbox"]:checked + span {
+  color: #00f0d0;
+  text-shadow: 0 0 6px rgba(0,240,200,0.7);
+  transform: scale(1.09);
+
+  }
+
+  .marca input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;  
+    border: 1px solid rgba(0,240,200,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-right: 0px;
+    background-color: #0005106c;
+    transition: transform 0.3s ease;
+  }
+
+  .marca div {
+    display: block;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .marca input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(0,240,200,0.7);
+    transform: scale(1.09);
+  }
+
+  .marca input[type="checkbox"]:checked {
+    background: #00f0c861;
+    border-color: #00f0c8;
+    box-shadow: 0 0 3px #00f0c8;
+    transform: scale(1.1);
+  }
+
+  .marca input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 13px;
+    color: #f7f5f5;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 3px;
+    opacity: 0;
+  }
+
+  .marca input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+  .limpiarFlitros{
+    width: 100% !important;
+    height: 34px  !important;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #0005106c;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388);
+    font-size: 11px;
+    color: #d7d7d9;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .limpiarFlitros:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 2px#00f0d0;
+    transform: scale(1.02);
+  }
+
+
+   /*BARRA MENU categiria filtros..............*/
+  .botonCategorias{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 34px !important;
+    margin-top: 10px !important;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    background-color: #1c82536c !important;
+    border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
+    transition: all 0.4s ease !important;
+    cursor: pointer !important;
+  }
+ 
+
+  /*TEXTO BARRA*/
+  .botonCategorias h2{
+    font-size: 11px !important;
+    color: #d7d7d9 !important;
+      margin: 0 auto !important;
+   
+  }
+
+  /*EVENTO TEXTO*/
+  .botonCategorias:hover{
+    background-color:  #62f0ab27 !important;
+    color: #00f0d0;
+    box-shadow: 0px 0px 6px#cee0dd;
+    transform: scale(1.02);
+  }
+
+  
+  .botonCategorias.active{
+    cursor: pointer;
+    border: solid 1.30px  rgba(26, 158, 96, 0.388);
+    box-shadow: 0px 0px 8px #79adad;
+    background-color: #00f0d051;
+    color: #ffffff;
+  }
+
+
+  /*CARRUSEL ........................................................................*/
+ #carouselExampleIndicators {
+  display: none !important;
+}
+
+/*BORDE CARRUSEL*/
+.carousel-inner{
+  display: none !important;
+}
+
+/*IMAGEN CARRUSEL*/
+.carousel-item img{
+  display: none !important;
+}
+
+/*ICOCO CARRISEL*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+ 
+}
+
+
+/*SECION INICIO.....................................................................................................................*/
+
+
+.container{
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 13px !important;
+  padding-right: 0 !important;
+  margin-top: 20px;
+  
+}
+
+.colunas{
+  margin: 0;
+  padding: 0;
+}
+
+
+/*
+#contenedor{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(169px, 1fr));
+  justify-content: flex-start;
+  gap: 10px;
+  
+}
+
+*/
+
+#contenedor{
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, 169px);
+
+  justify-content: start;
+
+  gap: 15px;
+  padding: 0;
+}
+
+.productos{
+  flex: 1;
+  min-width: 0;
+  background-color: transparent;
+  margin-bottom: 0px;
+}
+
+
+
+/*computadores card*/
+.productos .card{
   background-color: #111827;
-  box-shadow: 0px 0px 5px  #00ffcc55;
-  width: 160px;
+  box-shadow: 0px 0px 5px rgb(0, 0, 0);
+  border: solid 0.5px  rgba(241, 245, 243, 0.388);
+  width: 169px;
+  margin: 5px;
   height: 280px;
-  margin: 0px 0px 12px 0px;
   border-radius: 25px;
   display: block;
   overflow: hidden;
-  gap: 10px;
+  margin: 0;
 }
 
 
-/*COLUMNAS CARDS*/
-.row div .col{
-  padding: 0;
-  width: 160px;
-  margin: 0px 0px 0px 0px;
-  margin-left: 0px;
+/*CARRUSEL BOOTSTRAP .......................................................*/
+#carouselExampleIndicators {
+  height: 240px;
+  width: 98%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  
 }
+
+.carousel-inner{
+  height: 100%;
+  border-radius: 12px;
+  filter: drop-shadow(0px 0px 3px #066665);
+}
+
+.carousel-item{
+  height: 100%;
+}
+
+.carousel-item img{
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0.6;
+  border: none;
+}
+
 
 /*IMAGEN CARDS*/
 .imagenes{
@@ -389,13 +2672,14 @@ input[type="range"]::-moz-range-track {
 /*texto de crads*/
 .texto{
   width: 100%;
-  height: 50%;
+  height: 61%;
   display: block;
 }
 
 /*nobre de produdo*/
 .texto h5 {
-  color: #4fa983 !important;
+  color: #00f0d0;
+  opacity: 0.6;
   font-family: 'Orbitron', sans-serif;
   font-size: 13px;
   font-weight: bold;
@@ -440,7 +2724,7 @@ input[type="range"]::-moz-range-track {
 .masmenos{
   display: flex;
   background-color: transparent;
-  border: solid 1px #67927e;
+  border: solid 1px #00f0d0;;
   width: 71px;
   height: 20px;
   border-radius: 12px;
@@ -460,7 +2744,7 @@ input[type="range"]::-moz-range-track {
 
 /*cuando el mouse pasa - +*/
 .masmenos button:hover{
-  color: #06cf96;
+  color: #00f0d0;
   text-shadow: 0px 0px 5px #11cd0d;
 }
 
@@ -472,9 +2756,12 @@ input[type="range"]::-moz-range-track {
 /*precio de producto*/
 .precios span {
   margin: 0 auto;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: bold;
   color: #cfd1d4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*precio de producto*/
@@ -486,65 +2773,200 @@ input[type="range"]::-moz-range-track {
 
 /*boto añadir cariito*/
 .anadir{
-  margin-top: 5px;
   width: 100%;
   background-color: #0e0e0e;
-  height: 100%;
-  text-align: center;
+  height: 40px;
+  font-size: 13px;
+  margin: 0 auto;
   transition: all 0.3s ease;
 }
+
+.anadir .acregar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  height: 100%;
+  color: #fefcfc;
+   transition: transform 0.3s ease, color 0.3s ease;
+}
+
 
 /*boto añadir cariito movimiento*/
 .anadir:hover{
   background-color: #96eaa774;
   transform: scale(1.03);
+  cursor: pointer;
 }
 
-/*boto añadir cariito*/
-.anadir button{
-  border: none;
-  background-color: transparent;
-  font-size: 13px;
-  margin: 5px;
-  color: #a1a4a9;
-}
-
-/*boto añadir cariito movimiento*/
-.anadir button:hover{
+/*boto añadir cariito movimiento*/    
+.anadir button:hover{    
   transform: scale(1.01);
   color: #f4f4f6;
   font-weight: bold;
 }
 
-/*ocultar scrol*/
-.productos::-webkit-scrollbar {
-  display: none;
-}
 
-/*sesion productos*/
-.productos{
+
+
+
+
+.titulos{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  border-radius: 12px;
+
   width: 100%;
-  height: 89.5vh;
-  overflow-y: auto; /* escrol  aparese su es mucho contendo pero yo lo oculte*/
-  scrollbar-width: none; /* esconde escrol */
-}
+  max-width: 1200px;
 
-/*computadores card*/
-.productos .card{
-  background-color: #111827;
-  box-shadow: 0px 0px 5px  #00ffcc55;
-  width: 160px;
-  height: 280px;
-  border-radius: 25px;
-  display: block;
+  min-height: 80px;
+
+  margin: 0 auto 20px auto;
+  padding: 15px;
+
+  border: 1px solid var(--border-cyan);
+
+  font-family: var(--font-heading);
+
+  font-size: clamp(28px, 5vw, 50px);
+
+  color: #00f0d0;
+
   overflow: hidden;
-  margin: 3px 0px 5px 0px;
+  text-align: center;
+
+  box-sizing: border-box;
 }
 
 
 
+/* =========================================
+TOAST
+========================================= */
+
+#toast{
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 12px;
+
+    transform: translateX(-50%) translateY(20px);
+
+    background: #1a382c;
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+
+    z-index: 999999;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s;
+}
+
+#toast.active{
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-50%) translateY(0);
+
+}
 
 
+/* =========================================
+MODAL CONFIRMACIÓN
+========================================= */
 
+.modalConfirmacion{
+    position: fixed;
 
+    inset: 0;
 
+    background: rgba(0,0,0,.6);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999999;
+}
+
+.contenidoModal{
+    width: 90%;
+    max-width: 350px;
+
+    background: #151c2f;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.contenidoModal p{
+    color: white;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+}
+
+.botonesModal{
+    display: flex;
+
+    gap: 10px;
+}
+
+.botonesModal button{
+    flex: 1;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+#cancelarModal{
+    background: #2a3247;
+    color: white;
+}
+
+#aceptarModal{
+    background: #0648059e;
+    color: white;
+}
+
+#aceptarModal:hover{
+    transform: scale(1.03);
+    box-shadow: 0px 0px 5px #9fcc9e;
+}
+
+#cancelarModal:hover{
+    transform: scale(1.03);
+    box-shadow: 0px 0px 9px #010701;
+}

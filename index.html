@@ -8,7 +8,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="16x16" href="../images/klydy-favicon-32.png">
-<link rel="stylesheet" href="../CSS/nav-footer.css">
+<link rel="stylesheet" href="FRONTEND/CSS/nav-footer.css">
+<link rel="stylesheet" href="FRONTEND/CSS/index-style.css">
 
 <style>
   /* Modales y offcanvas siempre por encima de la barra inferior */
@@ -74,9 +75,9 @@
       <div>
         <ul class="navbar-nav flex-grow-1 justify-content-evenly mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link klydy-link" href="index.html">HOME</a></li>
-          <li class="nav-item"><a class="nav-link klydy-link" href="productos.html">PRODUCTOS</a></li>
-          <li class="nav-item"><a class="nav-link klydy-link" href="sobre-nosotros.html">SOBRE NOSOTROS</a></li>
-          <li class="nav-item"><a class="nav-link klydy-link" href="contacto.html">CONTÁCTANOS</a></li>
+          <li class="nav-item"><a class="nav-link klydy-link" href="/FRONTEND/HTML/productos.html">PRODUCTOS</a></li>
+          <li class="nav-item"><a class="nav-link klydy-link" href="/FRONTEND/HTML/sobre-nosotros.html">SOBRE NOSOTROS</a></li>
+          <li class="nav-item"><a class="nav-link klydy-link" href="/FRONTEND/HTML/contacto.html">CONTÁCTANOS</a></li>
         </ul>
       </div>
     </div>
@@ -100,10 +101,267 @@
  </nav>
 </section>
 
-<section class="contenido">
- 
-</section>
 
+
+
+  <main id="main-content">
+
+
+
+    <!-- SECCIÓN 1 — HERO -->
+
+    <section id="hero" class="section-hero" aria-label="Presentación principal">
+
+      <div class="container-fluid h-100">
+        <div class="row align-items-center h-100 g-0">
+
+          <!-- ──  imagen principal ── -->
+          <div class="col-12 col-lg-6 hero__media">
+            <img src="FRONTEND/images/images-index/hero_1.png"
+              alt="Laptop gaming ROG Strix con auriculares de alto rendimiento" class="hero__img" width="700"
+              height="500" loading="eager" />
+          </div>
+
+          <!-- ──  texto y CTA ── -->
+          <div class="col-12 col-lg-6 hero__content">
+
+            <!-- text-transform: uppercase se aplica desde index.css -->
+            <h1 class="hero__title">
+              Vive la<br />
+              experiencia<br />
+              definitiva
+            </h1>
+
+            <p class="hero__subtitle">
+              INDEX PENDIENTE SEGUN TAREAS.
+            </p>
+
+            <p class="hero__highlight">
+              Descubre la potencia y el sonido que revolucionarán tu juego.
+            </p>
+
+            <a href="/FRONTEND/HTML/productos.html" class="btn hero__cta" aria-label="Explorar catálogo de productos gaming">
+              Explorar productos
+            </a>
+
+          </div><!-- /hero__content -->
+
+        </div><!-- /row -->
+      </div><!-- /container-fluid -->
+
+    </section>
+    <!-- /SECCIÓN 1 HERO -->
+
+
+<!-- CATEGORÍAS -->
+         
+
+    <section id="categorias" class="section-categories" aria-label="Categorías de productos">
+
+      <!-- DESKTOP: carrusel 3D -->
+      <div class="categories-scene-wrap">
+        <div class="categories-scene">
+          <div class="categories-carousel" id="categoriesCarousel"></div>
+        </div>
+      </div>
+      <!-- Controles carrusel 3D (solo desktop) -->
+      <div class="categories-controls">
+        <button class="cat-ctrl-btn" id="catPrev" aria-label="Categoría anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button class="cat-ctrl-btn" id="catNext" aria-label="Categoría siguiente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- MÓVIL: grid estático -->
+      <div class="categories-mobile-grid" id="categoriesMobileGrid"></div>
+
+    </section>
+    <!-- /SECCIÓN 2 CATEGORÍAS -->
+
+
+    <!-- USOS SEGÚN ROL -->
+    <section id="usos" class="section-roles" aria-label="Tecnología según tu perfil de uso">
+
+      <div class="container">
+
+        <!-- Encabezado de sección -->
+        <header class="section-roles__header text-center">
+          <h2 class="section-roles__title">
+            Tecnología para cada rol
+          </h2>
+          <p class="section-roles__subtitle">
+            Encuentra el equipo perfecto según cómo usas la tecnología.
+          </p>
+        </header>
+
+        <!-- Grid de tarjetas -->
+        <div class="row justify-content-center g-4 section-roles__grid">
+
+
+          <!-- ══════════════════════════════════════════════
+               TARJETA 1 — Profesional Creativo
+               
+          ══════════════════════════════════════════════════ -->
+          <div class="col-12 col-md-6">
+            <article class="role-card role-card--cyan" aria-labelledby="role-creativo-title">
+              <div class="role-card__inner">
+
+                <!-- Texto  -->
+                <div class="role-card__body">
+                  <h3 id="role-creativo-title" class="role-card__title">
+                    Para el Profesional Creativo
+                  </h3>
+                  <p class="role-card__desc">
+                    Siente la potencia pura. Laptops para alto rendimiento,
+                    gráficas de última generación y periféricos ergonómicos.
+                    Tu estación de trabajo, tu estudio. Potencia tu creatividad.
+                  </p>
+                  <a href="/FRONTEND/HTML/productos.html?rol=trabajo" class="btn role-card__btn"
+                    aria-label="Explorar productos para profesional creativo">
+                    Explorar productos
+                  </a>
+                </div>
+
+                <!-- Imagen  -->
+                <div class="role-card__media">
+                  <img src="FRONTEND/images/images-index/profesional.png"
+                    alt="Profesional creativo trabajando en estación de diseño con múltiples monitores"
+                    class="role-card__img" loading="lazy" />
+                </div>
+
+              </div><!-- /role-card__inner -->
+            </article>
+          </div>
+          <!-- /TARJETA 1 -->
+
+
+          <!-- ══════════════════════════════════════════════
+               TARJETA 2 — Estudiante Enfocado
+              
+          ══════════════════════════════════════════════════ -->
+          <div class="col-12 col-md-6">
+            <article class="role-card role-card--purple" aria-labelledby="role-estudiante-title">
+              <div class="role-card__inner role-card__inner--reverse">
+
+                <!-- Imagen-->
+                <div class="role-card__media">
+                  <img src="FRONTEND/images/images-index/estudiante.png"
+                    alt="Estudiante enfocado con laptop trabajando en sus proyectos académicos" class="role-card__img"
+                    loading="lazy" />
+                </div>
+
+                <!-- Texto -->
+                <div class="role-card__body">
+                  <h3 id="role-estudiante-title" class="role-card__title">
+                    Para el Estudiante Enfocado
+                  </h3>
+                  <p class="role-card__desc">
+                    Alcanza tus metas académicas. Laptops ligeras pero potentes,
+                    ideales para investigación, tareas complejas y aprendizaje
+                    en línea. Herramientas para tu futuro. Logra el éxito.
+                  </p>
+                  <a href="/FRONTEND/HTML/productos.html?rol=estudio" class="btn role-card__btn"
+                    aria-label="Explorar productos para estudiante">
+                    Explorar productos
+                  </a>
+                </div>
+
+              </div><!-- /role-card__inner -->
+            </article>
+          </div>
+          <!-- /TARJETA 2 -->
+
+
+          <!-- ══════════════════════════════════════════════
+               TARJETA 3 — Hardcore Gamer
+             
+          ══════════════════════════════════════════════════ -->
+          <div class="col-12 col-md-6">
+            <article class="role-card role-card--pink" aria-labelledby="role-gamer-title">
+              <div class="role-card__inner">
+
+
+                <!-- Imagen -->
+                <div class="role-card__media">
+                  <img src="FRONTEND/images/images-index/gamer.png"
+                    alt="Gamer hardcore con setup RGB en plena competición" class="role-card__img" loading="lazy" />
+                </div>
+
+                <!-- Texto -->
+                <div class="role-card__body">
+                  <h3 id="role-gamer-title" class="role-card__title">
+                    Para el Hardcore Gamer
+                  </h3>
+                  <p class="role-card__desc">
+                    Siente la potencia pura. Laptops de alto rendimiento,
+                    gráficas y periféricos de competición. Domina el campo
+                    de batalla y lleva tu juego al siguiente nivel.
+                  </p>
+                  <a href="/FRONTEND/HTML/productos.html?rol=gamer" class="btn role-card__btn" aria-label="Explorar productos para gamer">
+                    Explorar productos
+                  </a>
+                </div>
+
+
+              </div><!-- /role-card__inner -->
+            </article>
+          </div>
+          <!-- /TARJETA 3 -->
+
+
+          <!-- ══════════════════════════════════════════════
+               TARJETA 4 — Uso Diario y Entretenimiento
+             
+          ══════════════════════════════════════════════════ -->
+          <div class="col-12 col-md-6">
+            <article class="role-card role-card--blue" aria-labelledby="role-diario-title">
+              <div class="role-card__inner role-card__inner--reverse">
+
+
+
+                <!-- Texto  -->
+                <div class="role-card__body">
+                  <h3 id="role-diario-title" class="role-card__title">
+                    Para el Uso Diario y Entretenimiento
+                  </h3>
+                  <p class="role-card__desc">
+                    Simplifica tu vida. Laptops versátiles para streaming,
+                    navegación, videollamadas y tareas cotidianas.
+                    Tecnología accesible y confiable para todos. Conecta y disfruta.
+                  </p>
+                  <a href="/FRONTEND/HTML/productos.html?rol=general" class="btn role-card__btn"
+                    aria-label="Explorar productos para uso diario">
+                    Explorar productos
+                  </a>
+                </div>
+                <!-- imagen  -->
+                <div class="role-card__media">
+                  <img src="FRONTEND/images/images-index/general.png"
+                    alt="Familia disfrutando de entretenimiento y videollamadas con laptop" class="role-card__img"
+                    loading="lazy" />
+                </div>
+
+              </div><!-- /role-card__inner -->
+            </article>
+          </div>
+          <!-- /TARJETA 4 -->
+
+
+        </div><!-- /row section-roles__grid -->
+
+      </div><!-- /container -->
+
+    </section>
+  
+
+
+  </main>
 
 <!-- ============================================================
      MODAL LOGIN
@@ -156,13 +414,7 @@
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
   </div>
   <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
-    <p id="msgVacio" class="text-center mt-4">Tu carrito está vacío.</p>
-     <ul id="listaCarrito" class="list-group"></ul>
-     <div class="totalCarrito">
-      <p class="totalC">Total: <span id="total">0</span></p>
-      <button id="btnVaciar" class="btn btn-danger">Vaciar carrito</button>
-     </div>
-     
+    <p class="text-center mt-4">Tu carrito está vacío.</p>
   </div>
 </div>
 
@@ -339,8 +591,13 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="FRONTEND/JS/inicio.js"></script>
-<script src="FRONTEND/JS/nav.js"></script>
+
+  <!-- Bootstrap  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="FRONTEND/JS/inicio.js"></script>
+  <script src="FRONTEND/JS/nav.js"></script>
+
 </body>
+
 </html>

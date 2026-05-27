@@ -10,14 +10,386 @@ document.addEventListener('DOMContentLoaded', function () {
     el.classList.add('active');
   }
 
+  
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
-  // Actualiza el número del carrito en ambos lugares:
-  // el badge de la barra inferior móvil y el del navbar desktop
-  function actualizarBadge(cantidad) {
-    document.getElementById('badge-mobile').textContent  = cantidad;
-    document.getElementById('badge-desktop').textContent = cantidad;
+  // =========================================
+// TOAST
+// =========================================
+
+function mostrarToast(mensaje){
+
+  let toast = document.getElementById("toast");
+
+  toast.textContent = mensaje;
+
+  toast.classList.add("active");
+
+  setTimeout(() => {
+    toast.classList.remove("active");
+  }, 3000);
+
+}
+
+
+// =========================================
+// MODAL CONFIRMACION
+// =========================================
+
+function mostrarConfirmacion(mensaje, callback){
+
+  let modal = document.getElementById("modalConfirmacion");
+
+  let mensajeModal = document.getElementById("mensajeModal");
+
+  let aceptar = document.getElementById("aceptarModal");
+
+  let cancelar = document.getElementById("cancelarModal");
+
+  mensajeModal.textContent = mensaje;
+
+  modal.style.display = "flex";
+
+  aceptar.onclick = () => {
+
+    modal.style.display = "none";
+
+    callback(true);
+
+  };
+
+  cancelar.onclick = () => {
+
+    modal.style.display = "none";
+
+    callback(false);
+
+  };
+
+}
+  
+  
+  //cotadores 
+  let cantitaProducto = 0;
+  let totalPrecio = 0;
+
+
+
+  // guardar en localStorage
+  function guardarCarrito() {
+    let listaCarrito = document.querySelectorAll("#listaCarrito li");
+
+    let carrito = [];
+
+    listaCarrito.forEach(item => {
+      carrito.push({
+        imagen: item.querySelector("img").src,
+        nombre: item.dataset.nombre,
+        precio: Number(item.dataset.precio),
+        cantidad: Number(item.querySelector(".cantidades").textContent)
+      });
+    });
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
   }
 
+
+  // contadores (cargar carrito guardado)
+  let datos = localStorage.getItem("carrito");
+
+  if(datos){
+    let carrito = JSON.parse(datos);
+
+    carrito.forEach(prodc => {
+      agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
+    });
+  }
+
+
+
+  // escha el click de la targeta para agrecar a lista
+  document.addEventListener("click", function(boton){
+
+    let evento = boton.target.closest(".btn-agregar");
+
+    if(evento){
+      
+      let imagen = evento.dataset.imagen;
+      let nombre = evento.dataset.nombre;
+      let precio = Number(evento.dataset.precio);
+
+      let card = evento.closest(".card");
+      let numero = card.querySelector(".numeros");
+      let cantidad = Number(numero.textContent);
+
+      agregarAlcarrito(imagen, nombre, precio, cantidad);
+
+      numero.textContent = 1;
+    }
+  });
+
+
+  // lista para carrito
+  function agregarAlcarrito(imagen, nombre, precio, cantidad){
+    
+    let listaCarrito = document.getElementById("listaCarrito");
+
+    let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
+
+    // si el producto ya esiste actializa para que se agrege la cantidad y no se repita la li
+    if(productoExistente){
+
+      let numero = productoExistente.querySelector(".cantidades");
+      let precioSpan = productoExistente.querySelector(".precio-item");
+
+      let cantidadActual = Number(numero.textContent);
+      let nuevaCantidad = cantidadActual + cantidad;
+
+      numero.textContent = nuevaCantidad;
+
+      let precioUnitario = Number(productoExistente.dataset.precio);
+      let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
+      precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
+
+      
+      cantitaProducto += cantidad;
+      totalPrecio += precioUnitario * cantidad;
+
+      actualizarBadge();
+      actualizarPrecio();
+      guardarCarrito();
+
+      // al agregar mas cantidad se pone al inicio
+      /*listaCarrito.prepend(productoExistente);*/
+
+      return; 
+    }
+
+
+    // si no esiste esa li con ese nombre la añade a la lista
+    let lista = document.createElement("li");
+    lista.classList.add("producto");
+    
+    lista.dataset.precio = precio;
+    lista.dataset.nombre = nombre;
+    
+    //boton eliminar
+    let eliminarP = document.createElement("button");
+    eliminarP.textContent = "x";
+    eliminarP.classList.add("botonEliminar");
+
+    // crea la lista
+    lista.innerHTML = `
+    <img src="${imagen}" class="imagenCarrito"> 
+    <span class="nombre-item">${nombre}</span>
+    <span class="precio-item">${(precio * cantidad).toLocaleString()}</span>
+
+    <div class="cajonNumero">
+      <button class="decremento">−</button> 
+      <span class="cantidades">${cantidad}</span> 
+      <button class="incremento">+</button>
+    </div>
+    `;
+
+    // agregar boton eliminar a la lista
+    lista.appendChild(eliminarP);
+
+    // agregar toda la li creada al contenedor de html 
+    listaCarrito.appendChild(lista);
+
+     // evento de boton eliminar el producto
+    eliminarP.addEventListener("click", function(){
+
+      mostrarConfirmacion(
+        `¿Deseas eliminar ${nombre} del carrito?`,
+        
+        function(confirmado){
+
+          if(confirmado){
+
+            eliminarProducto(lista);
+
+            mostrarToast(`${nombre} eliminado del carrito`);
+
+          }
+
+        }
+
+      );
+
+    });
+    cantitaProducto += cantidad;
+    totalPrecio += precio * cantidad;
+    actualizarBadge();
+    actualizarPrecio();
+    guardarCarrito();
+    
+    // la agrega la creada al inicio
+    listaCarrito.prepend(lista);
+    document.getElementById("msgVacio").style.display = "none";
+  }
+
+  
+
+  
+
+  // evento del decremento y decremento de la li
+  document.addEventListener("click", function(clic){
+
+    // si solo hace click en el boton decremento li
+ if(clic.target.classList.contains("decremento")){
+
+  // busca li
+  let contenedor = clic.target.closest("li"); 
+
+  // si no la encuentra se detiene
+  if(!contenedor) return; 
+
+  let numero = contenedor.querySelector(".cantidades");
+
+  let precioSpan = contenedor.querySelector(".precio-item");
+
+  let precio = Number(contenedor.dataset.precio);
+
+  let cantidad = Number(numero.textContent);
+
+  // si es mayor a 1 puede decrementar
+  if(cantidad > 1){
+
+    cantidad--;
+
+    numero.textContent = cantidad;
+
+    precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+    cantitaProducto--;
+
+    totalPrecio -= precio;
+
+    actualizarBadge();
+
+    actualizarPrecio();
+
+    guardarCarrito();
+
+  }
+
+}
+
+
+  
+    // evento del incremento y decremento de la li
+    // si dedecta en click en incremento
+   // evento del incremento
+if(clic.target.classList.contains("incremento")){
+
+  let contenedor = clic.target.closest("li");
+
+  if(!contenedor) return; 
+
+  let numero = contenedor.querySelector(".cantidades");
+
+  let precioSpan = contenedor.querySelector(".precio-item");
+
+  let precio = Number(contenedor.dataset.precio);
+
+  let cantidad = Number(numero.textContent);
+
+  cantidad++;
+
+  numero.textContent = cantidad;
+
+  precioSpan.textContent = (precio * cantidad).toLocaleString();
+
+  cantitaProducto++;
+
+  totalPrecio += precio;
+
+  actualizarBadge();
+
+  actualizarPrecio();
+
+  guardarCarrito();
+
+}
+
+  });
+
+
+  // elimina el producto unitario
+  function eliminarProducto(li){
+
+    let numero = li.querySelector(".cantidades");
+    let cantidad = Number(numero.textContent);
+
+    let precio = Number(li.dataset.precio);
+
+    cantitaProducto -= cantidad;
+    totalPrecio -= precio * cantidad;
+
+    li.remove();
+
+    actualizarBadge();
+    actualizarPrecio();
+    guardarCarrito();
+
+    if(cantitaProducto === 0){
+      document.getElementById("msgVacio").style.display = "block";
+    }
+  }
+
+    // vaciar carrito completo
+    let vaciarCarrito = document.getElementById("btnVaciar");
+
+    vaciarCarrito.addEventListener("click", function(){
+
+      mostrarConfirmacion(
+
+        "¿Deseas vaciar todo el carrito?",
+
+        function(confirmado){
+
+          if(confirmado){
+
+            let lista = document.getElementById("listaCarrito");
+
+            lista.querySelectorAll('li').forEach(li => li.remove());
+
+            document.getElementById("msgVacio").style.display = "block";
+
+            cantitaProducto = 0;
+            totalPrecio = 0;
+
+            actualizarBadge();
+            actualizarPrecio();
+            guardarCarrito();
+
+            mostrarToast("Carrito vaciado");
+
+          }
+
+        }
+
+      );
+
+    });
+
+  //actualizar total de produtos carrito
+  function actualizarBadge() {
+    document.getElementById('badge-mobile').textContent  = cantitaProducto;
+    document.getElementById('badge-desktop').textContent = cantitaProducto;
+  }
+
+  // actualizar precio total del carrito
+  function actualizarPrecio(){
+     let total = document.getElementById("total");
+     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
+  }
+
+
+  
+
+
+  
   // ── ÍCONO DEL BOTÓN MENÚ ─────────────────────────────────────────
   // Selecciona el menú desplegable y el botón de menú de la barra inferior
   const navbarCollapse = document.getElementById('navbarKlydy');
@@ -79,5 +451,210 @@ document.addEventListener('DOMContentLoaded', function () {
   // de lo contrario el HTML no las encontraría dentro del DOMContentLoaded
   window.setActive = setActive;
   window.actualizarBadge = actualizarBadge;
+
+});
+
+// ─────────────────────────────────────────────
+// LOGIN
+// ─────────────────────────────────────────────
+
+const btnLogin = document.getElementById("btnLogin");
+
+btnLogin.addEventListener("click", iniciarSesion);
+
+function iniciarSesion() {
+
+  const correo = document.getElementById("correoLogin").value.trim();
+
+  const password = document.getElementById("passwordLogin").value.trim();
+
+  const mensaje = document.getElementById("mensajeLogin");
+
+  // VALIDAR CAMPOS VACÍOS
+  if (correo === "" || password === "") {
+
+    mensaje.innerHTML = `
+      <div class="alert alert-danger">
+        Todos los campos son obligatorios
+      </div>
+    `;
+
+    return;
+  }
+
+  // OBTENER USUARIOS
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  // BUSCAR USUARIO
+  const usuarioEncontrado = usuarios.find(usuario =>
+    usuario.correo === correo &&
+    usuario.password === password
+  );
+
+  // LOGIN EXITOSO
+  if (usuarioEncontrado) {
+
+    localStorage.setItem(
+      "usuarioActivo",
+      JSON.stringify(usuarioEncontrado)
+    );
+
+    mensaje.innerHTML = `
+      <div class="alert alert-success">
+        Inicio de sesión exitoso
+      </div>
+    `;
+
+    //REDIRECCION
+
+    setTimeout(() => {
+
+      window.location.href = "FRONTEND/HTML/productos.html";
+
+    }, 1000);
+
+    // LOGIN INCORRECTO
+
+  } else {
+
+    mensaje.innerHTML = `
+      <div class="alert alert-danger">
+        Usuario o contraseña inválidos
+      </div>
+    `;
+  }
+}
+
+
+// ─────────────────────────────────────────────
+// CAMBIAR NAVBAR
+// ─────────────────────────────────────────────
+
+function actualizarNavbarUsuario() {
+
+  const usuarioActivo = JSON.parse(
+    localStorage.getItem("usuarioActivo")
+  );
+
+  const contenedorDesktop = document.querySelector(
+    ".d-none.d-lg-flex.align-items-center.gap-2"
+  );
+
+  if (usuarioActivo && contenedorDesktop) {
+
+    contenedorDesktop.innerHTML = `
+
+      <div class="d-flex align-items-center gap-2">
+
+        <!-- NOMBRE USUARIO -->
+        <span class="text-white fw-bold">
+          <i class="bi bi-person-check-fill"></i>
+          ${usuarioActivo.nombre}
+        </span>
+
+        <!-- BOTÓN CERRAR SESIÓN -->
+        <button
+          class="btn btn-outline-danger btn-sm"
+          id="btnCerrarSesion">
+
+          Cerrar Sesión
+        </button>
+
+        <!-- CARRITO -->
+        <button
+          class="btn klydy-btn-cart d-flex align-items-center"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasCarrito">
+
+          <i class="bi bi-cart3"></i>
+
+          <span
+            class="klydy-badge ms-1"
+            id="badge-desktop">
+
+          </span>
+
+        </button>
+
+      </div>
+    `;
+
+    // EVENTO CERRAR SESIÓN
+    document
+      .getElementById("btnCerrarSesion")
+      .addEventListener("click", abrirModalCerrarSesion);
+  }
+}
+
+// ─────────────────────────────────────────────
+// CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+function cerrarSesion() {
+
+  localStorage.removeItem("usuarioActivo");
+
+  // CREAR ALERTA VISUAL
+  const alerta = document.createElement("div");
+
+  alerta.innerHTML = `
+  
+    <div 
+      class="alert alert-info alert-dismissible fade show shadow-lg"
+      role="alert"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 320px;
+        border-radius: 14px;
+        font-weight: 600;
+      ">
+
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Sesión cerrada correctamente
+
+    </div>
+  `;
+
+  document.body.appendChild(alerta);
+
+  // REDIRECCIONAR
+  setTimeout(() => {
+
+    window.location.href = "../../index.html";
+
+  }, 1500);
+}
+
+// EJECUTAR AL CARGAR
+actualizarNavbarUsuario();
+
+// ─────────────────────────────────────────────
+// ABRIR MODAL CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+function abrirModalCerrarSesion() {
+
+  const modal = new bootstrap.Modal(
+    document.getElementById("modalCerrarSesion")
+  );
+
+  modal.show();
+}
+
+// ─────────────────────────────────────────────
+// CONFIRMAR CERRAR SESIÓN
+// ─────────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btnConfirmar = document.getElementById("confirmarCerrarSesion");
+
+  if (btnConfirmar) {
+    btnConfirmar.addEventListener("click", cerrarSesion);
+  }
 
 });
