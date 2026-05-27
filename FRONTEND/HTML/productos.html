@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet"> <!--link de fuente de h2-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/klydy-favicon-32.png">
     <link rel="stylesheet" href="../CSS/productos.css">
     <link rel="stylesheet" href="../CSS/nav-footer.css">
     <title>Document</title>
@@ -24,7 +27,7 @@
           </div>
         </div>
 
-        <!-- Toggler hamburguesa -->
+        <!-- Toggler hamburguesa -->    
         <button class="navbar-toggler d-lg-none" 
           type="button"
           data-bs-toggle="collapse"
@@ -66,121 +69,244 @@
     </nav>
   </section>
 
-  <div  class="contenedor" style="margin-top: 20px;">
-     <!--menu-->
-    <div class="Cajoncategorias">
-    <div class="menuCategorias"> 
-      <h2>Categorias</h2>
-      <button class="item" data-target="inicio">inicio</button>
-      <button class="item" data-target="laptops">Laptops</button>
-      <button class="item" data-target="mouses">Mouses</button>
-      <button class="item" data-target="smartwatches">Smartwatches</button>
-      <button class="item" data-target="audio">Audio</button>
-      <button class="item" data-target="teclados">Teclados</button>
-      <button class="item" data-target="tarjetas Graficar">Tarjetas Graficar</button>
-      <button class="item" data-target="videojuegos">Videos juegos</button>
-      <button class="item" data-target="accesorios">Accesorios</button>
+
+
+ <!--MENU PAGINA PRINCIPAL--------------------------------------------------------------------------------->
+  <div  class="contenedor" style="margin-top: 10px; margin-bottom: 10px;">
+    
+    <div class="Cajoncategorias" id="Cajoncategorias">
       
-    </div>
-    <div class="filtros">
-      <!--firtos usos-->
-      <h2 class="filtro">Filtros</h2>
-      <div class="usos">
-        <h4>Usos</h4>
-        <div class="lista">
-          <ul>
-            <li class="itenUso" data-target="gamer">Gamer</li>
-            <li class="itenUso" data-target="general">General</li>
-          </ul>
-          <ul>
-            <li class="itenUso" data-target="estudio" >Estudio</li>
-            <li class="itenUso" data-target="trabajo">Trabajo</li>
-          </ul>
-        </div>
+      <div class="menuCategorias"> 
+        <h3>Categorias</h3>
+        <button class="item" data-target="inicio">inicio</button>
+        <button class="item" data-target="laptops">Laptops</button>
+        <button class="item" data-target="mouses">Mouses</button>
+        <button class="item" data-target="smartwatches">Smartwatches</button>
+        <button class="item" data-target="audio">Audio</button>
+        <button class="item" data-target="teclados">Teclados</button>
+        <button class="item" data-target="tarjetas Graficar">Tarjetas Graficar</button>
+        <button class="item" data-target="accesorios">Accesorios</button>
       </div>
 
-      <div class="filtrosPrecio">
-        <div class="filtro-precio">
-          <label>Precio mínimo: <span id="minValor">0</span></label>
-          <input type="range" id="precioMin" >
+      <div class="filtros">
+        <!--firtos usos-->
+        <h3 class="filtrot">Filtros</h3>
+        <div class="usos">
+          <div class="lista">
+            <ul>
+              <li class="itenUso" data-target="gamer">Gamer</li>
+              <li class="itenUso" data-target="general">General</li>
+            </ul>
+            <ul>
+              <li class="itenUso" data-target="estudio" >Estudio</li>
+              <li class="itenUso" data-target="trabajo">Trabajo</li>
+            </ul>
+          </div>
+        </div>
 
-          <label>Precio máximo: <span id="maxValor">0</span></label>
-          <input type="range" id="precioMax" >
+        <div class="filtrosPrecio">
+          <div class="filtro-precio">
+            <input class="pre" type="text" placeholder="Min">
+            <input class="pre" type="text" placeholder="Max">
+          </div>
+          <div class="notonfl">
+            <button class="botonff botonFiltrar bottom-nav-item">Filtrar precios</button>
+            <button class="botonff limpiarFiltro bottom-nav-item">Limpiar filtro</button>
+          </div>
         </div>
-      </div>
 
-      <!--checkbox marca-->
-      <div class="marcas">
-        <div>
+        <!--checkbox marca-->
+        <div class="marcas">
+          <div>
+            <label>
+              <input type="checkbox" value="acer">
+            <span>Acer</span> 
+            </label>
           <label>
-          <input type="checkbox" name="acer" value="acer">
-           Acer
-        </label>
-        <label>
-          <input type="checkbox" name="apple" value="apple">
-           Apple
-        </label>
-         <label>
-          <input type="checkbox" name="asus" value="asus">
-           Asus
-        </label>
-        <label>
-          <input type="checkbox" name="dell" value="dell">
-           Dell
-        </label>
+            <input type="checkbox" value="apple">
+            <span>Apple</span>
+          </label>
+          <label>
+            <input type="checkbox" value="asus">
+            <span>Asus</span>
+          </label>
+          <label>
+            <input type="checkbox" value="dell">
+            <span>Dell</span>
+          </label>
+          </div>
+          
+          <div>
+            <label>
+            <input type="checkbox" value="hp">
+            <span>HP</span> 
+            </label>
+            <label>
+              <input type="checkbox" value="lenovo">
+              <span>Lenovo</span>
+            </label>
+            <label>
+              <input type="checkbox" value="msi">
+              <span>Msi</span>
+            </label>
+            <label>
+              <input type="checkbox" value="otros">
+              <span>Otros</span>
+            </label> 
+          </div>
         </div>
-        
-        <div>
-          <label>
-           <input type="checkbox" name="hp" value="hp">
-            HP
-          </label>
-          <label>
-            <input type="checkbox" name="Lenovo" value="Lenovo">
-            Lenovo
-          </label>
-          <label>
-            <input type="checkbox" name="microsoft" value="microsoft">
-            Microsoft
-          </label>
-          <label>
-            <input type="checkbox" name="msi" value="msi">
-            Msi
-          </label> 
-        </div>
+        <button class="limpiarF">Limpiar filtros</button>
       </div>
-    </div>
   </div>
+  <!--finde menu PAGINA--------------------------------------------------------------------------------------->
 
-  <!--finde menu-->
 
 
-  <div class="productos" style="padding-bottom: 100px;">
+
+<!--MENU MOVIIL---------------------------------------------------------------------------------->
+
+ <div class="menuMovil">
+    <div id="categoriasMenu2" class="categoriasMenu2 menuCategorias" style="display: none;">
+
+      <button class="item botonCategoria" data-target="inicio">
+        <img src="https://i.postimg.cc/Gmc9Q1fg/Copilot-20260514-113556.png" alt="imagen"  style="display: none;">
+      </button>
+
+      <button class="item botonCategoria" data-target="laptops">
+        <img src="https://i.postimg.cc/G2jkXjQg/Chat-GPT-Image-14-may-2026-11-32-21-a-m.png" alt="imagen">
+      </button>
+   
+      <button class="item botonCategoria" data-target="mouses">
+        <img src="https://i.postimg.cc/Pr1d9FD3/Chat-GPT-Image-14-may-2026-11-28-48-a-m.png" alt="imagen">
+      </button>
+
+      <button class="item botonCategoria" data-target="audio">
+        <img src="https://i.postimg.cc/T3ypKc5n/Chat-GPT-Image-14-may-2026-11-24-28-a-m.png" alt="imagen">
+      </button>
+    
+      <button class="item botonCategoria" data-target="accesorios">
+        <img src="https://i.postimg.cc/B62FXBkG/Chat-GPT-Image-14-may-2026-11-21-27-a-m.png" alt="imagen">
+      </button>
+
+      <button class="item botonCategoria" data-target="teclados">
+        <img src="https://i.postimg.cc/9Fn6QPh0/Chat-GPT-Image-14-may-2026-11-16-05-a-m.png" alt="imagen">
+      </button>
+   
+      <button class="item botonCategoria" data-target="tarjetas Graficar">
+        <img src="https://i.postimg.cc/d379HySz/Chat-GPT-Image-14-may-2026-11-18-34-a-m.png" alt="imagen" >
+      </button>
+
+      <button class="item botonCategoria" data-target="smartwatches">
+        <img src="https://i.postimg.cc/66S2VSVV/Chat-GPT-Image-14-may-2026-11-07-40-a-m.png" alt="imagen">
+      </button>
+     
+    </div>
+
+      <div id="filtros" class="filtroMovil filtros">
+        <!--firtos usos-->
+       
+        <div class="tipoUsos"> 
+          <div class="listaUsos">
+            <ul>
+              <li class="uso" data-target="gamer">Gamer</li>
+              <li class="uso" data-target="general">General</li>
+            </ul>
+            <ul>
+              <li class="uso" data-target="estudio" >Estudio</li>
+              <li class="uso" data-target="trabajo">Trabajo</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="filtrosPrecio filtroPrecio2">
+          <div class="precio">
+            <input class="minMax" type="text" placeholder="Min">
+            <input class="minMax" type="text" placeholder="Max">
+          </div>
+          <div class="botonesFiltraL">
+            <button class="bontonesFL botonFiltrar bottom-nav-item">Filtrar</button>
+            <button class="bontonesFL limpiarFiltro bottom-nav-item">Limpiar</button>
+          </div>
+        </div>
+
+        <!--checkbox marca-->
+        <div class="marcas marca">
+          <div>
+            <label>
+              <input type="checkbox" value="acer">
+              <span>Acer</span> 
+            </label>
+            <label>
+              <input type="checkbox" value="apple">
+              <span>Apple</span>
+            </label>
+            <label>
+              <input type="checkbox" value="asus">
+              <span>Asus</span>
+            </label>
+
+             <label>
+              <input type="checkbox" value="dell">
+              <span>Dell</span>
+            </label>
+              
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" value="hp">
+                <span>HP</span> 
+              </label>
+              <label>
+                <input type="checkbox" value="lenovo">
+                <span>Lenovo</span>
+              </label>
+              <label>
+                <input type="checkbox" value="msi">
+                <span>Msi</span>
+              </label>
+              <label>
+                <input type="checkbox" value="otros">
+                <span>Otros</span>
+              </label> 
+            </div>
+        </div>
+
+      <button class="limpiarF limpiarFlitros">Limpiar filtros</button>
+      <div id="botonCategorias" class="botonCategorias">
+          <h2 class="catego" id="catego">Categorias</h2>
+      </div>
+    </div>
+ </div>
+  
+  
+
+
+  <div class="productos" style="padding-bottom: 10px;">
        <!--Carrusel-->
-    <div class="inicio boton">
+    <div class="inicio boton" >
 
-      <div id="carouselExampleIndicators" class="carousel slide"> 
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" style="display: none;"> 
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="https://i.postimg.cc/SsVtz3dM/acer.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/SsVtz3dM/acer.png" class="d-block w-100" alt="imagen acer">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/hjM376sQ/apple.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/hjM376sQ/apple.png" class="d-block w-100" alt="imagen apple">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/Y98ymZRY/asus.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/Y98ymZRY/asus.png" class="d-block w-100" alt="imagen asus">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/nzTwQg27/dell.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/nzTwQg27/dell.png" class="d-block w-100" alt="imagen dell">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/tTDmVwkd/hp.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/tTDmVwkd/hp.png" class="d-block w-100" alt="imagen hp">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/D0ZpQ6pJ/lenovo.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/D0ZpQ6pJ/lenovo.png" class="d-block w-100" alt="imagen lenovo">
           </div>
           <div class="carousel-item">
-            <img src="https://i.postimg.cc/ZnRsPHsv/msi.png" class="d-block w-100" alt="...">
+            <img src="https://i.postimg.cc/ZnRsPHsv/msi.png" class="d-block w-100" alt="imagen msi">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -194,9 +320,12 @@
       </div>
       <!--fin de carusael-->
 
+      
+      
       <!--cards-->
-      <div class="container text-center"> 
-        <div class="row align-items-start g-4" id="contenedor">   
+      <div class="container text-center p-0">
+        <div class="titulos" id="titulo-seccion"></div> 
+        <div class="contenedor" id="contenedor">   
           <!--cards-->
         </div>
       </div> 
@@ -210,24 +339,135 @@
 
   </div>
 
-  <!-- ============================================================
-      MODAL LOGIN
-      
-      ============================================================ -->
-  <div class="modal fade" id="modalLogin" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content modal-klydy">
+<!-- ============================================================
+     MODAL LOGIN
+    
+     ============================================================ -->
+<div class="modal fade" id="modalLogin" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-klydy">
 
-        <div class="modal-header border-0">
-          <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-logo-wrap">
+        <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
+        <p class="modal-logo-sub">Technology</p>
+      </div>
+
+      <div class="modal-body px-4 pb-4">
+        <div class="mb-3">
+          <label class="modal-label">Correo</label>
+          <input type="email" class="form-control klydy-input" placeholder="tu@email.com">
         </div>
-
-        <div class="modal-logo-wrap">
-          <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
-          <p class="modal-logo-sub">Technology</p>
+        <div class="mb-4">
+          <label class="modal-label">Contraseña</label>
+          <input type="password" class="form-control klydy-input" placeholder="••••••••">
         </div>
+        <button class="btn w-100 fw-bold modal-btn-enter">ENTRAR</button>
+        <p class="modal-register-text">
+        <a href="registrarse.html" class="modal-register-link">Regístrate</a>
+        <a href="recuperar.html" class="modal-register-link">¿Olvidaste tu contraseña?</a>
+        </p>
+      </div>
 
+<<<<<<< HEAD
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     OFFCANVAS CARRITO
+     ============================================================ -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
+  <div class="offcanvas-header" style="background:#0d1225; border-bottom: 1px solid rgba(0,240,200,0.2);">
+    <h5 class="offcanvas-title text-white" id="offcanvasCarritoLabel">
+      <i class="bi bi-cart3 me-2" style="color:#00f0c8;"></i>Mi Carrito
+    </h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
+    <p id="msgVacio" class="text-center mt-4">Tu carrito está vacío.</p>
+     <ul id="listaCarrito" class="list-group"></ul>
+     <div class="totalCarrito">
+      <p class="totalC">Total: <span id="total">0</span></p>
+      <button id="btnVaciar" class="btn btn-danger">Vaciar carrito</button>
+     </div>
+     
+  </div>
+</div>
+
+
+<section class="footer">
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer class="klydy-footer">
+  <div class="container">
+
+    <div class="row gy-4 pb-4 align-items-start">
+
+      <!-- COL: REDES SOCIALES -->
+      <div class="col-12 col-md-5 col-lg-5 footer-divider">
+        <p class="footer-title">Síguenos</p>
+        <div class="social-grid">
+          <a href="#" class="social-btn whatsapp"  title="WhatsApp"> <i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-btn instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-btn facebook"  title="Facebook"> <i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn tiktok"    title="TikTok">   <i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-btn youtube"   title="YouTube">  <i class="bi bi-youtube"></i></a>
+          <a href="#" class="social-btn linkedin"  title="LinkedIn"> <i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- COL: LOGO -->
+      <div class="col-12 col-md-2 col-lg-2 footer-divider d-flex align-items-center justify-content-center">
+        <div class="footer-logo-wrap">
+          <a class="footer-logo" href="#">
+            <span>K</span>lydy<span class="footer-logo-dot"></span>
+          </a>
+          <p class="footer-sub">Technology</p>
+        </div>
+      </div>
+
+      <!-- COL: MEDIOS DE PAGO -->
+      <div class="col-12 col-md-5 col-lg-5">
+        <p class="footer-title">Medios de pago</p>
+        <div class="payment-grid">
+          <div class="payment-badge"><span class="pay-daviplata">Daviplata</span></div>
+          <div class="payment-badge"><span class="pay-nequi">Nequi</span></div>
+          <div class="payment-badge"><span class="pay-pse">PSE</span></div>
+          <div class="payment-badge"><span class="pay-efecty">Efecty</span></div>
+          <div class="payment-badge">
+            <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="10" r="9" fill="#eb001b"/>
+              <circle cx="20" cy="10" r="9" fill="#f79e1b" opacity="0.9"/>
+              <path d="M16 3.5a9 9 0 0 1 0 13A9 9 0 0 1 16 3.5z" fill="#ff5f00"/>
+            </svg>
+          </div>
+          <div class="payment-badge">
+            <span class="pay-paypal" style="font-weight:800; font-style:italic;">Pay<span style="color:#009cde;">Pal</span></span>
+          </div>
+          <div class="payment-badge"><span class="pay-bancol">Bancolombia</span></div>
+          <div class="payment-badge">
+            <svg width="38" height="14" viewBox="0 0 38 14" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="12" font-family="Arial" font-size="14" font-weight="900" fill="#1a1f71" letter-spacing="-1">VISA</text>
+            </svg>
+          </div>
+          <div class="payment-badge"><span class="pay-wompi">Wompi</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRA COPYRIGHT -->
+    
+          <div class="col-12">
+          <p class="footer-copy">
+            © <span>Klydy Technology</span> — Developers and Design <span>2026</span>
+=======
         <div class="modal-body px-4 pb-4">
           <div id="mensajeLogin"></div>
           <div class="mb-3">
@@ -242,130 +482,63 @@
           <p class="modal-register-text">
             ¿No tienes cuenta?
             <a href="registrarse.html" class="modal-register-link">Regístrate</a>
+>>>>>>> 04907a752b5f4bf84cf7b2ac297bf6e0ff9e7639
           </p>
         </div>
-
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ============================================================
-      OFFCANVAS CARRITO
-      ============================================================ -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasCarritoLabel">
-    <div class="offcanvas-header" style="background:#0d1225; border-bottom: 1px solid rgba(0,240,200,0.2);">
-      <h5 class="offcanvas-title text-white" id="offcanvasCarritoLabel">
-        <i class="bi bi-cart3 me-2" style="color:#00f0c8;"></i>Mi Carrito
-      </h5>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-    </div>
-    <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
-      <p class="text-center mt-4">Tu carrito está vacío.</p>
-    </div>
-  </div>
-
-
-  <section class="footer">
-  <!-- ══════════════════════════════════════════════════════
-      FOOTER
-  ══════════════════════════════════════════════════════ -->
-  <footer class="klydy-footer">
-    <div class="container">
-
-      <div class="row gy-4 pb-4 align-items-start">
-
-        <!-- COL: REDES SOCIALES -->
-        <div class="col-12 col-md-5 col-lg-5 footer-divider">
-          <p class="footer-title">Síguenos</p>
-          <div class="social-grid">
-            <a href="#" class="social-btn whatsapp"  title="WhatsApp"> <i class="bi bi-whatsapp"></i></a>
-            <a href="#" class="social-btn instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-btn facebook"  title="Facebook"> <i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-btn tiktok"    title="TikTok">   <i class="bi bi-tiktok"></i></a>
-            <a href="#" class="social-btn youtube"   title="YouTube">  <i class="bi bi-youtube"></i></a>
-            <a href="#" class="social-btn linkedin"  title="LinkedIn"> <i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-        <!-- COL: LOGO -->
-        <div class="col-12 col-md-2 col-lg-2 footer-divider d-flex align-items-center justify-content-center">
-          <div class="footer-logo-wrap">
-            <a class="footer-logo" href="#">
-              <span>K</span>lydy<span class="footer-logo-dot"></span>
-            </a>
-            <p class="footer-sub">Technology</p>
-          </div>
-        </div>
-
-        <!-- COL: MEDIOS DE PAGO -->
-        <div class="col-12 col-md-5 col-lg-5">
-          <p class="footer-title">Medios de pago</p>
-          <div class="payment-grid">
-            <div class="payment-badge"><span class="pay-daviplata">Daviplata</span></div>
-            <div class="payment-badge"><span class="pay-nequi">Nequi</span></div>
-            <div class="payment-badge"><span class="pay-pse">PSE</span></div>
-            <div class="payment-badge"><span class="pay-efecty">Efecty</span></div>
-            <div class="payment-badge">
-              <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="10" r="9" fill="#eb001b"/>
-                <circle cx="20" cy="10" r="9" fill="#f79e1b" opacity="0.9"/>
-                <path d="M16 3.5a9 9 0 0 1 0 13A9 9 0 0 1 16 3.5z" fill="#ff5f00"/>
-              </svg>
-            </div>
-            <div class="payment-badge">
-              <span class="pay-paypal" style="font-weight:800; font-style:italic;">Pay<span style="color:#009cde;">Pal</span></span>
-            </div>
-            <div class="payment-badge"><span class="pay-bancol">Bancolombia</span></div>
-            <div class="payment-badge">
-              <svg width="38" height="14" viewBox="0 0 38 14" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="12" font-family="Arial" font-size="14" font-weight="900" fill="#1a1f71" letter-spacing="-1">VISA</text>
-              </svg>
-            </div>
-            <div class="payment-badge"><span class="pay-wompi">Wompi</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BARRA COPYRIGHT -->
       
-            <div class="col-12">
-            <p class="footer-copy">
-              © <span>Klydy Technology</span> — Developers and Design <span>2026</span>
-            </p>
-          </div>
-        
+  </div>
+</footer>
+</section>
+
+
+<!-- ============================================================
+     BARRA INFERIOR MÓVIL
+     ============================================================ -->
+<div class="bottom-nav d-lg-none">
+
+  <button class="bottom-nav-item btn-cuenta"
+    data-bs-toggle="modal" data-bs-target="#modalLogin"
+    onclick="setActive(this)">
+    <i class="bi bi-person-circle"></i>
+    <span class="label">Mi Cuenta</span>
+  </button>
+
+  <button class="bottom-nav-item btn-carrito"
+    data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito"
+    onclick="setActive(this)">
+    <i class="bi bi-cart3"></i>
+    <span class="bottom-badge" id="badge-mobile">0</span>
+    <span class="label">Carrito</span>
+  </button>
+
+  <button id="buscarCatrgoria" class="bottom-nav-item filtro">
+    <i class="bi bi-funnel-fill"></i>
+     <span>Buscasr por</span>
+  </button>
+</div>
+  <!-- =========================================
+  TOAST NOTIFICACIONES
+  ========================================= -->
+
+  <div id="toast"></div>
+
+  <!-- =========================================
+  MODAL CONFIRMACIÓN
+  ========================================= -->
+
+  <div id="modalConfirmacion" class="modalConfirmacion">
+
+    <div class="contenidoModal">
+
+      <p id="mensajeModal"></p>
+
+      <div class="botonesModal">
+        <button id="cancelarModal">Cancelar</button>
+        <button id="aceptarModal">Aceptar</button>
+      </div>
+
     </div>
-  </footer>
-  </section>
 
-
-  <!-- ============================================================
-      BARRA INFERIOR MÓVIL
-      ============================================================ -->
-  <div class="bottom-nav d-lg-none">
-
-    <button class="bottom-nav-item btn-cuenta"
-      data-bs-toggle="modal" data-bs-target="#modalLogin"
-      onclick="setActive(this)">
-      <i class="bi bi-person-circle"></i>
-      <span class="label">Mi Cuenta</span>
-    </button>
-
-    <button class="bottom-nav-item btn-carrito"
-      data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito"
-      onclick="setActive(this)">
-      <i class="bi bi-cart3"></i>
-      <span class="bottom-badge" id="badge-mobile">0</span>
-      <span class="label">Carrito</span>
-    </button>
-
-    <button class="bottom-nav-item btn-menu active"
-      data-bs-toggle="collapse" data-bs-target="#navbarKlydy"
-      onclick="setActive(this)">
-      <i class="bi bi-grid-3x3-gap"></i>
-      <span class="label">Menú</span>
-    </button>
   </div>
 
 <!-- ============================================================

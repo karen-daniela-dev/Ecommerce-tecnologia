@@ -25,7 +25,7 @@ export const productos = [
     },
      {
         id: 3,
-        nombre: "Portátil HP ProBook",  
+        nombre: "Portátil ProBook",  
         imagen: "https://i.postimg.cc/xTM4PYD9/Copilot-20260423-025245.png", 
         descripcion: "Maximice su potencial con una laptop resiliente.", 
         precio: 5139000,
@@ -36,7 +36,7 @@ export const productos = [
     },
     {
         id: 4,
-        nombre: "Portátil HP 240R G9",  
+        nombre: "Portátil 240R G9",  
         imagen: "https://i.postimg.cc/QdBkqJWj/Copilot-20260423-030436.png", 
         descripcion: "El Portátil HP 240R G9 cuenta con una pantalla FHD.", 
         precio: 2488000,
@@ -106,7 +106,7 @@ export const productos = [
 
     { 
         id: 9,
-        nombre: "gaming Acer Nitro", 
+        nombre: "Acer Nitro", 
         imagen: "https://i.postimg.cc/HxQgKNjR/Copilot-20260423-040232.png",
         descripcion: "Auriculares de diadema alámbricos diseñados para gaming.", 
         precio: 130000,
@@ -152,31 +152,6 @@ export const productos = [
 
 
 
-
-    { 
-        id: 13,
-        nombre: "ROG Xbox Ally", 
-        imagen: "https://i.postimg.cc/3wWpgPt7/Copilot-20260423-042030.png", 
-        descripcion: "Accede rápidamente a la Game Bar.", 
-        precio: 2599900,
-        categoria: "videojuegos",
-        uso: "gamer",
-        marca: "asus",
-        catidad: 25
-        
-    },
-    { 
-        id: 14,
-        nombre: "ROG Ally RC72LA", 
-        imagen: "https://i.postimg.cc/FRcWNdtB/Copilot-20260423-041257.png", 
-        descripcion: "El procesador de élite de alto rendimiento y mejorado.", 
-        precio: 4099900,
-        categoria: "videojuegos",
-        uso: "estudio",
-        marca: "asus",
-        catidad: 25
-        
-    },
    
 
 
@@ -192,14 +167,15 @@ export const productos = [
         precio: 330000,
         categoria: "teclados",
         uso: "gamer",
-        catidad: 25,
-        marca: "msi"
+        marca: "msi",
+        catidad: 25
+        
         
     },
 
     { 
         id: 16,
-        nombre: "FORGE GK600 TKL",  
+        nombre: "FORGE GK600",  
         imagen: "https://i.postimg.cc/nVsYnJ9Y/Copilot-20260418-085301.png", 
         descripcion: "teclado compacto diseñado para la eficiencia y la portabilidad.", 
         precio: 3250389,
@@ -212,7 +188,7 @@ export const productos = [
 
     { 
         id: 17,
-        nombre: "FORGE GK600 TOPO", 
+        nombre: "FORGE TOPO", 
         imagen: "https://i.postimg.cc/XYKtxFnD/Copilot-20260418-204720.png",
         descripcion: "Inspirado en mapas topográficos, el juego de teclas.", 
         precio: 324840,
@@ -288,7 +264,7 @@ export const productos = [
     },
     { 
         id: 23,
-        nombre: "Base de acoplamiento", 
+        nombre: "Base acoplamiento", 
         imagen: "https://i.postimg.cc/YSFHYrLq/Copilot-20260423-045952.png",
         descripcion: "Conecta tu portátil mediante USB-C™ a tus pantallas.", 
         precio: 875773,
@@ -297,7 +273,6 @@ export const productos = [
         marca: "hp",
         catidad: 25
     },
-
 
 
  
