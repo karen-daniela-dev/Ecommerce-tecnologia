@@ -364,40 +364,46 @@
 
   </main>
 
-<!-- ============================================================
-     MODAL LOGIN
+  <!-- ============================================================
+      MODAL LOGIN
+      
+      ============================================================ -->
+  <div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-klydy">
+
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-logo-wrap">
+          <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
+          <p class="modal-logo-sub">Technology</p>
+        </div>
+
+        <div class="modal-body px-4 pb-4">
+          <div id="mensajeLogin"></div>
+          <div class="mb-3">
+            <label class="modal-label">Correo</label>
+            <input type="email" id="correoLogin" class="form-control klydy-input" placeholder="tu@email.com">
+          </div>
+          <div class="mb-4">
+            <label class="modal-label">Contraseña</label>
+            <input type="password" id="passwordLogin" class="form-control klydy-input" placeholder="••••••••">
+          </div>
+          <button id="btnLogin" class="btn w-100 fw-bold modal-btn-enter">ENTRAR</button>
+          <p class="modal-register-text">
+            ¿No tienes cuenta?
+            <a href="registrarse.html" class="modal-register-link">Regístrate</a>
+          </p>
+        </div>
+
     
-     ============================================================ -->
-<div class="modal fade" id="modalLogin" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content modal-klydy">
 
-      <div class="modal-header border-0">
-        <h5 class="modal-title text-white fw-bold">Iniciar sesión</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+      
 
-      <div class="modal-logo-wrap">
-        <p class="modal-logo"><span>K</span>lydy<span class="modal-logo-dot"></span></p>
-        <p class="modal-logo-sub">Technology</p>
-      </div>
-
-      <div class="modal-body px-4 pb-4">
-        <div id="mensajeLogin"></div>
-        <div class="mb-3">
-          <label class="modal-label">Correo</label>
-          <input type="email" id="correoLogin" class="form-control klydy-input" placeholder="tu@email.com">
-        </div>
-        <div class="mb-4">
-          <label class="modal-label">Contraseña</label>
-          <input type="password" id="passwordLogin" class="form-control klydy-input" placeholder="••••••••">
-        </div>
-        <button id="btnLogin" class="btn w-100 fw-bold modal-btn-enter">ENTRAR</button>
-        <p class="modal-register-text">
-        <a href="registrarse.html" class="modal-register-link">Regístrate</a>
-        <a href="recuperar.html" class="modal-register-link">¿Olvidaste tu contraseña?</a>
-        </p>
-      </div>
+      
 
     </div>
   </div>
@@ -415,7 +421,13 @@
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
   </div>
   <div class="offcanvas-body" style="background:#0d1225; color: rgba(255,255,255,0.5);">
-    <p class="text-center mt-4">Tu carrito está vacío.</p>
+    <p id="msgVacio" class="text-center mt-4">Tu carrito está vacío.</p>
+     <ul id="listaCarrito" class="list-group"></ul>
+     <div class="totalCarrito">
+      <p class="totalC">Total: <span id="total">0</span></p>
+      <button id="btnVaciar" class="btn btn-danger">Vaciar carrito</button>
+     </div>
+     
   </div>
 </div>
 
@@ -486,8 +498,7 @@
           <div class="col-12">
           <p class="footer-copy">
             © <span>Klydy Technology</span> — Developers and Design <span>2026</span>
-          </p>
-        </div>
+ 
       
   </div>
 </footer>
@@ -514,16 +525,35 @@
     <span class="label">Carrito</span>
   </button>
 
-  <button class="bottom-nav-item btn-menu active"
-    data-bs-toggle="collapse" data-bs-target="#navbarKlydy"
-    onclick="setActive(this)">
-    <i class="bi bi-grid-3x3-gap"></i>
-    <span class="label">Menú</span>
+  <button id="buscarCatrgoria" class="bottom-nav-item filtro">
+    <i class="bi bi-funnel-fill"></i>
+     <span>Buscasr por</span>
   </button>
 </div>
+  <!-- =========================================
+  TOAST NOTIFICACIONES
+  ========================================= -->
 
-</div> <!-- FIN bottom-nav -->
+  <div id="toast"></div>
 
+  <!-- =========================================
+  MODAL CONFIRMACIÓN
+  ========================================= -->
+
+  <div id="modalConfirmacion" class="modalConfirmacion">
+
+    <div class="contenidoModal">
+
+      <p id="mensajeModal"></p>
+
+      <div class="botonesModal">
+        <button id="cancelarModal">Cancelar</button>
+        <button id="aceptarModal">Aceptar</button>
+      </div>
+
+    </div>
+
+  </div>
 
 <!-- ============================================================
      MODAL CERRAR SESIÓN
@@ -591,6 +621,8 @@
   </div>
 
 </div>
+
+
 
 
   <!-- Bootstrap  -->
