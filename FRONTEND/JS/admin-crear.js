@@ -29,6 +29,38 @@
   const inputImagen = document.getElementById('imagenProducto');
   const inputUrl = document.getElementById('imagenUrl');
 
+
+
+  /* ── Mapeos hacia los enums del back ──────────────────── */
+  const mapCategoria = {
+    laptops: 'LAPTOPS',
+    smartwatches: 'SMARTWATCHES',
+    mouses: 'MOUSES',
+    audio: 'AUDIO',
+    teclados: 'TECLADOS',
+    tarjetas: 'TARJETAS_GRAFICAS',
+    accesorios: 'ACCESORIOS'
+  };
+
+  const mapMarca = {
+    Samsung: 'SAMSUNG',
+    Acer: 'ACER',
+    Apple: 'APPLE',
+    Asus: 'ASUS',
+    Dell: 'DELL',
+    HP: 'HP',
+    Lenovo: 'LENOVO',
+    MSI: 'MSI',
+    Otras: 'OTRAS'
+  };
+
+  const mapUso = {
+    trabajo: 'TRABAJO',
+    estudio: 'ESTUDIO',
+    gamer: 'GAMER',
+    general: 'GENERAL'
+  };
+
   function mostrarToast(mensaje) {
     const toast = document.getElementById('toastProducto');
 
@@ -433,130 +465,71 @@
     });
   }
 
+
+
   /* ── Envío del formulario ─────────────────────────── */
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    // Dispara la validación nativa de Bootstrap
-    form.classList.add('was-validated');
+  form.classList.add('was-validated');
 
-    // Validaciones personalizadas
-    const precioOk = validarPrecio(true);
-    const usoOk = validarUso();
-    const imagenOk = validarImagen();
+  const precioOk  = validarPrecio(true);
+  const usoOk     = validarUso();
+  const imagenOk  = validarImagen();
+  const formNativoOk = form.checkValidity();
 
-    // Verifica también los campos nativos de Bootstrap
-    const formNativoOk = form.checkValidity();
+  if (!formNativoOk || !precioOk || !usoOk || !imagenOk) {
+    const primerError = form.querySelector('.is-invalid, [style*="display: block"]');
+    if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
-    if (!formNativoOk || !precioOk || !usoOk || !imagenOk) {
-      // Hace scroll al primer campo inválido
-      const primerError = form.querySelector('.is-invalid, [style*="display: block"]');
-      if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const btnSubmit = form.querySelector('button[type="submit"]');
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Guardando...';
+
+  const urlImagen = inputUrl.value.trim();
+  const usoSeleccionado = [...radiosUso].find(r => r.checked)?.value;
+
+  const payload = {
+    nombre:     inputNombre.value.trim(),
+    stock:      parseInt(inputCantidad.value),
+    precio:     parseInt(inputPrecio.value.replace(/\./g, '')),
+    marca:      mapMarca[inputMarca.value],
+    categoria:  mapCategoria[selectCat.value],
+    uso:        mapUso[usoSeleccionado],
+    descripcion: descTextarea.value.trim(),
+    urlImagen:  urlImagen || null
+  };
+
+  try {
+    const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const error = await res.json().catch(() => null);
+      console.error('Error del servidor:', error);
+      mostrarToast(`Error al crear el producto (${res.status})`);
       return;
     }
 
-    let imagen = null;
-    let tipoImagen = null;
-
-    if (inputImagen.files.length > 0) {
-      imagen = await inputABase64(inputImagen);
-      tipoImagen = "file";
-    } else if (inputUrl.value.trim()) {
-      imagen = inputUrl.value.trim();
-      tipoImagen = "url";
-    }
-
-    /*  Formulario válido — construir el objeto producto */
-    const nuevoProducto = {
-      id: listaProductos.length + 1,          // ID temporal (la BD lo generará)
-      nombre: inputNombre.value.trim(),
-      cantidad: parseInt(inputCantidad.value),
-      precio: parseInt(inputPrecio.value.replace(/\./g, '')),  // sin puntos
-      marca: inputMarca.value.trim(),
-      categoria: selectCat.value,
-      uso: [...radiosUso].find(r => r.checked)?.value,
-      descripcion: descTextarea.value.trim(),
-
-      imagenNombre: tipoImagen === "file" ? inputImagen.files[0]?.name : null,
-      imagenTamano: tipoImagen === "file" && inputImagen.files[0]
-        ? `${(inputImagen.files[0].size / 1024).toFixed(1)} KB`
-        : null,
-      tipoImagen: tipoImagen,
-      imagen: imagen,
-
-
-      creadoEn: new Date().toLocaleString('es-CO'),
-
-      esBase64: tipoImagen === "file"
-    };
-
-    console.log(JSON.stringify(nuevoProducto));
-
-
-    if (modoEdicion) {
-
-      const index = listaProductos.findIndex(p => p.id === productoEditando.id);
-
-      if (index !== -1) {
-        listaProductos[index] = {
-          ...productoEditando,
-          ...nuevoProducto,
-          id: productoEditando.id
-        };
-
-        localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
-
-        mostrarToast(`Producto "${nuevoProducto.nombre}" actualizado`);
-      }
-
-      modoEdicion = false;
-      productoEditando = null;
-      productoOriginal = null;
-
-    } else {
-
-      listaProductos.push(nuevoProducto);
-
-      localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
-
-      mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
-    }
-
-
-
-
-    // Mostrar en consola
-    console.log(
-      ' Producto agregado:',
-      nuevoProducto
-    );
-    imprimirLista();
-
-    /*
-       CUANDO SE TENGA LA API — se reemplaza las dos líneas de arriba por:
- 
-      const fd = new FormData();
-      Object.entries(nuevoProducto).forEach(([k, v]) => fd.append(k, v));
-      fd.append('imagen', inputImagen.files[0]);
- 
-      fetch('/api/productos', { method: 'POST', body: fd })
-        .then(r => r.json())
-        .then(data => {
-          console.log(' Guardado en BD:', data);
-          // aquí puedes actualizar la tabla de productos en pantalla
-        })
-        .catch(err => console.error('Error al guardar:', err));
-    */
-
-    if (!modoEdicion) {
-      mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
-    }
+    const productoCreado = await res.json();
+    console.log('Producto creado en BD:', productoCreado);
+    mostrarToast(`Producto "${productoCreado.nombre}" creado`);
     limpiarFormulario();
 
+  } catch (err) {
+    console.error('Error de red:', err);
+    mostrarToast('No se pudo conectar con el servidor. Intenta de nuevo.');
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = modoEdicion ? 'Actualizar' : 'Crear';
+  }
+});
 
-
-
-  });
 
   /* ── Botón Cancelar ───────────────────────────────── */
   document.getElementById('btnCancelar').addEventListener('click', () => {
