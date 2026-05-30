@@ -8,10 +8,12 @@ body {
 }
 
 /* TÍTULO */
-h1 {
+   h1 {
   font-family: var(--font-heading);
+  color: var(--neon-cyan);
+  text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text-primary);
+  text-shadow: var(--glow-cyan);
 }
 
 /* ─────────────────────────────
