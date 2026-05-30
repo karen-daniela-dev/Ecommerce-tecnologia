@@ -1,43 +1,47 @@
-// importamanos los areglos
-import { productos } from "./textoProducto.js";
+const API = 'https://ecommerceklydy.onrender.com/productos';
+let listaProductos = [];
 
+async function cargarProductos() {
 
-//convertimos en JSON
-let listaProductos = JSON.parse(JSON.stringify(productos));
+      const contenedor = document.getElementById("contenedor");
+  contenedor.innerHTML = `
+    <div style="text-align:center; padding: 40px; color: #aaa;">
+      <div style="font-size: 2rem; margin-bottom: 10px;">⏳</div>
+      <p style="font-size: 1.1rem; font-weight: 500;">Cargando productos...</p>
+      <p style="font-size: 0.85rem; opacity: 0.7;">El servidor está despertando, esto puede tomar hasta 1 minuto.</p>
+    </div>
+  `;
 
-// unir productos con productos creados
-function unirDatos() {
+    
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    const datos = await res.json();
 
-    let datos = localStorage.getItem("ListaProductos");
+    // Normalizar campos para que sean compatibles con el resto del JS
+    listaProductos = datos.map(p => ({
+      ...p,
+      imagen:    p.urlImagen || '',
+      categoria: p.categoria.toLowerCase(),         // "LAPTOPS" → "laptops"
+      marca:     p.marca.toLowerCase(),             // "DELL" → "dell"
+      uso:       p.uso.toLowerCase(),               // "GAMER" → "gamer"
+      cantidad:  p.stock
+    }));
 
-    if (datos) {
-
-        let productosCreados = JSON.parse(datos);
-        listaProductos = [...listaProductos, ...productosCreados];
-    }
-
-};
-
-function ActualizarProductos() {
-
-    listaProductos = JSON.parse(JSON.stringify(productos));
-
-    let datos = localStorage.getItem("ListaProductos");
-
-    if (datos) {
-
-        let creadosProductos = JSON.parse(datos);
-        listaProductos = [...listaProductos, ...creadosProductos];
-    }
-
+    productosFiltros = [...listaProductos];
     mostrarProductos();
+
+  } catch (err) {
+    console.error('Error al cargar productos:', err);
+    document.getElementById("contenedor").innerHTML =
+      `<p class="text-center text-danger">No se pudieron cargar los productos. Intenta más tarde.</p>`;
+  }
 }
 
 
 
-//setInterval(ActualizarProductos, 2000);
 
-unirDatos();
+
 
 // =========================================
 // TOAST
@@ -567,8 +571,7 @@ function obtenerFiltrosDesdeURL() {
 
 }
 obtenerFiltrosDesdeURL();
-mostrarProductos();
-
+cargarProductos(); // ← esto carga y luego llama mostrarProductos() internamente
 
 
 
