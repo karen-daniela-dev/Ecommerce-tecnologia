@@ -458,203 +458,157 @@ if(clic.target.classList.contains("incremento")){
 // LOGIN
 // ─────────────────────────────────────────────
 
+const API_AUTH = "https://ecommerceklydy.onrender.com/auth";
+
+// ─────────────────────────────────────────────
+// HELPERS DE SESIÓN
+// ─────────────────────────────────────────────
+function guardarSesion(data) {
+  localStorage.setItem("token",    data.token);
+  localStorage.setItem("rol",      data.rol);
+  localStorage.setItem("nombre",   data.nombre);
+  localStorage.setItem("email",    data.email);
+}
+
+function cerrarSesionLocal() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("rol");
+  localStorage.removeItem("nombre");
+  localStorage.removeItem("email");
+}
+
+function obtenerSesion() {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  return {
+    token,
+    rol:    localStorage.getItem("rol"),
+    nombre: localStorage.getItem("nombre"),
+    email:  localStorage.getItem("email")
+  };
+}
+
+// ─────────────────────────────────────────────
+// LOGIN
+// ─────────────────────────────────────────────
 const btnLogin = document.getElementById("btnLogin");
+if (btnLogin) {
+  btnLogin.addEventListener("click", iniciarSesion);
+}
 
-btnLogin.addEventListener("click", iniciarSesion);
-
-function iniciarSesion() {
-
-  const correo = document.getElementById("correoLogin").value.trim();
-
+async function iniciarSesion() {
+  const correo   = document.getElementById("correoLogin").value.trim();
   const password = document.getElementById("passwordLogin").value.trim();
+  const mensaje  = document.getElementById("mensajeLogin");
 
-  const mensaje = document.getElementById("mensajeLogin");
-
-  // VALIDAR CAMPOS VACÍOS
-  if (correo === "" || password === "") {
-
-    mensaje.innerHTML = `
-      <div class="alert alert-danger">
-        Todos los campos son obligatorios
-      </div>
-    `;
-
+  if (!correo || !password) {
+    mensaje.innerHTML = `<div class="alert alert-danger">Todos los campos son obligatorios</div>`;
     return;
   }
 
-  // OBTENER USUARIOS
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  btnLogin.disabled = true;
+  btnLogin.textContent = "Entrando...";
 
-  // BUSCAR USUARIO
-  const usuarioEncontrado = usuarios.find(usuario =>
-    usuario.correo === correo &&
-    usuario.password === password
-  );
+  try {
+    const res = await fetch(`${API_AUTH}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: correo, password })
+    });
 
-  // LOGIN EXITOSO
-  if (usuarioEncontrado) {
+    const data = await res.json();
 
-    localStorage.setItem(
-      "usuarioActivo",
-      JSON.stringify(usuarioEncontrado)
-    );
+    if (!res.ok) {
+      mensaje.innerHTML = `<div class="alert alert-danger">${data.error || "Credenciales incorrectas"}</div>`;
+      return;
+    }
 
-    mensaje.innerHTML = `
-      <div class="alert alert-success">
-        Inicio de sesión exitoso
-      </div>
-    `;
+    guardarSesion(data);
+    actualizarNavbarUsuario();
 
-    //REDIRECCION
+    // Cerrar modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalLogin"));
+    if (modal) modal.hide();
 
-    setTimeout(() => {
+    mensaje.innerHTML = `<div class="alert alert-success">Bienvenido, ${data.nombre}</div>`;
+    setTimeout(() => mensaje.innerHTML = "", 2000);
 
-      window.location.href = "FRONTEND/HTML/productos.html";
-
-    }, 1000);
-
-    // LOGIN INCORRECTO
-
-  } else {
-
-    mensaje.innerHTML = `
-      <div class="alert alert-danger">
-        Usuario o contraseña inválidos
-      </div>
-    `;
+  } catch (err) {
+    console.error(err);
+    mensaje.innerHTML = `<div class="alert alert-danger">No se pudo conectar con el servidor.</div>`;
+  } finally {
+    btnLogin.disabled = false;
+    btnLogin.textContent = "ENTRAR";
   }
 }
 
-
 // ─────────────────────────────────────────────
-// CAMBIAR NAVBAR
+// NAVBAR SEGÚN SESIÓN
 // ─────────────────────────────────────────────
-
 function actualizarNavbarUsuario() {
+  const sesion = obtenerSesion();
+  const contenedorDesktop = document.querySelector(".d-none.d-lg-flex.align-items-center.gap-2");
+  const linkAdmin = document.getElementById("linkAdmin"); // ← ver paso 3
 
-  const usuarioActivo = JSON.parse(
-    localStorage.getItem("usuarioActivo")
-  );
+  // Mostrar/ocultar link ADMINISTRADOR
+  if (linkAdmin) {
+    linkAdmin.style.display = (sesion && sesion.rol === "ADMIN") ? "block" : "none";
+  }
 
-  const contenedorDesktop = document.querySelector(
-    ".d-none.d-lg-flex.align-items-center.gap-2"
-  );
+  if (!contenedorDesktop) return;
 
-  if (usuarioActivo && contenedorDesktop) {
-
+  if (sesion) {
     contenedorDesktop.innerHTML = `
-
       <div class="d-flex align-items-center gap-2">
-
-        <!-- NOMBRE USUARIO -->
         <span class="text-white fw-bold">
-          <i class="bi bi-person-check-fill"></i>
-          ${usuarioActivo.nombre}
+          <i class="bi bi-person-check-fill"></i> ${sesion.nombre}
         </span>
-
-        <!-- BOTÓN CERRAR SESIÓN -->
-        <button
-          class="btn btn-outline-danger btn-sm"
-          id="btnCerrarSesion">
-
+        <button class="btn btn-outline-danger btn-sm" id="btnCerrarSesion">
           Cerrar Sesión
         </button>
-
-        <!-- CARRITO -->
-        <button
-          class="btn klydy-btn-cart d-flex align-items-center"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasCarrito">
-
+        <button class="btn klydy-btn-cart d-flex align-items-center" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
           <i class="bi bi-cart3"></i>
-
-          <span
-            class="klydy-badge ms-1"
-            id="badge-desktop">
-
-          </span>
-
+          <span class="klydy-badge ms-1" id="badge-desktop"></span>
         </button>
-
       </div>
     `;
-
-    // EVENTO CERRAR SESIÓN
-    document
-      .getElementById("btnCerrarSesion")
-      .addEventListener("click", abrirModalCerrarSesion);
+    document.getElementById("btnCerrarSesion")?.addEventListener("click", abrirModalCerrarSesion);
+  } else {
+    // Sin sesión — mostrar botón Mi Cuenta y carrito
+    contenedorDesktop.innerHTML = `
+      <form class="d-flex align-items-center gap-2">
+        <button class="btn klydy-btn-login" type="button"
+          data-bs-toggle="modal" data-bs-target="#modalLogin">
+          <i class="bi bi-person"></i> Mi Cuenta
+        </button>
+        <button class="btn klydy-btn-cart d-flex align-items-center" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
+          <i class="bi bi-cart3"></i>
+          <span class="klydy-badge ms-1" id="badge-desktop"></span>
+        </button>
+      </form>
+    `;
   }
 }
 
 // ─────────────────────────────────────────────
 // CERRAR SESIÓN
 // ─────────────────────────────────────────────
-
 function cerrarSesion() {
-
-  localStorage.removeItem("usuarioActivo");
-
-  // CREAR ALERTA VISUAL
-  const alerta = document.createElement("div");
-
-  alerta.innerHTML = `
-  
-    <div 
-      class="alert alert-info alert-dismissible fade show shadow-lg"
-      role="alert"
-      style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        min-width: 320px;
-        border-radius: 14px;
-        font-weight: 600;
-      ">
-
-      <i class="bi bi-check-circle-fill me-2"></i>
-      Sesión cerrada correctamente
-
-    </div>
-  `;
-
-  document.body.appendChild(alerta);
-
-  // REDIRECCIONAR
-  setTimeout(() => {
-
-    window.location.href = "../../index.html";
-
-  }, 1500);
+  cerrarSesionLocal();
+  actualizarNavbarUsuario();
+  window.location.href = "../../index.html";
 }
 
-// EJECUTAR AL CARGAR
-actualizarNavbarUsuario();
-
-// ─────────────────────────────────────────────
-// ABRIR MODAL CERRAR SESIÓN
-// ─────────────────────────────────────────────
-
 function abrirModalCerrarSesion() {
-
-  const modal = new bootstrap.Modal(
-    document.getElementById("modalCerrarSesion")
-  );
-
+  const modal = new bootstrap.Modal(document.getElementById("modalCerrarSesion"));
   modal.show();
 }
 
-// ─────────────────────────────────────────────
-// CONFIRMAR CERRAR SESIÓN
-// ─────────────────────────────────────────────
-
 document.addEventListener("DOMContentLoaded", () => {
-
   const btnConfirmar = document.getElementById("confirmarCerrarSesion");
+  if (btnConfirmar) btnConfirmar.addEventListener("click", cerrarSesion);
 
-  if (btnConfirmar) {
-    btnConfirmar.addEventListener("click", cerrarSesion);
-  }
-
+  actualizarNavbarUsuario();
 });
