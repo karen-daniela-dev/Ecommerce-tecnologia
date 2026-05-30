@@ -32,9 +32,9 @@
   // MODAL CANCELAR 
 
   const modalCancelar = document.getElementById('modalCancelar');
-const btnSeguirEditando = document.getElementById('btnSeguirEditando');
-const btnConfirmarCancelar = document.getElementById('btnConfirmarCancelar');
-const modalMensaje = document.getElementById('modalMensaje');
+  const btnSeguirEditando = document.getElementById('btnSeguirEditando');
+  const btnConfirmarCancelar = document.getElementById('btnConfirmarCancelar');
+  const modalMensaje = document.getElementById('modalMensaje');
 
 
 
@@ -475,45 +475,77 @@ const modalMensaje = document.getElementById('modalMensaje');
 
 
   /* ── Envío del formulario ─────────────────────────── */
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  form.classList.add('was-validated');
+    form.classList.add('was-validated');
 
-  const precioOk  = validarPrecio(true);
-  const usoOk     = validarUso();
-  const imagenOk  = validarImagen();
-  const formNativoOk = form.checkValidity();
+    const precioOk = validarPrecio(true);
+    const usoOk = validarUso();
+    const imagenOk = validarImagen();
+    const formNativoOk = form.checkValidity();
 
-  if (!formNativoOk || !precioOk || !usoOk || !imagenOk) {
-    const primerError = form.querySelector('.is-invalid, [style*="display: block"]');
-    if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
+    if (!formNativoOk || !precioOk || !usoOk || !imagenOk) {
+      const primerError = form.querySelector('.is-invalid, [style*="display: block"]');
+      if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
-  const btnSubmit = form.querySelector('button[type="submit"]');
-  btnSubmit.disabled = true;
-  btnSubmit.textContent = 'Guardando...';
+    const btnSubmit = form.querySelector('button[type="submit"]');
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Guardando...';
 
-  const urlImagen = inputUrl.value.trim();
-  const usoSeleccionado = [...radiosUso].find(r => r.checked)?.value;
+    const urlImagen = inputUrl.value.trim();
+    const usoSeleccionado = [...radiosUso].find(r => r.checked)?.value;
 
-  const payload = {
-    nombre:     inputNombre.value.trim(),
-    stock:      parseInt(inputCantidad.value),
-    precio:     parseInt(inputPrecio.value.replace(/\./g, '')),
-    marca:      mapMarca[inputMarca.value],
-    categoria:  mapCategoria[selectCat.value],
-    uso:        mapUso[usoSeleccionado],
-    descripcion: descTextarea.value.trim(),
-    urlImagen:  urlImagen || null
-  };
+    const payload = {
+      nombre: inputNombre.value.trim(),
+      stock: parseInt(inputCantidad.value),
+      precio: parseInt(inputPrecio.value.replace(/\./g, '')),
+      marca: mapMarca[inputMarca.value],
+      categoria: mapCategoria[selectCat.value],
+      uso: mapUso[usoSeleccionado],
+      descripcion: descTextarea.value.trim(),
+      urlImagen: urlImagen || null
+    };
 
-  /* ── MODO EDICIÓN → PUT ───────────────────────────── */
-  if (modoEdicion) {
+    /* ── MODO EDICIÓN → PUT ───────────────────────────── */
+    if (modoEdicion) {
+      try {
+        const res = await fetch(`${API}/${productoEditando.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          const error = await res.json().catch(() => null);
+          console.error('Error del servidor:', error);
+          mostrarToast(`Error al actualizar (${res.status})`);
+          return;
+        }
+
+        const productoActualizado = await res.json();
+        console.log('Producto actualizado:', productoActualizado);
+        mostrarToast(`Producto "${productoActualizado.nombre}" actualizado`);
+        limpiarFormulario();
+        setTimeout(() => window.location.href = 'admin-ver.html', 1500);
+
+      } catch (err) {
+        console.error('Error de red:', err);
+        mostrarToast('No se pudo conectar con el servidor.');
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Actualizar';
+      }
+      return; // ← evita que caiga al POST
+    }
+
+    /* ── MODO CREACIÓN → POST ─────────────────────────── */
+
     try {
-      const res = await fetch(`${API}/${productoEditando.id}`, {
-        method: 'PUT',
+      const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
@@ -521,154 +553,127 @@ form.addEventListener('submit', async (e) => {
       if (!res.ok) {
         const error = await res.json().catch(() => null);
         console.error('Error del servidor:', error);
-        mostrarToast(`Error al actualizar (${res.status})`);
+        mostrarToast(`Error al crear el producto (${res.status})`);
         return;
       }
 
-      const productoActualizado = await res.json();
-      console.log('Producto actualizado:', productoActualizado);
-      mostrarToast(`Producto "${productoActualizado.nombre}" actualizado`);
+      const productoCreado = await res.json();
+      console.log('Producto creado en BD:', productoCreado);
+      mostrarToast(`Producto "${productoCreado.nombre}" creado`);
       limpiarFormulario();
-      setTimeout(() => window.location.href = 'admin-ver.html', 1500);
 
     } catch (err) {
       console.error('Error de red:', err);
-      mostrarToast('No se pudo conectar con el servidor.');
+      mostrarToast('No se pudo conectar con el servidor. Intenta de nuevo.');
     } finally {
       btnSubmit.disabled = false;
-      btnSubmit.textContent = 'Actualizar';
+      btnSubmit.textContent = modoEdicion ? 'Actualizar' : 'Crear';
     }
-    return; // ← evita que caiga al POST
-  }
-
-  /* ── MODO CREACIÓN → POST ─────────────────────────── */
-
-  try {
-    const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (!res.ok) {
-      const error = await res.json().catch(() => null);
-      console.error('Error del servidor:', error);
-      mostrarToast(`Error al crear el producto (${res.status})`);
-      return;
-    }
-
-    const productoCreado = await res.json();
-    console.log('Producto creado en BD:', productoCreado);
-    mostrarToast(`Producto "${productoCreado.nombre}" creado`);
-    limpiarFormulario();
-
-  } catch (err) {
-    console.error('Error de red:', err);
-    mostrarToast('No se pudo conectar con el servidor. Intenta de nuevo.');
-  } finally {
-    btnSubmit.disabled = false;
-    btnSubmit.textContent = modoEdicion ? 'Actualizar' : 'Crear';
-  }
-});
-
-
-if (modalCancelar && btnSeguirEditando && btnConfirmarCancelar) {
-  /* ── Botón Cancelar ───────────────────────────────── */
-document.getElementById('btnCancelar').addEventListener('click', () => {
-
-if (modoEdicion) {
-  modalMensaje.textContent = '¿Deseas salir sin guardar los cambios?';
-
-  btnSeguirEditando.textContent = 'Seguir editando';
-  btnConfirmarCancelar.textContent = 'Salir sin guardar';
-
-} else {
-  modalMensaje.textContent = '¿Deseas cancelar el registro del producto?';
-
-  btnSeguirEditando.textContent = 'Seguir llenando';
-  btnConfirmarCancelar.textContent = 'Cancelar';
-}
-
-  modalCancelar.classList.remove('d-none');
-});
-//  Cerrar modal (seguir editando)
-btnSeguirEditando.addEventListener('click', () => {
-  modalCancelar.classList.add('d-none');
-});
-//  Confirmar cancelar (LA CLAVE )
-btnConfirmarCancelar.addEventListener('click', () => {
-
-  modalCancelar.classList.add('d-none');
-
-  if (modoEdicion) {
-    // MODO EDICIÓN → redirige
-    window.location.href = '../HTML/admin-ver.html';
-  } else {
-    // MODO CREAR → limpia
-    limpiarFormulario();
-  }
-});
-}
-// cerrar modal al hacer click fuera 
-modalCancelar.addEventListener('click', (e) => {
-  if (e.target === modalCancelar) {
-    modalCancelar.classList.add('d-none');
-  }
-});
-
-/* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
-const API = 'https://ecommerceklydy.onrender.com/productos';
-
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-if (id) {
-  fetch(`${API}/${id}`)
-    .then(res => {
-      if (!res.ok) throw new Error(`Error ${res.status}`);
-      return res.json();
-    })
-    .then(producto => {
-      modoEdicion = true;
-      productoEditando = producto;
-      productoOriginal = JSON.stringify(producto);
-
-      cargarFormulario(producto);
-
-      document.querySelector("h1").textContent = "Editar producto";
-      const btnSubmit = form.querySelector('button[type="submit"]');
-      btnSubmit.textContent = "Actualizar";
-      btnSubmit.disabled = true;
-    })
-    .catch(err => {
-      console.error('Error al cargar producto:', err);
-      alert('No se pudo cargar el producto para editar.');
-    });
-}
-
-function cargarFormulario(p) {
-  inputNombre.value = p.nombre;
-  inputCantidad.value = p.stock;                          // ← stock, no cantidad
-  inputPrecio.value = p.precio.toLocaleString("es-CO");
-  inputMarca.value = p.marca;                             // ya viene en mayúsculas
-  selectCat.value = p.categoria === 'TARJETAS_GRAFICAS'  // mapeo inverso especial
-    ? 'tarjetas' : p.categoria.toLowerCase();
-  descTextarea.value = p.descripcion;
-
-  radiosUso.forEach(r => {
-    if (r.value === p.uso.toLowerCase()) r.checked = true;
   });
 
-  if (p.urlImagen) {
-    inputUrl.value = p.urlImagen;
-    previewImg.src = p.urlImagen;
-    previewNombre.textContent = "Imagen guardada";
-    previewContainer.classList.remove('d-none');
-    dropZone.classList.add('border-success');
+
+  if (modalCancelar && btnSeguirEditando && btnConfirmarCancelar) {
+    /* ── Botón Cancelar ───────────────────────────────── */
+    document.getElementById('btnCancelar').addEventListener('click', () => {
+
+      if (modoEdicion) {
+        modalMensaje.textContent = '¿Deseas salir sin guardar los cambios?';
+
+        btnSeguirEditando.textContent = 'Seguir editando';
+        btnConfirmarCancelar.textContent = 'Salir sin guardar';
+
+      } else {
+        modalMensaje.textContent = '¿Deseas cancelar el registro del producto?';
+
+        btnSeguirEditando.textContent = 'Seguir llenando';
+        btnConfirmarCancelar.textContent = 'Cancelar';
+      }
+
+      modalCancelar.classList.remove('d-none');
+    });
+    //  Cerrar modal (seguir editando)
+    btnSeguirEditando.addEventListener('click', () => {
+      modalCancelar.classList.add('d-none');
+    });
+    //  Confirmar cancelar (LA CLAVE )
+    btnConfirmarCancelar.addEventListener('click', () => {
+
+      modalCancelar.classList.add('d-none');
+
+      if (modoEdicion) {
+        // MODO EDICIÓN → redirige
+        window.location.href = '../HTML/admin-ver.html';
+      } else {
+        // MODO CREAR → limpia
+        limpiarFormulario();
+      }
+    });
+  }
+  // cerrar modal al hacer click fuera 
+  modalCancelar.addEventListener('click', (e) => {
+    if (e.target === modalCancelar) {
+      modalCancelar.classList.add('d-none');
+    }
+  });
+
+  /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+  const API = 'https://ecommerceklydy.onrender.com/productos';
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (id) {
+    fetch(`${API}/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`Error ${res.status}`);
+        return res.json();
+      })
+      .then(producto => {
+        modoEdicion = true;
+        productoEditando = producto;
+        productoOriginal = JSON.stringify(producto);
+
+        cargarFormulario(producto);
+
+        document.querySelector("h1").textContent = "Editar producto";
+        const btnSubmit = form.querySelector('button[type="submit"]');
+        btnSubmit.textContent = "Actualizar";
+        btnSubmit.disabled = true;
+      })
+      .catch(err => {
+        console.error('Error al cargar producto:', err);
+        alert('No se pudo cargar el producto para editar.');
+      });
   }
 
-  descContador.textContent = `${p.descripcion.length} / 500`;
-}
+  function cargarFormulario(p) {
+    inputNombre.value = p.nombre;
+    inputCantidad.value = p.stock;                          // ← stock, no cantidad
+    inputPrecio.value = p.precio.toLocaleString("es-CO");
+    const mapMarcaInverso = {
+      SAMSUNG: 'Samsung', ACER: 'Acer', APPLE: 'Apple',
+      ASUS: 'Asus', DELL: 'Dell', HP: 'HP',
+      LENOVO: 'Lenovo', MSI: 'MSI', OTRAS: 'Otras'
+    };
+    inputMarca.value = mapMarcaInverso[p.marca] || p.marca;                          // ya viene en mayúsculas
+    selectCat.value = p.categoria === 'TARJETAS_GRAFICAS'  // mapeo inverso especial
+      ? 'tarjetas' : p.categoria.toLowerCase();
+    descTextarea.value = p.descripcion;
+
+    radiosUso.forEach(r => {
+      if (r.value === p.uso.toLowerCase()) r.checked = true;
+    });
+
+    if (p.urlImagen) {
+      inputUrl.value = p.urlImagen;
+      previewImg.src = p.urlImagen;
+      previewNombre.textContent = "Imagen guardada";
+      previewContainer.classList.remove('d-none');
+      dropZone.classList.add('border-success');
+    }
+
+    descContador.textContent = `${p.descripcion.length} / 500`;
+  }
 
 
 
