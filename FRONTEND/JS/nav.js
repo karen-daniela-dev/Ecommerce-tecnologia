@@ -612,3 +612,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   actualizarNavbarUsuario();
 });
+
+
+// limpiar de autocompletados 
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.pre').forEach(input => {
+        input.value = "";
+    });
+});
