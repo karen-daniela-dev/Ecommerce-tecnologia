@@ -94,16 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // contadores (cargar carrito guardado)
-  let datos = localStorage.getItem("carrito");
+let datos = localStorage.getItem("carrito");
 
-  if (datos) {
-    let carrito = JSON.parse(datos);
+if (datos) {
+  let carrito = JSON.parse(datos);
+  cantitaProducto = 0;
+  totalPrecio = 0;
 
-    carrito.forEach(prodc => {
-      agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
-    });
-  }
-
+  carrito.forEach(prodc => {
+    agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
+  });
+}
 
 
   // escha el click de la targeta para agrecar a lista
@@ -556,7 +557,6 @@ function actualizarNavbarUsuario() {
   const contenedorDesktop = document.querySelector(".d-none.d-lg-flex.align-items-center.gap-2");
   const linkAdmin = document.getElementById("linkAdmin");
 
-  // Mostrar/ocultar link ADMINISTRADOR
   if (linkAdmin) {
     linkAdmin.style.display = (sesion && sesion.rol === "ADMIN") ? "block" : "none";
   }
@@ -581,7 +581,6 @@ function actualizarNavbarUsuario() {
     `;
     document.getElementById("btnCerrarSesion")?.addEventListener("click", abrirModalCerrarSesion);
   } else {
-    // Sin sesión — mostrar botón Mi Cuenta y carrito
     contenedorDesktop.innerHTML = `
       <form class="d-flex align-items-center gap-2">
         <button class="btn klydy-btn-login" type="button"
@@ -596,6 +595,12 @@ function actualizarNavbarUsuario() {
       </form>
     `;
   }
+
+  // ← NUEVO: restaurar badge después de redibujar el navbar
+  const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
+  const totalItems = carritoGuardado.reduce((acc, p) => acc + p.cantidad, 0);
+  const badgeDesktop = document.getElementById("badge-desktop");
+  if (badgeDesktop) badgeDesktop.textContent = totalItems || '';
 }
 
 // ─────────────────────────────────────────────
