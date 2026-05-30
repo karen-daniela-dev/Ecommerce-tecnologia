@@ -502,6 +502,40 @@ form.addEventListener('submit', async (e) => {
     urlImagen:  urlImagen || null
   };
 
+  /* ── MODO EDICIÓN → PUT ───────────────────────────── */
+  if (modoEdicion) {
+    try {
+      const res = await fetch(`${API}/${productoEditando.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const error = await res.json().catch(() => null);
+        console.error('Error del servidor:', error);
+        mostrarToast(`Error al actualizar (${res.status})`);
+        return;
+      }
+
+      const productoActualizado = await res.json();
+      console.log('Producto actualizado:', productoActualizado);
+      mostrarToast(`Producto "${productoActualizado.nombre}" actualizado`);
+      limpiarFormulario();
+      setTimeout(() => window.location.href = 'admin-ver.html', 1500);
+
+    } catch (err) {
+      console.error('Error de red:', err);
+      mostrarToast('No se pudo conectar con el servidor.');
+    } finally {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = 'Actualizar';
+    }
+    return; // ← evita que caiga al POST
+  }
+
+  /* ── MODO CREACIÓN → POST ─────────────────────────── */
+
   try {
     const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
       method: 'POST',
@@ -539,16 +573,19 @@ form.addEventListener('submit', async (e) => {
     }
   });
 
-  // edicion 
-  /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+/* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+const API = 'https://ecommerceklydy.onrender.com/productos';
 
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-  if (id) {
-    const producto = listaProductos.find(p => p.id == id);
-
-    if (producto) {
+if (id) {
+  fetch(`${API}/${id}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`Error ${res.status}`);
+      return res.json();
+    })
+    .then(producto => {
       modoEdicion = true;
       productoEditando = producto;
       productoOriginal = JSON.stringify(producto);
@@ -556,72 +593,40 @@ form.addEventListener('submit', async (e) => {
       cargarFormulario(producto);
 
       document.querySelector("h1").textContent = "Editar producto";
-
       const btnSubmit = form.querySelector('button[type="submit"]');
       btnSubmit.textContent = "Actualizar";
       btnSubmit.disabled = true;
-    }
-  }
-
-
-  function cargarFormulario(p) {
-    inputNombre.value = p.nombre;
-    inputCantidad.value = p.cantidad;
-    inputPrecio.value = p.precio.toLocaleString("es-CO");
-    inputMarca.value = p.marca;
-    selectCat.value = p.categoria;
-    descTextarea.value = p.descripcion;
-
-    // radio uso
-    radiosUso.forEach(r => {
-      if (r.value === p.uso) r.checked = true;
+    })
+    .catch(err => {
+      console.error('Error al cargar producto:', err);
+      alert('No se pudo cargar el producto para editar.');
     });
+}
 
-    // imagen
-    if (p.tipoImagen === "url") {
-      inputUrl.value = p.imagen;
-    }
-    if (p.imagen) {
-      previewImg.src = p.imagen;
-      previewNombre.textContent = p.imagenNombre || "Imagen guardada";
-      previewContainer.classList.remove('d-none');
+function cargarFormulario(p) {
+  inputNombre.value = p.nombre;
+  inputCantidad.value = p.stock;                          // ← stock, no cantidad
+  inputPrecio.value = p.precio.toLocaleString("es-CO");
+  inputMarca.value = p.marca;                             // ya viene en mayúsculas
+  selectCat.value = p.categoria === 'TARJETAS_GRAFICAS'  // mapeo inverso especial
+    ? 'tarjetas' : p.categoria.toLowerCase();
+  descTextarea.value = p.descripcion;
 
-      dropZone.classList.add('border-success');
-    }
+  radiosUso.forEach(r => {
+    if (r.value === p.uso.toLowerCase()) r.checked = true;
+  });
 
-    descContador.textContent = `${p.descripcion.length} / 500`;
+  if (p.urlImagen) {
+    inputUrl.value = p.urlImagen;
+    previewImg.src = p.urlImagen;
+    previewNombre.textContent = "Imagen guardada";
+    previewContainer.classList.remove('d-none');
+    dropZone.classList.add('border-success');
   }
 
-  function obtenerProductoFormulario() {
-    return {
-      nombre: inputNombre.value.trim(),
-      cantidad: parseInt(inputCantidad.value),
-      precio: parseInt(inputPrecio.value.replace(/\./g, '')),
-      marca: inputMarca.value,
-      categoria: selectCat.value,
-      uso: [...radiosUso].find(r => r.checked)?.value,
-      descripcion: descTextarea.value.trim(),
-      imagen: previewImg.src || null
-    };
-  }
+  descContador.textContent = `${p.descripcion.length} / 500`;
+}
 
-  function detectarCambios() {
-    if (!modoEdicion) return;
 
-    const actual = JSON.stringify({
-      ...productoEditando,
-      ...obtenerProductoFormulario()
-    });
-
-    const btnSubmit = form.querySelector('button[type="submit"]');
-
-    if (actual !== productoOriginal) {
-      btnSubmit.disabled = false;
-    } else {
-      btnSubmit.disabled = true;
-    }
-  }
-  form.addEventListener('input', detectarCambios);
-  form.addEventListener('change', detectarCambios);
 
 })();

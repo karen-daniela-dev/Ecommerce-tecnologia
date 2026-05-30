@@ -1,5 +1,7 @@
-const lista = JSON.parse(localStorage.getItem("ListaProductos")) || [];
+const API = 'https://ecommerceklydy.onrender.com/productos';
 
+let lista = [];
+let listaFiltrada = [];
 let paginaActual = 1;
 const porPagina = 5;
 
@@ -8,36 +10,54 @@ const cards = document.getElementById("cardsProductos");
 const paginacion = document.getElementById("paginacion");
 const buscador = document.getElementById("buscador");
 
-let listaFiltrada = [...lista];
-
-/* FORMATO PRECIO */
+/* ── Formato precio ───────────────────────────────── */
 function formatearPrecio(num) {
   return "$ " + num.toLocaleString("es-CO");
 }
 
-/* RENDER */
+/* ── Cargar productos desde la API ───────────────── */
+async function cargarProductos() {
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    lista = await res.json();
+    listaFiltrada = [...lista];
+    render();
+  } catch (err) {
+    console.error('Error al cargar productos:', err);
+    tabla.innerHTML = `<tr><td colspan="7" class="text-center text-danger">No se pudo cargar los productos.</td></tr>`;
+  }
+}
+
+/* ── Render tabla y cards ─────────────────────────── */
 function render() {
   tabla.innerHTML = "";
   cards.innerHTML = "";
 
   const inicio = (paginaActual - 1) * porPagina;
-  const fin = inicio + porPagina;
-  const datos = listaFiltrada.slice(inicio, fin);
+  const datos = listaFiltrada.slice(inicio, inicio + porPagina);
+
+  if (datos.length === 0) {
+    tabla.innerHTML = `<tr><td colspan="7" class="text-center text-muted">Sin productos.</td></tr>`;
+    cards.innerHTML = `<p class="text-center text-muted">Sin productos.</p>`;
+    renderPaginacion();
+    return;
+  }
 
   datos.forEach(p => {
 
     /* TABLA */
     tabla.innerHTML += `
       <tr>
-        <td><img src="${p.imagen}" style="width:60px;height:60px;object-fit:cover;"></td>
+        <td><img src="${p.urlImagen || ''}" style="width:60px;height:60px;object-fit:cover;" onerror="this.src='../IMG/no-image.png'"></td>
         <td>${p.id}</td>
         <td>${p.nombre}</td>
         <td>${p.marca}</td>
-        <td>${p.cantidad}</td>
+        <td>${p.stock}</td>
         <td>${formatearPrecio(p.precio)}</td>
         <td>
           <button class="btn btn-sm btn-outline-info" onclick="irAEditar(${p.id})">
-            <i class="bi bi-eye"></i>
+            <i class="bi bi-pencil"></i>
           </button>
           <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${p.id})">
             <i class="bi bi-trash"></i>
@@ -50,7 +70,7 @@ function render() {
     cards.innerHTML += `
       <div class="card mb-3 bg-dark text-white">
         <div class="d-flex p-3 gap-3">
-          <img src="${p.imagen}" style="width:80px;height:80px;object-fit:cover;">
+          <img src="${p.urlImagen || ''}" style="width:80px;height:80px;object-fit:cover;" onerror="this.src='../IMG/no-image.png'">
           <div class="flex-grow-1">
             <h6>${p.nombre}</h6>
             <small>${p.marca}</small><br>
@@ -58,8 +78,8 @@ function render() {
           </div>
         </div>
         <div class="p-2 d-flex justify-content-end gap-2">
-          <button class="btn btn-sm btn-outline-info" onclick="#">
-            <i class="bi bi-eye"></i>
+          <button class="btn btn-sm btn-outline-info" onclick="irAEditar(${p.id})">
+            <i class="bi bi-pencil"></i>
           </button>
           <button class="btn btn-sm btn-outline-danger" onclick="eliminar(${p.id})">
             <i class="bi bi-trash"></i>
@@ -72,11 +92,10 @@ function render() {
   renderPaginacion();
 }
 
-/* PAGINACIÓN */
+/* ── Paginación ───────────────────────────────────── */
 function renderPaginacion() {
   paginacion.innerHTML = "";
   const totalPaginas = Math.ceil(listaFiltrada.length / porPagina);
-
   for (let i = 1; i <= totalPaginas; i++) {
     paginacion.innerHTML += `
       <li class="page-item ${i === paginaActual ? "active" : ""}">
@@ -91,35 +110,36 @@ function cambiarPagina(p) {
   render();
 }
 
-/* BUSCADOR */
+/* ── Buscador ─────────────────────────────────────── */
 buscador.addEventListener("input", () => {
   const valor = buscador.value.toLowerCase();
-
   listaFiltrada = lista.filter(p =>
     p.nombre.toLowerCase().includes(valor) ||
     p.marca.toLowerCase().includes(valor) ||
     p.categoria.toLowerCase().includes(valor)
   );
-
   paginaActual = 1;
   render();
 });
 
-
-
-/* ELIMINAR */
-function eliminar(id) {
+/* ── Eliminar ─────────────────────────────────────── */
+async function eliminar(id) {
   if (!confirm("¿Eliminar producto?")) return;
 
-  const nuevaLista = lista.filter(p => p.id !== id);
-  localStorage.setItem("ListaProductos", JSON.stringify(nuevaLista));
-  location.reload();
+  try {
+    const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    await cargarProductos(); // recarga la lista desde la API
+  } catch (err) {
+    console.error('Error al eliminar:', err);
+    alert('No se pudo eliminar el producto. Intenta de nuevo.');
+  }
 }
 
-//edicion
+/* ── Editar ───────────────────────────────────────── */
 function irAEditar(id) {
   window.location.href = `admin-crear.html?id=${id}`;
 }
 
-/* INIT */
-render();
+/* ── Init ─────────────────────────────────────────── */
+cargarProductos();
