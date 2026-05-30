@@ -4,7 +4,8 @@
   let productoEditando = null;
   let productoOriginal = null;
 
-
+/* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+  const API = 'https://ecommerceklydy.onrender.com/productos';
 
   /* ── Referencias al DOM ───────────────────────────── */
   const form = document.getElementById('formCrearProducto');
@@ -84,13 +85,21 @@
     descContador.textContent = `${descTextarea.value.length} / 500`;
   });
 
-  /* ── Formateo de precio en tiempo real (COP) ──────── */
-  inputPrecio.addEventListener('input', () => {
-    // Elimina todo lo que no sea dígito
-    const raw = inputPrecio.value.replace(/\D/g, '');
-    // Formatea con puntos de miles (estilo COP: 1.500.000)
-    inputPrecio.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  });
+ 
+/* ── Formateo de precio en tiempo real (COP) ──────── */
+inputPrecio.addEventListener('input', () => {
+  let raw = inputPrecio.value.replace(/\D/g, '');
+  raw = raw.replace(/^0+/, '');
+
+  if (raw === '') {
+    inputPrecio.value = '';
+    return;
+  }
+
+  inputPrecio.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  validarPrecio(); // 🔥 feedback inmediato
+});
 
   /* ── Helpers de validación ────────────────────────── */
   function mostrarError(input, mensaje) {
@@ -162,11 +171,24 @@
     }
 
     // x <= 0
-    if (parseInt(raw) <= 0) {
+    const numero = parseInt(raw);
+
+    // menor o igual a 0
+    if (numero <= 0) {
       inputPrecio.classList.add('is-invalid');
       inputPrecio.classList.remove('is-valid');
 
       precioError.textContent = 'Debe ser mayor a 0.';
+      precioError.style.display = 'block';
+      return false;
+    }
+
+    // menor a 5000
+    if (numero < 5000) {
+      inputPrecio.classList.add('is-invalid');
+      inputPrecio.classList.remove('is-valid');
+
+      precioError.textContent = 'El precio debe ser mayor a $5.000.';
       precioError.style.display = 'block';
       return false;
     }
@@ -254,26 +276,53 @@
 
 
   function validarNombre() {
-    if (inputNombre.value.trim()) {
-      mostrarValido(inputNombre);
-    } else {
-      mostrarError(inputNombre, 'El nombre es obligatorio (máx. 100 caracteres).');
+    const valor = inputNombre.value.trim();
+
+    if (valor.length === 0) {
+      mostrarError(inputNombre, 'El nombre es obligatorio.');
+      return false;
     }
+
+    if (valor.length < 4) {
+      mostrarError(inputNombre, 'El nombre debe tener mínimo 4 caracteres.');
+      return false;
+    }
+
+    mostrarValido(inputNombre);
+    return true;
   }
 
   inputNombre.addEventListener('input', validarNombre);
   inputNombre.addEventListener('blur', validarNombre);
 
 
-
+  //Validando el stock 
   function validarCantidad() {
     const v = inputCantidad.value;
-
-    if (v === '' || parseInt(v) < 0 || !Number.isInteger(Number(v))) {
-      mostrarError(inputCantidad, 'Ingresa una cantidad válida (número entero ≥ 0).');
-    } else {
-      mostrarValido(inputCantidad);
+    if (/^0\d+/.test(v)) {
+      mostrarError(inputCantidad, 'El stock no puede comenzar con 0.');
+      return false;
     }
+
+    if (v === '') {
+      mostrarError(inputCantidad, 'La cantidad es obligatoria.');
+      return false;
+    }
+
+    const numero = Number(v);
+
+    if (!Number.isInteger(numero)) {
+      mostrarError(inputCantidad, 'Debe ser un número entero.');
+      return false;
+    }
+
+    if (numero <= 0) {
+      mostrarError(inputCantidad, 'El stock debe ser mayor a 0.');
+      return false;
+    }
+
+    mostrarValido(inputCantidad);
+    return true;
   }
 
   inputCantidad.addEventListener('input', validarCantidad);
@@ -318,11 +367,20 @@
 
 
   function validarDescripcion() {
-    if (descTextarea.value.trim()) {
-      mostrarValido(descTextarea);
-    } else {
-      mostrarError(descTextarea, 'La descripción es obligatoria (máx. 500 caracteres).');
+    const valor = descTextarea.value.trim();
+
+    if (valor.length === 0) {
+      mostrarError(descTextarea, 'La descripción es obligatoria.');
+      return false;
     }
+
+    if (valor.length < 5) {
+      mostrarError(descTextarea, 'La descripción debe tener mínimo 5 caracteres.');
+      return false;
+    }
+
+    mostrarValido(descTextarea);
+    return true;
   }
 
   descTextarea.addEventListener('input', validarDescripcion);
@@ -484,8 +542,11 @@
     const usoOk = validarUso();
     const imagenOk = validarImagen();
     const formNativoOk = form.checkValidity();
+    const nombreOk = validarNombre();
+    const descripcionOk = validarDescripcion();
+    const cantidadOk = validarCantidad();
 
-    if (!formNativoOk || !precioOk || !usoOk || !imagenOk) {
+    if (!formNativoOk || !precioOk || !usoOk || !imagenOk || !nombreOk || !descripcionOk || !cantidadOk) {
       const primerError = form.querySelector('.is-invalid, [style*="display: block"]');
       if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -616,8 +677,7 @@
     }
   });
 
-  /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
-  const API = 'https://ecommerceklydy.onrender.com/productos';
+  
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -674,6 +734,36 @@
 
     descContador.textContent = `${p.descripcion.length} / 500`;
   }
+
+
+  function obtenerProductoFormulario() {
+  return {
+    nombre:      inputNombre.value.trim(),
+    stock:       parseInt(inputCantidad.value) || 0,
+    precio:      parseInt(inputPrecio.value.replace(/\./g, '')) || 0,
+    marca:       mapMarca[inputMarca.value] || null,
+    categoria:   mapCategoria[selectCat.value] || null,
+    uso:         mapUso[[...radiosUso].find(r => r.checked)?.value] || null,
+    descripcion: descTextarea.value.trim(),
+    urlImagen:   inputUrl.value.trim() || null
+  };
+}
+
+function detectarCambios() {
+  if (!modoEdicion) return;
+
+  const actual = obtenerProductoFormulario();
+  const original = JSON.parse(productoOriginal);
+
+  const camposComparar = ['nombre', 'stock', 'precio', 'marca', 'categoria', 'uso', 'descripcion', 'urlImagen'];
+  const hayCambios = camposComparar.some(k => String(actual[k]) !== String(original[k]));
+
+  const btnSubmit = form.querySelector('button[type="submit"]');
+  btnSubmit.disabled = !hayCambios;
+}
+
+form.addEventListener('input', detectarCambios);
+form.addEventListener('change', detectarCambios);
 
 
 

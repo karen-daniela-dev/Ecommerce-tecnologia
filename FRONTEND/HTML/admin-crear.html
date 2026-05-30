@@ -154,7 +154,7 @@
               <label for="cantidad" class="form-label fw-semibold">
                 Cantidad <span class="text-danger">*</span>
               </label>
-              <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresa la cantidad"
+              <input type="number" min="1" step="1" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresa la cantidad"
                 min="0" max="99999" step="1" required />
               <div class="invalid-feedback">
                 Ingresa una cantidad válida (≥ 0).
