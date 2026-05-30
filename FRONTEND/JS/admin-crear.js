@@ -574,16 +574,23 @@ form.addEventListener('submit', async (e) => {
 
 if (modalCancelar && btnSeguirEditando && btnConfirmarCancelar) {
   /* ── Botón Cancelar ───────────────────────────────── */
-  document.getElementById('btnCancelar').addEventListener('click', () => {
+document.getElementById('btnCancelar').addEventListener('click', () => {
 
-  // Mensaje dinámico
-  modalMensaje.textContent = modoEdicion
-    ? '¿Deseas salir sin guardar los cambios?'
-    : '¿Deseas cancelar el registro del producto?';
+if (modoEdicion) {
+  modalMensaje.textContent = '¿Deseas salir sin guardar los cambios?';
+
+  btnSeguirEditando.textContent = 'Seguir editando';
+  btnConfirmarCancelar.textContent = 'Salir sin guardar';
+
+} else {
+  modalMensaje.textContent = '¿Deseas cancelar el registro del producto?';
+
+  btnSeguirEditando.textContent = 'Seguir llenando';
+  btnConfirmarCancelar.textContent = 'Cancelar';
+}
 
   modalCancelar.classList.remove('d-none');
 });
-
 //  Cerrar modal (seguir editando)
 btnSeguirEditando.addEventListener('click', () => {
   modalCancelar.classList.add('d-none');
@@ -595,7 +602,7 @@ btnConfirmarCancelar.addEventListener('click', () => {
 
   if (modoEdicion) {
     // MODO EDICIÓN → redirige
-    window.location.href = 'FRONTEND/HTML/admin-ver.html';
+    window.location.href = '../HTML/admin-ver.html';
   } else {
     // MODO CREAR → limpia
     limpiarFormulario();
