@@ -8,10 +8,12 @@ body {
 }
 
 /* TÍTULO */
-h1 {
+   h1 {
   font-family: var(--font-heading);
+  color: var(--neon-cyan);
+  text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text-primary);
+  text-shadow: var(--glow-cyan);
 }
 
 /* ─────────────────────────────
@@ -128,6 +130,10 @@ h1 {
 /* ─────────────────────────────
    PAGINACIÓN
 ──────────────────────────── */
+.paginacion-container {
+  background: transparent;
+  width: auto;
+}
 .pagination .page-link {
   background: var(--bg-surface);
   border: 1px solid var(--border-default);
@@ -170,4 +176,100 @@ h1 {
 
 .card strong {
   color: var(--text-cyan);
+}
+
+/* modal eliminar producto  */
+/* ── OVERLAY ───────────────────────── */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* ── CONTENIDO ─────────────────────── */
+.modal-content-neon {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: var(--glow-cyan);
+  animation: modalFade 0.2s ease;
+}
+
+/* ── TEXTO ─────────────────────────── */
+.modal-content-neon h2 {
+  font-family: var(--font-heading);
+  color: var(--text-cyan);
+  margin-bottom: 1rem;
+}
+
+.modal-content-neon p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* ── BOTONES ───────────────────────── */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Cancelar */
+.btn-secundario {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-secundario:hover {
+  border-color: var(--border-cyan-hover);
+  color: var(--text-cyan);
+}
+
+/* Eliminar (peligro) */
+.btn-danger {
+  background: var(--neon-pink-10);
+  border: 1px solid var(--border-pink);
+  color: var(--text-pink);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--glow-pink);
+  transition: var(--transition-fast);
+}
+
+.btn-danger:hover {
+  background: var(--neon-pink-20);
+}
+
+/* ── ANIMACIÓN ─────────────────────── */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── OCULTO ───────────────────────── */
+.d-none {
+  display: none;
 }

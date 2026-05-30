@@ -4,7 +4,8 @@
   let productoEditando = null;
   let productoOriginal = null;
 
-
+/* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+  const API = 'https://ecommerceklydy.onrender.com/productos';
 
   /* ── Referencias al DOM ───────────────────────────── */
   const form = document.getElementById('formCrearProducto');
@@ -29,6 +30,45 @@
   const inputImagen = document.getElementById('imagenProducto');
   const inputUrl = document.getElementById('imagenUrl');
 
+  // MODAL CANCELAR 
+
+  const modalCancelar = document.getElementById('modalCancelar');
+  const btnSeguirEditando = document.getElementById('btnSeguirEditando');
+  const btnConfirmarCancelar = document.getElementById('btnConfirmarCancelar');
+  const modalMensaje = document.getElementById('modalMensaje');
+
+
+
+  /* ── Mapeos hacia los enums del back ──────────────────── */
+  const mapCategoria = {
+    laptops: 'LAPTOPS',
+    smartwatches: 'SMARTWATCHES',
+    mouses: 'MOUSES',
+    audio: 'AUDIO',
+    teclados: 'TECLADOS',
+    tarjetas: 'TARJETAS_GRAFICAS',
+    accesorios: 'ACCESORIOS'
+  };
+
+  const mapMarca = {
+    Samsung: 'SAMSUNG',
+    Acer: 'ACER',
+    Apple: 'APPLE',
+    Asus: 'ASUS',
+    Dell: 'DELL',
+    HP: 'HP',
+    Lenovo: 'LENOVO',
+    MSI: 'MSI',
+    Otras: 'OTRAS'
+  };
+
+  const mapUso = {
+    trabajo: 'TRABAJO',
+    estudio: 'ESTUDIO',
+    gamer: 'GAMER',
+    general: 'GENERAL'
+  };
+
   function mostrarToast(mensaje) {
     const toast = document.getElementById('toastProducto');
 
@@ -45,13 +85,21 @@
     descContador.textContent = `${descTextarea.value.length} / 500`;
   });
 
-  /* ── Formateo de precio en tiempo real (COP) ──────── */
-  inputPrecio.addEventListener('input', () => {
-    // Elimina todo lo que no sea dígito
-    const raw = inputPrecio.value.replace(/\D/g, '');
-    // Formatea con puntos de miles (estilo COP: 1.500.000)
-    inputPrecio.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  });
+ 
+/* ── Formateo de precio en tiempo real (COP) ──────── */
+inputPrecio.addEventListener('input', () => {
+  let raw = inputPrecio.value.replace(/\D/g, '');
+  raw = raw.replace(/^0+/, '');
+
+  if (raw === '') {
+    inputPrecio.value = '';
+    return;
+  }
+
+  inputPrecio.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  validarPrecio(); // 🔥 feedback inmediato
+});
 
   /* ── Helpers de validación ────────────────────────── */
   function mostrarError(input, mensaje) {
@@ -123,11 +171,24 @@
     }
 
     // x <= 0
-    if (parseInt(raw) <= 0) {
+    const numero = parseInt(raw);
+
+    // menor o igual a 0
+    if (numero <= 0) {
       inputPrecio.classList.add('is-invalid');
       inputPrecio.classList.remove('is-valid');
 
       precioError.textContent = 'Debe ser mayor a 0.';
+      precioError.style.display = 'block';
+      return false;
+    }
+
+    // menor a 5000
+    if (numero < 5000) {
+      inputPrecio.classList.add('is-invalid');
+      inputPrecio.classList.remove('is-valid');
+
+      precioError.textContent = 'El precio debe ser mayor a $5.000.';
       precioError.style.display = 'block';
       return false;
     }
@@ -215,26 +276,53 @@
 
 
   function validarNombre() {
-    if (inputNombre.value.trim()) {
-      mostrarValido(inputNombre);
-    } else {
-      mostrarError(inputNombre, 'El nombre es obligatorio (máx. 100 caracteres).');
+    const valor = inputNombre.value.trim();
+
+    if (valor.length === 0) {
+      mostrarError(inputNombre, 'El nombre es obligatorio.');
+      return false;
     }
+
+    if (valor.length < 4) {
+      mostrarError(inputNombre, 'El nombre debe tener mínimo 4 caracteres.');
+      return false;
+    }
+
+    mostrarValido(inputNombre);
+    return true;
   }
 
   inputNombre.addEventListener('input', validarNombre);
   inputNombre.addEventListener('blur', validarNombre);
 
 
-
+  //Validando el stock 
   function validarCantidad() {
     const v = inputCantidad.value;
-
-    if (v === '' || parseInt(v) < 0 || !Number.isInteger(Number(v))) {
-      mostrarError(inputCantidad, 'Ingresa una cantidad válida (número entero ≥ 0).');
-    } else {
-      mostrarValido(inputCantidad);
+    if (/^0\d+/.test(v)) {
+      mostrarError(inputCantidad, 'El stock no puede comenzar con 0.');
+      return false;
     }
+
+    if (v === '') {
+      mostrarError(inputCantidad, 'La cantidad es obligatoria.');
+      return false;
+    }
+
+    const numero = Number(v);
+
+    if (!Number.isInteger(numero)) {
+      mostrarError(inputCantidad, 'Debe ser un número entero.');
+      return false;
+    }
+
+    if (numero <= 0) {
+      mostrarError(inputCantidad, 'El stock debe ser mayor a 0.');
+      return false;
+    }
+
+    mostrarValido(inputCantidad);
+    return true;
   }
 
   inputCantidad.addEventListener('input', validarCantidad);
@@ -279,11 +367,20 @@
 
 
   function validarDescripcion() {
-    if (descTextarea.value.trim()) {
-      mostrarValido(descTextarea);
-    } else {
-      mostrarError(descTextarea, 'La descripción es obligatoria (máx. 500 caracteres).');
+    const valor = descTextarea.value.trim();
+
+    if (valor.length === 0) {
+      mostrarError(descTextarea, 'La descripción es obligatoria.');
+      return false;
     }
+
+    if (valor.length < 5) {
+      mostrarError(descTextarea, 'La descripción debe tener mínimo 5 caracteres.');
+      return false;
+    }
+
+    mostrarValido(descTextarea);
+    return true;
   }
 
   descTextarea.addEventListener('input', validarDescripcion);
@@ -433,222 +530,241 @@
     });
   }
 
+
+
   /* ── Envío del formulario ─────────────────────────── */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Dispara la validación nativa de Bootstrap
     form.classList.add('was-validated');
 
-    // Validaciones personalizadas
     const precioOk = validarPrecio(true);
     const usoOk = validarUso();
     const imagenOk = validarImagen();
-
-    // Verifica también los campos nativos de Bootstrap
     const formNativoOk = form.checkValidity();
+    const nombreOk = validarNombre();
+    const descripcionOk = validarDescripcion();
+    const cantidadOk = validarCantidad();
 
-    if (!formNativoOk || !precioOk || !usoOk || !imagenOk) {
-      // Hace scroll al primer campo inválido
+    if (!formNativoOk || !precioOk || !usoOk || !imagenOk || !nombreOk || !descripcionOk || !cantidadOk) {
       const primerError = form.querySelector('.is-invalid, [style*="display: block"]');
       if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
-    let imagen = null;
-    let tipoImagen = null;
+    const btnSubmit = form.querySelector('button[type="submit"]');
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Guardando...';
 
-    if (inputImagen.files.length > 0) {
-      imagen = await inputABase64(inputImagen);
-      tipoImagen = "file";
-    } else if (inputUrl.value.trim()) {
-      imagen = inputUrl.value.trim();
-      tipoImagen = "url";
-    }
+    const urlImagen = inputUrl.value.trim();
+    const usoSeleccionado = [...radiosUso].find(r => r.checked)?.value;
 
-    /*  Formulario válido — construir el objeto producto */
-    const nuevoProducto = {
-      id: listaProductos.length + 1,          // ID temporal (la BD lo generará)
+    const payload = {
       nombre: inputNombre.value.trim(),
-      cantidad: parseInt(inputCantidad.value),
-      precio: parseInt(inputPrecio.value.replace(/\./g, '')),  // sin puntos
-      marca: inputMarca.value.trim(),
-      categoria: selectCat.value,
-      uso: [...radiosUso].find(r => r.checked)?.value,
+      stock: parseInt(inputCantidad.value),
+      precio: parseInt(inputPrecio.value.replace(/\./g, '')),
+      marca: mapMarca[inputMarca.value],
+      categoria: mapCategoria[selectCat.value],
+      uso: mapUso[usoSeleccionado],
       descripcion: descTextarea.value.trim(),
-
-      imagenNombre: tipoImagen === "file" ? inputImagen.files[0]?.name : null,
-      imagenTamano: tipoImagen === "file" && inputImagen.files[0]
-        ? `${(inputImagen.files[0].size / 1024).toFixed(1)} KB`
-        : null,
-      tipoImagen: tipoImagen,
-      imagen: imagen,
-
-
-      creadoEn: new Date().toLocaleString('es-CO'),
-
-      esBase64: tipoImagen === "file"
+      urlImagen: urlImagen || null
     };
 
-    console.log(JSON.stringify(nuevoProducto));
-
-
+    /* ── MODO EDICIÓN → PUT ───────────────────────────── */
     if (modoEdicion) {
+      try {
+        const res = await fetch(`${API}/${productoEditando.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-      const index = listaProductos.findIndex(p => p.id === productoEditando.id);
+        if (!res.ok) {
+          const error = await res.json().catch(() => null);
+          console.error('Error del servidor:', error);
+          mostrarToast(`Error al actualizar (${res.status})`);
+          return;
+        }
 
-      if (index !== -1) {
-        listaProductos[index] = {
-          ...productoEditando,
-          ...nuevoProducto,
-          id: productoEditando.id
-        };
+        const productoActualizado = await res.json();
+        console.log('Producto actualizado:', productoActualizado);
+        mostrarToast(`Producto "${productoActualizado.nombre}" actualizado`);
+        limpiarFormulario();
+        setTimeout(() => window.location.href = 'admin-ver.html', 1500);
 
-        localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
+      } catch (err) {
+        console.error('Error de red:', err);
+        mostrarToast('No se pudo conectar con el servidor.');
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Actualizar';
+      }
+      return; // ← evita que caiga al POST
+    }
 
-        mostrarToast(`Producto "${nuevoProducto.nombre}" actualizado`);
+    /* ── MODO CREACIÓN → POST ─────────────────────────── */
+
+    try {
+      const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const error = await res.json().catch(() => null);
+        console.error('Error del servidor:', error);
+        mostrarToast(`Error al crear el producto (${res.status})`);
+        return;
       }
 
-      modoEdicion = false;
-      productoEditando = null;
-      productoOriginal = null;
-
-    } else {
-
-      listaProductos.push(nuevoProducto);
-
-      localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
-
-      mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
-    }
-
-
-
-
-    // Mostrar en consola
-    console.log(
-      ' Producto agregado:',
-      nuevoProducto
-    );
-    imprimirLista();
-
-    /*
-       CUANDO SE TENGA LA API — se reemplaza las dos líneas de arriba por:
- 
-      const fd = new FormData();
-      Object.entries(nuevoProducto).forEach(([k, v]) => fd.append(k, v));
-      fd.append('imagen', inputImagen.files[0]);
- 
-      fetch('/api/productos', { method: 'POST', body: fd })
-        .then(r => r.json())
-        .then(data => {
-          console.log(' Guardado en BD:', data);
-          // aquí puedes actualizar la tabla de productos en pantalla
-        })
-        .catch(err => console.error('Error al guardar:', err));
-    */
-
-    if (!modoEdicion) {
-      mostrarToast(`Producto "${nuevoProducto.nombre}" agregado`);
-    }
-    limpiarFormulario();
-
-
-
-
-  });
-
-  /* ── Botón Cancelar ───────────────────────────────── */
-  document.getElementById('btnCancelar').addEventListener('click', () => {
-    if (confirm('¿Deseas cancelar? Los datos ingresados se perderán.')) {
+      const productoCreado = await res.json();
+      console.log('Producto creado en BD:', productoCreado);
+      mostrarToast(`Producto "${productoCreado.nombre}" creado`);
       limpiarFormulario();
 
+    } catch (err) {
+      console.error('Error de red:', err);
+      mostrarToast('No se pudo conectar con el servidor. Intenta de nuevo.');
+    } finally {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = modoEdicion ? 'Actualizar' : 'Crear';
     }
   });
 
-  // edicion 
-  /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+
+  if (modalCancelar && btnSeguirEditando && btnConfirmarCancelar) {
+    /* ── Botón Cancelar ───────────────────────────────── */
+    document.getElementById('btnCancelar').addEventListener('click', () => {
+
+      if (modoEdicion) {
+        modalMensaje.textContent = '¿Deseas salir sin guardar los cambios?';
+
+        btnSeguirEditando.textContent = 'Seguir editando';
+        btnConfirmarCancelar.textContent = 'Salir sin guardar';
+
+      } else {
+        modalMensaje.textContent = '¿Deseas cancelar el registro del producto?';
+
+        btnSeguirEditando.textContent = 'Seguir llenando';
+        btnConfirmarCancelar.textContent = 'Cancelar';
+      }
+
+      modalCancelar.classList.remove('d-none');
+    });
+    //  Cerrar modal (seguir editando)
+    btnSeguirEditando.addEventListener('click', () => {
+      modalCancelar.classList.add('d-none');
+    });
+    //  Confirmar cancelar (LA CLAVE )
+    btnConfirmarCancelar.addEventListener('click', () => {
+
+      modalCancelar.classList.add('d-none');
+
+      if (modoEdicion) {
+        // MODO EDICIÓN → redirige
+        window.location.href = '../HTML/admin-ver.html';
+      } else {
+        // MODO CREAR → limpia
+        limpiarFormulario();
+      }
+    });
+  }
+  // cerrar modal al hacer click fuera 
+  modalCancelar.addEventListener('click', (e) => {
+    if (e.target === modalCancelar) {
+      modalCancelar.classList.add('d-none');
+    }
+  });
+
+  
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
   if (id) {
-    const producto = listaProductos.find(p => p.id == id);
+    fetch(`${API}/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`Error ${res.status}`);
+        return res.json();
+      })
+      .then(producto => {
+        modoEdicion = true;
+        productoEditando = producto;
+        productoOriginal = JSON.stringify(producto);
 
-    if (producto) {
-      modoEdicion = true;
-      productoEditando = producto;
-      productoOriginal = JSON.stringify(producto);
+        cargarFormulario(producto);
 
-      cargarFormulario(producto);
-
-      document.querySelector("h1").textContent = "Editar producto";
-
-      const btnSubmit = form.querySelector('button[type="submit"]');
-      btnSubmit.textContent = "Actualizar";
-      btnSubmit.disabled = true;
-    }
+        document.querySelector("h1").textContent = "Editar producto";
+        const btnSubmit = form.querySelector('button[type="submit"]');
+        btnSubmit.textContent = "Actualizar";
+        btnSubmit.disabled = true;
+      })
+      .catch(err => {
+        console.error('Error al cargar producto:', err);
+        alert('No se pudo cargar el producto para editar.');
+      });
   }
-
 
   function cargarFormulario(p) {
     inputNombre.value = p.nombre;
-    inputCantidad.value = p.cantidad;
+    inputCantidad.value = p.stock;                          // ← stock, no cantidad
     inputPrecio.value = p.precio.toLocaleString("es-CO");
-    inputMarca.value = p.marca;
-    selectCat.value = p.categoria;
+    const mapMarcaInverso = {
+      SAMSUNG: 'Samsung', ACER: 'Acer', APPLE: 'Apple',
+      ASUS: 'Asus', DELL: 'Dell', HP: 'HP',
+      LENOVO: 'Lenovo', MSI: 'MSI', OTRAS: 'Otras'
+    };
+    inputMarca.value = mapMarcaInverso[p.marca] || p.marca;                          // ya viene en mayúsculas
+    selectCat.value = p.categoria === 'TARJETAS_GRAFICAS'  // mapeo inverso especial
+      ? 'tarjetas' : p.categoria.toLowerCase();
     descTextarea.value = p.descripcion;
 
-    // radio uso
     radiosUso.forEach(r => {
-      if (r.value === p.uso) r.checked = true;
+      if (r.value === p.uso.toLowerCase()) r.checked = true;
     });
 
-    // imagen
-    if (p.tipoImagen === "url") {
-      inputUrl.value = p.imagen;
-    }
-    if (p.imagen) {
-      previewImg.src = p.imagen;
-      previewNombre.textContent = p.imagenNombre || "Imagen guardada";
+    if (p.urlImagen) {
+      inputUrl.value = p.urlImagen;
+      previewImg.src = p.urlImagen;
+      previewNombre.textContent = "Imagen guardada";
       previewContainer.classList.remove('d-none');
-
       dropZone.classList.add('border-success');
     }
 
     descContador.textContent = `${p.descripcion.length} / 500`;
   }
 
+
   function obtenerProductoFormulario() {
-    return {
-      nombre: inputNombre.value.trim(),
-      cantidad: parseInt(inputCantidad.value),
-      precio: parseInt(inputPrecio.value.replace(/\./g, '')),
-      marca: inputMarca.value,
-      categoria: selectCat.value,
-      uso: [...radiosUso].find(r => r.checked)?.value,
-      descripcion: descTextarea.value.trim(),
-      imagen: previewImg.src || null
-    };
-  }
+  return {
+    nombre:      inputNombre.value.trim(),
+    stock:       parseInt(inputCantidad.value) || 0,
+    precio:      parseInt(inputPrecio.value.replace(/\./g, '')) || 0,
+    marca:       mapMarca[inputMarca.value] || null,
+    categoria:   mapCategoria[selectCat.value] || null,
+    uso:         mapUso[[...radiosUso].find(r => r.checked)?.value] || null,
+    descripcion: descTextarea.value.trim(),
+    urlImagen:   inputUrl.value.trim() || null
+  };
+}
 
-  function detectarCambios() {
-    if (!modoEdicion) return;
+function detectarCambios() {
+  if (!modoEdicion) return;
 
-    const actual = JSON.stringify({
-      ...productoEditando,
-      ...obtenerProductoFormulario()
-    });
+  const actual = obtenerProductoFormulario();
+  const original = JSON.parse(productoOriginal);
 
-    const btnSubmit = form.querySelector('button[type="submit"]');
+  const camposComparar = ['nombre', 'stock', 'precio', 'marca', 'categoria', 'uso', 'descripcion', 'urlImagen'];
+  const hayCambios = camposComparar.some(k => String(actual[k]) !== String(original[k]));
 
-    if (actual !== productoOriginal) {
-      btnSubmit.disabled = false;
-    } else {
-      btnSubmit.disabled = true;
-    }
-  }
-  form.addEventListener('input', detectarCambios);
-  form.addEventListener('change', detectarCambios);
+  const btnSubmit = form.querySelector('button[type="submit"]');
+  btnSubmit.disabled = !hayCambios;
+}
+
+form.addEventListener('input', detectarCambios);
+form.addEventListener('change', detectarCambios);
+
+
 
 })();
