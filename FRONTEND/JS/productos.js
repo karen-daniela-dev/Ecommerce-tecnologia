@@ -2,41 +2,42 @@ const API = 'https://ecommerceklydy.onrender.com/productos';
 let listaProductos = [];
 
 async function cargarProductos() {
+  const loading = document.getElementById("loading");
+  const contenedor = document.getElementById("contenedor");
 
-      const contenedor = document.getElementById("contenedor");
-  contenedor.innerHTML = `
-    <div style="text-align:center; padding: 40px; color: #aaa;">
-      <div style="font-size: 2rem; margin-bottom: 10px;">⏳</div>
-      <p style="font-size: 1.1rem; font-weight: 500;">Cargando productos...</p>
-      <p style="font-size: 0.85rem; opacity: 0.7;">El servidor está despertando, esto puede tomar hasta 1 minuto.</p>
-    </div>
-  `;
+  // Mostrar loader
+  loading.style.display = "block";
+  contenedor.innerHTML = "";
 
-    
   try {
     const res = await fetch(API);
     if (!res.ok) throw new Error(`Error ${res.status}`);
+
     const datos = await res.json();
 
-    // Normalizar campos para que sean compatibles con el resto del JS
     listaProductos = datos.map(p => ({
       ...p,
       imagen:    p.urlImagen || '',
-      categoria: p.categoria.toLowerCase(),         // "LAPTOPS" → "laptops"
-      marca:     p.marca.toLowerCase(),             // "DELL" → "dell"
-      uso:       p.uso.toLowerCase(),               // "GAMER" → "gamer"
+      categoria: p.categoria.toLowerCase(),
+      marca:     p.marca.toLowerCase(),
+      uso:       p.uso.toLowerCase(),
       cantidad:  p.stock
     }));
 
     productosFiltros = [...listaProductos];
+
+    // Ocultar loader y mostrar productos
+    loading.style.display = "none";
     mostrarProductos();
 
   } catch (err) {
     console.error('Error al cargar productos:', err);
-    document.getElementById("contenedor").innerHTML =
+    loading.style.display = "none";
+    contenedor.innerHTML =
       `<p class="text-center text-danger">No se pudieron cargar los productos. Intenta más tarde.</p>`;
   }
 }
+
 
 
 
