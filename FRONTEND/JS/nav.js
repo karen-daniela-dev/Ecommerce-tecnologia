@@ -526,22 +526,18 @@ async function iniciarSesion() {
     guardarSesion(data);
     actualizarNavbarUsuario();
 
-    // Cerrar modal
-    const modal = bootstrap.Modal.getInstance(document.getElementById("modalLogin"));
-    if (modal) modal.hide();
 
-    mensaje.innerHTML = `<div class="alert alert-success">Bienvenido, ${data.nombre}</div>`;
-    setTimeout(() => mensaje.innerHTML = "", 2000);
+
+
 
     // Redirigir según rol
-    setTimeout(() => {
-      const base = window.location.origin + "/Ecommerse-tecnologia-"; // raíz de tu GitHub Pages
-      if (data.rol === "ADMIN") {
-        window.location.href = base + "/FRONTEND/HTML/admin-ver.html";
-      } else {
-        window.location.href = base + "/FRONTEND/HTML/productos.html";
-      }
-    }, 1000);
+
+    const base = window.location.origin + "/Ecommerse-tecnologia-";
+    if (data.rol === "ADMIN") {
+      window.location.href = base + "/FRONTEND/HTML/admin-ver.html";
+    } else {
+      window.location.href = base + "/FRONTEND/HTML/productos.html";
+    }
 
   } catch (err) {
     console.error(err);
