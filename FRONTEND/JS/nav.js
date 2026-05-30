@@ -616,7 +616,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // limpiar de autocompletados 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.pre').forEach(input => {
+    // Limpiar inmediatamente
+    document.querySelectorAll('input').forEach(input => {
         input.value = "";
     });
+
+    // El navegador a veces rellena DESPUÉS del DOMContentLoaded, 
+    // este segundo timeout lo atrapa
+    setTimeout(() => {
+        document.querySelectorAll('input').forEach(input => {
+            input.value = "";
+        });
+    }, 100);
 });
