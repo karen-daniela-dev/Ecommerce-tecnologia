@@ -10,6 +10,14 @@ const cards = document.getElementById("cardsProductos");
 const paginacion = document.getElementById("paginacion");
 const buscador = document.getElementById("buscador");
 
+// MODAL ELIMIMAR PRODUCTO 
+const modalEliminar = document.getElementById("modalEliminar");
+const btnCancelarEliminar = document.getElementById("btnCancelarEliminar");
+const btnConfirmarEliminar = document.getElementById("btnConfirmarEliminar");
+const modalEliminarMensaje = document.getElementById("modalEliminarMensaje");
+
+let idAEliminar = null;
+
 /* ── Formato precio ───────────────────────────────── */
 function formatearPrecio(num) {
   return "$ " + num.toLocaleString("es-CO");
@@ -123,18 +131,44 @@ buscador.addEventListener("input", () => {
 });
 
 /* ── Eliminar ─────────────────────────────────────── */
-async function eliminar(id) {
-  if (!confirm("¿Eliminar producto?")) return;
+function eliminar(id) {
+
+  idAEliminar = id;
+
+  modalEliminarMensaje.textContent = "¿Seguro que deseas eliminar este producto? Esta acción no se puede deshacer.";
+
+  modalEliminar.classList.remove("d-none");
+}
+btnConfirmarEliminar.addEventListener("click", async () => {
+
+  if (!idAEliminar) return;
+
+  modalEliminar.classList.add("d-none");
 
   try {
-    const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API}/${idAEliminar}`, { method: 'DELETE' });
+
     if (!res.ok) throw new Error(`Error ${res.status}`);
-    await cargarProductos(); // recarga la lista desde la API
+
+    await cargarProductos();
+
   } catch (err) {
     console.error('Error al eliminar:', err);
     alert('No se pudo eliminar el producto. Intenta de nuevo.');
+  } finally {
+    idAEliminar = null;
   }
-}
+});
+btnCancelarEliminar.addEventListener("click", () => {
+  modalEliminar.classList.add("d-none");
+  idAEliminar = null;
+});
+modalEliminar.addEventListener("click", (e) => {
+  if (e.target === modalEliminar) {
+    modalEliminar.classList.add("d-none");
+    idAEliminar = null;
+  }
+});
 
 /* ── Editar ───────────────────────────────────────── */
 function irAEditar(id) {

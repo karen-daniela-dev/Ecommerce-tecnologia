@@ -179,6 +179,9 @@ legend {
 
 
 /* ── TOAST NOTIFICACIÓN ───────────────────────────── */
+#toastProducto {
+  pointer-events: none;
+}
 .toast-custom {
   position: fixed;
   top: 20px;
