@@ -10,64 +10,64 @@ document.addEventListener('DOMContentLoaded', function () {
     el.classList.add('active');
   }
 
-  
+
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
   // =========================================
-// TOAST
-// =========================================
+  // TOAST
+  // =========================================
 
-function mostrarToast(mensaje){
+  function mostrarToast(mensaje) {
 
-  let toast = document.getElementById("toast");
+    let toast = document.getElementById("toast");
 
-  toast.textContent = mensaje;
+    toast.textContent = mensaje;
 
-  toast.classList.add("active");
+    toast.classList.add("active");
 
-  setTimeout(() => {
-    toast.classList.remove("active");
-  }, 3000);
+    setTimeout(() => {
+      toast.classList.remove("active");
+    }, 3000);
 
-}
+  }
 
 
-// =========================================
-// MODAL CONFIRMACION
-// =========================================
+  // =========================================
+  // MODAL CONFIRMACION
+  // =========================================
 
-function mostrarConfirmacion(mensaje, callback){
+  function mostrarConfirmacion(mensaje, callback) {
 
-  let modal = document.getElementById("modalConfirmacion");
+    let modal = document.getElementById("modalConfirmacion");
 
-  let mensajeModal = document.getElementById("mensajeModal");
+    let mensajeModal = document.getElementById("mensajeModal");
 
-  let aceptar = document.getElementById("aceptarModal");
+    let aceptar = document.getElementById("aceptarModal");
 
-  let cancelar = document.getElementById("cancelarModal");
+    let cancelar = document.getElementById("cancelarModal");
 
-  mensajeModal.textContent = mensaje;
+    mensajeModal.textContent = mensaje;
 
-  modal.style.display = "flex";
+    modal.style.display = "flex";
 
-  aceptar.onclick = () => {
+    aceptar.onclick = () => {
 
-    modal.style.display = "none";
+      modal.style.display = "none";
 
-    callback(true);
+      callback(true);
 
-  };
+    };
 
-  cancelar.onclick = () => {
+    cancelar.onclick = () => {
 
-    modal.style.display = "none";
+      modal.style.display = "none";
 
-    callback(false);
+      callback(false);
 
-  };
+    };
 
-}
-  
-  
+  }
+
+
   //cotadores 
   let cantitaProducto = 0;
   let totalPrecio = 0;
@@ -96,7 +96,7 @@ function mostrarConfirmacion(mensaje, callback){
   // contadores (cargar carrito guardado)
   let datos = localStorage.getItem("carrito");
 
-  if(datos){
+  if (datos) {
     let carrito = JSON.parse(datos);
 
     carrito.forEach(prodc => {
@@ -107,12 +107,12 @@ function mostrarConfirmacion(mensaje, callback){
 
 
   // escha el click de la targeta para agrecar a lista
-  document.addEventListener("click", function(boton){
+  document.addEventListener("click", function (boton) {
 
     let evento = boton.target.closest(".btn-agregar");
 
-    if(evento){
-      
+    if (evento) {
+
       let imagen = evento.dataset.imagen;
       let nombre = evento.dataset.nombre;
       let precio = Number(evento.dataset.precio);
@@ -129,14 +129,14 @@ function mostrarConfirmacion(mensaje, callback){
 
 
   // lista para carrito
-  function agregarAlcarrito(imagen, nombre, precio, cantidad){
-    
+  function agregarAlcarrito(imagen, nombre, precio, cantidad) {
+
     let listaCarrito = document.getElementById("listaCarrito");
 
     let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
 
     // si el producto ya esiste actializa para que se agrege la cantidad y no se repita la li
-    if(productoExistente){
+    if (productoExistente) {
 
       let numero = productoExistente.querySelector(".cantidades");
       let precioSpan = productoExistente.querySelector(".precio-item");
@@ -148,9 +148,9 @@ function mostrarConfirmacion(mensaje, callback){
 
       let precioUnitario = Number(productoExistente.dataset.precio);
       let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
-      precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
+      precioSpan.textContent = nuevoPrecioTotal.toLocaleString();
 
-      
+
       cantitaProducto += cantidad;
       totalPrecio += precioUnitario * cantidad;
 
@@ -161,17 +161,17 @@ function mostrarConfirmacion(mensaje, callback){
       // al agregar mas cantidad se pone al inicio
       /*listaCarrito.prepend(productoExistente);*/
 
-      return; 
+      return;
     }
 
 
     // si no esiste esa li con ese nombre la añade a la lista
     let lista = document.createElement("li");
     lista.classList.add("producto");
-    
+
     lista.dataset.precio = precio;
     lista.dataset.nombre = nombre;
-    
+
     //boton eliminar
     let eliminarP = document.createElement("button");
     eliminarP.textContent = "x";
@@ -196,15 +196,15 @@ function mostrarConfirmacion(mensaje, callback){
     // agregar toda la li creada al contenedor de html 
     listaCarrito.appendChild(lista);
 
-     // evento de boton eliminar el producto
-    eliminarP.addEventListener("click", function(){
+    // evento de boton eliminar el producto
+    eliminarP.addEventListener("click", function () {
 
       mostrarConfirmacion(
         `¿Deseas eliminar ${nombre} del carrito?`,
-        
-        function(confirmado){
 
-          if(confirmado){
+        function (confirmado) {
+
+          if (confirmado) {
 
             eliminarProducto(lista);
 
@@ -222,101 +222,101 @@ function mostrarConfirmacion(mensaje, callback){
     actualizarBadge();
     actualizarPrecio();
     guardarCarrito();
-    
+
     // la agrega la creada al inicio
     listaCarrito.prepend(lista);
     document.getElementById("msgVacio").style.display = "none";
   }
 
-  
 
-  
+
+
 
   // evento del decremento y decremento de la li
-  document.addEventListener("click", function(clic){
+  document.addEventListener("click", function (clic) {
 
     // si solo hace click en el boton decremento li
- if(clic.target.classList.contains("decremento")){
+    if (clic.target.classList.contains("decremento")) {
 
-  // busca li
-  let contenedor = clic.target.closest("li"); 
+      // busca li
+      let contenedor = clic.target.closest("li");
 
-  // si no la encuentra se detiene
-  if(!contenedor) return; 
+      // si no la encuentra se detiene
+      if (!contenedor) return;
 
-  let numero = contenedor.querySelector(".cantidades");
+      let numero = contenedor.querySelector(".cantidades");
 
-  let precioSpan = contenedor.querySelector(".precio-item");
+      let precioSpan = contenedor.querySelector(".precio-item");
 
-  let precio = Number(contenedor.dataset.precio);
+      let precio = Number(contenedor.dataset.precio);
 
-  let cantidad = Number(numero.textContent);
+      let cantidad = Number(numero.textContent);
 
-  // si es mayor a 1 puede decrementar
-  if(cantidad > 1){
+      // si es mayor a 1 puede decrementar
+      if (cantidad > 1) {
 
-    cantidad--;
+        cantidad--;
 
-    numero.textContent = cantidad;
+        numero.textContent = cantidad;
 
-    precioSpan.textContent = (precio * cantidad).toLocaleString();
+        precioSpan.textContent = (precio * cantidad).toLocaleString();
 
-    cantitaProducto--;
+        cantitaProducto--;
 
-    totalPrecio -= precio;
+        totalPrecio -= precio;
 
-    actualizarBadge();
+        actualizarBadge();
 
-    actualizarPrecio();
+        actualizarPrecio();
 
-    guardarCarrito();
+        guardarCarrito();
 
-  }
+      }
 
-}
+    }
 
 
-  
+
     // evento del incremento y decremento de la li
     // si dedecta en click en incremento
-   // evento del incremento
-if(clic.target.classList.contains("incremento")){
+    // evento del incremento
+    if (clic.target.classList.contains("incremento")) {
 
-  let contenedor = clic.target.closest("li");
+      let contenedor = clic.target.closest("li");
 
-  if(!contenedor) return; 
+      if (!contenedor) return;
 
-  let numero = contenedor.querySelector(".cantidades");
+      let numero = contenedor.querySelector(".cantidades");
 
-  let precioSpan = contenedor.querySelector(".precio-item");
+      let precioSpan = contenedor.querySelector(".precio-item");
 
-  let precio = Number(contenedor.dataset.precio);
+      let precio = Number(contenedor.dataset.precio);
 
-  let cantidad = Number(numero.textContent);
+      let cantidad = Number(numero.textContent);
 
-  cantidad++;
+      cantidad++;
 
-  numero.textContent = cantidad;
+      numero.textContent = cantidad;
 
-  precioSpan.textContent = (precio * cantidad).toLocaleString();
+      precioSpan.textContent = (precio * cantidad).toLocaleString();
 
-  cantitaProducto++;
+      cantitaProducto++;
 
-  totalPrecio += precio;
+      totalPrecio += precio;
 
-  actualizarBadge();
+      actualizarBadge();
 
-  actualizarPrecio();
+      actualizarPrecio();
 
-  guardarCarrito();
+      guardarCarrito();
 
-}
+    }
 
   });
 
 
   // elimina el producto unitario
-  function eliminarProducto(li){
+  function eliminarProducto(li) {
 
     let numero = li.querySelector(".cantidades");
     let cantidad = Number(numero.textContent);
@@ -332,64 +332,64 @@ if(clic.target.classList.contains("incremento")){
     actualizarPrecio();
     guardarCarrito();
 
-    if(cantitaProducto === 0){
+    if (cantitaProducto === 0) {
       document.getElementById("msgVacio").style.display = "block";
     }
   }
 
-    // vaciar carrito completo
-    let vaciarCarrito = document.getElementById("btnVaciar");
+  // vaciar carrito completo
+  let vaciarCarrito = document.getElementById("btnVaciar");
 
-    vaciarCarrito.addEventListener("click", function(){
+  vaciarCarrito.addEventListener("click", function () {
 
-      mostrarConfirmacion(
+    mostrarConfirmacion(
 
-        "¿Deseas vaciar todo el carrito?",
+      "¿Deseas vaciar todo el carrito?",
 
-        function(confirmado){
+      function (confirmado) {
 
-          if(confirmado){
+        if (confirmado) {
 
-            let lista = document.getElementById("listaCarrito");
+          let lista = document.getElementById("listaCarrito");
 
-            lista.querySelectorAll('li').forEach(li => li.remove());
+          lista.querySelectorAll('li').forEach(li => li.remove());
 
-            document.getElementById("msgVacio").style.display = "block";
+          document.getElementById("msgVacio").style.display = "block";
 
-            cantitaProducto = 0;
-            totalPrecio = 0;
+          cantitaProducto = 0;
+          totalPrecio = 0;
 
-            actualizarBadge();
-            actualizarPrecio();
-            guardarCarrito();
+          actualizarBadge();
+          actualizarPrecio();
+          guardarCarrito();
 
-            mostrarToast("Carrito vaciado");
-
-          }
+          mostrarToast("Carrito vaciado");
 
         }
 
-      );
+      }
 
-    });
+    );
+
+  });
 
   //actualizar total de produtos carrito
   function actualizarBadge() {
-    document.getElementById('badge-mobile').textContent  = cantitaProducto;
+    document.getElementById('badge-mobile').textContent = cantitaProducto;
     document.getElementById('badge-desktop').textContent = cantitaProducto;
   }
 
   // actualizar precio total del carrito
-  function actualizarPrecio(){
-     let total = document.getElementById("total");
-     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
+  function actualizarPrecio() {
+    let total = document.getElementById("total");
+    total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
   }
 
 
-  
 
 
-  
+
+
   // ── ÍCONO DEL BOTÓN MENÚ ─────────────────────────────────────────
   // Selecciona el menú desplegable y el botón de menú de la barra inferior
   const navbarCollapse = document.getElementById('navbarKlydy');
@@ -411,15 +411,15 @@ if(clic.target.classList.contains("incremento")){
 
   // ── CERRAR MENÚ AL HACER CLICK AFUERA ───────────────────────────
   // Escucha clicks en cualquier parte de la página
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     const navbar = document.getElementById('navbarKlydy');
     const toggler = document.querySelector('.navbar-toggler');
 
     // Solo actúa si el menú está abierto Y el click fue fuera
     // del menú desplegado Y fuera del botón hamburguesa
     if (navbar.classList.contains('show') &&
-        !navbar.contains(e.target) &&
-        !toggler.contains(e.target)) {
+      !navbar.contains(e.target) &&
+      !toggler.contains(e.target)) {
       bootstrap.Collapse.getInstance(navbar)?.hide();
     }
   });
@@ -464,10 +464,10 @@ const API_AUTH = "https://ecommerceklydy.onrender.com/auth";
 // HELPERS DE SESIÓN
 // ─────────────────────────────────────────────
 function guardarSesion(data) {
-  localStorage.setItem("token",    data.token);
-  localStorage.setItem("rol",      data.rol);
-  localStorage.setItem("nombre",   data.nombre);
-  localStorage.setItem("email",    data.email);
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("rol", data.rol);
+  localStorage.setItem("nombre", data.nombre);
+  localStorage.setItem("email", data.email);
 }
 
 function cerrarSesionLocal() {
@@ -482,9 +482,9 @@ function obtenerSesion() {
   if (!token) return null;
   return {
     token,
-    rol:    localStorage.getItem("rol"),
+    rol: localStorage.getItem("rol"),
     nombre: localStorage.getItem("nombre"),
-    email:  localStorage.getItem("email")
+    email: localStorage.getItem("email")
   };
 }
 
@@ -497,9 +497,9 @@ if (btnLogin) {
 }
 
 async function iniciarSesion() {
-  const correo   = document.getElementById("correoLogin").value.trim();
+  const correo = document.getElementById("correoLogin").value.trim();
   const password = document.getElementById("passwordLogin").value.trim();
-  const mensaje  = document.getElementById("mensajeLogin");
+  const mensaje = document.getElementById("mensajeLogin");
 
   if (!correo || !password) {
     mensaje.innerHTML = `<div class="alert alert-danger">Todos los campos son obligatorios</div>`;
@@ -533,6 +533,16 @@ async function iniciarSesion() {
     mensaje.innerHTML = `<div class="alert alert-success">Bienvenido, ${data.nombre}</div>`;
     setTimeout(() => mensaje.innerHTML = "", 2000);
 
+    // Redirigir según rol
+    setTimeout(() => {
+      const base = window.location.origin + "/Ecommerse-tecnologia-"; // raíz de tu GitHub Pages
+      if (data.rol === "ADMIN") {
+        window.location.href = base + "/FRONTEND/HTML/admin-ver.html";
+      } else {
+        window.location.href = base + "/FRONTEND/HTML/productos.html";
+      }
+    }, 1000);
+
   } catch (err) {
     console.error(err);
     mensaje.innerHTML = `<div class="alert alert-danger">No se pudo conectar con el servidor.</div>`;
@@ -548,7 +558,7 @@ async function iniciarSesion() {
 function actualizarNavbarUsuario() {
   const sesion = obtenerSesion();
   const contenedorDesktop = document.querySelector(".d-none.d-lg-flex.align-items-center.gap-2");
-  const linkAdmin = document.getElementById("linkAdmin"); // ← ver paso 3
+  const linkAdmin = document.getElementById("linkAdmin");
 
   // Mostrar/ocultar link ADMINISTRADOR
   if (linkAdmin) {
@@ -616,16 +626,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // limpiar de autocompletados 
 document.addEventListener("DOMContentLoaded", () => {
-    // Limpiar inmediatamente
-    document.querySelectorAll('input').forEach(input => {
-        input.value = "";
-    });
+  // Limpiar inmediatamente
+  document.querySelectorAll('input').forEach(input => {
+    input.value = "";
+  });
 
-    // El navegador a veces rellena DESPUÉS del DOMContentLoaded, 
-    // este segundo timeout lo atrapa
-    setTimeout(() => {
-        document.querySelectorAll('input').forEach(input => {
-            input.value = "";
-        });
-    }, 100);
+  // El navegador a veces rellena DESPUÉS del DOMContentLoaded, 
+  // este segundo timeout lo atrapa
+  setTimeout(() => {
+    document.querySelectorAll('input').forEach(input => {
+      input.value = "";
+    });
+  }, 100);
 });
