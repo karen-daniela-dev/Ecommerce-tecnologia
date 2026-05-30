@@ -2,40 +2,40 @@ const API = 'https://ecommerceklydy.onrender.com/productos';
 let listaProductos = [];
 
 async function cargarProductos() {
-  const loading = document.getElementById("loading");
-  const contenedor = document.getElementById("contenedor");
+    const loading = document.getElementById("loading");
+    const contenedor = document.getElementById("contenedor");
 
-  // Mostrar loader
-  loading.style.display = "block";
-  contenedor.innerHTML = "";
+    // Mostrar loader
+    loading.style.display = "block";
+    contenedor.innerHTML = "";
 
-  try {
-    const res = await fetch(API);
-    if (!res.ok) throw new Error(`Error ${res.status}`);
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error(`Error ${res.status}`);
 
-    const datos = await res.json();
+        const datos = await res.json();
 
-    listaProductos = datos.map(p => ({
-      ...p,
-      imagen:    p.urlImagen || '',
-      categoria: p.categoria.toLowerCase(),
-      marca:     p.marca.toLowerCase(),
-      uso:       p.uso.toLowerCase(),
-      cantidad:  p.stock
-    }));
+        listaProductos = datos.map(p => ({
+            ...p,
+            imagen: p.urlImagen || '',
+            categoria: p.categoria.toLowerCase(),
+            marca: p.marca.toLowerCase(),
+            uso: p.uso.toLowerCase(),
+            cantidad: p.stock
+        }));
 
-    productosFiltros = [...listaProductos];
+        productosFiltros = [...listaProductos];
 
-    // Ocultar loader y mostrar productos
-    loading.style.display = "none";
-    mostrarProductos();
+        // Ocultar loader y mostrar productos
+        loading.style.display = "none";
+        mostrarProductos();
 
-  } catch (err) {
-    console.error('Error al cargar productos:', err);
-    loading.style.display = "none";
-    contenedor.innerHTML =
-      `<p class="text-center text-danger">No se pudieron cargar los productos. Intenta más tarde.</p>`;
-  }
+    } catch (err) {
+        console.error('Error al cargar productos:', err);
+        loading.style.display = "none";
+        contenedor.innerHTML =
+            `<p class="text-center text-danger">No se pudieron cargar los productos. Intenta más tarde.</p>`;
+    }
 }
 
 
@@ -175,6 +175,10 @@ filtrosPrecio.forEach(filtro => {
         precioMax = inputMax.value
             ? limpiarNumero(inputMax.value)
             : null;
+        console.log("precioMin:", precioMin);
+        console.log("precioMax:", precioMax);
+        console.log("precios en lista:", listaProductos.map(p => p.precio));
+
 
         mostrarProductos();
 
