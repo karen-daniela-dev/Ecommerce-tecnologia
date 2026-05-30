@@ -603,8 +603,8 @@ function actualizarNavbarUsuario() {
 // ─────────────────────────────────────────────
 function cerrarSesion() {
   cerrarSesionLocal();
-  actualizarNavbarUsuario();
-  window.location.href = "../../index.html";
+  const base = window.location.origin + "/Ecommerse-tecnologia-";
+  window.location.href = base + "/index.html";
 }
 
 function abrirModalCerrarSesion() {
