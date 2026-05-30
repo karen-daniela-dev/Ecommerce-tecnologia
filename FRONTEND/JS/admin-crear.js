@@ -29,6 +29,13 @@
   const inputImagen = document.getElementById('imagenProducto');
   const inputUrl = document.getElementById('imagenUrl');
 
+  // MODAL CANCELAR 
+
+  const modalCancelar = document.getElementById('modalCancelar');
+const btnSeguirEditando = document.getElementById('btnSeguirEditando');
+const btnConfirmarCancelar = document.getElementById('btnConfirmarCancelar');
+const modalMensaje = document.getElementById('modalMensaje');
+
 
 
   /* ── Mapeos hacia los enums del back ──────────────────── */
@@ -565,13 +572,42 @@ form.addEventListener('submit', async (e) => {
 });
 
 
+if (modalCancelar && btnSeguirEditando && btnConfirmarCancelar) {
   /* ── Botón Cancelar ───────────────────────────────── */
   document.getElementById('btnCancelar').addEventListener('click', () => {
-    if (confirm('¿Deseas cancelar? Los datos ingresados se perderán.')) {
-      limpiarFormulario();
 
-    }
-  });
+  // Mensaje dinámico
+  modalMensaje.textContent = modoEdicion
+    ? '¿Deseas salir sin guardar los cambios?'
+    : '¿Deseas cancelar el registro del producto?';
+
+  modalCancelar.classList.remove('d-none');
+});
+
+//  Cerrar modal (seguir editando)
+btnSeguirEditando.addEventListener('click', () => {
+  modalCancelar.classList.add('d-none');
+});
+//  Confirmar cancelar (LA CLAVE )
+btnConfirmarCancelar.addEventListener('click', () => {
+
+  modalCancelar.classList.add('d-none');
+
+  if (modoEdicion) {
+    // MODO EDICIÓN → redirige
+    window.location.href = 'FRONTEND/HTML/admin-ver.html';
+  } else {
+    // MODO CREAR → limpia
+    limpiarFormulario();
+  }
+});
+}
+// cerrar modal al hacer click fuera 
+modalCancelar.addEventListener('click', (e) => {
+  if (e.target === modalCancelar) {
+    modalCancelar.classList.add('d-none');
+  }
+});
 
 /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
 const API = 'https://ecommerceklydy.onrender.com/productos';
