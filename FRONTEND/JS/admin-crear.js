@@ -580,7 +580,10 @@
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
           body: JSON.stringify(payload)
+          
         });
+        
+       
 
         if (!res.ok) {
           const error = await res.json().catch(() => null);
@@ -604,6 +607,7 @@
       }
       return; // ← evita que caiga al POST
     }
+  
 
     /* ── MODO CREACIÓN → POST ─────────────────────────── */
 

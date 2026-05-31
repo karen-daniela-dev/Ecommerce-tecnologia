@@ -624,19 +624,3 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarNavbarUsuario();
 });
 
-
-// limpiar de autocompletados 
-document.addEventListener("DOMContentLoaded", () => {
-  // Limpiar inmediatamente
-  document.querySelectorAll('input').forEach(input => {
-    input.value = "";
-  });
-
-  // El navegador a veces rellena DESPUÉS del DOMContentLoaded, 
-  // este segundo timeout lo atrapa
-  setTimeout(() => {
-    document.querySelectorAll('input').forEach(input => {
-      input.value = "";
-    });
-  }, 100);
-});
