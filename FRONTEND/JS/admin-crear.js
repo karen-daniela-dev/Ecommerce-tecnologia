@@ -556,7 +556,27 @@
     btnSubmit.disabled = true;
     btnSubmit.textContent = 'Guardando...';
 
-    const urlImagen = inputUrl.value.trim();
+    let urlImagenFinal = inputUrl.value.trim();
+
+    //Si el usuario subió archivo → usar Cloudinary
+    if (inputImagen.files.length > 0) {
+
+      btnSubmit.textContent = "Subiendo imagen...";
+
+      const file = inputImagen.files[0];
+      const urlCloudinary = await subirImagenBackend(file);
+
+      if (!urlCloudinary) {
+        mostrarToast("Error al subir imagen");
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = modoEdicion ? 'Actualizar' : 'Crear';
+        return;
+      }
+
+      urlImagenFinal = urlCloudinary;
+    }
+
+
     const usoSeleccionado = [...radiosUso].find(r => r.checked)?.value;
 
     const payload = {
@@ -567,7 +587,8 @@
       categoria: mapCategoria[selectCat.value],
       uso: mapUso[usoSeleccionado],
       descripcion: descTextarea.value.trim(),
-      urlImagen: urlImagen || null
+      urlImagen: urlImagenFinal || null
+
     };
 
     /* ── MODO EDICIÓN → PUT ───────────────────────────── */
@@ -580,10 +601,10 @@
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
           body: JSON.stringify(payload)
-          
+
         });
-        
-       
+
+
 
         if (!res.ok) {
           const error = await res.json().catch(() => null);
@@ -607,7 +628,7 @@
       }
       return; // ← evita que caiga al POST
     }
-  
+
 
     /* ── MODO CREACIÓN → POST ─────────────────────────── */
 
@@ -774,6 +795,32 @@
 
   form.addEventListener('input', detectarCambios);
   form.addEventListener('change', detectarCambios);
+
+
+
+  async function subirImagenBackend(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("https://ecommerceklydy.onrender.com/imagenes/upload", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        body: formData
+      });
+
+      if (!res.ok) throw new Error("Error subiendo imagen");
+
+      const data = await res.json();
+      return data.url;
+
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 
 
 
