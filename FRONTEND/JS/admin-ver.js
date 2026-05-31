@@ -103,11 +103,77 @@ function render() {
 /* ── Paginación ───────────────────────────────────── */
 function renderPaginacion() {
   paginacion.innerHTML = "";
+
   const totalPaginas = Math.ceil(listaFiltrada.length / porPagina);
-  for (let i = 1; i <= totalPaginas; i++) {
+  const maxVisible = 5;
+
+  let inicio = Math.max(1, paginaActual - Math.floor(maxVisible / 2));
+  let fin = inicio + maxVisible - 1;
+
+  if (fin > totalPaginas) {
+    fin = totalPaginas;
+    inicio = Math.max(1, fin - maxVisible + 1);
+  }
+
+  // ⏮ Primera página
+  if (paginaActual > 1) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(1)">«</button>
+      </li>
+    `;
+  }
+
+  // ◀ Anterior
+  if (paginaActual > 1) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(${paginaActual - 1})">‹</button>
+      </li>
+    `;
+  }
+
+  // ... al inicio
+  if (inicio > 1) {
+    paginacion.innerHTML += `
+      <li class="page-item disabled">
+        <span class="page-link">...</span>
+      </li>
+    `;
+  }
+
+  // 🔢 páginas visibles
+  for (let i = inicio; i <= fin; i++) {
     paginacion.innerHTML += `
       <li class="page-item ${i === paginaActual ? "active" : ""}">
         <button class="page-link" onclick="cambiarPagina(${i})">${i}</button>
+      </li>
+    `;
+  }
+
+  // ... al final
+  if (fin < totalPaginas) {
+    paginacion.innerHTML += `
+      <li class="page-item disabled">
+        <span class="page-link">...</span>
+      </li>
+    `;
+  }
+
+  // ▶ Siguiente
+  if (paginaActual < totalPaginas) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(${paginaActual + 1})">›</button>
+      </li>
+    `;
+  }
+
+  // ⏭ Última página
+  if (paginaActual < totalPaginas) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(${totalPaginas})">»</button>
       </li>
     `;
   }

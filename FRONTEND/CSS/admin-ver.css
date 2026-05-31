@@ -130,9 +130,43 @@ body {
 /* ─────────────────────────────
    PAGINACIÓN
 ──────────────────────────── */
+.pagination {
+  gap: 6px;
+}
+
+.page-item.disabled .page-link {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+}
+
+.page-link {
+  border-radius: 8px;
+  min-width: 40px;
+  text-align: center;
+}
 .paginacion-container {
   background: transparent;
   width: auto;
+  padding: 0 12px;
+}
+/* Solo en móviles */
+@media (max-width: 576px) {
+   .page-link {
+    padding: 4px 8px;   
+    font-size: 12px;   
+    min-width: 30px;   
+  }
+
+  .paginacion-container {
+    padding: 0 20px;
+  }
+
+  .pagination {
+    flex-wrap: wrap; /* evita que se desborde */
+    justify-content: center;
+     
+  }
 }
 .pagination .page-link {
   background: var(--bg-surface);
