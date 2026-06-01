@@ -536,8 +536,20 @@ async function iniciarSesion() {
       return;
     }
 
+<<<<<<< Updated upstream
     guardarSesion(data);
     actualizarNavbarUsuario();
+=======
+    //ACTUALIZAR NAVBAR Y BOTÓN MÓVIL
+    actualizarNavbarUsuario();
+    actualizarBotonMovil();
+
+    mensaje.innerHTML = `
+      <div class="alert alert-success">
+        Inicio de sesión exitoso
+      </div>
+    `;
+>>>>>>> Stashed changes
 
 
 
@@ -619,9 +631,48 @@ function actualizarNavbarUsuario() {
 // CERRAR SESIÓN
 // ─────────────────────────────────────────────
 function cerrarSesion() {
+<<<<<<< Updated upstream
   cerrarSesionLocal();
   const base = window.location.origin + "/Ecommerse-tecnologia-";
   window.location.href = base + "/index.html";
+=======
+
+  localStorage.removeItem("usuarioActivo");
+
+  actualizarNavbarUsuario();
+  actualizarBotonMovil();
+
+  // CREAR ALERTA VISUAL
+  const alerta = document.createElement("div");
+
+  alerta.innerHTML = `
+  
+    <div 
+      class="alert alert-success shadow-lg"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 280px;
+        border-radius: 12px;
+      ">
+
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Sesión cerrada correctamente
+
+    </div>
+  `;
+
+  document.body.appendChild(alerta);
+
+  // REDIRECCIONAR
+  setTimeout(() => {
+
+    window.location.href = "../../index.html";
+
+  }, 1500);
+>>>>>>> Stashed changes
 }
 
 function abrirModalCerrarSesion() {
@@ -636,3 +687,53 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarNavbarUsuario();
 });
 
+<<<<<<< Updated upstream
+=======
+
+function actualizarBotonMovil() {
+
+  const usuarioActivo = JSON.parse(
+    localStorage.getItem("usuarioActivo")
+  );
+
+  const btnCuentaMobile =
+    document.getElementById("btnCuentaMobile");
+
+    if (!btnCuentaMobile) return;
+    if (usuarioActivo) {
+
+      btnCuentaMobile.innerHTML = `
+        <i class="bi bi-box-arrow-right"></i>
+        <span class="label">Salir</span>
+      `;
+
+      btnCuentaMobile.removeAttribute("data-bs-toggle");
+      btnCuentaMobile.removeAttribute("data-bs-target");
+      btnCuentaMobile.onclick = abrirModalCerrarSesion;
+} else {
+      btnCuentaMobile.innerHTML = `
+        <i class="bi bi-person-circle"></i>
+        <span class="label">Mi Cuenta</span>
+      `;
+
+      btnCuentaMobile.setAttribute(
+        "data-bs-toggle",
+        "modal"
+      );
+
+      btnCuentaMobile.setAttribute(
+        "data-bs-target",
+        "#modalLogin"
+      );
+  }
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    actualizarNavbarUsuario();
+    actualizarBotonMovil();
+  }
+);
+>>>>>>> Stashed changes
