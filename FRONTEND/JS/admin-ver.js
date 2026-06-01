@@ -17,6 +17,7 @@ const btnConfirmarEliminar = document.getElementById("btnConfirmarEliminar");
 const modalEliminarMensaje = document.getElementById("modalEliminarMensaje");
 
 let idAEliminar = null;
+const token = localStorage.getItem("token");
 
 // si el servidor duerme
 const loading = document.getElementById("loading");
@@ -226,7 +227,7 @@ buscador.addEventListener("input", () => {
   paginaActual = 1;
   render();
 });
-
+console.log("TOKEN:", token);
 /* ── Eliminar ─────────────────────────────────────── */
 function eliminar(id) {
 
@@ -243,8 +244,14 @@ btnConfirmarEliminar.addEventListener("click", async () => {
   modalEliminar.classList.add("d-none");
 
   try {
-    const res = await fetch(`${API}/${idAEliminar}`, { method: 'DELETE' });
+    const res = await fetch(`${API}/${idAEliminar}`, {
+  method: 'DELETE',
+  headers: {
+    "Authorization": `Bearer ${token}`
+  }
+});
 
+    
     if (!res.ok) throw new Error(`Error ${res.status}`);
 
     await cargarProductos();
