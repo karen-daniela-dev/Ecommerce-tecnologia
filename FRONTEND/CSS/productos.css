@@ -2208,7 +2208,7 @@ body::-webkit-scrollbar {
     margin: 10px 0px 0px 0px ;
     margin-bottom: 0px !important;
     padding: 70px 16px 200px 16px;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     margin-top: 0px !important;
     border-radius: 0px !important;
     justify-content: center !important;
@@ -2221,7 +2221,7 @@ body::-webkit-scrollbar {
   }
 
   .filtroMovil::-webkit-scrollbar{
-    display: none;
+    display: none !important;
   }
 
    /*LISTA DE USOS*/
