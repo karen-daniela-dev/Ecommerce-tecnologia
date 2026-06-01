@@ -374,10 +374,22 @@ if(clic.target.classList.contains("incremento")){
     });
 
   //actualizar total de produtos carrito
-  function actualizarBadge() {
-    document.getElementById('badge-mobile').textContent  = cantitaProducto;
-    document.getElementById('badge-desktop').textContent = cantitaProducto;
-  }
+ function actualizarBadge() {
+
+    const badgeMobile = document.getElementById('badge-mobile');
+    const badgeDesktop = document.getElementById('badge-desktop');
+
+    if (cantitaProducto === 0) {
+        badgeMobile.style.display = 'none';
+        badgeDesktop.style.display = 'none';
+    } else {
+        badgeMobile.style.display = 'flex'; // o block
+        badgeDesktop.style.display = 'flex'; // o block
+
+        badgeMobile.textContent = cantitaProducto;
+        badgeDesktop.textContent = cantitaProducto;
+    }
+}
 
   // actualizar precio total del carrito
   function actualizarPrecio(){

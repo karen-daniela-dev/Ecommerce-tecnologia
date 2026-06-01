@@ -2065,7 +2065,7 @@ body::-webkit-scrollbar {
 }
 /*500px*/
 
-@media(min-width: 50px ) and ( max-width: 601px){
+@media(min-width: 0px ) and ( max-width: 601px){
 
   /*DISPLAYS NONES*/
 
@@ -2106,12 +2106,12 @@ body::-webkit-scrollbar {
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     gap: 1px !important;
     margin-top: 0px !important;
-    height:420px !important;
-    width: 40% !important;
+    height:430px !important;
+    width: 50% !important;
     padding: 0% 20% 0% 0%;
     margin-bottom: 20px !important;
     border-radius: 0 !important;
-    margin-left: 48%;
+    margin-left: 6%;
     flex-direction:column !important;
     position: fixed; /* o absolute */
     z-index: 1;
@@ -2215,7 +2215,7 @@ body::-webkit-scrollbar {
     align-items: center !important;
     top: 0  !important;
     right: 0  !important;
-    width: 30% !important;
+    width: 60% !important;
     height: 100vh  !important;
     z-index: 1  !important;
   }
