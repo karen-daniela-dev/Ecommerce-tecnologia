@@ -375,7 +375,6 @@ if (datos) {
   });
 
   //actualizar total de produtos carrito
-<<<<<<< HEAD
  function actualizarBadge() {
 
     const badgeMobile = document.getElementById('badge-mobile');
@@ -392,12 +391,6 @@ if (datos) {
         badgeDesktop.textContent = cantitaProducto;
     }
 }
-=======
-  function actualizarBadge() {
-    document.getElementById('badge-mobile').textContent = cantitaProducto;
-    document.getElementById('badge-desktop').textContent = cantitaProducto;
-  }
->>>>>>> 13e9502f6326acbef9e28ae8a8e36f0b4ea4cbe8
 
   // actualizar precio total del carrito
   function actualizarPrecio() {
