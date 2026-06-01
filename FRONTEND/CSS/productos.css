@@ -2104,14 +2104,14 @@ body::-webkit-scrollbar {
     background-color: #000d1f !important;
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
-    gap: 1px !important;
+    gap: 20px !important;
     margin-top: 0px !important;
-    height:430px !important;
-    width: 50% !important;
+    height:81% !important;
+    width: 45% !important;
     padding: 0% 20% 0% 0%;
     margin-bottom: 20px !important;
     border-radius: 0 !important;
-    margin-left: 60%;
+    margin-left: 15%;
     flex-direction:column !important;
     position: fixed; /* o absolute */
     z-index: 1;
