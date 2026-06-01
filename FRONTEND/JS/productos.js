@@ -15,7 +15,7 @@ async function cargarProductos() {
 
         const datos = await res.json();
 
-        listaProductos = datos.map(p => ({
+        listaProductos = datos.reverse().map(p => ({
             ...p,
             imagen: p.urlImagen || '',
             categoria: p.categoria.toLowerCase(),

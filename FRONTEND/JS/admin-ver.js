@@ -45,6 +45,7 @@ async function cargarProductos() {
     if (!res.ok) throw new Error(`Error ${res.status}`);
 
     lista = await res.json();
+    lista.reverse();
     listaFiltrada = [...lista];
 
     render();
