@@ -656,11 +656,12 @@ body::-webkit-scrollbar {
   .categoriasMenu2{
     display: none;
     background-color: #000d1f !important;
+    overflow-y: scroll !important;
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     gap: 19px !important;
     margin-top: 0px !important;
-    height: 80px !important;
+    height: 80% !important;
     width: 100%;
     padding: 0% 25% 0% 0%;
     margin-bottom: 20px !important;
@@ -1139,7 +1140,8 @@ body::-webkit-scrollbar {
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     gap: 2.50% !important;
     margin-top: 0px !important;
-    height: 80px !important;
+    overflow-y: scroll !important;
+    height: 80% !important;
     margin-right: 5000px !important;
     width: 74.93%;
     margin-left: 12px !important;
@@ -1614,8 +1616,9 @@ body::-webkit-scrollbar {
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     gap: 0% !important;
+    overflow-y: scroll !important;
     margin-top: 0px !important;
-    height: 80px !important;
+    height: 80% !important;
     margin-right: 5000px !important;
     width: 74.93%;
     margin-left: 12px !important;
@@ -2088,13 +2091,15 @@ body::-webkit-scrollbar {
 
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, 169px);
+  grid-template-columns: repeat(auto-fit, 170px) !important;
 
   justify-content: center  !important;
 
-  gap: 15px;
-  padding: 0;
+  gap: 9px !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
+
 
 
    /*MENU CATEGORIA..................................................................*/
@@ -2104,22 +2109,24 @@ body::-webkit-scrollbar {
     background-color: #000d1f !important;
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.7) !important;
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
-    gap: 20px !important;
+    gap: 10px !important;
     margin-top: 0px !important;
-    height:81% !important;
-    width: 45% !important;
-    padding: 0% 20% 0% 0%;
-    margin-bottom: 20px !important;
+    height: 80% !important;
+    width: 25% !important;
+    padding-top: 200px;
+    padding-bottom: 100px;
+    margin-bottom: 0px !important;
     border-radius: 0 !important;
     margin-left: 15%;
     flex-direction:column !important;
     position: fixed; /* o absolute */
+    overflow-y: scroll !important;
     z-index: 1;
   }
 
    .botonCategoria{
-      width:36px !important;
-      height:36px !important;
+      width:45px !important;
+      height:49px !important;
       border:none !important;
       outline:none !important;
       cursor:pointer !important;
