@@ -18,6 +18,9 @@ const modalEliminarMensaje = document.getElementById("modalEliminarMensaje");
 
 let idAEliminar = null;
 
+// si el servidor duerme
+const loading = document.getElementById("loading");
+
 /* ── Formato precio ───────────────────────────────── */
 function formatearPrecio(num) {
   return "$ " + num.toLocaleString("es-CO");
@@ -25,15 +28,42 @@ function formatearPrecio(num) {
 
 /* ── Cargar productos desde la API ───────────────── */
 async function cargarProductos() {
+
+  //  MOSTRAR LOADER
+  loading.style.display = "block";
+
+  // limpiar contenido mientras carga
+  tabla.innerHTML = "";
+  cards.innerHTML = "";
+  paginacion.innerHTML = "";
+
   try {
+
     const res = await fetch(API);
+
     if (!res.ok) throw new Error(`Error ${res.status}`);
+
     lista = await res.json();
     listaFiltrada = [...lista];
+
     render();
+
   } catch (err) {
+
     console.error('Error al cargar productos:', err);
-    tabla.innerHTML = `<tr><td colspan="7" class="text-center text-danger">No se pudo cargar los productos.</td></tr>`;
+
+    tabla.innerHTML = `
+      <tr>
+        <td colspan="7" class="text-center text-danger">
+          No se pudo cargar los productos.
+        </td>
+      </tr>
+    `;
+
+  } finally {
+
+    //  OCULTAR LOADER SIEMPRE
+    loading.style.display = "none";
   }
 }
 
@@ -44,6 +74,7 @@ function render() {
 
   const inicio = (paginaActual - 1) * porPagina;
   const datos = listaFiltrada.slice(inicio, inicio + porPagina);
+ 
 
   if (datos.length === 0) {
     tabla.innerHTML = `<tr><td colspan="7" class="text-center text-muted">Sin productos.</td></tr>`;
@@ -103,11 +134,77 @@ function render() {
 /* ── Paginación ───────────────────────────────────── */
 function renderPaginacion() {
   paginacion.innerHTML = "";
+
   const totalPaginas = Math.ceil(listaFiltrada.length / porPagina);
-  for (let i = 1; i <= totalPaginas; i++) {
+  const maxVisible = 5;
+
+  let inicio = Math.max(1, paginaActual - Math.floor(maxVisible / 2));
+  let fin = inicio + maxVisible - 1;
+
+  if (fin > totalPaginas) {
+    fin = totalPaginas;
+    inicio = Math.max(1, fin - maxVisible + 1);
+  }
+
+  // ⏮ Primera página
+  if (paginaActual > 1) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(1)">«</button>
+      </li>
+    `;
+  }
+
+  // ◀ Anterior
+  if (paginaActual > 1) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(${paginaActual - 1})">‹</button>
+      </li>
+    `;
+  }
+
+  // ... al inicio
+  if (inicio > 1) {
+    paginacion.innerHTML += `
+      <li class="page-item disabled">
+        <span class="page-link">...</span>
+      </li>
+    `;
+  }
+
+  // 🔢 páginas visibles
+  for (let i = inicio; i <= fin; i++) {
     paginacion.innerHTML += `
       <li class="page-item ${i === paginaActual ? "active" : ""}">
         <button class="page-link" onclick="cambiarPagina(${i})">${i}</button>
+      </li>
+    `;
+  }
+
+  // ... al final
+  if (fin < totalPaginas) {
+    paginacion.innerHTML += `
+      <li class="page-item disabled">
+        <span class="page-link">...</span>
+      </li>
+    `;
+  }
+
+  // ▶ Siguiente
+  if (paginaActual < totalPaginas) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(${paginaActual + 1})">›</button>
+      </li>
+    `;
+  }
+
+  // ⏭ Última página
+  if (paginaActual < totalPaginas) {
+    paginacion.innerHTML += `
+      <li class="page-item">
+        <button class="page-link" onclick="cambiarPagina(${totalPaginas})">»</button>
       </li>
     `;
   }

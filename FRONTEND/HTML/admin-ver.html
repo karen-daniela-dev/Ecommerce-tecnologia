@@ -17,6 +17,15 @@
 </head>
 
 <body>
+  <!-- contenedor si el servidor duerme  -->
+<div id="loading" class="text-center" style="display:none; padding:40px; color:#aaa; margin-top:100px;">
+  <div class="spinner-border text-primary" role="status" style="width:3rem; height:3rem;">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+  <p style="margin-top:15px; font-weight:500;">
+    El servidor está despertando, esto puede tomar hasta 1 minuto ⏳
+  </p>
+</div>
 
   <section class="nav">
     <nav class="navbar navbar-expand-lg">
@@ -68,72 +77,73 @@
     </nav>
   </section>
 
-<main class="py-4 py-md-5">
-  <div class="container">
+  <main class="py-4 py-md-5">
+    <div class="container">
 
-    <!-- HEADER -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-      <h1 class="mb-0">Gestión de productos</h1>
+      <!-- HEADER -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <h1 class="mb-0">Gestión de productos</h1>
 
-      <div class="d-flex gap-2">
-        <input type="text" id="buscador" class="form-control" placeholder="Buscar producto...">
-        <a href="admin-crear.html" class="btn btn-outline-info">
-          <i class="bi bi-plus-lg"></i>
-        </a>
+        <div class="d-flex gap-2">
+          <input type="text" id="buscador" class="form-control" placeholder="Buscar producto..."
+            autocomplete="new-password">
+          <a href="admin-crear.html" class="btn btn-outline-info">
+            <i class="bi bi-plus-lg"></i>
+          </a>
+        </div>
       </div>
+
+      <!-- TABLA -->
+      <div class="table-responsive d-none d-md-block">
+        <table class="table table-dark table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Marca</th>
+              <th>Stock</th>
+              <th>Precio</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tablaProductos"></tbody>
+        </table>
+      </div>
+
+      <!-- CARDS (MÓVIL) -->
+      <div class="d-md-none" id="cardsProductos"></div>
+
+      <!-- PAGINACIÓN -->
+      <nav class="paginacion-container mt-4 d-flex justify-content-center">
+        <ul class="pagination" id="paginacion"></ul>
+      </nav>
+
     </div>
+  </main>
 
-    <!-- TABLA -->
-    <div class="table-responsive d-none d-md-block">
-      <table class="table table-dark table-hover align-middle">
-        <thead>
-          <tr>
-            <th>Imagen</th>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Marca</th>
-            <th>Stock</th>
-            <th>Precio</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="tablaProductos"></tbody>
-      </table>
+  <!-- MODAL ELIMINAR PRODUCTO  -->
+  <div id="modalEliminar" class="modal-overlay d-none">
+    <div class="modal-content-neon">
+
+      <h2>Eliminar producto</h2>
+
+      <p id="modalEliminarMensaje">
+        ¿Seguro que deseas eliminar este producto?
+      </p>
+
+      <div class="modal-actions">
+        <button id="btnCancelarEliminar" class="btn-secundario">
+          Cancelar
+        </button>
+
+        <button id="btnConfirmarEliminar" class="btn-danger">
+          Eliminar
+        </button>
+      </div>
+
     </div>
-
-    <!-- CARDS (MÓVIL) -->
-    <div class="d-md-none" id="cardsProductos"></div>
-
-    <!-- PAGINACIÓN -->
-    <nav class="paginacion-container mt-4 d-flex justify-content-center">
-      <ul class="pagination" id="paginacion"></ul>
-    </nav>
-
   </div>
-</main>
-
-<!-- MODAL ELIMINAR PRODUCTO  -->
- <div id="modalEliminar" class="modal-overlay d-none">
-  <div class="modal-content-neon">
-
-    <h2>Eliminar producto</h2>
-
-    <p id="modalEliminarMensaje">
-      ¿Seguro que deseas eliminar este producto?
-    </p>
-
-    <div class="modal-actions">
-      <button id="btnCancelarEliminar" class="btn-secundario">
-        Cancelar
-      </button>
-
-      <button id="btnConfirmarEliminar" class="btn-danger">
-        Eliminar
-      </button>
-    </div>
-
-  </div>
-</div>
 
 
 
@@ -387,9 +397,10 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../JS/admin-ver.js"></script>
-<script src="../JS/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/admin-ver.js"></script>
+  <script src="../JS/nav.js"></script>
 
 </body>
+
 </html>

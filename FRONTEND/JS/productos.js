@@ -1,43 +1,48 @@
-// importamanos los areglos
-import { productos } from "./textoProducto.js";
+const API = 'https://ecommerceklydy.onrender.com/productos';
+let listaProductos = [];
 
+async function cargarProductos() {
+    const loading = document.getElementById("loading");
+    const contenedor = document.getElementById("contenedor");
 
-//convertimos en JSON
-let listaProductos = JSON.parse(JSON.stringify(productos));
+    // Mostrar loader
+    loading.style.display = "block";
+    contenedor.innerHTML = "";
 
-// unir productos con productos creados
-function unirDatos() {
+    try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error(`Error ${res.status}`);
 
-    let datos = localStorage.getItem("ListaProductos");
+        const datos = await res.json();
 
-    if (datos) {
+        listaProductos = datos.map(p => ({
+            ...p,
+            imagen: p.urlImagen || '',
+            categoria: p.categoria.toLowerCase(),
+            marca: p.marca.toLowerCase(),
+            uso: p.uso.toLowerCase(),
+            cantidad: p.stock
+        }));
 
-        let productosCreados = JSON.parse(datos);
-        listaProductos = [...listaProductos, ...productosCreados];
+        productosFiltros = [...listaProductos];
+
+        // Ocultar loader y mostrar productos
+        loading.style.display = "none";
+        mostrarProductos();
+
+    } catch (err) {
+        console.error('Error al cargar productos:', err);
+        loading.style.display = "none";
+        contenedor.innerHTML =
+            `<p class="text-center text-danger">No se pudieron cargar los productos. Intenta más tarde.</p>`;
     }
-
-};
-
-function ActualizarProductos() {
-
-    listaProductos = JSON.parse(JSON.stringify(productos));
-
-    let datos = localStorage.getItem("ListaProductos");
-
-    if (datos) {
-
-        let creadosProductos = JSON.parse(datos);
-        listaProductos = [...listaProductos, ...creadosProductos];
-    }
-
-    mostrarProductos();
 }
 
 
 
-//setInterval(ActualizarProductos, 2000);
 
-unirDatos();
+
+
 
 // =========================================
 // TOAST
@@ -170,6 +175,10 @@ filtrosPrecio.forEach(filtro => {
         precioMax = inputMax.value
             ? limpiarNumero(inputMax.value)
             : null;
+        console.log("precioMin:", precioMin);
+        console.log("precioMax:", precioMax);
+        console.log("precios en lista:", listaProductos.map(p => p.precio));
+
 
         mostrarProductos();
 
@@ -567,8 +576,7 @@ function obtenerFiltrosDesdeURL() {
 
 }
 obtenerFiltrosDesdeURL();
-mostrarProductos();
-
+cargarProductos(); // ← esto carga y luego llama mostrarProductos() internamente
 
 
 

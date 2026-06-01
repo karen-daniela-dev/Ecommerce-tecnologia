@@ -4,7 +4,7 @@
   let productoEditando = null;
   let productoOriginal = null;
 
-/* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
+  /* ── DETECTAR MODO EDICIÓN DESDE URL ───────────────── */
   const API = 'https://ecommerceklydy.onrender.com/productos';
 
   /* ── Referencias al DOM ───────────────────────────── */
@@ -85,21 +85,21 @@
     descContador.textContent = `${descTextarea.value.length} / 500`;
   });
 
- 
-/* ── Formateo de precio en tiempo real (COP) ──────── */
-inputPrecio.addEventListener('input', () => {
-  let raw = inputPrecio.value.replace(/\D/g, '');
-  raw = raw.replace(/^0+/, '');
 
-  if (raw === '') {
-    inputPrecio.value = '';
-    return;
-  }
+  /* ── Formateo de precio en tiempo real (COP) ──────── */
+  inputPrecio.addEventListener('input', () => {
+    let raw = inputPrecio.value.replace(/\D/g, '');
+    raw = raw.replace(/^0+/, '');
 
-  inputPrecio.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (raw === '') {
+      inputPrecio.value = '';
+      return;
+    }
 
-  validarPrecio(); // 🔥 feedback inmediato
-});
+    inputPrecio.value = raw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    validarPrecio(); // 🔥 feedback inmediato
+  });
 
   /* ── Helpers de validación ────────────────────────── */
   function mostrarError(input, mensaje) {
@@ -556,7 +556,27 @@ inputPrecio.addEventListener('input', () => {
     btnSubmit.disabled = true;
     btnSubmit.textContent = 'Guardando...';
 
-    const urlImagen = inputUrl.value.trim();
+    let urlImagenFinal = inputUrl.value.trim();
+
+    //Si el usuario subió archivo → usar Cloudinary
+    if (inputImagen.files.length > 0) {
+
+      btnSubmit.textContent = "Subiendo imagen...";
+
+      const file = inputImagen.files[0];
+      const urlCloudinary = await subirImagenBackend(file);
+
+      if (!urlCloudinary) {
+        mostrarToast("Error al subir imagen");
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = modoEdicion ? 'Actualizar' : 'Crear';
+        return;
+      }
+
+      urlImagenFinal = urlCloudinary;
+    }
+
+
     const usoSeleccionado = [...radiosUso].find(r => r.checked)?.value;
 
     const payload = {
@@ -567,7 +587,8 @@ inputPrecio.addEventListener('input', () => {
       categoria: mapCategoria[selectCat.value],
       uso: mapUso[usoSeleccionado],
       descripcion: descTextarea.value.trim(),
-      urlImagen: urlImagen || null
+      urlImagen: urlImagenFinal || null
+
     };
 
     /* ── MODO EDICIÓN → PUT ───────────────────────────── */
@@ -575,9 +596,15 @@ inputPrecio.addEventListener('input', () => {
       try {
         const res = await fetch(`${API}/${productoEditando.id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
           body: JSON.stringify(payload)
+
         });
+
+
 
         if (!res.ok) {
           const error = await res.json().catch(() => null);
@@ -602,12 +629,16 @@ inputPrecio.addEventListener('input', () => {
       return; // ← evita que caiga al POST
     }
 
+
     /* ── MODO CREACIÓN → POST ─────────────────────────── */
 
     try {
       const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         body: JSON.stringify(payload)
       });
 
@@ -677,7 +708,7 @@ inputPrecio.addEventListener('input', () => {
     }
   });
 
-  
+
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -737,33 +768,59 @@ inputPrecio.addEventListener('input', () => {
 
 
   function obtenerProductoFormulario() {
-  return {
-    nombre:      inputNombre.value.trim(),
-    stock:       parseInt(inputCantidad.value) || 0,
-    precio:      parseInt(inputPrecio.value.replace(/\./g, '')) || 0,
-    marca:       mapMarca[inputMarca.value] || null,
-    categoria:   mapCategoria[selectCat.value] || null,
-    uso:         mapUso[[...radiosUso].find(r => r.checked)?.value] || null,
-    descripcion: descTextarea.value.trim(),
-    urlImagen:   inputUrl.value.trim() || null
-  };
-}
+    return {
+      nombre: inputNombre.value.trim(),
+      stock: parseInt(inputCantidad.value) || 0,
+      precio: parseInt(inputPrecio.value.replace(/\./g, '')) || 0,
+      marca: mapMarca[inputMarca.value] || null,
+      categoria: mapCategoria[selectCat.value] || null,
+      uso: mapUso[[...radiosUso].find(r => r.checked)?.value] || null,
+      descripcion: descTextarea.value.trim(),
+      urlImagen: inputUrl.value.trim() || null
+    };
+  }
 
-function detectarCambios() {
-  if (!modoEdicion) return;
+  function detectarCambios() {
+    if (!modoEdicion) return;
 
-  const actual = obtenerProductoFormulario();
-  const original = JSON.parse(productoOriginal);
+    const actual = obtenerProductoFormulario();
+    const original = JSON.parse(productoOriginal);
 
-  const camposComparar = ['nombre', 'stock', 'precio', 'marca', 'categoria', 'uso', 'descripcion', 'urlImagen'];
-  const hayCambios = camposComparar.some(k => String(actual[k]) !== String(original[k]));
+    const camposComparar = ['nombre', 'stock', 'precio', 'marca', 'categoria', 'uso', 'descripcion', 'urlImagen'];
+    const hayCambios = camposComparar.some(k => String(actual[k]) !== String(original[k]));
 
-  const btnSubmit = form.querySelector('button[type="submit"]');
-  btnSubmit.disabled = !hayCambios;
-}
+    const btnSubmit = form.querySelector('button[type="submit"]');
+    btnSubmit.disabled = !hayCambios;
+  }
 
-form.addEventListener('input', detectarCambios);
-form.addEventListener('change', detectarCambios);
+  form.addEventListener('input', detectarCambios);
+  form.addEventListener('change', detectarCambios);
+
+
+
+  async function subirImagenBackend(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("https://ecommerceklydy.onrender.com/imagenes/upload", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        body: formData
+      });
+
+      if (!res.ok) throw new Error("Error subiendo imagen");
+
+      const data = await res.json();
+      return data.url;
+
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 
 
 

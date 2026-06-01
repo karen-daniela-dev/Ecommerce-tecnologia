@@ -10,64 +10,64 @@ document.addEventListener('DOMContentLoaded', function () {
     el.classList.add('active');
   }
 
-  
+
   // ── BADGE DEL CARRITO ────────────────────────────────────────────
   // =========================================
-// TOAST
-// =========================================
+  // TOAST
+  // =========================================
 
-function mostrarToast(mensaje){
+  function mostrarToast(mensaje) {
 
-  let toast = document.getElementById("toast");
+    let toast = document.getElementById("toast");
 
-  toast.textContent = mensaje;
+    toast.textContent = mensaje;
 
-  toast.classList.add("active");
+    toast.classList.add("active");
 
-  setTimeout(() => {
-    toast.classList.remove("active");
-  }, 3000);
+    setTimeout(() => {
+      toast.classList.remove("active");
+    }, 3000);
 
-}
+  }
 
 
-// =========================================
-// MODAL CONFIRMACION
-// =========================================
+  // =========================================
+  // MODAL CONFIRMACION
+  // =========================================
 
-function mostrarConfirmacion(mensaje, callback){
+  function mostrarConfirmacion(mensaje, callback) {
 
-  let modal = document.getElementById("modalConfirmacion");
+    let modal = document.getElementById("modalConfirmacion");
 
-  let mensajeModal = document.getElementById("mensajeModal");
+    let mensajeModal = document.getElementById("mensajeModal");
 
-  let aceptar = document.getElementById("aceptarModal");
+    let aceptar = document.getElementById("aceptarModal");
 
-  let cancelar = document.getElementById("cancelarModal");
+    let cancelar = document.getElementById("cancelarModal");
 
-  mensajeModal.textContent = mensaje;
+    mensajeModal.textContent = mensaje;
 
-  modal.style.display = "flex";
+    modal.style.display = "flex";
 
-  aceptar.onclick = () => {
+    aceptar.onclick = () => {
 
-    modal.style.display = "none";
+      modal.style.display = "none";
 
-    callback(true);
+      callback(true);
 
-  };
+    };
 
-  cancelar.onclick = () => {
+    cancelar.onclick = () => {
 
-    modal.style.display = "none";
+      modal.style.display = "none";
 
-    callback(false);
+      callback(false);
 
-  };
+    };
 
-}
-  
-  
+  }
+
+
   //cotadores 
   let cantitaProducto = 0;
   let totalPrecio = 0;
@@ -94,25 +94,26 @@ function mostrarConfirmacion(mensaje, callback){
 
 
   // contadores (cargar carrito guardado)
-  let datos = localStorage.getItem("carrito");
+let datos = localStorage.getItem("carrito");
 
-  if(datos){
-    let carrito = JSON.parse(datos);
+if (datos) {
+  let carrito = JSON.parse(datos);
+  cantitaProducto = 0;
+  totalPrecio = 0;
 
-    carrito.forEach(prodc => {
-      agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
-    });
-  }
-
+  carrito.forEach(prodc => {
+    agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
+  });
+}
 
 
   // escha el click de la targeta para agrecar a lista
-  document.addEventListener("click", function(boton){
+  document.addEventListener("click", function (boton) {
 
     let evento = boton.target.closest(".btn-agregar");
 
-    if(evento){
-      
+    if (evento) {
+
       let imagen = evento.dataset.imagen;
       let nombre = evento.dataset.nombre;
       let precio = Number(evento.dataset.precio);
@@ -129,14 +130,14 @@ function mostrarConfirmacion(mensaje, callback){
 
 
   // lista para carrito
-  function agregarAlcarrito(imagen, nombre, precio, cantidad){
-    
+  function agregarAlcarrito(imagen, nombre, precio, cantidad) {
+
     let listaCarrito = document.getElementById("listaCarrito");
 
     let productoExistente = listaCarrito.querySelector(`li[data-nombre="${nombre}"]`);
 
     // si el producto ya esiste actializa para que se agrege la cantidad y no se repita la li
-    if(productoExistente){
+    if (productoExistente) {
 
       let numero = productoExistente.querySelector(".cantidades");
       let precioSpan = productoExistente.querySelector(".precio-item");
@@ -148,9 +149,9 @@ function mostrarConfirmacion(mensaje, callback){
 
       let precioUnitario = Number(productoExistente.dataset.precio);
       let nuevoPrecioTotal = precioUnitario * nuevaCantidad;
-      precioSpan.textContent = nuevoPrecioTotal.toLocaleString(); 
+      precioSpan.textContent = nuevoPrecioTotal.toLocaleString();
 
-      
+
       cantitaProducto += cantidad;
       totalPrecio += precioUnitario * cantidad;
 
@@ -161,17 +162,17 @@ function mostrarConfirmacion(mensaje, callback){
       // al agregar mas cantidad se pone al inicio
       /*listaCarrito.prepend(productoExistente);*/
 
-      return; 
+      return;
     }
 
 
     // si no esiste esa li con ese nombre la añade a la lista
     let lista = document.createElement("li");
     lista.classList.add("producto");
-    
+
     lista.dataset.precio = precio;
     lista.dataset.nombre = nombre;
-    
+
     //boton eliminar
     let eliminarP = document.createElement("button");
     eliminarP.textContent = "x";
@@ -196,15 +197,15 @@ function mostrarConfirmacion(mensaje, callback){
     // agregar toda la li creada al contenedor de html 
     listaCarrito.appendChild(lista);
 
-     // evento de boton eliminar el producto
-    eliminarP.addEventListener("click", function(){
+    // evento de boton eliminar el producto
+    eliminarP.addEventListener("click", function () {
 
       mostrarConfirmacion(
         `¿Deseas eliminar ${nombre} del carrito?`,
-        
-        function(confirmado){
 
-          if(confirmado){
+        function (confirmado) {
+
+          if (confirmado) {
 
             eliminarProducto(lista);
 
@@ -222,101 +223,101 @@ function mostrarConfirmacion(mensaje, callback){
     actualizarBadge();
     actualizarPrecio();
     guardarCarrito();
-    
+
     // la agrega la creada al inicio
     listaCarrito.prepend(lista);
     document.getElementById("msgVacio").style.display = "none";
   }
 
-  
 
-  
+
+
 
   // evento del decremento y decremento de la li
-  document.addEventListener("click", function(clic){
+  document.addEventListener("click", function (clic) {
 
     // si solo hace click en el boton decremento li
- if(clic.target.classList.contains("decremento")){
+    if (clic.target.classList.contains("decremento")) {
 
-  // busca li
-  let contenedor = clic.target.closest("li"); 
+      // busca li
+      let contenedor = clic.target.closest("li");
 
-  // si no la encuentra se detiene
-  if(!contenedor) return; 
+      // si no la encuentra se detiene
+      if (!contenedor) return;
 
-  let numero = contenedor.querySelector(".cantidades");
+      let numero = contenedor.querySelector(".cantidades");
 
-  let precioSpan = contenedor.querySelector(".precio-item");
+      let precioSpan = contenedor.querySelector(".precio-item");
 
-  let precio = Number(contenedor.dataset.precio);
+      let precio = Number(contenedor.dataset.precio);
 
-  let cantidad = Number(numero.textContent);
+      let cantidad = Number(numero.textContent);
 
-  // si es mayor a 1 puede decrementar
-  if(cantidad > 1){
+      // si es mayor a 1 puede decrementar
+      if (cantidad > 1) {
 
-    cantidad--;
+        cantidad--;
 
-    numero.textContent = cantidad;
+        numero.textContent = cantidad;
 
-    precioSpan.textContent = (precio * cantidad).toLocaleString();
+        precioSpan.textContent = (precio * cantidad).toLocaleString();
 
-    cantitaProducto--;
+        cantitaProducto--;
 
-    totalPrecio -= precio;
+        totalPrecio -= precio;
 
-    actualizarBadge();
+        actualizarBadge();
 
-    actualizarPrecio();
+        actualizarPrecio();
 
-    guardarCarrito();
+        guardarCarrito();
 
-  }
+      }
 
-}
+    }
 
 
-  
+
     // evento del incremento y decremento de la li
     // si dedecta en click en incremento
-   // evento del incremento
-if(clic.target.classList.contains("incremento")){
+    // evento del incremento
+    if (clic.target.classList.contains("incremento")) {
 
-  let contenedor = clic.target.closest("li");
+      let contenedor = clic.target.closest("li");
 
-  if(!contenedor) return; 
+      if (!contenedor) return;
 
-  let numero = contenedor.querySelector(".cantidades");
+      let numero = contenedor.querySelector(".cantidades");
 
-  let precioSpan = contenedor.querySelector(".precio-item");
+      let precioSpan = contenedor.querySelector(".precio-item");
 
-  let precio = Number(contenedor.dataset.precio);
+      let precio = Number(contenedor.dataset.precio);
 
-  let cantidad = Number(numero.textContent);
+      let cantidad = Number(numero.textContent);
 
-  cantidad++;
+      cantidad++;
 
-  numero.textContent = cantidad;
+      numero.textContent = cantidad;
 
-  precioSpan.textContent = (precio * cantidad).toLocaleString();
+      precioSpan.textContent = (precio * cantidad).toLocaleString();
 
-  cantitaProducto++;
+      cantitaProducto++;
 
-  totalPrecio += precio;
+      totalPrecio += precio;
 
-  actualizarBadge();
+      actualizarBadge();
 
-  actualizarPrecio();
+      actualizarPrecio();
 
-  guardarCarrito();
+      guardarCarrito();
 
-}
+    }
 
   });
 
 
   // elimina el producto unitario
-  function eliminarProducto(li){
+  function eliminarProducto(li) {
 
     let numero = li.querySelector(".cantidades");
     let cantidad = Number(numero.textContent);
@@ -332,48 +333,49 @@ if(clic.target.classList.contains("incremento")){
     actualizarPrecio();
     guardarCarrito();
 
-    if(cantitaProducto === 0){
+    if (cantitaProducto === 0) {
       document.getElementById("msgVacio").style.display = "block";
     }
   }
 
-    // vaciar carrito completo
-    let vaciarCarrito = document.getElementById("btnVaciar");
+  // vaciar carrito completo
+  let vaciarCarrito = document.getElementById("btnVaciar");
 
-    vaciarCarrito.addEventListener("click", function(){
+  vaciarCarrito.addEventListener("click", function () {
 
-      mostrarConfirmacion(
+    mostrarConfirmacion(
 
-        "¿Deseas vaciar todo el carrito?",
+      "¿Deseas vaciar todo el carrito?",
 
-        function(confirmado){
+      function (confirmado) {
 
-          if(confirmado){
+        if (confirmado) {
 
-            let lista = document.getElementById("listaCarrito");
+          let lista = document.getElementById("listaCarrito");
 
-            lista.querySelectorAll('li').forEach(li => li.remove());
+          lista.querySelectorAll('li').forEach(li => li.remove());
 
-            document.getElementById("msgVacio").style.display = "block";
+          document.getElementById("msgVacio").style.display = "block";
 
-            cantitaProducto = 0;
-            totalPrecio = 0;
+          cantitaProducto = 0;
+          totalPrecio = 0;
 
-            actualizarBadge();
-            actualizarPrecio();
-            guardarCarrito();
+          actualizarBadge();
+          actualizarPrecio();
+          guardarCarrito();
 
-            mostrarToast("Carrito vaciado");
-
-          }
+          mostrarToast("Carrito vaciado");
 
         }
 
-      );
+      }
 
-    });
+    );
+
+  });
 
   //actualizar total de produtos carrito
+<<<<<<< HEAD
  function actualizarBadge() {
 
     const badgeMobile = document.getElementById('badge-mobile');
@@ -390,18 +392,24 @@ if(clic.target.classList.contains("incremento")){
         badgeDesktop.textContent = cantitaProducto;
     }
 }
+=======
+  function actualizarBadge() {
+    document.getElementById('badge-mobile').textContent = cantitaProducto;
+    document.getElementById('badge-desktop').textContent = cantitaProducto;
+  }
+>>>>>>> 13e9502f6326acbef9e28ae8a8e36f0b4ea4cbe8
 
   // actualizar precio total del carrito
-  function actualizarPrecio(){
-     let total = document.getElementById("total");
-     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
+  function actualizarPrecio() {
+    let total = document.getElementById("total");
+    total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
   }
 
 
-  
 
 
-  
+
+
   // ── ÍCONO DEL BOTÓN MENÚ ─────────────────────────────────────────
   // Selecciona el menú desplegable y el botón de menú de la barra inferior
   const navbarCollapse = document.getElementById('navbarKlydy');
@@ -423,15 +431,15 @@ if(clic.target.classList.contains("incremento")){
 
   // ── CERRAR MENÚ AL HACER CLICK AFUERA ───────────────────────────
   // Escucha clicks en cualquier parte de la página
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     const navbar = document.getElementById('navbarKlydy');
     const toggler = document.querySelector('.navbar-toggler');
 
     // Solo actúa si el menú está abierto Y el click fue fuera
     // del menú desplegado Y fuera del botón hamburguesa
     if (navbar.classList.contains('show') &&
-        !navbar.contains(e.target) &&
-        !toggler.contains(e.target)) {
+      !navbar.contains(e.target) &&
+      !toggler.contains(e.target)) {
       bootstrap.Collapse.getInstance(navbar)?.hide();
     }
   });
@@ -470,203 +478,168 @@ if(clic.target.classList.contains("incremento")){
 // LOGIN
 // ─────────────────────────────────────────────
 
+const API_AUTH = "https://ecommerceklydy.onrender.com/auth";
+
+// ─────────────────────────────────────────────
+// HELPERS DE SESIÓN
+// ─────────────────────────────────────────────
+function guardarSesion(data) {
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("rol", data.rol);
+  localStorage.setItem("nombre", data.nombre);
+  localStorage.setItem("email", data.email);
+}
+
+function cerrarSesionLocal() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("rol");
+  localStorage.removeItem("nombre");
+  localStorage.removeItem("email");
+}
+
+function obtenerSesion() {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  return {
+    token,
+    rol: localStorage.getItem("rol"),
+    nombre: localStorage.getItem("nombre"),
+    email: localStorage.getItem("email")
+  };
+}
+
+// ─────────────────────────────────────────────
+// LOGIN
+// ─────────────────────────────────────────────
 const btnLogin = document.getElementById("btnLogin");
+if (btnLogin) {
+  btnLogin.addEventListener("click", iniciarSesion);
+}
 
-btnLogin.addEventListener("click", iniciarSesion);
-
-function iniciarSesion() {
-
+async function iniciarSesion() {
   const correo = document.getElementById("correoLogin").value.trim();
-
   const password = document.getElementById("passwordLogin").value.trim();
-
   const mensaje = document.getElementById("mensajeLogin");
 
-  // VALIDAR CAMPOS VACÍOS
-  if (correo === "" || password === "") {
-
-    mensaje.innerHTML = `
-      <div class="alert alert-danger">
-        Todos los campos son obligatorios
-      </div>
-    `;
-
+  if (!correo || !password) {
+    mensaje.innerHTML = `<div class="alert alert-danger">Todos los campos son obligatorios</div>`;
     return;
   }
 
-  // OBTENER USUARIOS
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  btnLogin.disabled = true;
+  btnLogin.textContent = "Entrando...";
 
-  // BUSCAR USUARIO
-  const usuarioEncontrado = usuarios.find(usuario =>
-    usuario.correo === correo &&
-    usuario.password === password
-  );
+  try {
+    const res = await fetch(`${API_AUTH}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: correo, password })
+    });
 
-  // LOGIN EXITOSO
-  if (usuarioEncontrado) {
+    const data = await res.json();
 
-    localStorage.setItem(
-      "usuarioActivo",
-      JSON.stringify(usuarioEncontrado)
-    );
+    if (!res.ok) {
+      mensaje.innerHTML = `<div class="alert alert-danger">${data.error || "Credenciales incorrectas"}</div>`;
+      return;
+    }
 
-    mensaje.innerHTML = `
-      <div class="alert alert-success">
-        Inicio de sesión exitoso
-      </div>
-    `;
+    guardarSesion(data);
+    actualizarNavbarUsuario();
 
-    //REDIRECCION
 
-    setTimeout(() => {
 
-      window.location.href = "FRONTEND/HTML/productos.html";
 
-    }, 1000);
 
-    // LOGIN INCORRECTO
+    // Redirigir según rol
 
-  } else {
+    const base = window.location.origin + "/Ecommerse-tecnologia-";
+    if (data.rol === "ADMIN") {
+      window.location.href = base + "/FRONTEND/HTML/admin-ver.html";
+    } else {
+      window.location.href = base + "/FRONTEND/HTML/productos.html";
+    }
 
-    mensaje.innerHTML = `
-      <div class="alert alert-danger">
-        Usuario o contraseña inválidos
-      </div>
-    `;
+  } catch (err) {
+    console.error(err);
+    mensaje.innerHTML = `<div class="alert alert-danger">No se pudo conectar con el servidor.</div>`;
+  } finally {
+    btnLogin.disabled = false;
+    btnLogin.textContent = "ENTRAR";
   }
 }
 
-
 // ─────────────────────────────────────────────
-// CAMBIAR NAVBAR
+// NAVBAR SEGÚN SESIÓN
 // ─────────────────────────────────────────────
-
 function actualizarNavbarUsuario() {
+  const sesion = obtenerSesion();
+  const contenedorDesktop = document.querySelector(".d-none.d-lg-flex.align-items-center.gap-2");
+  const linkAdmin = document.getElementById("linkAdmin");
 
-  const usuarioActivo = JSON.parse(
-    localStorage.getItem("usuarioActivo")
-  );
+  if (linkAdmin) {
+    linkAdmin.style.display = (sesion && sesion.rol === "ADMIN") ? "block" : "none";
+  }
 
-  const contenedorDesktop = document.querySelector(
-    ".d-none.d-lg-flex.align-items-center.gap-2"
-  );
+  if (!contenedorDesktop) return;
 
-  if (usuarioActivo && contenedorDesktop) {
-
+  if (sesion) {
     contenedorDesktop.innerHTML = `
-
       <div class="d-flex align-items-center gap-2">
-
-        <!-- NOMBRE USUARIO -->
         <span class="text-white fw-bold">
-          <i class="bi bi-person-check-fill"></i>
-          ${usuarioActivo.nombre}
+          <i class="bi bi-person-check-fill"></i> ${sesion.nombre}
         </span>
-
-        <!-- BOTÓN CERRAR SESIÓN -->
-        <button
-          class="btn btn-outline-danger btn-sm"
-          id="btnCerrarSesion">
-
+        <button class="btn btn-outline-danger btn-sm" id="btnCerrarSesion">
           Cerrar Sesión
         </button>
-
-        <!-- CARRITO -->
-        <button
-          class="btn klydy-btn-cart d-flex align-items-center"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasCarrito">
-
+        <button class="btn klydy-btn-cart d-flex align-items-center" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
           <i class="bi bi-cart3"></i>
-
-          <span
-            class="klydy-badge ms-1"
-            id="badge-desktop">
-
-          </span>
-
+          <span class="klydy-badge ms-1" id="badge-desktop"></span>
         </button>
-
       </div>
     `;
-
-    // EVENTO CERRAR SESIÓN
-    document
-      .getElementById("btnCerrarSesion")
-      .addEventListener("click", abrirModalCerrarSesion);
+    document.getElementById("btnCerrarSesion")?.addEventListener("click", abrirModalCerrarSesion);
+  } else {
+    contenedorDesktop.innerHTML = `
+      <form class="d-flex align-items-center gap-2">
+        <button class="btn klydy-btn-login" type="button"
+          data-bs-toggle="modal" data-bs-target="#modalLogin">
+          <i class="bi bi-person"></i> Mi Cuenta
+        </button>
+        <button class="btn klydy-btn-cart d-flex align-items-center" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
+          <i class="bi bi-cart3"></i>
+          <span class="klydy-badge ms-1" id="badge-desktop"></span>
+        </button>
+      </form>
+    `;
   }
+
+  // ← NUEVO: restaurar badge después de redibujar el navbar
+  const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
+  const totalItems = carritoGuardado.reduce((acc, p) => acc + p.cantidad, 0);
+  const badgeDesktop = document.getElementById("badge-desktop");
+  if (badgeDesktop) badgeDesktop.textContent = totalItems || '';
 }
 
 // ─────────────────────────────────────────────
 // CERRAR SESIÓN
 // ─────────────────────────────────────────────
-
 function cerrarSesion() {
-
-  localStorage.removeItem("usuarioActivo");
-
-  // CREAR ALERTA VISUAL
-  const alerta = document.createElement("div");
-
-  alerta.innerHTML = `
-  
-    <div 
-      class="alert alert-info alert-dismissible fade show shadow-lg"
-      role="alert"
-      style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        min-width: 320px;
-        border-radius: 14px;
-        font-weight: 600;
-      ">
-
-      <i class="bi bi-check-circle-fill me-2"></i>
-      Sesión cerrada correctamente
-
-    </div>
-  `;
-
-  document.body.appendChild(alerta);
-
-  // REDIRECCIONAR
-  setTimeout(() => {
-
-    window.location.href = "../../index.html";
-
-  }, 1500);
+  cerrarSesionLocal();
+  const base = window.location.origin + "/Ecommerse-tecnologia-";
+  window.location.href = base + "/index.html";
 }
 
-// EJECUTAR AL CARGAR
-actualizarNavbarUsuario();
-
-// ─────────────────────────────────────────────
-// ABRIR MODAL CERRAR SESIÓN
-// ─────────────────────────────────────────────
-
 function abrirModalCerrarSesion() {
-
-  const modal = new bootstrap.Modal(
-    document.getElementById("modalCerrarSesion")
-  );
-
+  const modal = new bootstrap.Modal(document.getElementById("modalCerrarSesion"));
   modal.show();
 }
 
-// ─────────────────────────────────────────────
-// CONFIRMAR CERRAR SESIÓN
-// ─────────────────────────────────────────────
-
 document.addEventListener("DOMContentLoaded", () => {
-
   const btnConfirmar = document.getElementById("confirmarCerrarSesion");
+  if (btnConfirmar) btnConfirmar.addEventListener("click", cerrarSesion);
 
-  if (btnConfirmar) {
-    btnConfirmar.addEventListener("click", cerrarSesion);
-  }
-
+  actualizarNavbarUsuario();
 });
+
