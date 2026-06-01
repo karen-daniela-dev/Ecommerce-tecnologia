@@ -2106,12 +2106,12 @@ body::-webkit-scrollbar {
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     gap: 1px !important;
     margin-top: 0px !important;
-    
+    height:430px !important;
     width: 50% !important;
     padding: 0% 20% 0% 0%;
     margin-bottom: 20px !important;
     border-radius: 0 !important;
-    margin-left: 6%;
+    margin-left: 60%;
     flex-direction:column !important;
     position: fixed; /* o absolute */
     z-index: 1;
@@ -2207,8 +2207,8 @@ body::-webkit-scrollbar {
     border: solid 0.5px  rgba(26, 158, 96, 0.388);
     margin: 10px 0px 0px 0px ;
     margin-bottom: 0px !important;
-    padding: 70px 16px 20px 16px;
-    
+    padding: 70px 16px 200px 16px;
+    overflow-y: scroll;
     margin-top: 0px !important;
     border-radius: 0px !important;
     justify-content: center !important;
@@ -2218,6 +2218,10 @@ body::-webkit-scrollbar {
     width: 60% !important;
     height: 100vh  !important;
     z-index: 1  !important;
+  }
+
+  .filtroMovil::-webkit-scrollbar{
+    display: none;
   }
 
    /*LISTA DE USOS*/
