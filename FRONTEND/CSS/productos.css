@@ -2106,7 +2106,7 @@ body::-webkit-scrollbar {
     border: solid 0.5px  rgba(26, 158, 96, 0.388) !important;
     gap: 1px !important;
     margin-top: 0px !important;
-    height:430px !important;
+    
     width: 50% !important;
     padding: 0% 20% 0% 0%;
     margin-bottom: 20px !important;
