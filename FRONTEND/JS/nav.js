@@ -537,11 +537,10 @@ async function iniciarSesion() {
     }
 
     guardarSesion(data);
+
+    //ACTUALIZAR INTERFAZ DESPUÉS DE LOGIN
     actualizarNavbarUsuario();
-
-
-
-
+    actualizarBotonMovil();
 
     // Redirigir según rol
 
@@ -619,9 +618,17 @@ function actualizarNavbarUsuario() {
 // CERRAR SESIÓN
 // ─────────────────────────────────────────────
 function cerrarSesion() {
+
   cerrarSesionLocal();
+
+  actualizarNavbarUsuario();
+  actualizarBotonMovil();
+
   const base = window.location.origin + "/Ecommerse-tecnologia-";
-  window.location.href = base + "/index.html";
+
+  setTimeout(() => {
+    window.location.href = base + "/index.html";
+  }, 500);
 }
 
 function abrirModalCerrarSesion() {
@@ -630,9 +637,60 @@ function abrirModalCerrarSesion() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const btnConfirmar = document.getElementById("confirmarCerrarSesion");
-  if (btnConfirmar) btnConfirmar.addEventListener("click", cerrarSesion);
+
+  const btnConfirmar =
+    document.getElementById("confirmarCerrarSesion");
+  
+  if (btnConfirmar) {
+    btnConfirmar.addEventListener(
+      "click",
+      cerrarSesion
+    );
+  }
 
   actualizarNavbarUsuario();
+  actualizarBotonMovil();
 });
 
+function actualizarBotonMovil() {
+
+  const sesion = obtenerSesion();
+
+  const btnCuentaMobile =
+  document.getElementById("btnCuentaMobile");
+
+  if (!btnCuentaMobile) return;
+
+  if (sesion) {
+
+    btnCuentaMobile.innerHTML = `
+      <i class="bi bi-box-arrow-right"></i>
+      <span class="label">Salir</span>
+    `;
+
+    btnCuentaMobile.removeAttribute("data-bs-toggle");
+    btnCuentaMobile.removeAttribute("data-bs-target");
+
+    // ABRIR MODAL DE CONFIRMACION
+    btnCuentaMobile.onclick = abrirModalCerrarSesion;
+
+  } else {
+
+    btnCuentaMobile.innerHTML = `
+      <i class="bi bi-person-circle"></i>
+      <span class="label">Mi Cuenta</span>
+    `;
+
+    btnCuentaMobile.setAttribute(
+      "data-bs-toggle",
+      "modal"
+    );
+
+    btnCuentaMobile.setAttribute(
+      "data-bs-target",
+      "#modalLogin"
+    );
+
+    btnCuentaMobile.onclick = null;
+  } 
+}
