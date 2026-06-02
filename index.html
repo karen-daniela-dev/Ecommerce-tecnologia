@@ -85,7 +85,9 @@
         <!-- Solo desktop -->
         <div class="d-none d-lg-flex align-items-center gap-2">
           <form class="d-flex align-items-center gap-2">
-            <button class="btn klydy-btn-login" type="button" data-bs-toggle="modal" data-bs-target="#modalLogin">
+            <button class="btn klydy-btn-login" type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#modalLogin">
               <i class="bi bi-person"></i> Mi Cuenta
             </button>
             <button class="btn klydy-btn-cart d-flex align-items-center" type="button" data-bs-toggle="offcanvas"
@@ -513,8 +515,13 @@
      ============================================================ -->
   <div class="bottom-nav d-lg-none">
 
-    <button class="bottom-nav-item btn-cuenta" data-bs-toggle="modal" data-bs-target="#modalLogin"
-      onclick="setActive(this)">
+    <button
+      id="btnCuentaMobile"
+      class="bottom-nav-item btn-cuenta"
+      data-bs-toggle="modal"
+      data-bs-target="#modalLogin"
+      onclick="setActive(this)"
+    >
       <i class="bi bi-person-circle"></i>
       <span class="label">Mi Cuenta</span>
     </button>
