@@ -187,15 +187,19 @@ async function enviarMensaje() {
   scrollAbajo();
 
   try {
+    console.log('📤 Enviando a:', CHAT_API_URL);
+    console.log('📦 Body:', JSON.stringify({ messages: historial }));
     const res = await fetch(CHAT_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: historial })
     });
 
+    console.log('📥 Status:', res.status);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    console.log('📥 Respuesta:', data);
     const reply = data.reply || 'No obtuve respuesta, intenta de nuevo.';
 
     // Ocultar indicador
@@ -212,6 +216,8 @@ async function enviarMensaje() {
   } catch (err) {
     chatTyping.style.display = 'none';
     console.error('Error en chat:', err);
+    console.error('❌ Tipo:', err.constructor.name);
+    console.error('❌ Mensaje:', err.message);
     const fallback = 'En este momento tengo mucha demanda, intenta de nuevo en un momento 😊';
     agregarBurbuja('assistant', fallback, true);
     historial.push({ role: 'assistant', content: fallback });
