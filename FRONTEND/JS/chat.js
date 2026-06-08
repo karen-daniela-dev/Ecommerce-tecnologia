@@ -239,6 +239,7 @@ function procesarCartAdd(texto) {
   while ((match = regex.exec(texto)) !== null) {
     try {
       const datos = JSON.parse(match[1]);
+      console.log('CART_ADD datos:', datos);
       const idProducto = String(datos.id);
       const cantidad   = Number(datos.qty) || 1;
 
