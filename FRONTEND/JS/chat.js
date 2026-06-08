@@ -346,3 +346,65 @@ function mostrarToastChat(mensaje) {
   toast.style.opacity = '1';
   setTimeout(() => { toast.style.opacity = '0'; }, 3000);
 }
+// ═══════════════════════════════════════════════════════════════
+//  DRAG DEL FAB
+// ═══════════════════════════════════════════════════════════════
+
+(function makeDraggable() {
+  const fab = document.getElementById('chatFab');
+  let isDragging = false;
+  let holdTimer = null;
+  let startX, startY, startRight, startBottom;
+
+  fab.addEventListener('pointerdown', (e) => {
+    startX = e.clientX;
+    startY = e.clientY;
+
+    const rect = fab.getBoundingClientRect();
+    startRight  = window.innerWidth  - rect.right;
+    startBottom = window.innerHeight - rect.bottom;
+
+    // Solo inicia drag después de 200ms presionando
+    holdTimer = setTimeout(() => {
+      isDragging = true;
+      fab.setPointerCapture(e.pointerId);
+      fab.style.transition = 'none';
+      fab.style.cursor = 'grabbing';
+    }, 200);
+  });
+
+  fab.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+
+    let newRight  = startRight  - (e.clientX - startX);
+    let newBottom = startBottom + (e.clientY - startY);
+
+    const size = fab.offsetWidth;
+    newRight  = Math.max(8, Math.min(newRight,  window.innerWidth  - size - 8));
+    newBottom = Math.max(8, Math.min(newBottom, window.innerHeight - size - 8));
+
+    fab.style.right  = newRight  + 'px';
+    fab.style.bottom = newBottom + 'px';
+
+    const win = document.getElementById('chatWindow');
+    win.style.right  = newRight  + 'px';
+    win.style.bottom = (newBottom + size + 8) + 'px';
+  });
+
+  fab.addEventListener('pointerup', () => {
+    clearTimeout(holdTimer);
+    if (isDragging) {
+      fab.addEventListener('click', (ev) => ev.stopImmediatePropagation(), { once: true });
+    }
+    isDragging = false;
+    fab.style.transition = '';
+    fab.style.cursor = '';
+  });
+
+  fab.addEventListener('pointercancel', () => {
+    clearTimeout(holdTimer);
+    isDragging = false;
+    fab.style.transition = '';
+    fab.style.cursor = '';
+  });
+})();
