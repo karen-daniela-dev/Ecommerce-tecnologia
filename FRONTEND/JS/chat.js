@@ -24,10 +24,11 @@ const btnClear     = document.getElementById('btnClearChat');
 //  INICIALIZACIÓN
 // ═══════════════════════════════════════════════════════════════
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async() => {
   cargarHistorial();
-  cargarProductos();
+  await cargarProductos();
   renderizarHistorial();
+  console.log('Catálogo cargado:', listaProductos.length, 'productos');
 });
 
 // ─── CARGAR CATÁLOGO ────────────────────────────────────────────
@@ -36,6 +37,7 @@ async function cargarProductos() {
     const res = await fetch('https://ecommerceklydy.onrender.com/productos');
     if (res.ok) {
       listaProductos = await res.json();
+      console.log('listaProductos cargados:', listaProductos.length);
     }
   } catch (e) {
     console.warn('No se pudo cargar el catálogo en el chat:', e);
@@ -244,7 +246,7 @@ function procesarCartAdd(texto) {
       const cantidad   = Number(datos.qty) || 1;
 
       // Buscar el producto en la lista cargada
-      const producto = listaProductos.find(p => String(p.id_producto) === idProducto);
+      const producto = listaProductos.find(p => String(p.id) === idProducto);
 
       if (!producto) {
         console.warn(`CART_ADD: producto id=${idProducto} no encontrado en catálogo`);
