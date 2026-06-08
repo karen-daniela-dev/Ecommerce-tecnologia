@@ -243,7 +243,7 @@ function procesarCartAdd(texto) {
       const cantidad   = Number(datos.qty) || 1;
 
       // Buscar el producto en la lista cargada
-      const producto = listaProductos.find(p => String(p.id) === idProducto);
+      const producto = listaProductos.find(p => String(p.id_producto) === idProducto);
 
       if (!producto) {
         console.warn(`CART_ADD: producto id=${idProducto} no encontrado en catálogo`);
