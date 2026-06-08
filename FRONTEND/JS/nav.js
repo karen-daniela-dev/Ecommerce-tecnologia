@@ -94,17 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // contadores (cargar carrito guardado)
-let datos = localStorage.getItem("carrito");
+  let datos = localStorage.getItem("carrito");
 
-if (datos) {
-  let carrito = JSON.parse(datos);
-  cantitaProducto = 0;
-  totalPrecio = 0;
+  if (datos) {
+    let carrito = JSON.parse(datos);
+    cantitaProducto = 0;
+    totalPrecio = 0;
 
-  carrito.forEach(prodc => {
-    agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
-  });
-}
+    carrito.forEach(prodc => {
+      agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
+    });
+  }
 
 
   // escha el click de la targeta para agrecar a lista
@@ -218,6 +218,7 @@ if (datos) {
       );
 
     });
+
     cantitaProducto += cantidad;
     totalPrecio += precio * cantidad;
     actualizarBadge();
@@ -228,6 +229,11 @@ if (datos) {
     listaCarrito.prepend(lista);
     document.getElementById("msgVacio").style.display = "none";
   }
+      //  Escuchar cuando el chat agrega productos
+    window.addEventListener('carritoActualizado', (e) => {
+      const { imagen, nombre, precio, cantidad } = e.detail;
+      agregarAlcarrito(imagen, nombre, precio, cantidad);
+    });
 
 
 
@@ -375,22 +381,30 @@ if (datos) {
   });
 
   //actualizar total de produtos carrito
- function actualizarBadge() {
+  function actualizarBadge() {
 
     const badgeMobile = document.getElementById('badge-mobile');
     const badgeDesktop = document.getElementById('badge-desktop');
 
     if (cantitaProducto === 0) {
-        badgeMobile.style.display = 'none';
-        badgeDesktop.style.display = 'none';
+      badgeMobile.style.display = 'none';
+      badgeDesktop.style.display = 'none';
     } else {
-        badgeMobile.style.display = 'flex'; // o block
-        badgeDesktop.style.display = 'flex'; // o block
+      badgeMobile.style.display = 'flex'; // o block
+      badgeDesktop.style.display = 'flex'; // o block
 
-        badgeMobile.textContent = cantitaProducto;
-        badgeDesktop.textContent = cantitaProducto;
+      badgeMobile.textContent = cantitaProducto;
+      badgeDesktop.textContent = cantitaProducto;
     }
-}
+    // Escuchar cuando el chat actualiza el carrito
+    window.addEventListener('carritoActualizado', () => {
+      const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+      cantitaProducto = carrito.reduce((sum, p) => sum + p.cantidad, 0);
+      totalPrecio = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+      actualizarBadge();
+      actualizarPrecio();
+    });
+  }
 
   // actualizar precio total del carrito
   function actualizarPrecio() {
@@ -640,7 +654,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnConfirmar =
     document.getElementById("confirmarCerrarSesion");
-  
+
   if (btnConfirmar) {
     btnConfirmar.addEventListener(
       "click",
@@ -657,7 +671,7 @@ function actualizarBotonMovil() {
   const sesion = obtenerSesion();
 
   const btnCuentaMobile =
-  document.getElementById("btnCuentaMobile");
+    document.getElementById("btnCuentaMobile");
 
   if (!btnCuentaMobile) return;
 
@@ -692,5 +706,5 @@ function actualizarBotonMovil() {
     );
 
     btnCuentaMobile.onclick = null;
-  } 
+  }
 }

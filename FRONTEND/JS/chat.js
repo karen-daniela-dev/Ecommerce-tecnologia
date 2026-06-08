@@ -8,7 +8,7 @@ const MAX_HISTORY  = 20; // máximo a guardar en localStorage
 
 // ─── ESTADO ────────────────────────────────────────────────────
 let historial = [];           // { role: "user"|"assistant", content: "..." }
-let listaProductos = [];      // catálogo cargado desde el backend
+let catalogoChat = [];      // catálogo cargado desde el backend
 let chatAbierto = false;
 
 // ─── ELEMENTOS DOM ─────────────────────────────────────────────
@@ -24,23 +24,35 @@ const btnClear     = document.getElementById('btnClearChat');
 //  INICIALIZACIÓN
 // ═══════════════════════════════════════════════════════════════
 
-document.addEventListener('DOMContentLoaded', async() => {
+// ✅ cambiar a — se ejecuta siempre sin importar cuándo carga el script
+(async function iniciar() {
   cargarHistorial();
   await cargarProductos();
   renderizarHistorial();
-  console.log('Catálogo cargado:', listaProductos.length, 'productos');
-});
+})();
 
 // ─── CARGAR CATÁLOGO ────────────────────────────────────────────
 async function cargarProductos() {
   try {
+    if (typeof catalogoChat !== 'undefined' && catalogoChat.length > 0) {
+      console.log('✅ Reutilizando catálogo:', catalogoChat.length);
+      return;
+    }
+
+    console.log('🔄 Cargando productos desde API...');
     const res = await fetch('https://ecommerceklydy.onrender.com/productos');
+    console.log('📦 Status fetch productos:', res.status);
+    
     if (res.ok) {
-      listaProductos = await res.json();
-      console.log('listaProductos cargados:', listaProductos.length);
+      const datos = await res.json();
+      catalogoChat = datos;
+      console.log('✅ Productos cargados:', catalogoChat.length);
+      console.log('Primer producto:', catalogoChat[0]);
+    } else {
+      console.error('❌ Error fetch productos:', res.status);
     }
   } catch (e) {
-    console.warn('No se pudo cargar el catálogo en el chat:', e);
+    console.error('❌ Exception cargando catálogo:', e.message);
   }
 }
 
@@ -237,6 +249,8 @@ async function enviarMensaje() {
 function procesarCartAdd(texto) {
   const regex = /\[\[CART_ADD:(\{[^}]+\})\]\]/g;
   let match;
+  console.log(' listaProductos.length:', catalogoChat.length);
+
 
   while ((match = regex.exec(texto)) !== null) {
     try {
@@ -246,7 +260,7 @@ function procesarCartAdd(texto) {
       const cantidad   = Number(datos.qty) || 1;
 
       // Buscar el producto en la lista cargada
-      const producto = listaProductos.find(p => String(p.id) === idProducto);
+      const producto = catalogoChat.find(p => String(p.id) === idProducto);
 
       if (!producto) {
         console.warn(`CART_ADD: producto id=${idProducto} no encontrado en catálogo`);
@@ -257,14 +271,9 @@ function procesarCartAdd(texto) {
       const nombre = producto.nombre || '';
       const precio = Number(producto.precio) || 0;
 
-      // ── Opción A: si agregarAlcarrito está disponible en el scope global
-      if (typeof agregarAlcarrito === 'function') {
-        agregarAlcarrito(imagen, nombre, precio, cantidad);
-        mostrarToastChat(`✅ ${nombre} agregado al carrito`);
-        continue;
-      }
+    
 
-      // ── Opción B: escribir directamente en localStorage (widget en página separada)
+      // escribir directamente en localStorage (widget en página separada)
       agregarAlCarritoLocalStorage(imagen, nombre, precio, cantidad);
       mostrarToastChat(`✅ ${nombre} agregado al carrito`);
 
@@ -290,6 +299,10 @@ function agregarAlCarritoLocalStorage(imagen, nombre, precio, cantidad) {
     }
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
+    // Notificar a la página que el carrito cambió
+    window.dispatchEvent(new CustomEvent('carritoActualizado', {
+      detail: { imagen, nombre, precio, cantidad }
+    }));
   } catch (err) {
     console.error('Error escribiendo carrito en localStorage:', err);
   }
