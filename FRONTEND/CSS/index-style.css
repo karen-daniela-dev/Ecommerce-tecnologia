@@ -715,6 +715,9 @@ main {
     width: 100%;
     justify-content: center;
   }
+  .hero__img {
+    margin-left: 0;
+  }
 }
  
  
