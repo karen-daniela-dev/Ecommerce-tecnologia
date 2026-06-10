@@ -10,6 +10,7 @@ const MAX_HISTORY  = 20; // máximo a guardar en localStorage
 let historial = [];           // { role: "user"|"assistant", content: "..." }
 let catalogoChat = [];      // catálogo cargado desde el backend
 let chatAbierto = false;
+let wasDragged = false;
 
 // ─── ELEMENTOS DOM ─────────────────────────────────────────────
 const chatFab      = document.getElementById('chatFab');
@@ -17,8 +18,30 @@ const chatWindow   = document.getElementById('chatWindow');
 const chatMessages = document.getElementById('chatMessages');
 const chatTyping   = document.getElementById('chatTyping');
 const chatInput    = document.getElementById('chatInput');
-const btnSend      = document.getElementById('btnSend');
-const btnClear     = document.getElementById('btnClearChat');
+
+
+// ─── BOTONES DEL HEADER (delegación) ───────────────────────────
+document.addEventListener('click', (e) => {
+
+    if (e.target.closest('#btnSend')) {
+    enviarMensaje();
+  }
+
+  if (e.target.closest('#btnClearChat')) {
+    if (confirm('¿Deseas limpiar la conversación?')) {
+      limpiarHistorial();
+    }
+  }
+
+  if (e.target.closest('#btnCerrarChat')) {
+    chatAbierto = false;
+    chatWindow.classList.remove('chat-window--open');
+    chatFab.classList.remove('chat-fab--open');
+    chatWindow.setAttribute('aria-hidden', 'true');
+  }
+
+});
+
 
 // ═══════════════════════════════════════════════════════════════
 //  INICIALIZACIÓN
@@ -35,24 +58,24 @@ const btnClear     = document.getElementById('btnClearChat');
 async function cargarProductos() {
   try {
     if (typeof catalogoChat !== 'undefined' && catalogoChat.length > 0) {
-      console.log('✅ Reutilizando catálogo:', catalogoChat.length);
+      console.log('Reutilizando catálogo:', catalogoChat.length);
       return;
     }
 
-    console.log('🔄 Cargando productos desde API...');
+    console.log('argando productos desde API...');
     const res = await fetch('https://ecommerceklydy.onrender.com/productos');
-    console.log('📦 Status fetch productos:', res.status);
+    console.log(' Status fetch productos:', res.status);
     
     if (res.ok) {
       const datos = await res.json();
       catalogoChat = datos;
-      console.log('✅ Productos cargados:', catalogoChat.length);
+      console.log('Productos cargados:', catalogoChat.length);
       console.log('Primer producto:', catalogoChat[0]);
     } else {
-      console.error('❌ Error fetch productos:', res.status);
+      console.error(' Error fetch productos:', res.status);
     }
   } catch (e) {
-    console.error('❌ Exception cargando catálogo:', e.message);
+    console.error(' Exception cargando catálogo:', e.message);
   }
 }
 
@@ -81,38 +104,33 @@ function limpiarHistorial() {
   mostrarBienvenida();
 }
 
+
 // ═══════════════════════════════════════════════════════════════
 //  TOGGLE DEL WIDGET
 // ═══════════════════════════════════════════════════════════════
 
 chatFab.addEventListener('click', () => {
+  //  Si hubo drag, no abrir
+  if (wasDragged) {
+    wasDragged = false;
+    return;
+  }
   chatAbierto = !chatAbierto;
   chatWindow.classList.toggle('chat-window--open', chatAbierto);
   chatFab.classList.toggle('chat-fab--open', chatAbierto);
   chatWindow.setAttribute('aria-hidden', String(!chatAbierto));
 
   if (chatAbierto) {
+    const right = parseInt(chatFab.style.right) || 16;
+    const bottom = parseInt(chatFab.style.bottom) || 70;
+    posicionarVentana(right, bottom);
     setTimeout(() => chatInput.focus(), 300);
     scrollAbajo();
   }
 });
 
-// ─── CERRAR CON ESC ─────────────────────────────────────────────
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && chatAbierto) {
-    chatAbierto = false;
-    chatWindow.classList.remove('chat-window--open');
-    chatFab.classList.remove('chat-fab--open');
-    chatWindow.setAttribute('aria-hidden', 'true');
-  }
-});
 
-// ─── LIMPIAR CONVERSACIÓN ───────────────────────────────────────
-btnClear.addEventListener('click', () => {
-  if (confirm('¿Deseas limpiar la conversación?')) {
-    limpiarHistorial();
-  }
-});
+
 
 // ═══════════════════════════════════════════════════════════════
 //  RENDERIZADO DE MENSAJES
@@ -163,23 +181,28 @@ function scrollAbajo() {
   }, 50);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  ENVÍO DE MENSAJES
-// ═══════════════════════════════════════════════════════════════
 
-btnSend.addEventListener('click', enviarMensaje);
-
-chatInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
+document.addEventListener('keydown', (e) => {
+  if (e.target.id === 'chatInput' && e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
     enviarMensaje();
   }
+  if (e.key === 'Escape' && chatAbierto) {
+    chatAbierto = false;
+    chatWindow.classList.remove('chat-window--open');
+    chatFab.classList.remove('chat-fab--open');
+    chatWindow.setAttribute('aria-hidden', 'true');
+  }
 });
 
+
+
 // Auto-resize del textarea
-chatInput.addEventListener('input', () => {
-  chatInput.style.height = 'auto';
-  chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+document.addEventListener('input', (e) => {
+  if (e.target.id === 'chatInput') {
+    e.target.style.height = 'auto';
+    e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+  }
 });
 
 async function enviarMensaje() {
@@ -346,6 +369,43 @@ function mostrarToastChat(mensaje) {
   toast.style.opacity = '1';
   setTimeout(() => { toast.style.opacity = '0'; }, 3000);
 }
+
+function posicionarVentana(fabRight, fabBottom) {
+    const fabSize = chatFab.offsetWidth;
+    const winRect = chatWindow.getBoundingClientRect();
+    const winH = winRect.height || 480;
+    const winW = winRect.width  || 360;
+
+    const MARGEN = 8;
+    const esMobil = window.innerWidth <= 980;
+    if (esMobil) return; // en móvil el CSS lo maneja con top/bottom fijos
+
+    // Espacio disponible arriba y abajo del FAB
+    const espacioArriba = window.innerHeight - fabBottom - fabSize - MARGEN;
+    const espacioAbajo  = window.innerHeight - (window.innerHeight - fabBottom) - fabSize - MARGEN;
+
+    // Right: que no se salga por la izquierda
+    const safeRight = Math.min(fabRight, window.innerWidth - winW - MARGEN);
+
+    chatWindow.style.right = Math.max(MARGEN, safeRight) + 'px';
+    chatWindow.style.left  = 'auto';
+
+    if (espacioArriba >= winH) {
+        // Hay espacio arriba → normal
+        chatWindow.style.bottom = (fabBottom + fabSize + MARGEN) + 'px';
+        chatWindow.style.top    = 'auto';
+    } else if (espacioAbajo >= winH) {
+        // No hay arriba pero hay abajo → abrir hacia abajo
+        const fabTopPx = window.innerHeight - fabBottom - fabSize;
+        chatWindow.style.top    = (fabTopPx + fabSize + MARGEN) + 'px';
+        chatWindow.style.bottom = 'auto';
+    } else {
+        // No cabe ni arriba ni abajo → centrar verticalmente en pantalla
+        const topCentrado = Math.max(MARGEN, (window.innerHeight - winH) / 2);
+        chatWindow.style.top    = topCentrado + 'px';
+        chatWindow.style.bottom = 'auto';
+    }
+}
 // ═══════════════════════════════════════════════════════════════
 //  DRAG DEL FAB
 // ═══════════════════════════════════════════════════════════════
@@ -353,10 +413,12 @@ function mostrarToastChat(mensaje) {
 (function makeDraggable() {
   const fab = document.getElementById('chatFab');
   let isDragging = false;
+
   let holdTimer = null;
   let startX, startY, startRight, startBottom;
 
   fab.addEventListener('pointerdown', (e) => {
+    wasDragged = false;
     startX = e.clientX;
     startY = e.clientY;
 
@@ -373,33 +435,52 @@ function mostrarToastChat(mensaje) {
     }, 200);
   });
 
-  fab.addEventListener('pointermove', (e) => {
+fab.addEventListener('pointermove', (e) => {
     if (!isDragging) return;
-
-    let newRight  = startRight  - (e.clientX - startX);
-    let newBottom = startBottom + (e.clientY - startY);
+    wasDragged = true;
 
     const size = fab.offsetWidth;
-    newRight  = Math.max(8, Math.min(newRight,  window.innerWidth  - size - 8));
-    newBottom = Math.max(8, Math.min(newBottom, window.innerHeight - size - 8));
+    const esMobil = window.innerWidth <= 980;
+    const NAV_TOP    = esMobil ? 66 : 8;
+    const NAV_BOTTOM = esMobil ? 70 : 8;
 
+    let newRight  = startRight  - (e.clientX - startX);
+    let newBottom = startBottom - (e.clientY - startY);
+
+    newRight  = Math.max(8, Math.min(newRight,  window.innerWidth  - size - 8));
+    newBottom = Math.max(NAV_BOTTOM + 8, Math.min(newBottom, window.innerHeight - size - NAV_TOP - 8));
+
+    //  Primero mover el FAB
     fab.style.right  = newRight  + 'px';
     fab.style.bottom = newBottom + 'px';
 
-    const win = document.getElementById('chatWindow');
-    win.style.right  = newRight  + 'px';
-    win.style.bottom = (newBottom + size + 8) + 'px';
-  });
+    // Luego posicionar la ventana relativa al FAB ya actualizado
+    posicionarVentana(newRight, newBottom);
+});
 
-  fab.addEventListener('pointerup', () => {
+  fab.addEventListener('pointerup', (e) => {
     clearTimeout(holdTimer);
-    if (isDragging) {
-      fab.addEventListener('click', (ev) => ev.stopImmediatePropagation(), { once: true });
-    }
-    isDragging = false;
     fab.style.transition = '';
     fab.style.cursor = '';
-  });
+    
+    if (isDragging) {
+        // era drag — cancelar el click que viene después
+        isDragging = false;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        
+        // Bloquear el siguiente click por 300ms
+        fab.style.pointerEvents = 'none';
+        setTimeout(() => {
+            fab.style.pointerEvents = '';
+        }, 300);
+        return;
+    }
+    
+    isDragging = false;
+});
+
+
 
   fab.addEventListener('pointercancel', () => {
     clearTimeout(holdTimer);
@@ -407,4 +488,77 @@ function mostrarToastChat(mensaje) {
     fab.style.transition = '';
     fab.style.cursor = '';
   });
+
+ // ─── DRAG DE LA VENTANA ──────────────────────────────────────
+const win = document.getElementById('chatWindow');
+const header = win.querySelector('.chat-header');
+let isDraggingWin = false;
+let winStartX, winStartY, winStartRight, winStartBottom;
+
+header.style.cursor = 'grab';
+
+header.addEventListener('pointerdown', (e) => {
+    isDraggingWin = true;
+    winStartX = e.clientX;
+    winStartY = e.clientY;
+
+    const rect = win.getBoundingClientRect();
+    winStartRight  = window.innerWidth  - rect.right;
+    winStartBottom = window.innerHeight - rect.bottom;
+
+    header.setPointerCapture(e.pointerId);
+    win.style.transition = 'none';
+    header.style.cursor = 'grabbing';
+});
+
+header.addEventListener('pointermove', (e) => {
+    if (!isDraggingWin) return;
+
+    const esMobil = window.innerWidth <= 980;
+    if (esMobil) return;
+
+    let newRight  = winStartRight  - (e.clientX - winStartX);
+    let newBottom = winStartBottom - (e.clientY - winStartY);
+
+    //  Usar getBoundingClientRect() en lugar de offsetHeight
+    const winRect = win.getBoundingClientRect();
+    const winW = winRect.width;
+    const winH = winRect.height;
+
+    // El límite superior: newBottom máximo = altura_pantalla - altura_ventana - margen
+    const maxBottom = window.innerHeight - winH - 8;
+
+    newRight  = Math.max(8, Math.min(newRight,  window.innerWidth - winW - 8));
+    newBottom = Math.max(8, Math.min(newBottom, maxBottom));
+
+    win.style.right  = newRight  + 'px';
+    win.style.bottom = newBottom + 'px';
+
+    // fab sigue a la ventana
+    const fabSize = fab.offsetWidth;
+    fab.style.right  = newRight  + 'px';
+    fab.style.bottom = (newBottom - fabSize - 8) + 'px';
+});
+
+header.addEventListener('pointerup', () => {
+    isDraggingWin = false;
+    win.style.transition = '';
+    header.style.cursor = 'grab';
+});
+
+header.addEventListener('pointercancel', () => {
+    isDraggingWin = false;
+    win.style.transition = '';
+    header.style.cursor = 'grab';
+});
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#btnCerrarChat')) {
+    chatAbierto = false;
+    chatWindow.classList.remove('chat-window--open');
+    chatFab.classList.remove('chat-fab--open');
+    chatWindow.setAttribute('aria-hidden', 'true');
+  }
+});
+
+
 })();
