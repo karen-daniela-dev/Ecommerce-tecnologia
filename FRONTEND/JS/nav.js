@@ -96,15 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // contadores (cargar carrito guardado)
   let datos = localStorage.getItem("carrito");
 
-  if (datos) {
-    let carrito = JSON.parse(datos);
-    cantitaProducto = 0;
-    totalPrecio = 0;
-
-    carrito.forEach(prodc => {
-      agregarAlcarrito(prodc.imagen, prodc.nombre, prodc.precio, prodc.cantidad);
-    });
-  }
+ sincronizarCarritoDesdeStorage();
 
 
   // escha el click de la targeta para agrecar a lista
@@ -229,11 +221,10 @@ document.addEventListener('DOMContentLoaded', function () {
     listaCarrito.prepend(lista);
     document.getElementById("msgVacio").style.display = "none";
   }
-      //  Escuchar cuando el chat agrega productos
-    window.addEventListener('carritoActualizado', (e) => {
-      const { imagen, nombre, precio, cantidad } = e.detail;
-      agregarAlcarrito(imagen, nombre, precio, cantidad);
-    });
+ 
+  window.addEventListener('carritoActualizado', () => {
+    sincronizarCarritoDesdeStorage();
+  });
 
 
 
@@ -396,20 +387,28 @@ document.addEventListener('DOMContentLoaded', function () {
       badgeMobile.textContent = cantitaProducto;
       badgeDesktop.textContent = cantitaProducto;
     }
-    // Escuchar cuando el chat actualiza el carrito
-    window.addEventListener('carritoActualizado', () => {
-      const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-      cantitaProducto = carrito.reduce((sum, p) => sum + p.cantidad, 0);
-      totalPrecio = carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
-      actualizarBadge();
-      actualizarPrecio();
-    });
+
   }
 
   // actualizar precio total del carrito
   function actualizarPrecio() {
     let total = document.getElementById("total");
     total.textContent = "$" + totalPrecio.toLocaleString('es-CO');
+  }
+
+  function sincronizarCarritoDesdeStorage() {
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+    // limpiar UI
+    const listaCarrito = document.getElementById("listaCarrito");
+    listaCarrito.innerHTML = "";
+
+    cantitaProducto = 0;
+    totalPrecio = 0;
+
+    carrito.forEach(p => {
+      agregarAlcarrito(p.imagen, p.nombre, p.precio, p.cantidad);
+    });
   }
 
 
