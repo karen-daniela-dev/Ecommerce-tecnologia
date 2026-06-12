@@ -4,16 +4,16 @@
 // ═══════════════════════════════════════════════════════════════
 
 (function () {
-
   // ─── RUTA BASE (ajusta si mueves los archivos) ───────────────
-  const BASE = (document.currentScript && document.currentScript.src)
-    ? document.currentScript.src.replace(/chatWidget\.js.*$/, '')
-    : './';
+  const BASE =
+    document.currentScript && document.currentScript.src
+      ? document.currentScript.src.replace(/chatWidget\.js.*$/, "")
+      : "./";
 
   // ─── INYECTAR CSS ────────────────────────────────────────────
-  const link = document.createElement('link');
-  link.rel  = 'stylesheet';
-  link.href = BASE + '../CSS/chat.css';
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = BASE + "../CSS/chat.css";
   document.head.appendChild(link);
 
   // ─── INYECTAR HTML ───────────────────────────────────────────
@@ -47,7 +47,7 @@
     </svg>
   </button>
 
-  <!-- ✅ Botón cerrar -->
+  <!--  Botón cerrar -->
   <button class="btn-icon" id="btnCerrarChat" title="Cerrar chat">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <line x1="18" y1="6" x2="6" y2="18"/>
@@ -74,13 +74,12 @@
     </div>
   `;
 
-  const container = document.createElement('div');
+  const container = document.createElement("div");
   container.innerHTML = html;
   document.body.appendChild(container);
 
   // ─── CARGAR chat.js DESPUÉS DE INYECTAR EL HTML ──────────────
-  const script = document.createElement('script');
-  script.src = BASE + 'chat.js';
+  const script = document.createElement("script");
+  script.src = BASE + "chat.js";
   document.body.appendChild(script);
-
 })();
