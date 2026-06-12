@@ -498,6 +498,8 @@ let winStartX, winStartY, winStartRight, winStartBottom;
 header.style.cursor = 'grab';
 
 header.addEventListener('pointerdown', (e) => {
+    if (!e.target.closest('.chat-header')) return;
+    if (e.target.closest('.chat-header__actions')) return;
     isDraggingWin = true;
     winStartX = e.clientX;
     winStartY = e.clientY;
