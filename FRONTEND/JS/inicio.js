@@ -17,7 +17,7 @@
       </svg>` },
 
         {
-            num: '03', name: 'Tarjetas Gráficas', tag: 'Visual Power', color: '#ff3cac', href: 'FRONTEND/HTML/productos.html?categoria=tarjetasGraficar',
+            num: '03', name: 'Tarjetas Gráficas', tag: 'Visual Power', color: '#ff3cac', href: 'FRONTEND/HTML/productos.html?categoria=tarjetas_graficas',
             icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <rect x="1" y="6" width="22" height="12" rx="2"/>
         <path d="M6 6V4M9 6V4M12 6V4M15 6V4M18 6V4"/>
