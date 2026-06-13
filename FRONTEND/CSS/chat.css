@@ -49,13 +49,17 @@
   width: var(--kc-fab-size);
   height: var(--kc-fab-size);
   border-radius: 50%;
-  border: none;
+  
   cursor: pointer;
   z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--kc-accent), var(--kc-accent2));
+  background-image: url('../images/bot2.png'); 
+  background-size: cover;       /* ajusta la imagen */
+  background-position: top;  
+  background-repeat: no-repeat;
+   background-color: #e8eaf65f;
   box-shadow: 0 4px 24px var(--kc-accent-glow), 0 2px 8px rgba(0,0,0,0.4);
   transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
               box-shadow 0.3s ease;
@@ -76,7 +80,7 @@
   position: absolute;
   width: 22px;
   height: 22px;
-  color: #fff;
+  color: #0d84f3;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
