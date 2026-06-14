@@ -557,7 +557,7 @@ async function iniciarSesion() {
 
     // Redirigir según rol
 
-    const base = window.location.origin + "/Ecommerse-tecnologia-";
+    const base = window.location.origin + "/ecommerce-ia";
     if (data.rol === "ADMIN") {
       window.location.href = base + "/FRONTEND/HTML/admin-ver.html";
     } else {
@@ -637,7 +637,7 @@ function cerrarSesion() {
   actualizarNavbarUsuario();
   actualizarBotonMovil();
 
-  const base = window.location.origin + "/Ecommerse-tecnologia-";
+  const base = window.location.origin + "/ecommerce-ia";
 
   setTimeout(() => {
     window.location.href = base + "/index.html";
