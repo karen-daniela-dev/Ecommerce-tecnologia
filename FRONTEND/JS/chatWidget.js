@@ -55,7 +55,19 @@
 </div>
 
       </div>
-      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-messages" id="chatMessages">
+      <!-- Loader para cuando el servidor despierta -->
+        <div id="chatLoading" class="text-center" style="display: none; padding: 40px 20px; color: #aaa;">
+  <div class="spinner-border text-primary" role="status" style="width: 2.5rem; height: 2.5rem;">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+  <p style="margin-top: 15px; font-weight: 500; font-size: 15px;">
+    El servidor está despertando (Deploy plan free).<br>
+    Esto puede tomar hasta 50 segundos.<br>
+    <strong>No te vayas</strong> ⏳
+  </p>
+</div>
+      </div>
       <div class="chat-typing" id="chatTyping" style="display:none">
         <div class="typing-bubble"><span></span><span></span><span></span></div>
         <p>Klydy está escribiendo…</p>

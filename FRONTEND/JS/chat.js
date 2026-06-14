@@ -71,41 +71,41 @@ if (window.klydyChatInicializado) {
 
 
   async function asegurarServidor() {
-  if (servidorListo || despertando) return;
+    if (servidorListo || despertando) return;
 
-  despertando = true;
-  if (btnSend) btnSend.disabled = true;
-  chatInput.disabled = true;
+    despertando = true;
+    if (btnSend) btnSend.disabled = true;
+    chatInput.disabled = true;
 
-  let mensajeConexion = null;
+    const chatLoading = document.getElementById('chatLoading');
 
-  try {
-    const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
-      method: 'GET',
-      cache: 'no-cache'
-    });
+    // Mostrar loader
+    if (chatLoading) chatLoading.style.display = 'block';
 
-    servidorListo = res.ok;
+    try {
+      const res = await fetch('https://ecommerceklydy.onrender.com/productos', {
+        method: 'GET',
+        cache: 'no-cache'
+      });
 
-    if (servidorListo) {
-      localStorage.setItem('klydy_server_ready', 'true');
-    } else {
-      // Solo mostrar mensaje si realmente falló
-      mensajeConexion = agregarBurbuja('assistant', 'Conectando con el servidor... ⏳', false);
+      servidorListo = res.ok;
+
+      if (servidorListo) {
+        localStorage.setItem('klydy_server_ready', 'true');
+        localStorage.setItem('klydy_server_ready_time', Date.now().toString()); 
+      }
+    } catch (error) {
+      console.error('Error despertando servidor:', error);
+    } finally {
+      // Ocultar loader
+      if (chatLoading) chatLoading.style.display = 'none';
+
+      despertando = false;
+      if (btnSend) btnSend.disabled = false;
+      chatInput.disabled = false;
+      chatInput.focus();
     }
-  } catch (error) {
-    console.error('Error despertando servidor:', error);
-    mensajeConexion = agregarBurbuja('assistant', 'Conectando con el servidor... ⏳', false);
-  } finally {
-    if (mensajeConexion && mensajeConexion.parentElement) {
-      mensajeConexion.parentElement.remove();
-    }
-    despertando = false;
-    if (btnSend) btnSend.disabled = false;
-    chatInput.disabled = false;
-    chatInput.focus();
   }
-}
 
   // ─── CATÁLOGO ──────────────────────────────────────────────────
   async function cargarProductos() {
@@ -285,7 +285,7 @@ if (window.klydyChatInicializado) {
 
 
 
-    chatFab.addEventListener('click', async () => {
+  chatFab.addEventListener('click', async () => {
     if (wasDragged) {
       wasDragged = false;
       return;
@@ -308,7 +308,7 @@ if (window.klydyChatInicializado) {
         mostrarBienvenida();
       }
 
-      // === CORRECCIÓN IMPORTANTE ===
+
       if (!servidorListo && !despertando) {
         await asegurarServidor();
       }
@@ -504,5 +504,18 @@ if (window.klydyChatInicializado) {
     cargarHistorial();
     await cargarProductos();
     renderizarHistorial();
+    // Verificar si el flag sigue siendo válido (menos de 10 minutos)
+  const serverReadyTime = localStorage.getItem('klydy_server_ready_time');
+  if (serverReadyTime) {
+    const minutosPasados = (Date.now() - parseInt(serverReadyTime)) / 60000;
+    if (minutosPasados < 10) {
+      servidorListo = true;
+    } else {
+      localStorage.removeItem('klydy_server_ready');
+      localStorage.removeItem('klydy_server_ready_time');
+    }
+  }
+
+    
   })();
 }
